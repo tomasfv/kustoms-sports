@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
-import { Home } from '../views/index'
+import { Home, Details } from '../views/index'
 const Rutas = () => {
     return (
         <BrowserRouter>
