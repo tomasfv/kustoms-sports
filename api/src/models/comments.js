@@ -1,7 +1,7 @@
 const { DataTypes } = require ('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('user', {
+    sequelize.define('comments', {
         id:{
             type: DataTypes.INTEGER,
             autoIncrement: true,

@@ -30,7 +30,7 @@ comments: {
 
 },
 
-users: {
+user: {
   
     type: DataTypes.BOOLEAN,
     allowNull: false

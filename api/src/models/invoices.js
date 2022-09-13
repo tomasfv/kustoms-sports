@@ -9,11 +9,11 @@ module.exports = (sequelize) => {
             primaryKey: true
         },
         number:{
-           type: DataTypes.UUIDV4,
+           type: DataTypes.UUID,
            defaultValue: DataTypes.UUIDV4,
            allowNull: false 
         },
-        paymentmethod:{
+        paymentmethods:{
            type: DataTypes.STRING,
            allowNull: false 
         },

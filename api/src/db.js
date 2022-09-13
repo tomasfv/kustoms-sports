@@ -31,7 +31,7 @@ let sequelize =
 				ssl: true,
 		  })
 		: new Sequelize(
-				`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/`,
+				`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/kustom`,
 				{ logging: false, native: false }
 		  );
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
@@ -58,32 +58,32 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {products, carts, cartsdetails, comments, invoices, profiles, users, paymentmethod } = sequelize.models;
+const {Products, Carts, Cartsdetails, Comments, Invoices, Profiles, Users, Paymentmethod } = sequelize.models;
 
 // Aca vendrian las relaciones
-products.hasMany(cartsdetails);
-cartsdetails.belongsTo(products);
+Cartsdetails.belongsTo(Products)
+Products.hasMany(Cartsdetails)
 
-carts.hasMany(cartsdetails);
-cartsdetails.belongsTo(carts);
+Carts.hasMany(Cartsdetails)
+Cartsdetails.belongsTo(Carts)
 
-carts.hasMany(users);
-users.belongsTo(carts);
+Carts.hasMany(Users)
+Users.belongsTo(Carts)
 
-comments.hasMany(users);
-users.belongsTo(comments);
+Comments.hasMany(Users)
+Users.belongsTo(Comments)
 
-profiles.hasMany(users);
-users.belongsTo(profiles);
+Profiles.hasMany(Users)
+Users.belongsTo(Profiles)
 
-users.hasMany(invoices);
-invoices.belongsTo(users);
+Users.hasMany(Invoices)
+Invoices.belongsTo(Users)
 
-carts.hasOne(invoices);
-invoices.belongsTo(carts);
+Carts.hasOne(Invoices)
+Invoices.belongsTo(Carts)
 
-paymentmethod.hasMany(invoices);
-invoices.belongsTo(paymentmethod);
+Paymentmethod.hasMany(Invoices)
+Invoices.belongsTo(Paymentmethod)
 
 
 module.exports = {
