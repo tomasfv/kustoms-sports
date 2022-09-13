@@ -59,7 +59,8 @@ image:{
 stock:{
 
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 0
 
 },
 price: {
@@ -68,10 +69,6 @@ price: {
 },
 promotion:{
     type: DataTypes.DECIMAL,
-    allowNull: false
-},
-date:{
-    type: DataTypes.DATE,
     allowNull: false
 },
 visits:{

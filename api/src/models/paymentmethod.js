@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-const { toDefaultValue } = require('sequelize/types/utils');
 module.exports = (sequelize) => {
 
 sequelize.define('paymentmethod', {
