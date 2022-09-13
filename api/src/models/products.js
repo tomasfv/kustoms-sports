@@ -74,6 +74,10 @@ date:{
     type: DataTypes.DATE,
     allowNull: false
 },
+visits:{
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+},
 available:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
