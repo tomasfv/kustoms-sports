@@ -6,6 +6,7 @@ sequelize.define('products', {
 
 id: {
     type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     allowNull: false
     

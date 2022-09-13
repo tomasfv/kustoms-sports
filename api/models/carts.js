@@ -6,6 +6,7 @@ sequelize.define('carts', {
 
 id: {
     type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     allowNull: false
     
