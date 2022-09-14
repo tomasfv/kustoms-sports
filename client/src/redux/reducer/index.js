@@ -1,7 +1,9 @@
-import { types } from "../actions";
+import { types} from "../actions";
+
 
 const initialState={
-    theme:"light"
+    theme:"light",
+    details:[]
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -16,6 +18,11 @@ export const rootReducer=(state=initialState, action)=>{
                 return {...state, theme:'dark'}
             }
         }
+        case types.GET_DETAILS:
+            return{
+               ...state,
+               details:action.payload
+            }
 
         default: return {...state}
     }
