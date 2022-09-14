@@ -15,7 +15,7 @@ module.exports = {
     dark:'#212121',
     },
     'verde':{
-    light:'#52B788',
+    light:'#18C977',
     dark:'#52B788'
     },
     'botvioleta':{
