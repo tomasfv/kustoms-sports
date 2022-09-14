@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MdMenu, MdClose, MdLightbulbOutline, MdLightbulb, MdShoppingCart } from 'react-icons/md'
+import { MdMenu, MdClose, MdLightbulbOutline, MdLightbulb, MdShoppingCart, MdOutlineChevronRight } from 'react-icons/md'
 import smLogo from '../assets/smLogo.png'
 import logoLargo from '../assets/logoLargo.png'
 import logoLargoLight from '../assets/logoLargoLight.png'
@@ -38,10 +38,35 @@ const NavBar = () => {
     }, [])
 
 
+    const data = {
+        "brand": [
+            "sonder",
+            "adidas",
+            "pirulo",
+            "nike",
+            "underwear",
+            "new balance",
+            "Fila"
+        ],
+        "collection": [
+            "verano",
+            "primavera"
+        ],
+        "gender": [
+            "Hombre",
+            "Mujer",
+            "Otro",
+        ],
+        "sport": [
+            "golf",
+            "futbol"
+        ]
+    }
+
     return (
         <>
             {/* NavBar Pequeña */}
-            <nav className='lg:hidden fixed w-full flex flex-row justify-between text-main-dark dark:text-main-light h-16 bg-main-light dark:bg-main-dark'>
+            <nav className='z-50 fixed top-0 lg:hidden w-full flex flex-row justify-between text-main-dark dark:text-main-light h-16 bg-main-light dark:bg-main-dark'>
                 <Link className='h-16 w-fit pl-5' to={'/'}><img src={smLogo} alt="logo-small" className='h-16 w-16' /></Link>
                 <div className='flex flex-row  gap-3 items-center'>
                     <Link to={'/'} className='w-fit h-fit relative'>
@@ -60,23 +85,30 @@ const NavBar = () => {
                         <div className='w-full opacity-100 right-0 relative flex flex-col align-baseline'>
                             <img src={theme === 'light' ? logoLargoLight : logoLargo} alt="logo-grande" className='w-fit mx-auto my-1' />
                             <ul className='flex flex-col text-justify'>
-                                <Link to={'/'} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>Hombre</Link>
-                                <Link to={'/'} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>Mujer</Link>
-                                <Link to={'/'} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b w-full'>Niños</Link>
+                                {data.gender.map(gen => {
+                                    return <Link to={'/'} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>{gen}</Link>
+
+                                })}
                                 <li onClick={handleClickMarca} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
                                     Marca
                                     <div className={`mt-5 ${showingMarca ? 'flex flex-col' : 'hidden'}`} >
-                                        <li className='py-3 ml-5'>MarcaA</li>
-                                        <li className='py-3 ml-5'>MarcaA</li>
-                                        <li className='py-3 ml-5'>MarcaA</li>
+                                        {data.brand.map(bra => {
+                                            return <Link className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
+                                                {bra}
+                                                <MdOutlineChevronRight className='text-verde-light' />
+                                            </Link>
+                                        })}
                                     </div>
                                 </li>
                                 <li onClick={handleClickDeporte} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
                                     Deporte
                                     <div className={`mt-5 ${showingDeporte ? 'flex flex-col' : 'hidden'}`} >
-                                        <li className='py-3 ml-5'>DeporteA</li>
-                                        <li className='py-3 ml-5'>DeporteA</li>
-                                        <li className='py-3 ml-5'>DeporteA</li>
+                                        {data.sport.map(spr => {
+                                            return <Link className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
+                                                {spr}
+                                                <MdOutlineChevronRight className='text-verde-light' />
+                                            </Link>
+                                        })}
                                     </div>
                                 </li>
                             </ul>
@@ -97,43 +129,44 @@ const NavBar = () => {
 
             {/* NavBar grande */}
 
-            <nav className='hidden lg:flex justify-between items-center relative'>
-                <img src={theme === 'light' ? logoLargoLight : logoLargo} className='h-10 w-auto ml-5' alt="logo-kustoms" />
+            <nav className='hidden lg:flex justify-between items-center relative z-50'>
+                <Link className='ml-5'>
+                    <img src={theme === 'light' ? logoLargoLight : logoLargo} className='h-10 w-auto ' alt="logo-kustoms" />
+                </Link>
                 <div>
                     <ul className='flex flex-row'>
-                        <Link to={'/'} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute top-7  hidden group-hover:block '></span>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7  hidden group-hover:block '></span>
-                            Hombre
-                        </Link>
-                        <Link to={'/'} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block '></span>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
-                            Mujer
-                        </Link>
-                        <Link to={'/'} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block '></span>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
-                            Niños
-                        </Link>
+                        {data.gender.map((gen) => {
+                            return <Link to={'/'} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
+                                <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute top-7  hidden group-hover:block '></span>
+                                <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7  hidden group-hover:block '></span>
+                                {gen}
+                            </Link>
+
+                        })}
                         <li onClick={handleClickMarca} className=' group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer relative'>
                             <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block '></span>
                             <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
                             Marca
-                            <div className={`hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
-                                <li>marcaA</li>
-                                <li>marcaA</li>
-                                <li>marcaA</li>
+                            <div className={` py-2 hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
+                                {data.brand.map(bra => {
+                                    return <Link className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark rounded-sm'>
+                                        {bra}
+                                        <MdOutlineChevronRight className='text-verde-light' />
+                                    </Link>
+                                })}
                             </div>
                         </li>
                         <li onClick={handleClickDeporte} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer overflow-hidden'>
                             <span className='w-16 bg-main-dark h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block'></span>
                             <span className='w-16 bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
                             Deporte
-                            <div className={`hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
-                                <li>DeporteA</li>
-                                <li>DeporteA</li>
-                                <li>DeporteA</li>
+                            <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
+                                {data.sport.map(spr => {
+                                    return <Link className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
+                                        {spr}
+                                        <MdOutlineChevronRight className='text-verde-light' />
+                                    </Link>
+                                })}
                             </div>
                         </li>
                     </ul>
