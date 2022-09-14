@@ -38,5 +38,44 @@ module.exports = {
     navbar.sport = sport
     
     return navbar;
+},
+infoDetail: async function (id){
+    let detail = {}
+    const productdetail = await Products.findByPk(parseInt(id))
+
+
+    const asociados = await Products.findAll({
+        where:{
+            name: productdetail.name,
+            brand: productdetail.brand,
+            clotheType: productdetail.clotheType
+        }
+    })
+
+    detail.infoprod = asociados.map(el =>{ 
+        return{
+                name: el.name,
+                clotheType: el.clotheType,
+                brand: el.brand,
+                gender:el.gender,
+                sport:el.sport,
+                collection:el.collection,
+                price:el.price,
+                promotion:el.promotion,
+                image:el.image,
+        }
+    })
+    detail.infostock = asociados.map(el =>{ 
+        return{
+            id : el.id,
+            color:el.color,
+            size:el.size,
+            stock:el.stock,
+        }
+    })
+
+    
+    
+    return detail;
 }
 }
