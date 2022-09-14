@@ -1,8 +1,9 @@
-import React from 'react'
+import { MainPromo } from "../components"
 
 const Home = () => {
     return (
-        <div>Home</div>
+
+        <div className="my-10"><MainPromo /></div>
     )
 }
 
