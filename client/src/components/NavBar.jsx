@@ -129,7 +129,7 @@ const NavBar = () => {
 
             {/* NavBar grande */}
 
-            <nav className='hidden lg:flex justify-between items-center relative z-50'>
+            <nav className='hidden lg:flex fixed top-0 justify-between items-center bg-main-light dark:bg-main-dark z-50 w-full'>
                 <Link className='ml-5'>
                     <img src={theme === 'light' ? logoLargoLight : logoLargo} className='h-10 w-auto ' alt="logo-kustoms" />
                 </Link>
@@ -137,15 +137,15 @@ const NavBar = () => {
                     <ul className='flex flex-row'>
                         {data.gender.map((gen) => {
                             return <Link to={'/'} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
-                                <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute top-7  hidden group-hover:block '></span>
-                                <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7  hidden group-hover:block '></span>
+                                <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7  hidden group-hover:block '></span>
+                                <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7  hidden group-hover:block '></span>
                                 {gen}
                             </Link>
 
                         })}
                         <li onClick={handleClickMarca} className=' group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer relative'>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block '></span>
-                            <span className='w-full bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
+                            <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block '></span>
+                            <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
                             Marca
                             <div className={` py-2 hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
                                 {data.brand.map(bra => {
@@ -157,8 +157,8 @@ const NavBar = () => {
                             </div>
                         </li>
                         <li onClick={handleClickDeporte} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer overflow-hidden'>
-                            <span className='w-16 bg-main-dark h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block'></span>
-                            <span className='w-16 bg-main-dark h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
+                            <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 hidden group-hover:block'></span>
+                            <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 hidden group-hover:block'></span>
                             Deporte
                             <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
                                 {data.sport.map(spr => {

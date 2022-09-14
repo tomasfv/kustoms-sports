@@ -1,9 +1,13 @@
-import { MainPromo } from "../components"
+import { MainPromo, KustomPromo } from "../components"
 
 const Home = () => {
     return (
 
-        <div className="my-10"><MainPromo /></div>
+        <div className="mb-10 mt-16">
+            <MainPromo />
+            <KustomPromo />
+        </div>
+
     )
 }
 
