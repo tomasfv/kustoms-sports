@@ -4,8 +4,8 @@ const Footer = () => {
     return (
         
         
-        <footer className="fixed flex-col" >
-            <div className="fixed w-full flex flex-row justify-around bottom-11 text-main-dark dark:text-main-light">
+        <footer className="flex flex-col bg-gris-light dark:bg-gris-dark min-h-[30.5rem]" >
+            <div className=" w-full flex flex-row justify-around text-main-dark dark:text-main-light">
 
                 <img src="" alt="logo-small" />
                 <div className="flex flex-col">
@@ -24,10 +24,10 @@ const Footer = () => {
                     <button>Ingresar</button>
                 </div>
             </div>
-            <div className="fixed w-full bottom-9">
+            <div className="w-full">
                 <hr></hr>
             </div>
-            <div className="fixed w-full flex flex-row justify-around bottom-1">
+            <div className="w-full flex flex-row justify-around">
                 <p>The Last Dance.inc 2022. We love our users!</p>
                 <p>Follow</p>
             </div>
