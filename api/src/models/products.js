@@ -22,11 +22,8 @@ brand: {
     allowNull: false
 },
 name: {
-
     type: DataTypes.STRING,
     allowNull:false
-
-
 },
 
 gender: {
