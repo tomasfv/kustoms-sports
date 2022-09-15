@@ -1,6 +1,6 @@
-import smLogo from '../assets/smLogo.png'
 import logoLargo from '../assets/logoLargo.png'
-import logoLargoLight from '../assets/logoLargoLight.png'
+import { GrLinkedinOption } from 'react-icons/gr'
+
 
 const Footer = () => {
     return (
@@ -11,8 +11,8 @@ const Footer = () => {
                 <img src={logoLargo} className='h-10 w-auto ml-5' alt="logo-kustoms" />
                 <div className="flex flex-col">
                     <div className="font-bold">Community</div>
-                    <p>Henry Blog</p>
-                    <p>The Portal</p>
+                    <a href='https://blog.soyhenry.com/' target="_blank">Henry Blog</a>
+                    <a href='https://www.adidas.com/us' target='_blank'>The Portal</a>
                 </div>
                 <div className="flex flex-col">
                     <div className="font-bold">Company</div>
@@ -55,7 +55,10 @@ const Footer = () => {
             </div>
             <div className="w-full flex flex-row justify-around  text-main-dark dark:text-main-light">
                 <p>The Last Dance.inc 2022. We love our users!</p>
-                <p>Follow</p>
+                <div className='flex flex-row'>
+                    <p className='mr-4'>Follow </p>
+                    <GrLinkedinOption/>
+                </div>
             </div>
 
         </footer>
