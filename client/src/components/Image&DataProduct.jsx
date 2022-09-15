@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useParams} from "react-router-dom";
 import { getdetailid } from "../redux/actions";
 import { useState } from "react";
 
@@ -12,13 +12,14 @@ const ImageXDataProduct = (props) =>{
     const details = useSelector((state) => state.details);
     const imagenes= useSelector((state) => state.images)
     const [ordenimg, setOrdenimg] = useState("")
-    //const id = props.match.params.id;
+    const params = useParams()
+    const id = params.id
     // const deta = details.infoprod[0]
     const dispatch = useDispatch()
     useEffect(()=>{
-       dispatch(getdetailid(6))
-    },[dispatch])
-    console.log(imagenes)
+       dispatch(getdetailid(id))
+    },[dispatch,id])
+    console.log(ordenimg)
     const data = {
         clotheType: "shirt",
         brand:"adidas",
