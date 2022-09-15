@@ -69,7 +69,7 @@ const NavBar = () => {
             <nav className='z-50 fixed top-0 lg:hidden w-full flex flex-row justify-between text-main-dark dark:text-main-light h-16 bg-main-light dark:bg-main-dark transition-all duration-300'>
                 <Link className='h-16 w-fit pl-5' to={'/'}><img src={smLogo} alt="logo-small" className='h-16 w-16' /></Link>
                 <div className='flex flex-row  gap-3 items-center'>
-                    <Link to={'/'} className='w-fit h-fit relative'>
+                    <Link to={''} className='w-fit h-fit relative'>
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
                         <p className='absolute right-0 -top-2 z-10 bg-verde-light  rounded-full  font-bold'>0</p>
                     </Link>
@@ -86,14 +86,14 @@ const NavBar = () => {
                             <img src={theme === 'light' ? logoLargoLight : logoLargo} alt="logo-grande" className='w-fit mx-auto my-1' />
                             <ul className='flex flex-col text-justify'>
                                 {data.gender.map(gen => {
-                                    return <Link to={'/'} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>{gen}</Link>
+                                    return <Link to={`categories/${gen}`} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>{gen}</Link>
 
                                 })}
                                 <li onClick={handleClickMarca} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
                                     Marca
                                     <div className={`mt-5 ${showingMarca ? 'flex flex-col' : 'hidden'}`} >
                                         {data.brand.map(bra => {
-                                            return <Link className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
+                                            return <Link to={`categories/${bra}`} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
                                                 {bra}
                                                 <MdOutlineChevronRight className='text-verde-light' />
                                             </Link>
@@ -104,7 +104,7 @@ const NavBar = () => {
                                     Deporte
                                     <div className={`mt-5 ${showingDeporte ? 'flex flex-col' : 'hidden'}`} >
                                         {data.sport.map(spr => {
-                                            return <Link className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
+                                            return <Link to={`categories/${spr}`} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
                                                 {spr}
                                                 <MdOutlineChevronRight className='text-verde-light' />
                                             </Link>
@@ -136,7 +136,7 @@ const NavBar = () => {
                 <div>
                     <ul className='flex flex-row'>
                         {data.gender.map((gen) => {
-                            return <Link to={'/'} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
+                            return <Link to={`categories/${gen}`} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
                                 <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                                 <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                                 {gen}
@@ -149,7 +149,7 @@ const NavBar = () => {
                             Marca
                             <div className={` py-2 hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
                                 {data.brand.map(bra => {
-                                    return <Link className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark rounded-sm'>
+                                    return <Link to={`categories/${bra}`} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark rounded-sm'>
                                         {bra}
                                         <MdOutlineChevronRight className='text-verde-light' />
                                     </Link>
@@ -162,7 +162,7 @@ const NavBar = () => {
                             Deporte
                             <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
                                 {data.sport.map(spr => {
-                                    return <Link className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
+                                    return <Link to={`categories/${spr}`} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
                                         {spr}
                                         <MdOutlineChevronRight className='text-verde-light' />
                                     </Link>
