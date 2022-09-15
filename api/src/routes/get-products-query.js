@@ -3,6 +3,7 @@ const { Router } = require('express');
 const axios = require('axios')
 const {Products} = require('../db.js');
 const { where } = require('sequelize');
+const {Sequelize, Op} = require('sequelize')
 
 const router = Router();
 
@@ -10,29 +11,76 @@ router.get('/', async (req, res) => {
     let {sport, name, collection, gender, brand} = req.query
     try {
         if(sport){
-            const productsport = await Products.findAll({ where : { sport: sport }})
-            productsport.length ?
-            res.status(200).json(productsport):
+            const productsport = await Products.findAll({where : { sport: sport }})
+            
+            let aux = []
+            // aux.push(productsport[0])
+            productsport.forEach(element => {
+                let flag = true
+                for (let i = 0; i < aux.length; i++) {
+                   if (element.name === aux[i].name) flag = false
+                }
+                if (flag) aux.push(element)
+            });
+            
+            aux.length ?
+            res.status(200).json(aux):
             res.status(400).json("sports was not found")
         }else if(name){
-            const productsname = await Products.findAll({ where : { name: name }})
-            productsname.length ?
-            res.status(200).json(productsname):
+            const productsname = await Products.findAll({ where : { name : {[Op.substring]: name}}})
+            let aux = []
+            // aux.push(productsport[0])
+            productsname.forEach(element => {
+                let flag = true
+                for (let i = 0; i < aux.length; i++) {
+                   if (element.name === aux[i].name) flag = false
+                }
+                if (flag) aux.push(element)
+            });
+            aux.length ?
+            res.status(200).json(aux):
             res.status(400).json("name was not found")
         }else if(collection){
             const productscollection = await Products.findAll({ where : { collection: collection }})
-            productscollection.length ?
-            res.status(200).json(productscollection):
+            let aux = []
+            // aux.push(productsport[0])
+            productscollection.forEach(element => {
+                let flag = true
+                for (let i = 0; i < aux.length; i++) {
+                   if (element.name === aux[i].name) flag = false
+                }
+                if (flag) aux.push(element)
+            });
+            aux.length ?
+            res.status(200).json(aux):
             res.status(400).json("name was not found")
         }else if(gender){
             const productsgender = await Products.findAll({ where : { gender: gender }})
-            productsgender.length ?
-            res.status(200).json(productsgender):
+            let aux = []
+            // aux.push(productsport[0])
+            productsgender.forEach(element => {
+                let flag = true
+                for (let i = 0; i < aux.length; i++) {
+                   if (element.name === aux[i].name) flag = false
+                }
+                if (flag) aux.push(element)
+            });
+            aux.length ?
+            res.status(200).json(aux):
             res.status(400).json("name was not found")
         }else if(brand){
             const productsbrand = await Products.findAll({ where : { brand: brand }})
-            productsbrand.length ?
-            res.status(200).json(productsbrand):
+            let aux = []
+            // aux.push(productsport[0])
+            productsbrand.forEach(element => {
+                let flag = true
+                for (let i = 0; i < aux.length; i++) {
+                   if (element.name === aux[i].name) flag = false
+                }
+                if (flag) aux.push(element)
+            });
+            aux.length ?
+            res.status(200).json(aux):
             res.status(400).json("name was not found")
         }
     } catch (error) {

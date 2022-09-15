@@ -8,10 +8,19 @@ const router = Router();
 router.get('/', async (req, res) => {
     try {
             const productsdate = await Products.findAll({
-                limit: 3 ,
                 order: [['createdAt', 'DESC' ]]
             })    
-            res.status(200).json(productsdate)
+            let aux = []
+            // aux.push(productsport[0])
+            productsdate.forEach(element => {
+                let flag = true
+                for (let i = 0; i < aux.length; i++) {
+                   if (element.name === aux[i].name) flag = false
+                }
+                if (flag) aux.push(element)
+            });
+            aux.splice(3,aux.length+1)
+            res.status(200).json(aux)
         
     } catch (error) {
         return res.status(400).json(error.message)

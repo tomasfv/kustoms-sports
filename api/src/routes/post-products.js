@@ -2,6 +2,7 @@ require ('dotenv').config();
 const { Router } = require('express');
 const axios = require('axios')
 const {Products} = require('../db.js');
+const { ARRAY } = require('sequelize');
 
 const router = Router();
 
@@ -20,6 +21,19 @@ router.post('/chargeproducts', async (req , res) => {
         price,
         promotion
     } = req.body
+    
+    if(typeof clotheType !== 'string')return res.status(400).json("clotheType should be a word")
+    if(typeof brand !== 'string')return res.status(400).json("brand should be a word")
+    if(typeof name !== 'string')return res.status(400).json("name should be a word")
+    if(typeof gender !== 'string')return res.status(400).json("gender should be a word")
+    if(typeof sport !== 'string')return res.status(400).json("sport should be a word")
+    if(typeof collection !== 'string')return res.status(400).json("collection should be a word")
+    if(typeof color !== 'string')return res.status(400).json("color should be a word")
+    if(!Array.isArray(image))return res.status(400).json("image should be an array")
+    if(typeof stock !== 'number')return res.status(400).json("stock should be a number")
+    if(typeof price !== 'number')return res.status(400).json("price should be a number")
+    if(typeof promotion !== 'number')return res.status(400).json("promotion should be a number")
+    
     try {
         
         let productCreated = await Products.create({
