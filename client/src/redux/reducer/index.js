@@ -3,7 +3,8 @@ import { types} from "../actions";
 
 const initialState={
     theme:"light",
-    details:[]
+    details:[],
+    images:[]
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -21,7 +22,8 @@ export const rootReducer=(state=initialState, action)=>{
         case types.GET_DETAILS:
             return{
                ...state,
-               details:action.payload
+               details:action.payload,
+               images:action.payload.image.map(e=>e)
             }
 
         default: return {...state}

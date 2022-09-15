@@ -3,19 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getdetailid } from "../redux/actions";
+import { useState } from "react";
 
 
 
 
 const ImageXDataProduct = (props) =>{
     const details = useSelector((state) => state.details);
+    const imagenes= useSelector((state) => state.images)
+    const [ordenimg, setOrdenimg] = useState("")
     //const id = props.match.params.id;
     // const deta = details.infoprod[0]
     const dispatch = useDispatch()
     useEffect(()=>{
-       dispatch(getdetailid(64))
+       dispatch(getdetailid(6))
     },[dispatch])
-    
+    console.log(imagenes)
     const data = {
         clotheType: "shirt",
         brand:"adidas",
@@ -30,20 +33,35 @@ const ImageXDataProduct = (props) =>{
         price:"13000",
         promotion:"0.15"
        }
+
+
+    function handleImage(e){
+       setOrdenimg(e.target.src)
+    }
+     console.log(ordenimg,"orden")
   return(
     <div className="flex flex-row mt-[100px] ml-36 space-x-10">
-        <div>
-          <div><img src={details.image} alt="imagen del product" width="550px" height="550px"
+        <div className="flex flex-col items-center">
+          <div><img src={ordenimg === ""?imagenes[0]:ordenimg} alt="imagen del product" width="550px" height="550px"
             /></div>
-          
+          <div className="flex flex-row items-center gap-[20px]">
+          {imagenes.map(d=>
+            {
+              return(
+                <button onClick={(e) => handleImage(e)} value= {d}><img src={d} alt="imagen del product" width="120px" height="120px"
+                /></button>
+              )
+            })}
         </div>
+        </div>
+        
         <div className="flex flex-col gap-10 ">
           <div className=" flex text-[30px] ">{details.name}</div>
-          <div className=" flex ml-0 pl-0 "> {data.price}$</div>
+          <div className=" flex ml-0 pl-0 "> {details.price}$</div>
           <div className="flex flex-col ">
-            <div className="flex">Gender: {data.gender}</div>
-            <div className=" flex">Sport: {data.sport}</div>   
-            <div className=" flex"> Collection: {data.collection}</div>
+            <div className="flex">Gender: {details.gender}</div>
+            <div className=" flex">Sport: {details.sport}</div>   
+            <div className=" flex"> Collection: {details.collection}</div>
             </div>
           <div className="flex">Size</div>
           <button

@@ -21,10 +21,11 @@ export function getdetailid(id) {
         var json = await axios.get(`http://localhost:3001/${id}`);
         return dispatch({
           type: types.GET_DETAILS,
-          payload: json.data,
+          payload: json.data[0],
         });
       } catch (error) {
         console.log(error);
       }
     };
   }
+  
