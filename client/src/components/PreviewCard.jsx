@@ -1,21 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const PreviewCard = () => {
-    const data = {
-        "clotheType": "shirt",
-        "brand": "adidas",
-        "name": "camiseton",
-        "gender": "x",
-        "sport": "running",
-        "collection": "primavera",
-        "color": "darkred",
-        "size": "xxl",
-        "image": 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b2c6ff231fe04a809820aec4010a2b1d_9366/Jersey_Visitante_Seleccion_Nacional_de_Mexico_Beige_HD9314_21_model.jpg',
-        "stock": "10",
-        "price": "13000",
-        "promotion": "0.15"
-    }
+const PreviewCard = ({ data }) => {
     if (data) {
         return (
             <Link to={''} className='min-w-[16.3rem] shadow-md h-72'>
