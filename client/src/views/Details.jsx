@@ -13,7 +13,7 @@ const Details = () => {
       <SelectoresProduct/>
       <div className="flex flex-col ml-16 mt-[20px]">
         
-        <Carrousel/>
+        
       </div>
     </div>
   );
