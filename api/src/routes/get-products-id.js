@@ -12,8 +12,8 @@ router.get('/:id', async (req, res) => {
         // if(id){
             const result = await infoDetail(id)
             // if(productdetail === null) return res.status(400).json("Product id was not found")
-            const resultado = result.infoprod[0]
-            res.status(200).json(resultado)
+            
+            res.status(200).json(result)
         
     } catch (error) {
         return res.status(400).json(error.message)

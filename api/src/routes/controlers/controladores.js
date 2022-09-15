@@ -42,7 +42,17 @@ module.exports = {
 infoDetail: async function (id){
     let detail = {}
     const productdetail = await Products.findByPk(parseInt(id))
+    let infoprod = {}
 
+    infoprod.name = productdetail.name,
+    infoprod.clotheType = productdetail.name,
+    infoprod.brand = productdetail.brand,
+    infoprod.gender = productdetail.gender,
+    infoprod.sport = productdetail.sport,
+    infoprod.collection = productdetail.collection,
+    infoprod.price = productdetail.price,
+    infoprod.promotion = productdetail.promotion,
+    infoprod.image = productdetail.image
 
     const asociados = await Products.findAll({
         where:{
@@ -52,19 +62,7 @@ infoDetail: async function (id){
         }
     })
 
-    detail.infoprod = asociados.map(el =>{ 
-        return{
-                name: el.name,
-                clotheType: el.clotheType,
-                brand: el.brand,
-                gender:el.gender,
-                sport:el.sport,
-                collection:el.collection,
-                price:el.price,
-                promotion:el.promotion,
-                image:el.image,
-        }
-    })
+    detail.infoprod = infoprod
     detail.infostock = asociados.map(el =>{ 
         return{
             id : el.id,
