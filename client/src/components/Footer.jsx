@@ -1,5 +1,7 @@
 import logoLargo from '../assets/logoLargo.png'
 import { GrLinkedinOption } from 'react-icons/gr'
+import { BsFacebook, BsInstagram } from 'react-icons/bs'
+import { MdCopyright } from 'react-icons/md'
 
 
 const Footer = () => {
@@ -25,18 +27,15 @@ const Footer = () => {
                      dark:bg-verde-dark 
                      dark:border-verde-dark 
                      dark:text-main-dark
-
                      dark:hover:bg-main-dark 
                      dark:hover:border-verde-light
                      dark:hover:text-verde-light
-                     
                      hover:bg-main-light 
                      hover:text-verde-light 
-                     hover:border-verde-light 
-                     
+                     hover:border-verde-light                      
                      text-main-light 
                      bg-verde-light
-                     border-verde-light   '>Registrarse</button>
+                     border-verde-light'>Registrarse</button>
                     <button className='border rounded-md h-12 w-30 font-bold 
                      dark:bg-main-dark 
                      dark:border-verde-dark 
@@ -54,10 +53,15 @@ const Footer = () => {
                 <hr></hr>
             </div>
             <div className="w-full flex flex-row justify-around  text-main-dark dark:text-main-light">
-                <p>The Last Dance.inc 2022. We love our users!</p>
+                <div className='flex flex-row'>
+                    <MdCopyright className='h-5 w-5 mr-1 '/>
+                    <p>The Last Dance.inc 2022. We love our users!</p>
+                </div>
                 <div className='flex flex-row'>
                     <p className='mr-4'>Follow </p>
-                    <GrLinkedinOption/>
+                    <a href='https://www.linkedin.com/' target='_blank'><GrLinkedinOption className='h-5 w-5 mr-4'/></a>
+                    <a href='https://www.facebook.com/' target='_blank'><BsFacebook className='h-5 w-5 mr-4'/></a>
+                    <a href='https://www.instagram.com/' target='_blank'><BsInstagram className='h-5 w-5'/></a>
                 </div>
             </div>
 
