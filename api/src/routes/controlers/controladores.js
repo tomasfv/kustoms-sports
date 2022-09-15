@@ -40,7 +40,7 @@ module.exports = {
     return navbar;
 },
 infoDetail: async function (id){
-    let detail = {}
+    let detail = []
     const productdetail = await Products.findByPk(parseInt(id))
     let infoprod = {}
 
@@ -62,8 +62,8 @@ infoDetail: async function (id){
         }
     })
 
-    detail.infoprod = infoprod
-    detail.infostock = asociados.map(el =>{ 
+    detail.push(infoprod)
+    infostock = asociados.map(el =>{ 
         return{
             id : el.id,
             color:el.color,
@@ -72,6 +72,7 @@ infoDetail: async function (id){
         }
     })
 
+    detail.push(infostock)
     
     
     return detail;
