@@ -50,7 +50,7 @@ size:{
     allowNull: false
 },
 image:{
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.TEXT),
     allowNull: false
 },
 stock:{
