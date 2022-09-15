@@ -85,15 +85,15 @@ const NavBar = () => {
                         <div className='w-full opacity-100 right-0 relative flex flex-col align-baseline'>
                             <img src={theme === 'light' ? logoLargoLight : logoLargo} alt="logo-grande" className='w-fit mx-auto my-1' />
                             <ul className='flex flex-col text-justify'>
-                                {data.gender.map(gen => {
-                                    return <Link to={`categories/${gen}`} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>{gen}</Link>
+                                {data.gender.map((gen, index) => {
+                                    return <Link to={`categories/gender/${gen}`} key={gen + index} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>{gen}</Link>
 
                                 })}
                                 <li onClick={handleClickMarca} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
                                     Marca
                                     <div className={`mt-5 ${showingMarca ? 'flex flex-col' : 'hidden'}`} >
-                                        {data.brand.map(bra => {
-                                            return <Link to={`categories/${bra}`} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
+                                        {data.brand.map((bra, index) => {
+                                            return <Link to={`categories/brand/${bra}`} key={bra + index} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
                                                 {bra}
                                                 <MdOutlineChevronRight className='text-verde-light' />
                                             </Link>
@@ -103,8 +103,8 @@ const NavBar = () => {
                                 <li onClick={handleClickDeporte} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
                                     Deporte
                                     <div className={`mt-5 ${showingDeporte ? 'flex flex-col' : 'hidden'}`} >
-                                        {data.sport.map(spr => {
-                                            return <Link to={`categories/${spr}`} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
+                                        {data.sport.map((spr, index) => {
+                                            return <Link to={`categories/sport/${spr}`} key={spr + index} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
                                                 {spr}
                                                 <MdOutlineChevronRight className='text-verde-light' />
                                             </Link>
@@ -130,13 +130,13 @@ const NavBar = () => {
             {/* NavBar grande */}
 
             <nav className='hidden lg:flex fixed top-0 justify-between items-center bg-main-light dark:bg-main-dark z-50 w-full transition-all duration-300'>
-                <Link className='ml-5'>
+                <Link to={'/'} className='ml-5'>
                     <img src={theme === 'light' ? logoLargoLight : logoLargo} className='h-10 w-auto ' alt="logo-kustoms" />
                 </Link>
                 <div>
                     <ul className='flex flex-row'>
-                        {data.gender.map((gen) => {
-                            return <Link to={`categories/${gen}`} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
+                        {data.gender.map((gen, index) => {
+                            return <Link to={`categories/gender/${gen}`} key={gen + index} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
                                 <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                                 <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                                 {gen}
@@ -148,8 +148,8 @@ const NavBar = () => {
                             <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             Marca
                             <div className={` py-2 hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
-                                {data.brand.map(bra => {
-                                    return <Link to={`categories/${bra}`} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark rounded-sm'>
+                                {data.brand.map((bra, index) => {
+                                    return <Link to={`categories/brand/${bra}`} key={bra + index} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark rounded-sm'>
                                         {bra}
                                         <MdOutlineChevronRight className='text-verde-light' />
                                     </Link>
@@ -161,8 +161,8 @@ const NavBar = () => {
                             <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             Deporte
                             <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
-                                {data.sport.map(spr => {
-                                    return <Link to={`categories/${spr}`} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
+                                {data.sport.map((spr, index) => {
+                                    return <Link to={`categories/sport/${spr}`} key={spr + index} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
                                         {spr}
                                         <MdOutlineChevronRight className='text-verde-light' />
                                     </Link>

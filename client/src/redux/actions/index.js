@@ -1,8 +1,13 @@
 import axios from 'axios';
 
+
+const URL="http://localhost:3001/"
+
 export const types={
     CHANGE_THEME:"CHANGE_THEME",
     GET_DETAILS :"GET_DETAILS",
+    GET_CATEGORY: "GET_CATEGORY",
+    CLEAR_CATEGORY: "CLEAR_CATEGORY"
 
 }
 
@@ -13,7 +18,6 @@ export const changeTheme=(payload)=>{
         payload:payload
     })
 }
- 
 
 export function getdetailid(id) {
     return async function (dispatch) {
@@ -29,3 +33,22 @@ export function getdetailid(id) {
     };
   }
   
+  export const getByCategory=(category, value)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}?${category}=${value}`)
+        return dispatch({
+          type: types.GET_CATEGORY,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+  export const clearCategory=()=>{
+    return{
+      type: types.CLEAR_CATEGORY
+    }
+  }

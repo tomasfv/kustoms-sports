@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
-import { PreviewCard } from "./index"
+import { PreviewCard, Filters } from "./index"
 
 const ProductGallery = ({ productos }) => {
     const [nShowing, setNShowing] = useState(20)
@@ -60,9 +60,7 @@ const ProductGallery = ({ productos }) => {
 
     return (
         <section>
-            <section>
-                filtros
-            </section>
+            <Filters data={productos} />
             <section className="w-10/12 my-5 mx-auto flex flex-row flex-wrap gap-6 justify-center">
 
                 {onDisplay?.map((data, index) => (

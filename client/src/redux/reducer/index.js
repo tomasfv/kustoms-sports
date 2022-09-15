@@ -4,7 +4,8 @@ import { types} from "../actions";
 const initialState={
     theme:"light",
     details:[],
-    images:[]
+    images:[],
+    productByCategory:[],
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -24,6 +25,16 @@ export const rootReducer=(state=initialState, action)=>{
                ...state,
                details:action.payload,
                images:action.payload.image.map(e=>e)
+            }
+        case types.GET_CATEGORY:
+            return{
+                ...state,
+                productByCategory:action.payload
+            }
+        case types.CLEAR_CATEGORY:
+            return{
+                ...state,
+                productByCategory:[]
             }
 
         default: return {...state}
