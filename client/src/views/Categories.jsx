@@ -31,7 +31,7 @@ const Categories = () => {
 
     return (
         <main className="mb-10 mt-16 pt-14 min-h-screen">
-            <h1 className="text-3xl text-main-dark dark:text-main-light uppercase font-bold">{paramValue}</h1>
+            <h1 className="text-4xl text-main-dark dark:text-main-light uppercase font-bold ">{paramValue}</h1>
             <ProductGallery productos={products} />
         </main>
     )

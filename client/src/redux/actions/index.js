@@ -10,7 +10,8 @@ export const types={
     CLEAR_CATEGORY: "CLEAR_CATEGORY",
     GET_STOCK:"GET_STOCK",
     GET_NAVBAR:"GET_NAVBAR",
-    GET_BY_DATE:"GET_DATE"
+    GET_BY_DATE:"GET_DATE",
+    FILTER:"FILTER"
 }
 
 
@@ -88,6 +89,12 @@ export function getStock(id) {
     }
   }
 
+  export const filterProducts=(payload)=>{
+    return{
+      type: types.FILTER,
+      payload
+    }
+  }
   export const clearCategory=()=>{
     return{
       type: types.CLEAR_CATEGORY
