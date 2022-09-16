@@ -9,6 +9,7 @@ const initialState={
     navData:{},
     stock:[],
     color:{},
+    newest:[]
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -25,14 +26,19 @@ export const rootReducer=(state=initialState, action)=>{
         }
         case types.GET_DETAILS:
             return{
-               ...state,
-               details:action.payload,
-               images:action.payload.image.map(e=>e)
+                ...state,
+                details:action.payload,
+                images:action.payload.image.map(e=>e)
             }
         case types.GET_CATEGORY:
             return{
                 ...state,
                 productByCategory:action.payload
+            }
+        case types.GET_BY_DATE:
+            return{
+                ...state,
+                newest:action.payload
             }
         case types.CLEAR_CATEGORY:
             return{

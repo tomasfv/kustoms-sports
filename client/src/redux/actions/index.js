@@ -9,7 +9,8 @@ export const types={
     GET_CATEGORY: "GET_CATEGORY",
     CLEAR_CATEGORY: "CLEAR_CATEGORY",
     GET_STOCK:"GET_STOCK",
-    GET_NAVBAR:"GET_NAVBAR"
+    GET_NAVBAR:"GET_NAVBAR",
+    GET_BY_DATE:"GET_DATE"
 }
 
 
@@ -53,6 +54,19 @@ export function getStock(id) {
         let response= await axios.get(`${URL}?${category}=${value}`)
         return dispatch({
           type: types.GET_CATEGORY,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getByDate=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}date`)
+        return dispatch({
+          type: types.GET_BY_DATE,
           payload:response.data
         })
       } catch (error) {

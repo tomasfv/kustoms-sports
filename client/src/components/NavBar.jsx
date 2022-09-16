@@ -42,6 +42,7 @@ const NavBar = () => {
     useEffect(() => {
         setIsShowing(false)
         dispatch(getNavData())
+        // eslint-disable-next-line
     }, [])
 
 
@@ -151,8 +152,8 @@ const NavBar = () => {
                             </div>
                         </li>
                         <li className='group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer overflow-hidden uppercase'>
-                            <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
-                            <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
+                            <span className='w-20 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
+                            <span className='w-20 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             Deporte
                             <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light drop-shadow-2xl dark:drop-shadow-[0_10px_10px_rgba(150,150,150,0.25)] dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
                                 {navData?.sport?.map((spr, index) => {
