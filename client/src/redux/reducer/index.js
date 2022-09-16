@@ -36,6 +36,11 @@ export const rootReducer=(state=initialState, action)=>{
                 ...state,
                 productByCategory:[]
             }
+        case types.GET_STOCK:
+                return{
+                    ...state,
+                    stock:action.payload.map(d=>d)
+                }   
 
         default: return {...state}
     }
