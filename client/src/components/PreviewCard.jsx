@@ -5,7 +5,7 @@ const PreviewCard = ({ data }) => {
 
     if (data) {
         return (
-            <Link to={''} className='min-w-[16.3rem] shadow-md h-72'>
+            <Link to={`/producto/${data.id}`} className='min-w-[16.3rem] shadow-md h-72'>
                 < div className='relative' >
                     <img src={data.image[0]} alt="Imagen producto" className='w-full h-52 object-scale-down bg-main-light' />
                     <div className='absolute bottom-1 left-1 flex flex-row bg-main-light dark:bg-main-dark'>
