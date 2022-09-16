@@ -66,6 +66,7 @@ infoDetail: async function (id){
     infostock = asociados.map(el =>{ 
         return{
             id : el.id,
+            gender: el.gender,
             color:el.color,
             size:el.size,
             stock:el.stock,
