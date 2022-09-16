@@ -14,9 +14,10 @@ const NavBar = () => {
     const [isShowing, setIsShowing] = useState(false)
     const [showingMarca, setShowingMarca] = useState(false)
     const [showingDeporte, setShowingDeporte] = useState(false)
+    const [showingColeccion, setShowingColeccion] = useState(false)
 
     const dispatch = useDispatch()
-    let navData = { gender: [], collectiom: [], sport: [], brand: [] }
+    let navData = { gender: [], collection: [], sport: [], brand: [] }
     navData = useSelector(state => state.navData)
     const theme = useSelector(state => state.theme)
     const handleClick = () => {
@@ -27,6 +28,9 @@ const NavBar = () => {
     }
     const handleClickDeporte = () => {
         setShowingDeporte(!showingDeporte)
+    }
+    const handleClickCol = () => {
+        setShowingColeccion(!showingColeccion)
     }
     const hadndleTheme = () => {
         if (theme === 'light') {
@@ -90,6 +94,17 @@ const NavBar = () => {
                                         })}
                                     </div>
                                 </li>
+                                <li onClick={handleClickCol} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
+                                    Colección
+                                    <div className={`mt-5 ${showingColeccion ? 'flex flex-col' : 'hidden'}`} >
+                                        {navData?.collection?.map((cl, index) => {
+                                            return <Link to={`categories/collection/${cl}`} key={cl + index} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
+                                                {cl}
+                                                <MdOutlineChevronRight className='text-verde-light' />
+                                            </Link>
+                                        })}
+                                    </div>
+                                </li>
                             </ul>
                             <div className='gap-6 flex flex-col ml-6 mt-10'>
                                 <Button classname={'mb-3'} type={'registrarse'} />
@@ -122,11 +137,11 @@ const NavBar = () => {
                             </Link>
 
                         })}
-                        <li onClick={handleClickMarca} className=' group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer relative'>
+                        <li className=' group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer relative uppercase'>
                             <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             Marca
-                            <div className={` py-2 hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
+                            <div className={` py-2 hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark drop-shadow-2xl dark:drop-shadow-[0_10px_10px_rgba(150,150,150,0.25)] text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
                                 {navData?.brand?.map((bra, index) => {
                                     return <Link to={`categories/brand/${bra}`} key={bra + index} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark rounded-sm'>
                                         {bra}
@@ -135,14 +150,27 @@ const NavBar = () => {
                                 })}
                             </div>
                         </li>
-                        <li onClick={handleClickDeporte} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer overflow-hidden'>
+                        <li className='group text-main-dark dark:text-main-light text-base py-8 ml-6 cursor-pointer overflow-hidden uppercase'>
                             <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             Deporte
-                            <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
+                            <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light drop-shadow-2xl dark:drop-shadow-[0_10px_10px_rgba(150,150,150,0.25)] dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
                                 {navData?.sport?.map((spr, index) => {
-                                    return <Link to={`categories/sport/${spr}`} key={spr + index} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
+                                    return <Link to={`categories/sport/${spr}`} key={spr + index} className='p-2 flex flex-row  items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
                                         {spr}
+                                        <MdOutlineChevronRight className='text-verde-light' />
+                                    </Link>
+                                })}
+                            </div>
+                        </li>
+                        <li className='group text-main-dark dark:text-main-light  text-base py-8 ml-6 cursor-pointer overflow-hidden uppercase w-fit'>
+                            <span className='w-24 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
+                            <span className='w-24 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
+                            Colección
+                            <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light drop-shadow-2xl dark:drop-shadow-[0_10px_10px_rgba(150,150,150,0.25)] dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
+                                {navData?.collection?.map((cl, index) => {
+                                    return <Link to={`categories/collection/${cl}`} key={cl + index} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
+                                        {cl}
                                         <MdOutlineChevronRight className='text-verde-light' />
                                     </Link>
                                 })}

@@ -11,7 +11,7 @@ const MainPromo = () => {
 
     useEffect(() => {
         dispatch(clearCategory())
-        dispatch(getByCategory('collection', 'qatar'))
+        dispatch(getByCategory('collection', 'Qatar'))
     }, [])
 
 
