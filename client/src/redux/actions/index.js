@@ -7,7 +7,8 @@ export const types={
     CHANGE_THEME:"CHANGE_THEME",
     GET_DETAILS :"GET_DETAILS",
     GET_CATEGORY: "GET_CATEGORY",
-    CLEAR_CATEGORY: "CLEAR_CATEGORY"
+    CLEAR_CATEGORY: "CLEAR_CATEGORY",
+    GET_STOCK:"GET_STOCK",
 
 }
 
@@ -19,7 +20,7 @@ export const changeTheme=(payload)=>{
     })
 }
 
-export function getdetailid(id) {
+export function getDetailId(id) {
     return async function (dispatch) {
       try {
         var json = await axios.get(`http://localhost:3001/${id}`);
@@ -32,7 +33,20 @@ export function getdetailid(id) {
       }
     };
   }
-  
+export function getStock(id) {
+    return async function (dispatch) {
+      try {
+        var json = await axios.get(`http://localhost:3001/${id}`);
+        return dispatch({
+          type: types.GET_STOCK,
+          payload: json.data[1],
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
   export const getByCategory=(category, value)=>{
     return async (dispatch)=>{
       try {
