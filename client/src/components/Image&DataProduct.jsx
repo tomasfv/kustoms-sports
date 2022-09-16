@@ -23,21 +23,8 @@ const ImageXDataProduct = () => {
     dispatch(getStock(id));
   }, [dispatch, id]);
 
-  const data = {
-    clotheType: "shirt",
-    brand: "adidas",
-    name: "Camiseta selección Argentina",
-    gender: "x",
-    sport: "futbol",
-    collection: "primavera",
-    color: "darkred",
-    size: "xxl",
-    image:
-      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/611f58bb7b4444bbb62eaeca012c57dd_9366/Camiseta_Titular_Argentina_22_Blanco_HF1495_01_laydown.jpg",
-    stock: "10",
-    price: "13000",
-    promotion: "0.15",
-  };
+  const stockgender = stock.filter(e=>{return(e.gender == details.gender)})
+  console.log(stockgender,"stock")
 
   function handleImage(e) {
     setOrdenimg(e.target.src);
@@ -83,7 +70,7 @@ const ImageXDataProduct = () => {
         <div className="flex flex-col">
           <div className="flex font-bold">Talles disponibles</div>
           <div className="flex flex-row  ">
-            {stock?.map((el) => {
+            {stockgender.map((el) => {
               return (
                 <div className=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]">
                   {el.size}
