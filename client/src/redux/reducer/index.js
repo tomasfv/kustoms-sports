@@ -6,6 +6,7 @@ const initialState={
     details:[],
     images:[],
     productByCategory:[],
+    navData:{},
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -40,6 +41,11 @@ export const rootReducer=(state=initialState, action)=>{
                 return{
                     ...state,
                     stock:action.payload.map(d=>d)
+                }   
+        case types.GET_NAVBAR:
+                return{
+                    ...state,
+                    navData:action.payload
                 }   
 
         default: return {...state}

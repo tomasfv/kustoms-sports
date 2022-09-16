@@ -36,11 +36,11 @@ const Filters = ({ data }) => {
 
     return (
         <section className='flex flex-row gap-3 flex-wrap w-10/12 justify-center mx-auto mt-14 mb-11'>
-            {Object.keys(filters).map((e) => {
-                return <select name={e} id="{e}" className='md:w-52 w-fit h-14 uppercase text-center text-main-dark dark:text-main-light bg-main-light border-b-main-dark dark:bg-main-dark dark:border-b-main-light border-b-[5px] transition-all duration-300'>
+            {Object.keys(filters).map((e, index) => {
+                return <select name={e} id="{e}" key={e + index} className='md:w-52 w-fit h-14 uppercase text-center text-main-dark dark:text-main-light bg-main-light border-b-main-dark dark:bg-main-dark dark:border-b-main-light border-b-[5px] transition-all duration-300'>
                     <option default value={null} >{e}</option>
-                    {filters[e]?.map(j => {
-                        return <option value={j}>{j}</option>
+                    {filters[e]?.map((j, index) => {
+                        return <option key={j + index + e} value={j}>{j}</option>
                     })}
                 </select>
             })}
