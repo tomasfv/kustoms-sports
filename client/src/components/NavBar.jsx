@@ -6,21 +6,18 @@ import logoLargoLight from '../assets/logoLargoLight.png'
 import { Link } from 'react-router-dom'
 import { Button } from './index'
 import { useSelector, useDispatch } from 'react-redux'
-import { changeTheme } from '../redux/actions'
+import { changeTheme, getNavData } from '../redux/actions'
 import { useEffect } from 'react'
-import { LoginButton } from './Login';
-import { LogoutButton } from './Logout';
-import { Profile } from './Profile';
-import { useAuth0 } from "@auth0/auth0-react";
 
 
 const NavBar = () => {
-    const { isAuthenticated } = useAuth0();
     const [isShowing, setIsShowing] = useState(false)
     const [showingMarca, setShowingMarca] = useState(false)
     const [showingDeporte, setShowingDeporte] = useState(false)
 
     const dispatch = useDispatch()
+    let navData = { gender: [], collectiom: [], sport: [], brand: [] }
+    navData = useSelector(state => state.navData)
     const theme = useSelector(state => state.theme)
     const handleClick = () => {
         setIsShowing(!isShowing)
@@ -40,33 +37,10 @@ const NavBar = () => {
     }
     useEffect(() => {
         setIsShowing(false)
+        dispatch(getNavData())
     }, [])
 
 
-    const data = {
-        "brand": [
-            "sonder",
-            "adidas",
-            "pirulo",
-            "nike",
-            "underwear",
-            "new balance",
-            "Fila"
-        ],
-        "collection": [
-            "verano",
-            "primavera"
-        ],
-        "gender": [
-            "Hombre",
-            "Mujer",
-            "Otro",
-        ],
-        "sport": [
-            "golf",
-            "futbol"
-        ]
-    }
 
     return (
         <>
@@ -90,14 +64,14 @@ const NavBar = () => {
                         <div className='w-full opacity-100 right-0 relative flex flex-col align-baseline'>
                             <img src={theme === 'light' ? logoLargoLight : logoLargo} alt="logo-grande" className='w-fit mx-auto my-1' />
                             <ul className='flex flex-col text-justify'>
-                                {data.gender.map((gen, index) => {
+                                {navData?.gender?.map((gen, index) => {
                                     return <Link to={`categories/gender/${gen}`} key={gen + index} className='text-main-dark dark:text-main-light text-base py-8 pl-6 border-gris-light border-b w-full'>{gen}</Link>
 
                                 })}
                                 <li onClick={handleClickMarca} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
                                     Marca
                                     <div className={`mt-5 ${showingMarca ? 'flex flex-col' : 'hidden'}`} >
-                                        {data.brand.map((bra, index) => {
+                                        {navData?.brand?.map((bra, index) => {
                                             return <Link to={`categories/brand/${bra}`} key={bra + index} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
                                                 {bra}
                                                 <MdOutlineChevronRight className='text-verde-light' />
@@ -108,7 +82,7 @@ const NavBar = () => {
                                 <li onClick={handleClickDeporte} className='text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b list-none w-full cursor-pointer'>
                                     Deporte
                                     <div className={`mt-5 ${showingDeporte ? 'flex flex-col' : 'hidden'}`} >
-                                        {data.sport.map((spr, index) => {
+                                        {navData?.sport?.map((spr, index) => {
                                             return <Link to={`categories/sport/${spr}`} key={spr + index} className='ml-5 px-2 py-5 flex flex-row items-center gap-1 uppercase text-justify'>
                                                 {spr}
                                                 <MdOutlineChevronRight className='text-verde-light' />
@@ -118,13 +92,8 @@ const NavBar = () => {
                                 </li>
                             </ul>
                             <div className='gap-6 flex flex-col ml-6 mt-10'>
-                                {/* <Button classname={'mb-3'} type={'registrarse'} />
-                                <Button className='my-3' type={'ingresar'} /> */}
-                                {isAuthenticated ? (
-                                 <>
-                                 <Profile />
-                                <LogoutButton />
-                                 </> ) : ( <LoginButton /> ) }
+                                <Button classname={'mb-3'} type={'registrarse'} />
+                                <Button className='my-3' type={'ingresar'} />
 
                                 <button onClick={hadndleTheme} className='border rounded-md border-main-dark dark:border-verde-dark w-fit p-3'>
                                     {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
@@ -145,8 +114,8 @@ const NavBar = () => {
                 </Link>
                 <div>
                     <ul className='flex flex-row'>
-                        {data.gender.map((gen, index) => {
-                            return <Link to={`categories/gender/${gen}`} key={gen + index} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative'>
+                        {navData?.gender?.map((gen, index) => {
+                            return <Link to={`categories/gender/${gen}`} key={gen + index} className='group text-main-dark dark:text-main-light text-base py-8 ml-6 flex flex-col relative uppercase'>
                                 <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute top-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                                 <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                                 {gen}
@@ -158,7 +127,7 @@ const NavBar = () => {
                             <span className='w-full bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             Marca
                             <div className={` py-2 hidden group-hover:flex flex-col bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
-                                {data.brand.map((bra, index) => {
+                                {navData?.brand?.map((bra, index) => {
                                     return <Link to={`categories/brand/${bra}`} key={bra + index} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark rounded-sm'>
                                         {bra}
                                         <MdOutlineChevronRight className='text-verde-light' />
@@ -171,7 +140,7 @@ const NavBar = () => {
                             <span className='w-16 bg-main-dark dark:bg-gris-light h-1 mx-auto rounded-lg absolute bottom-7 opacity-0 group-hover:opacity-100 transition-all duration-300 '></span>
                             Deporte
                             <div className={`py-2 hidden group-hover:flex flex-col rounded-sm bg-main-light dark:bg-main-dark text-main-dark dark:text-main-light absolute gap-3 mt-5 px-3`}>
-                                {data.sport.map((spr, index) => {
+                                {navData?.sport?.map((spr, index) => {
                                     return <Link to={`categories/sport/${spr}`} key={spr + index} className='p-2 flex flex-row items-center gap-1 uppercase text-justify border border-transparent hover:border-verde-light dark:hover:border-verde-dark'>
                                         {spr}
                                         <MdOutlineChevronRight className='text-verde-light' />
@@ -189,13 +158,8 @@ const NavBar = () => {
                     <button onClick={hadndleTheme} className='border rounded-md h-12 border-main-dark dark:border-verde-dark hover:bg-verde-light hover:border-verde-light dark:hover:bg-gris-dark dark:hover:border-botvmioleta-light transition-all duration-300 '>
                         {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
                     </button>
-                    {/* <Button type={'registrarse'} />
-                    <Button type={'ingresar'} /> */}
-                    {isAuthenticated ? (
-                                 <>
-                                 <Profile />
-                                <LogoutButton />
-                                 </> ) : ( <LoginButton /> ) }
+                    <Button type={'registrarse'} />
+                    <Button type={'ingresar'} />
                 </div>
             </nav>
         </>
