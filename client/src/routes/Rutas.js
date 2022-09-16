@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
 import { Home, Details, Categories } from '../views/index'
-import { Profile } from '../components/Profile';
+import { Profile2 } from '../views/Profile2';
 
 const Rutas = () => {
     return (
@@ -11,7 +11,7 @@ const Rutas = () => {
                     <Route path={'/'} element={<Home/>} />
                     <Route path={'/producto/:id'} element={<Details/>} />
                     <Route path={'categories/:category/:value'} element={<Categories/>} />
-                    <Route path={'/profile'} element={<Profile/>} />
+                    <Route path={'/profile'} element={<Profile2/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

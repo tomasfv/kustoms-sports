@@ -21,8 +21,8 @@ const Footer = () => {
                 <img src={logoLargo} className='h-10 w-auto ml-5' alt="logo-kustoms" />
                 <div className="flex flex-col">
                     <div className="font-bold">Community</div>
-                    <a href='https://blog.soyhenry.com/' target="_blank">Henry Blog</a>
-                    <a href='https://www.adidas.com/us' target='_blank'>The Portal</a>
+                    <a href='https://blog.soyhenry.com/' target="_blank" rel="noreferrer">Henry Blog</a>
+                    <a href='https://www.adidas.com/us' target='_blank' rel="noreferrer">The Portal</a>
                 </div>
                 <div className="flex flex-col">
                     <div className="font-bold">Company</div>
@@ -77,9 +77,9 @@ const Footer = () => {
                 </div>
                 <div className='flex flex-row'>
                     <p className='mr-4'>Follow </p>
-                    <a href='https://www.linkedin.com/' target='_blank'><GrLinkedinOption className='h-5 w-5 mr-4'/></a>
-                    <a href='https://www.facebook.com/' target='_blank'><BsFacebook className='h-5 w-5 mr-4'/></a>
-                    <a href='https://www.instagram.com/' target='_blank'><BsInstagram className='h-5 w-5'/></a>
+                    <a href='https://www.linkedin.com/' target='_blank' rel="noreferrer"><GrLinkedinOption className='h-5 w-5 mr-4'/></a>
+                    <a href='https://www.facebook.com/' target='_blank' rel="noreferrer"><BsFacebook className='h-5 w-5 mr-4'/></a>
+                    <a href='https://www.instagram.com/' target='_blank' rel="noreferrer"><BsInstagram className='h-5 w-5'/></a>
                 </div>
             </div>
 
