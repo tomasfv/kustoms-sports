@@ -6,7 +6,7 @@ const {Products} = require('./src/db.js');
 const { products } = require( './src/bulk/products.json' );
 
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(process.env.PORT || 3001, () => {
     console.log('%s listening at 3001'); 
 
