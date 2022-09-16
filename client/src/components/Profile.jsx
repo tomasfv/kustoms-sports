@@ -16,7 +16,7 @@ export const Profile = () => {
         <Link to={'/profile'}>
           <img src={user.picture} alt={user.name} className='h-12 w-12 rounded-full' />
         </Link>
-        <p>{user.name}</p>
+        {/* <p>{user.name}</p> */}
         {/* <p>{user.email}</p> */}
       </div>
     )

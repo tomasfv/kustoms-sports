@@ -13,11 +13,11 @@ export const Profile2 = () => {
 
   return (
     isAuthenticated && (
-      //<div className="border-2 p-6 m-60 font-bold text-xs grid gap-2 justify-items-center text-main-dark dark:text-main-light">
-        <div className="m-60 w-65 flex flex-row justify-center  bg-gris-light dark:bg-gris-dark ">
-        <img src={user.picture} alt={user.name} className='h-20 w-20 rounded-full mt-12' /> 
-
-      <div className="flex flex-col p-8 ml-10 font-bold  bg-gris-light dark:bg-gris-dark text-main-dark dark:text-main-light ">
+      <div className="object-bottom">
+        <p className="font-bold">Hola {user.given_name}!</p>
+      <div className="  ">
+        <img src={user.picture} alt={user.name} className='h-20 w-20 rounded-full' /> 
+      <div className="p-8 font-bold  text-main-dark dark:text-main-light ">
         <p className="text-2xl">Perfil</p>
         <p>usuario: {user.name}</p>
         <p>e-mail: {user.email}</p>
@@ -25,7 +25,8 @@ export const Profile2 = () => {
         <p>apellido: {user.family_name}</p>
         <LogoutButton/>
       </div>
-        </div>
+    </div>
+      </div>
     )
   );
   

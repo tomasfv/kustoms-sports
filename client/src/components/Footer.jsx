@@ -56,11 +56,11 @@ const Footer = () => {
                      text-verde-light 
                      bg-main-light   '>Ingresar</button> */}
                     <div>
-                    {isAuthenticated ? (
+                    {/* {isAuthenticated ? (
                                  <>
                                  <Profile />
                                 <LogoutButton />
-                                 </> ) : ( <LoginButton /> ) }
+                                 </> ) : ( <LoginButton /> ) } */}
                     
 
                     </div>
