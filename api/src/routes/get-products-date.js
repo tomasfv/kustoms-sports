@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
                 }
                 if (flag) aux.push(element)
             });
-            aux.splice(3,aux.length+1)
+            aux.splice(10,aux.length+1)
             res.status(200).json(aux)
         
     } catch (error) {
