@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import { PreviewCard, Filters } from "./index"
+import { useSelector } from "react-redux"
 
 const ProductGallery = ({ productos }) => {
+    const [isFiltering, setIsFiltering] = useState(false)
+    const [displaying, setDisplaying] = useState([])
+    const filtering = useSelector(state => state.filteredProducts)
     const [nShowing, setNShowing] = useState(20)
     const [page, setPage] = useState(1)
-    const totalProducts = productos?.length
+    const totalProducts = displaying?.length
     const lastShowing = page * nShowing
     const firstShowing = lastShowing - nShowing
     const amountPages = []
@@ -14,8 +18,7 @@ const ProductGallery = ({ productos }) => {
     for (let p = 0; p < Math.ceil(totalProducts / nShowing); p++) {
         amountPages.push(p)
     }
-
-    productos && (onDisplay = productos.slice(firstShowing, lastShowing))
+    displaying && (onDisplay = displaying?.slice(firstShowing, lastShowing))
     const handleClick = (numero) => {
         setPage(numero)
     }
@@ -34,7 +37,19 @@ const ProductGallery = ({ productos }) => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [page])
+    useEffect(() => {
+        setDisplaying(productos)
+    }, [productos])
+    useEffect(() => {
+        if (filtering[0]) {
+            return setDisplaying(filtering)
+        }
+        if (filtering !== productos) setDisplaying(productos)
+
+    }, [filtering])
+
     const Pagination = () => (
+
 
         <div className="mt-6 flex flex-row mx-auto justify-center gap-6 items-center">
             <button onClick={handleLeftClick} disabled={page === 1 ? true : false} className="text-main-dark dark:text-main-light cursor-pointer hover:bg-opacity-10 hover:bg-main-dark dark:hover:bg-main-light dark:hover:text-main-dark p-2 rounded-full">
@@ -62,10 +77,13 @@ const ProductGallery = ({ productos }) => {
         <section>
             <Filters data={productos} />
             <section className="w-10/12 my-5 mx-auto flex flex-row flex-wrap gap-6 justify-center">
-
-                {onDisplay?.map((data, index) => (
-                    <PreviewCard data={data} key={index} />
-                ))}
+                {onDisplay[0] === 'vacio'
+                    ? <section className="w-full shadow-lg border rounded-md py-10 text-main-dark dark:text-main-light bg-main-light dark:bg-main-dark border-verde-light dark:border-verde-dark">
+                        La busqueda no produjo ningun resultado, intente cambiando algunos parametros
+                    </section>
+                    : onDisplay?.map((data, index) => (
+                        <PreviewCard data={data} key={index} />
+                    ))}
 
             </section>
             <Pagination />
