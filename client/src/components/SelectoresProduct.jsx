@@ -107,7 +107,7 @@ const SelectoresProduct = () => {
                 <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
                   INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
                 </div>
-                <ul className="grid-cols-2 ml-[20px]">
+                <ul className="flex flex-col ml-[20px] gap-[20px]">
                   <li className="list-disc">No usar suavizante</li>
                   <li className="list-disc">Lavar y planchar al revés</li>
                   <li className="list-disc">Retirar inmediatamente</li>
