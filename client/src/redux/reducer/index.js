@@ -7,6 +7,8 @@ const initialState={
     images:[],
     productByCategory:[],
     navData:{},
+    stock:[],
+    color:{},
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -40,7 +42,8 @@ export const rootReducer=(state=initialState, action)=>{
         case types.GET_STOCK:
                 return{
                     ...state,
-                    stock:action.payload.map(d=>d)
+                    stock:action.payload.map(d=>d),
+                    color:action.payload[0]
                 }   
         case types.GET_NAVBAR:
                 return{
