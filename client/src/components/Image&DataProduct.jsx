@@ -22,7 +22,9 @@ const ImageXDataProduct = () => {
     dispatch(getDetailId(id));
     dispatch(getStock(id));
   }, [dispatch, id]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [details])
   const stockgender = stock.filter(e=>{return(e.gender == details.gender)})
   console.log(stockgender,"stock")
 

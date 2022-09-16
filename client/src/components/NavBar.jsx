@@ -39,6 +39,12 @@ const NavBar = () => {
             dispatch(changeTheme('light'))
         }
     }
+
+    const handleReload = () =>{
+    
+            window.scrollTo(0, 0)
+           
+    }
     useEffect(() => {
         setIsShowing(false)
         dispatch(getNavData())
@@ -51,7 +57,7 @@ const NavBar = () => {
         <>
             {/* NavBar Pequeña */}
             <nav className='z-50 fixed top-0 lg:hidden w-full flex flex-row justify-between text-main-dark dark:text-main-light h-16 bg-main-light dark:bg-main-dark transition-all duration-300'>
-                <Link className='h-16 w-fit pl-5' to={'/'}><img src={smLogo} alt="logo-small" className='h-16 w-16' /></Link>
+                <Link className='h-16 w-fit pl-5' to={'/'} onClick={handleReload}><img src={smLogo} alt="logo-small" className='h-16 w-16' /></Link>
                 <div className='flex flex-row  gap-3 items-center'>
                     <Link to={''} className='w-fit h-fit relative'>
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
@@ -125,7 +131,7 @@ const NavBar = () => {
             {/* NavBar grande */}
 
             <nav className='hidden lg:flex fixed top-0 justify-between items-center bg-main-light dark:bg-main-dark z-50 w-full transition-all duration-300'>
-                <Link to={'/'} className='ml-5'>
+                <Link to={'/'} className='ml-5' onClick={handleReload}>
                     <img src={theme === 'light' ? logoLargoLight : logoLargo} className='h-10 w-auto ' alt="logo-kustoms" />
                 </Link>
                 <div>
