@@ -9,6 +9,7 @@ const ImageXDataProduct = () => {
   const details = useSelector((state) => state.details);
   const imagenes = useSelector((state) => state.images);
   const stock = useSelector((state) => state.stock);
+  const color = useSelector((state) => state.color);
   console.log(details);
   console.log(stock);
   const [ordenimg, setOrdenimg] = useState("");
@@ -72,13 +73,14 @@ const ImageXDataProduct = () => {
       <div className="flex flex-col gap-10 ">
         <div className=" flex text-[30px] ">{details.name}</div>
         <div className=" flex ml-0 pl-0 "> {details.price}$</div>
-        <div className="flex flex-col ">
-          <div className="flex">Gender: {details.gender}</div>
-          <div className=" flex">Sport: {details.sport}</div>
-          <div className=" flex"> Collection: {details.collection}</div>
+        <div className=" flex ml-0 pl-0 "> {color.color}</div>
+        <div className="flex flex-col gap-[10px]">
+          <div className="flex">Género: {details.gender}</div>
+          <div className=" flex">Deporte: {details.sport}</div>
+          <div className=" flex"> Colección: {details.collection}</div>
         </div>
         <div className="flex flex-col">
-          <div className="flex ">Size</div>
+          <div className="flex ">Talles disponibles</div>
           <div className="flex flex-row  ">
             {stock?.map((el) => {
               return (
