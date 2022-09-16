@@ -9,7 +9,7 @@ export const types={
     GET_CATEGORY: "GET_CATEGORY",
     CLEAR_CATEGORY: "CLEAR_CATEGORY",
     GET_STOCK:"GET_STOCK",
-
+    GET_NAVBAR:"GET_NAVBAR"
 }
 
 
@@ -53,6 +53,19 @@ export function getStock(id) {
         let response= await axios.get(`${URL}?${category}=${value}`)
         return dispatch({
           type: types.GET_CATEGORY,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getNavData=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}navbar`)
+        return dispatch({
+          type: types.GET_NAVBAR,
           payload:response.data
         })
       } catch (error) {
