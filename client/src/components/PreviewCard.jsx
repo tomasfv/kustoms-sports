@@ -7,7 +7,7 @@ const PreviewCard = ({ data }) => {
         return (
             <Link to={''} className='min-w-[16.3rem] shadow-md h-72'>
                 < div className='relative' >
-                    <img src={data.image[0]} alt="Imagen producto" className='w-full h-52 object-scale-down' />
+                    <img src={data.image[0]} alt="Imagen producto" className='w-full h-52 object-scale-down bg-main-light' />
                     <div className='absolute bottom-1 left-1 flex flex-row bg-main-light dark:bg-main-dark'>
                         <span className='text-base'>$</span>
                         <p className=' text-main-dark dark:text-main-light  px-1  text-xsm'>{data.price}</p>
