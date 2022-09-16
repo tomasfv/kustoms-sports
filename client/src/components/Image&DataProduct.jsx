@@ -57,12 +57,13 @@ const ImageXDataProduct = () => {
         <div className="flex flex-row items-center gap-[20px]">
           {imagenes.map((d) => {
             return (
-              <button onClick={(e) => handleImage(e)} value={d}>
+              <button onClick={(e) => handleImage(e)} value={d}className="hover:shadow-xl transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-100 mt-[10px]" >
                 <img
                   src={d}
                   alt="imagen del product"
                   width="120px"
                   height="120px"
+                  
                 />
               </button>
             );
@@ -75,12 +76,12 @@ const ImageXDataProduct = () => {
         <div className=" flex ml-0 pl-0 "> {details.price}$</div>
         <div className=" flex ml-0 pl-0 "> {color.color}</div>
         <div className="flex flex-col gap-[10px]">
-          <div className="flex">Género: {details.gender}</div>
-          <div className=" flex">Deporte: {details.sport}</div>
-          <div className=" flex"> Colección: {details.collection}</div>
+          <div className="flex flex-row gap-[5px]"><div className="font-bold">Género:</div> {details.gender}</div>
+          <div className=" flex flex-row gap-[5px]"><div className="font-bold">Deporte:</div> {details.sport}</div>
+          <div className=" flex flex-row gap-[5px]"> <div className="font-bold">Colección:</div> {details.collection}</div>
         </div>
         <div className="flex flex-col">
-          <div className="flex ">Talles disponibles</div>
+          <div className="flex font-bold">Talles disponibles</div>
           <div className="flex flex-row  ">
             {stock?.map((el) => {
               return (
