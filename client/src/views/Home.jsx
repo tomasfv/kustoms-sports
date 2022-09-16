@@ -7,7 +7,7 @@ import ninos from '../assets/ninos.jpg'
 const Home = () => {
     return (
 
-        <div className="mb-10 mt-16">
+        <div className="mb-10 mt-16 min-h-screen">
             <MainPromo />
             <KustomPromo />
             <section className="my-10">

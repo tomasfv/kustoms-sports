@@ -8,7 +8,7 @@ const Rutas = () => {
                 <Route path='/' element={<Layout/>}>
                     <Route path={'/'} element={<Home/>} />
                     <Route path={'/:id'} element={<Details/>} />
-                    <Route path={'categories/:category'} element={<Categories/>} />
+                    <Route path={'categories/:category/:value'} element={<Categories/>} />
                 </Route>
             </Routes>
         </BrowserRouter>
