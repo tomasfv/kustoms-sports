@@ -2,9 +2,17 @@ import logoLargo from '../assets/logoLargo.png'
 import { GrLinkedinOption } from 'react-icons/gr'
 import { BsFacebook, BsInstagram } from 'react-icons/bs'
 import { MdCopyright } from 'react-icons/md'
+import { Link } from 'react-router-dom'
+import { LoginButton } from './Login';
+import { LogoutButton } from './Logout';
+import { Profile } from './Profile';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 const Footer = () => {
+  const { isAuthenticated } = useAuth0();
+
     return (
         
         
@@ -23,7 +31,7 @@ const Footer = () => {
                     <p>History</p>
                 </div>
                     <div className="flex flex-col">
-                    <button className='border rounded-md h-12 w-30 font-bold mb-2 p-2
+                    <button hidden className='border rounded-md h-12 w-30 font-bold mb-2 p-2
                      dark:bg-verde-dark 
                      dark:border-verde-dark 
                      dark:text-main-dark
@@ -36,7 +44,7 @@ const Footer = () => {
                      text-main-light 
                      bg-verde-light
                      border-verde-light'>Registrarse</button>
-                    <button className='border rounded-md h-12 w-30 font-bold 
+                    {/* <button className='border rounded-md h-12 w-30 font-bold 
                      dark:bg-main-dark 
                      dark:border-verde-dark 
                      dark:hover:bg-verde-dark 
@@ -46,7 +54,17 @@ const Footer = () => {
                      hover:text-main-light 
                      hover:border-verde-light 
                      text-verde-light 
-                     bg-main-light   '>Ingresar</button>
+                     bg-main-light   '>Ingresar</button> */}
+                    <div>
+                    {isAuthenticated ? (
+                                 <>
+                                 <Profile />
+                                <LogoutButton />
+                                 </> ) : ( <LoginButton /> ) }
+                    
+
+                    </div>
+
                 </div>
             </div>
             <div className="w-full p-10  text-main-dark dark:text-main-light">

@@ -8,9 +8,14 @@ import { Button } from './index'
 import { useSelector, useDispatch } from 'react-redux'
 import { changeTheme } from '../redux/actions'
 import { useEffect } from 'react'
+import { LoginButton } from './Login';
+import { LogoutButton } from './Logout';
+import { Profile } from './Profile';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const NavBar = () => {
+    const { isAuthenticated } = useAuth0();
     const [isShowing, setIsShowing] = useState(false)
     const [showingMarca, setShowingMarca] = useState(false)
     const [showingDeporte, setShowingDeporte] = useState(false)
@@ -113,8 +118,13 @@ const NavBar = () => {
                                 </li>
                             </ul>
                             <div className='gap-6 flex flex-col ml-6 mt-10'>
-                                <Button classname={'mb-3'} type={'registrarse'} />
-                                <Button className='my-3' type={'ingresar'} />
+                                {/* <Button classname={'mb-3'} type={'registrarse'} />
+                                <Button className='my-3' type={'ingresar'} /> */}
+                                {isAuthenticated ? (
+                                 <>
+                                 <Profile />
+                                <LogoutButton />
+                                 </> ) : ( <LoginButton /> ) }
 
                                 <button onClick={hadndleTheme} className='border rounded-md border-main-dark dark:border-verde-dark w-fit p-3'>
                                     {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
@@ -179,8 +189,13 @@ const NavBar = () => {
                     <button onClick={hadndleTheme} className='border rounded-md h-12 border-main-dark dark:border-verde-dark hover:bg-verde-light hover:border-verde-light dark:hover:bg-gris-dark dark:hover:border-botvmioleta-light transition-all duration-300 '>
                         {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
                     </button>
-                    <Button type={'registrarse'} />
-                    <Button type={'ingresar'} />
+                    {/* <Button type={'registrarse'} />
+                    <Button type={'ingresar'} /> */}
+                    {isAuthenticated ? (
+                                 <>
+                                 <Profile />
+                                <LogoutButton />
+                                 </> ) : ( <LoginButton /> ) }
                 </div>
             </nav>
         </>
