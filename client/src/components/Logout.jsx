@@ -18,7 +18,7 @@ export const LogoutButton = () => {
     text-main-light 
     bg-main-dark
     border-verde-dark' onClick={() => logout({ returnTo: window.location.origin })}>
-      Logout
+      Salir
     </button>
   );
 };
