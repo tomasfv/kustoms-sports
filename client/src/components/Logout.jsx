@@ -5,7 +5,7 @@ export const LogoutButton = () => {
   const { logout } = useAuth0();
 
   return (
-    <button className='border rounded-md h-12 w-30 font-bold mb-2 p-2
+    <button className='border rounded-md h-12 w-40 font-bold  
     dark:bg-main-dark 
     dark:border-verde-dark 
     dark:text-main-light
