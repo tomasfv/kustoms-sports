@@ -14,7 +14,14 @@ export const Profile = () => {
     isAuthenticated && (
       <div className="font-bold text-xs grid gap-2 justify-items-center m-2 text-main-dark dark:text-main-light">
         <Link to={'/profile'}>
-          <img src={user.picture} alt={user.name} className='h-12 w-12 rounded-full' />
+          <img
+          src={user.picture} 
+          alt='avatar' 
+          onError={event => {
+            event.target.src = "https://thumbs.dreamstime.com/b/running-man-athletics-marathon-summer-sport-run-icon-isolated-white-background-minimal-cover-design-creative-running-man-158850742.jpg"
+            event.onerror = null
+          }}  
+          className='h-12 w-12 rounded-full' />
         </Link>
         {/* <p>{user.name}</p> */}
         {/* <p>{user.email}</p> */}

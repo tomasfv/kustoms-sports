@@ -1,6 +1,8 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from '../components/Logout';
+import logoLargo from '../assets/logoLargo.png'
+
 
 console.log('afuera')
 
@@ -29,7 +31,14 @@ export const Profile2 = () => {
         border-verde-dark">
           <p className="text-xl">Hola {user.given_name}!</p>
           <p className="text-2xl">Perfil</p>
-          <img src={user.picture} alt={user.name} className='h-20 w-20 rounded-full border-2 border-verde-dark' /> 
+          <img 
+            src={user.picture} 
+            alt='avatar' 
+            onError={event => {
+              event.target.src = "https://thumbs.dreamstime.com/b/running-man-athletics-marathon-summer-sport-run-icon-isolated-white-background-minimal-cover-design-creative-running-man-158850742.jpg"
+              event.onerror = null
+            }}
+            className='h-20 w-20 rounded-full border-2 border-verde-dark' /> 
           <p className="text-sm">usuario</p>
           <p className="text-2xl">{user.name}</p>
           <p className="text-sm">e-mail</p>
