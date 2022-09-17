@@ -13,19 +13,30 @@ export const Profile2 = () => {
 
   return (
     isAuthenticated && (
-      <div className="object-bottom">
-        <p className="font-bold">Hola {user.given_name}!</p>
-      <div className="  ">
-        <img src={user.picture} alt={user.name} className='h-20 w-20 rounded-full' /> 
-      <div className="p-8 font-bold  text-main-dark dark:text-main-light ">
-        <p className="text-2xl">Perfil</p>
-        <p>usuario: {user.name}</p>
-        <p>e-mail: {user.email}</p>
-        <p>nombre: {user.given_name}</p>
-        <p>apellido: {user.family_name}</p>
-        <LogoutButton/>
-      </div>
-    </div>
+      <div className="relative top-60 mb-80 flex flex-row justify-center">
+      
+        <div className=" font-bold border-2 rounded-lg p-4 space-y-4 grid justify-items-center 
+        dark:bg-verde-dark 
+        dark:border-verde-dark 
+        dark:text-main-dark
+        dark:hover:bg-main-dark 
+        dark:hover:border-verde-light
+        dark:hover:text-verde-light
+        hover:bg-gris-dark
+                    
+        text-main-light 
+        bg-verde-light
+        border-verde-dark">
+          <p className="text-xl">Hola {user.given_name}!</p>
+          <p className="text-2xl">Perfil</p>
+          <img src={user.picture} alt={user.name} className='h-20 w-20 rounded-full border-2 border-verde-dark' /> 
+          <p className="text-sm">usuario</p>
+          <p className="text-2xl">{user.name}</p>
+          <p className="text-sm">e-mail</p>
+          <p className="text-md">{user.email}</p>
+          <LogoutButton/>
+        </div>
+    
       </div>
     )
   );

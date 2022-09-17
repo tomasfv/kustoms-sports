@@ -6,18 +6,18 @@ export const LogoutButton = () => {
 
   return (
     <button className='border rounded-md h-12 w-30 font-bold mb-2 p-2
-    dark:bg-verde-dark 
+    dark:bg-main-dark 
     dark:border-verde-dark 
-    dark:text-main-dark
-    dark:hover:bg-main-dark 
-    dark:hover:border-verde-light
-    dark:hover:text-verde-light
-    hover:bg-main-light 
-    hover:text-verde-light 
-    hover:border-verde-light                      
+    dark:text-main-light
+    dark:hover:bg-red-dark 
+    dark:hover:border-red-dark
+    dark:hover:text-main-light
+    hover:bg-red-dark 
+    hover:text-main-light 
+    hover:border-red-dark                      
     text-main-light 
-    bg-verde-light
-    border-verde-light' onClick={() => logout({ returnTo: window.location.origin })}>
+    bg-main-dark
+    border-verde-dark' onClick={() => logout({ returnTo: window.location.origin })}>
       Logout
     </button>
   );
