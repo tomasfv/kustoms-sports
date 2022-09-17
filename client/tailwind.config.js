@@ -26,6 +26,9 @@ module.exports = {
       'degAcento':{
         dark:'#000000',
         light:'#1C89A1',
+      },
+      'red':{
+        dark: '#990000' 
       }
     },
     extend: {},
