@@ -21,7 +21,7 @@ const finduser = await Users.findOne( {
     }
 
 })
-
+console.log(finduser)
 if (finduser === null) {
     
         const createuser = await Users.create({
@@ -33,8 +33,9 @@ if (finduser === null) {
         }
         
        )
-         
-       await transporter.sendMail(
+      
+     const transs =   await transporter.sendMail(
+   
             {
     
                 from: "kustomssports@hotmail.com",
@@ -46,7 +47,7 @@ if (finduser === null) {
     
         
         )
-    
+        console.log(transs) 
     
         return res.status(200).json(createuser)
     }

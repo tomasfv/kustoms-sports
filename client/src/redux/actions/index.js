@@ -11,7 +11,8 @@ export const types={
     GET_STOCK:"GET_STOCK",
     GET_NAVBAR:"GET_NAVBAR",
     GET_BY_DATE:"GET_DATE",
-    FILTER:"FILTER"
+    FILTER:"FILTER",
+    POST_USER: "POST_USER",
 }
 
 
@@ -99,4 +100,18 @@ export function getStock(id) {
     return{
       type: types.CLEAR_CATEGORY
     }
+
+
+  }
+
+  export const createnewuser = (payload) => {
+    return async function (dispatch) {
+      try {
+        var json = await axios.post(`http://localhost:3001/user`, payload);
+        return json
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
   }

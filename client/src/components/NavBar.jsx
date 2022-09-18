@@ -12,10 +12,11 @@ import { LoginButton } from './Login';
 import { LogoutButton } from './Logout';
 import { Profile } from './Profile';
 import { useAuth0 } from "@auth0/auth0-react";
+import { createnewuser } from '../redux/actions'
 
 
 const NavBar = () => {
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, user } = useAuth0();
     const [isShowing, setIsShowing] = useState(false)
     const [showingMarca, setShowingMarca] = useState(false)
     const [showingDeporte, setShowingDeporte] = useState(false)
@@ -44,6 +45,23 @@ const NavBar = () => {
             dispatch(changeTheme('light'))
         }
     }
+    useEffect(() => {
+        if (isAuthenticated) {
+          console.log(isAuthenticated)
+          console.log(user)
+          let bodydepost = {
+    
+            name: user.name,
+            nickname: user.nickname,
+            email: user.email,
+            picture: user.picture
+    
+          }
+    
+    dispatch(createnewuser(bodydepost))
+        }
+      
+    }, [isAuthenticated])
 
     const handleReload = () =>{
     
@@ -55,7 +73,7 @@ const NavBar = () => {
         dispatch(getNavData())
         // eslint-disable-next-line
     }, [])
-
+    
 
 
     return (
@@ -204,7 +222,7 @@ const NavBar = () => {
                                  <>
                                  <Profile />
                                 {/* <LogoutButton /> */}
-                                 </> ) : ( <LoginButton /> ) }
+                                 </> ) : ( <LoginButton/> ) }
                 </div>
             </nav>
         </>
