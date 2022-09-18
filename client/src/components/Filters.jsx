@@ -2,41 +2,39 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { filterProducts } from '../redux/actions'
+import { MdExpandMore } from 'react-icons/md'
 
 const Filters = ({ data }) => {
     const dispatch = useDispatch()
     const [filterProduct, setFilterProduct] = useState({ brand: 'all', clotheType: 'all', gender: 'all', color: 'all', collection: 'all', sport: 'all', /* size: 'all' */ })
     const [filters, setFilters] = useState({ marca: [], categoria: [], genero: [], color: [], coleccion: [], deporte: [], /* talle: [] */ })
     const [accent, setAccent] = useState({ marca: false, categoria: false, genero: false, color: false, coleccion: false, deporte: false, /* talle: false */ })
+
+    const translate = (word) => {
+        switch (word) {
+            case 'marca':
+                return 'brand'
+            case 'categoria':
+                return 'clotheType'
+            case 'genero':
+                return 'gender'
+            case 'color':
+                return 'color'
+            case 'coleccion':
+                return 'collection'
+            case 'deporte':
+                return 'sport'
+            default:
+                /* tradu = 'size' */
+                break;
+        }
+    }
     useEffect(() => {
         const provisorio = { marca: [], categoria: [], genero: [], color: [], coleccion: [], deporte: [], /* talle: [] */ }
         data?.forEach((e) => {
             const keys = Object.keys(provisorio)
             keys.forEach((option) => {
-                let tradu
-                switch (option) {
-                    case 'marca':
-                        tradu = 'brand'
-                        break;
-                    case 'categoria':
-                        tradu = 'clotheType'
-                        break;
-                    case 'genero':
-                        tradu = 'gender'
-                        break;
-                    case 'color':
-                        tradu = 'color'
-                        break;
-                    case 'coleccion':
-                        tradu = 'collection'
-                        break;
-                    case 'deporte':
-                        tradu = 'sport'
-                        break;
-                    default:
-                        /* tradu = 'size' */
-                        break;
-                }
+                const tradu = translate(option)
                 if (e[tradu] && !provisorio[option].includes(e[tradu])) {
                     provisorio[option].push(e[tradu])
                 }
@@ -118,19 +116,28 @@ const Filters = ({ data }) => {
                 break;
         }
     }
+    // ${filterProduct[translate(e)] === 'all' ? 'text-main-light dark:text-main-dark' : 'text-main-dark dark:text-main-light'} 
+
     useEffect(() => {
         dispatch(filterProducts(filterProduct))
     }, [filterProduct])
     return (
         <section className='flex flex-row gap-3 flex-wrap w-10/12 justify-center mx-auto mt-14 mb-11'>
             {Object.keys(filters).map((e, index) => {
-                return <select name={e} id="{e}" key={e + index} className={`md:w-52 w-fit h-14 uppercase text-center text-main-dark dark:text-main-light bg-main-light  dark:bg-main-dark ${accent[e] ? 'border-b-verde-dark  dark:border-b-verde-light' : 'border-b-main-dark  dark:border-b-main-light'} border-b-[5px] transition-all duration-300`} onChange={(event) => handleSelect(e, event.target)}>
-                    <option default className='uppercase' value={'all'}>{e}</option>
-                    <option className='uppercase' value={'all'}>Todos</option>
-                    {filters[e]?.map((j, index) => {
-                        return <option key={j + index + e} value={j}>{j}</option>
-                    })}
-                </select>
+                return <div className='relative'>
+
+                    <select name={e} id={e} key={e + index} className={` z-20 md:w-52 w-fit h-14 uppercase text-center
+                    ${filterProduct[translate(e)] === 'all' ? 'text-main-light dark:text-main-dark' : 'text-main-dark dark:text-main-light'} 
+                    bg-main-light  dark:bg-main-dark ${accent[e] ? 'border-b-verde-dark  dark:border-b-verde-light' : 'border-b-main-dark  dark:border-b-main-light'} border-b-[5px] `} onChange={(event) => handleSelect(e, event.target)}>
+                        <option className={`uppercase `} defaultValue value={'all'}>Todos</option>
+                        {filters[e]?.map((j, index) => {
+                            return <option key={j + index + e} value={j}>{j}</option>
+                        })}
+                    </select>
+                    <p className={`z-10 absolute uppercase flex items-center ${filterProduct[translate(e)] === 'all' ? 'top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4' : 'text-xs'} cursor-default transition-[font-size] duration-500 `}>{e} <MdExpandMore className={` uppercase ${filterProduct[translate(e)] === 'all' ? 'block' : 'hidden'} cursor-default transition-all duration-700 `} /></p>
+
+                </div>
+
             })}
         </section >
     )

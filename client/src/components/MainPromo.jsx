@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import im1 from '../assets/bannerCam.png'
 import im2 from '../assets/qatar.png'
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from 'swiper'
 
 // Import Swiper styles
 import "swiper/css";
@@ -29,27 +30,28 @@ const MainPromo = () => {
 
     return (
         <article className='w-full h-auto'>
-            <Link to={'/collection/Qatar'}>
-                <Swiper
-                    navigation={true}
-                    modules={[Navigation]}
-                    className="mySwiper"
-                >
-                    {array?.map((e, index) => {
-                        { console.log(e) }
-                        <SwiperSlide>
+            <Swiper
+                navigation={true}
+                modules={[Navigation, Autoplay]}
+                autoplay={{ delay: 5000 }}
+                className="mySwiper"
+            >
+                {array?.map((e, index) => {
+
+                    return <SwiperSlide>
+                        <Link to={'/categories/collection/Qatar'}>
                             <img
                                 key={index}
-                                className="object-fill w-full h-96"
+                                className="object-cover w-full h-[36 rem]"
                                 src={e}
                                 alt={`imagen de la collecion`}
                             />
-                        </SwiperSlide>
-                    })}
+                        </Link>
+                    </SwiperSlide>
+                })}
 
 
-                </Swiper>
-            </Link>
+            </Swiper>
             <Carrousel collection={collection} />
         </article>
     )
