@@ -127,14 +127,14 @@ const Filters = ({ data }) => {
                 return <div className='relative'>
 
                     <select name={e} id={e} key={e + index} className={` z-20 md:w-52 w-fit h-14 uppercase text-center
-                    ${filterProduct[translate(e)] === 'all' ? 'text-main-light dark:text-main-dark' : 'text-main-dark dark:text-main-light'} 
-                    bg-main-light  dark:bg-main-dark ${accent[e] ? 'border-b-verde-dark  dark:border-b-verde-light' : 'border-b-main-dark  dark:border-b-main-light'} border-b-[5px] `} onChange={(event) => handleSelect(e, event.target)}>
-                        <option className={`uppercase `} defaultValue value={'all'}>Todos</option>
+                    ${filterProduct === 'all' ? 'text-main-light dark:text-main-dark' : 'text-main-dark dark:text-main-light'} 
+                    bg-main-light  dark:bg-main-dark  border-b-[5px] `} onChange={(event) => handleSelect(e, event.target)}>
+                        <option className={`uppercase `} defaultValue value={'all'}>{e}</option>
                         {filters[e]?.map((j, index) => {
                             return <option key={j + index + e} value={j}>{j}</option>
                         })}
                     </select>
-                    <p className={`z-10 absolute uppercase flex items-center ${filterProduct[translate(e)] === 'all' ? 'top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4' : 'text-xs'} cursor-default transition-[font-size] duration-500 `}>{e} <MdExpandMore className={` uppercase ${filterProduct[translate(e)] === 'all' ? 'block' : 'hidden'} cursor-default transition-all duration-700 `} /></p>
+                    <p className={`z-10 absolute uppercase flex items-center ${filterProduct[translate(e)] === {e} ? 'top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4' : 'text-xs'} cursor-default transition-[font-size] duration-500 `}>{e} <MdExpandMore className={` uppercase ${filterProduct[translate(e)] === 'all' ? 'block' : 'hidden'} cursor-default transition-all duration-700 `} /></p>
 
                 </div>
 

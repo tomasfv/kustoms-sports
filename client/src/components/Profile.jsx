@@ -17,10 +17,10 @@ export const Profile = () => {
           <img
           src={user.picture} 
           alt='avatar' 
-          onError={event => {
+       /*    onError={event => {
             event.target.src = "https://thumbs.dreamstime.com/b/running-man-athletics-marathon-summer-sport-run-icon-isolated-white-background-minimal-cover-design-creative-running-man-158850742.jpg"
             event.onerror = null
-          }}  
+          }}   */
           className='h-12 w-12 rounded-full' />
         </Link>
         {/* <p>{user.name}</p> */}
