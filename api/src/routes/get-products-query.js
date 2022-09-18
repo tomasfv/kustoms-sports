@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
             productsport.forEach(element => {
                 let flag = true
                 for (let i = 0; i < aux.length; i++) {
-                   if (element.name === aux[i].name) flag = false
+                   if (element.name === aux[i].name && element.gender === aux[i].gender) flag = false
                 }
                 if (flag) aux.push(element)
             });
@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
             productsname.forEach(element => {
                 let flag = true
                 for (let i = 0; i < aux.length; i++) {
-                   if (element.name === aux[i].name) flag = false
+                   if (element.name === aux[i].name && element.gender === aux[i].gender) flag = false
                 }
                 if (flag) aux.push(element)
             });
@@ -47,7 +47,7 @@ router.get('/', async (req, res) => {
             productscollection.forEach(element => {
                 let flag = true
                 for (let i = 0; i < aux.length; i++) {
-                   if (element.name === aux[i].name) flag = false
+                   if (element.name === aux[i].name && element.gender === aux[i].gender) flag = false
                 }
                 if (flag) aux.push(element)
             });
@@ -75,7 +75,7 @@ router.get('/', async (req, res) => {
             productsbrand.forEach(element => {
                 let flag = true
                 for (let i = 0; i < aux.length; i++) {
-                   if (element.name === aux[i].name) flag = false
+                   if (element.name === aux[i].name && element.gender === aux[i].gender) flag = false
                 }
                 if (flag) aux.push(element)
             });

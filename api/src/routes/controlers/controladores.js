@@ -45,7 +45,7 @@ infoDetail: async function (id){
     let infoprod = {}
 
     infoprod.name = productdetail.name,
-    infoprod.clotheType = productdetail.name,
+    infoprod.clotheType = productdetail.clotheType,
     infoprod.brand = productdetail.brand,
     infoprod.gender = productdetail.gender,
     infoprod.sport = productdetail.sport,
