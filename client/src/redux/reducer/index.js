@@ -62,7 +62,7 @@ export const rootReducer=(state=initialState, action)=>{
             let filter=action.payload
             let toFilter=state.productByCategory
             let finalShow=[]
-            if(filter.brand==='all' && filter.clotheType==='all' && filter.collection==='all' && filter.gender==='all' && filter.color==='all' && filter.size==='all' && filter.sport==='all'){
+            if(filter.brand==='all' && filter.clotheType==='all' && filter.collection==='all' && filter.gender==='all' && filter.color==='all' /* && filter.size==='all' */ && filter.sport==='all'){
                 return {
                     ...state,
                     filteredProducts:false
@@ -112,14 +112,14 @@ export const rootReducer=(state=initialState, action)=>{
                         }
                         checker()
                     } 
-                    if (filter.size!=='all'){
+                    /* if (filter.size!=='all'){
                         if(finalShow.length){
                             finalShow=finalShow.filter(e=> e.size===filter.size)
                         } else{
                             finalShow=toFilter.filter(e=> e.size===filter.size)
                         }
                         checker()
-                    } 
+                    }  */
                     if (filter.sport!=='all'){
                         if(finalShow.length){
                             finalShow=finalShow.filter(e=> e.sport===filter.sport)
