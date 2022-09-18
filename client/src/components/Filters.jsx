@@ -5,11 +5,11 @@ import { filterProducts } from '../redux/actions'
 
 const Filters = ({ data }) => {
     const dispatch = useDispatch()
-    const [filterProduct, setFilterProduct] = useState({ brand: 'all', clotheType: 'all', gender: 'all', color: 'all', collection: 'all', sport: 'all', size: 'all' })
-    const [filters, setFilters] = useState({ marca: [], categoria: [], genero: [], color: [], coleccion: [], deporte: [], talle: [] })
-    const [accent, setAccent] = useState({ marca: false, categoria: false, genero: false, color: false, coleccion: false, deporte: false, talle: false })
+    const [filterProduct, setFilterProduct] = useState({ brand: 'all', clotheType: 'all', gender: 'all', color: 'all', collection: 'all', sport: 'all', /* size: 'all' */ })
+    const [filters, setFilters] = useState({ marca: [], categoria: [], genero: [], color: [], coleccion: [], deporte: [], /* talle: [] */ })
+    const [accent, setAccent] = useState({ marca: false, categoria: false, genero: false, color: false, coleccion: false, deporte: false, /* talle: false */ })
     useEffect(() => {
-        const provisorio = { marca: [], categoria: [], genero: [], color: [], coleccion: [], deporte: [], talle: [] }
+        const provisorio = { marca: [], categoria: [], genero: [], color: [], coleccion: [], deporte: [], /* talle: [] */ }
         data?.forEach((e) => {
             const keys = Object.keys(provisorio)
             keys.forEach((option) => {
@@ -34,7 +34,7 @@ const Filters = ({ data }) => {
                         tradu = 'sport'
                         break;
                     default:
-                        tradu = 'size'
+                        /* tradu = 'size' */
                         break;
                 }
                 if (e[tradu] && !provisorio[option].includes(e[tradu])) {
@@ -108,13 +108,13 @@ const Filters = ({ data }) => {
                 }
                 break;
             default:
-                if (target.value === 'all') {
+                /* if (target.value === 'all') {
                     setFilterProduct({ ...filterProduct, size: 'all' })
-                    setAccent({ ...accent, size: false })
+                    setAccent({ ...accent, talle: false })
                 } else {
                     setFilterProduct({ ...filterProduct, size: target.value })
-                    setAccent({ ...accent, size: true })
-                }
+                    setAccent({ ...accent, talle: true })
+                } */
                 break;
         }
     }
