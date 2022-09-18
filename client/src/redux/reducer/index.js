@@ -12,6 +12,7 @@ const initialState={
     newest:[],
     filteredProducts:[],
     cacheNotFiltered:[],
+    
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -26,6 +27,10 @@ export const rootReducer=(state=initialState, action)=>{
                 return {...state, theme:'dark'}
             }
         }
+        case types.POST_USER:
+            return{
+                ...state
+                       }
         case types.GET_DETAILS:
             return{
                 ...state,
