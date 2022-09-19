@@ -16,29 +16,26 @@ module.exports = (sequelize) => {
            type: DataTypes.STRING,
            allowNull: false 
         },
-        surname:{
-           type: DataTypes.STRING,
-           allowNull: false 
-        },
+       
         email:{
            type: DataTypes.STRING,
            allowNull: false 
         },
-        birthdate:{
-           type: DataTypes.DATE,
-           allowNull: false 
+        picture: {
+         type: DataTypes.TEXT,
+         allowNull: true,
+         defaultValue: "https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
         },
-        country:{
-           type: DataTypes.STRING,
-           allowNull: false 
-        },
-        fidelity:{
+      
+       fidelity:{
            type: DataTypes.DECIMAL,
-           allowNull: false 
+           allowNull: false, 
+           defaultValue: 0
         },
         visited:{
-           type: DataTypes.ARRAY(DataTypes.STRING),
-           allowNull: false 
+           type: DataTypes.INTEGER,
+          
+           defaultValue: 0
         },
         available:{
            type: DataTypes.BOOLEAN,

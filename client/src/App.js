@@ -1,11 +1,14 @@
-import logo from './logo.svg';
+import Rutas from './routes/Rutas'
 import './App.css';
 
+
+
 function App() {
+  
   return (
-    <div className="App">
-      <h1 className='text-lg uppercase'> Hola Mundo 2 </h1>
-      
+    <div className="App bg-main-light dark:bg-main-dark min-h-screen transition-all duration-150">
+      <Rutas/>
+      {/* <h1 className='text-lg uppercase'> Hola Mundo 2 </h1> */}
     </div>
   );
 }

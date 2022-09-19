@@ -22,11 +22,8 @@ brand: {
     allowNull: false
 },
 name: {
-
     type: DataTypes.STRING,
     allowNull:false
-
-
 },
 
 gender: {
@@ -53,13 +50,14 @@ size:{
     allowNull: false
 },
 image:{
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.TEXT),
     allowNull: false
 },
 stock:{
 
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 0
 
 },
 price: {
@@ -70,9 +68,9 @@ promotion:{
     type: DataTypes.DECIMAL,
     allowNull: false
 },
-date:{
-    type: DataTypes.DATE,
-    allowNull: false
+visits:{
+    type: DataTypes.INTEGER,
+    defaultValue: 0
 },
 available:{
     type: DataTypes.BOOLEAN,
