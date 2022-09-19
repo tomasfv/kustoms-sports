@@ -1,14 +1,14 @@
 const nodemailer = require ("nodemailer");
 var transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com", // hostname
+    host: "smtp.gmail.com", // hostname
     port: 587, // port for secure SMTP
     secureConnection: false,
     tls: {
        ciphers:'SSLv3'
     },
     auth: {
-        user: 'kustomssports2@hotmail.com',
-        pass: 'Nightchanges'
+        user: 'kustomssports@gmail.com',
+        pass: 'pluhikmkndosilit'
     }
 });
 
