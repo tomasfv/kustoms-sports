@@ -34,11 +34,11 @@ if (finduser === null) {
         
        )
       
-     const transs =   await transporter.sendMail(
+     const transs = await transporter.sendMail(
    
             {
     
-                from: "kustomssports@hotmail.com",
+                from: "kustomssports2@hotmail.com",
                 to: email,
                 subject: "REGISTRADO!",
                 html: `Gracias por registrarse a KUSTOMS SPORTS!, para entrar a tu cuenta ingrese a este link <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">KUSTOMSSPORTS</a>`

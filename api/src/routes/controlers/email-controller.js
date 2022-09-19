@@ -7,9 +7,11 @@ var transporter = nodemailer.createTransport({
        ciphers:'SSLv3'
     },
     auth: {
-        user: 'kustomssports@hotmail.com',
+        user: 'kustomssports2@hotmail.com',
         pass: 'Nightchanges'
     }
 });
+
+
 
 module.exports = {transporter}
