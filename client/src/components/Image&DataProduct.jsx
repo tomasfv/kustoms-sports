@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getDetailId, getStock } from "../redux/actions";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ImageXDataProduct = () => {
+  const { isAuthenticated, user } = useAuth0();
   const details = useSelector((state) => state.details);
   const imagenes = useSelector((state) => state.images);
   const stock = useSelector((state) => state.stock);
@@ -17,12 +19,16 @@ const ImageXDataProduct = () => {
   const id = params.id;
   // const name = details.name[0].toUpperCase() + details.name.substring(1)
 
+  function postuserClick(){
+    
+  }
+
   const dispatch = useDispatch();
   useEffect(() => {
     setOrdenimg ('');
     dispatch(getDetailId(id));
     dispatch(getStock(id));
-  }, [dispatch, id]);
+  }, [dispatch, id,isAuthenticated]);
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [details])
@@ -64,7 +70,7 @@ const ImageXDataProduct = () => {
 
       <div className="flex flex-col gap-10 ">
         <div className=" flex text-[30px] ">{details.name}</div>
-        <div className=" flex ml-0 pl-0 "> {details.price}$</div>
+        <div className=" flex ml-0 pl-0 "> ${details.price}</div>
         <div className=" flex ml-0 pl-0 "> {color.color}</div>
         <div className="flex flex-col gap-[10px]">
           <div className="flex flex-row gap-[5px]"><div className="font-bold">Género:</div> {details.gender}</div>
@@ -82,17 +88,22 @@ const ImageXDataProduct = () => {
               );
             })}
           </div>
-        </div>
-        <button
+        </div>{ isAuthenticated?
+          
+          <button
+          onClick={postuserClick}
           type="button "
           className="flex break-inside bg-[#2ea44f] text-main-light border-2 border-transparent  px-6 py-3 mb-4 w-fit h-fit pt-1 pb-1 mt-[200px]"
         >
           <div className="m-auto">
-            <div className="flex items-center justify-start flex-1 space-x-4 #f8fafc">
+           <div className="flex items-center justify-start flex-1 space-x-4 #f8fafc">
               <span className="font-medium ">Add Carrito</span>
             </div>
           </div>
-        </button>
+        </button>:<div className="flex flex-col"><p>Para poder realizar un pedido,debe registrarse/ingresar en la página.</p></div>
+           
+        }
+        
       </div>
     </div>
   );
