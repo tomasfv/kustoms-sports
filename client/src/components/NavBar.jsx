@@ -38,7 +38,7 @@ const NavBar = () => {
     const handleClickCol = () => {
         setShowingColeccion(!showingColeccion)
     }
-    const hadndleTheme = () => {
+    const handleTheme = () => {
         if (theme === 'light') {
             dispatch(changeTheme('dark'))
         } else {
@@ -50,30 +50,23 @@ const NavBar = () => {
           console.log(isAuthenticated)
           console.log(user)
           let bodydepost = {
-    
             name: user.name,
             nickname: user.nickname,
             email: user.email,
             picture: user.picture
-    
           }
-    
-    dispatch(createnewuser(bodydepost))
+          dispatch(createnewuser(bodydepost))
         }
-      
     }, [isAuthenticated])
 
     const handleReload = () =>{
-    
             window.scrollTo(0, 0)
-           
     }
     useEffect(() => {
         setIsShowing(false)
         dispatch(getNavData())
         // eslint-disable-next-line
     }, [])
-    
 
 
     return (
@@ -82,10 +75,12 @@ const NavBar = () => {
             <nav className='z-50 fixed top-0 lg:hidden w-full flex flex-row justify-between text-main-dark dark:text-main-light h-16 bg-main-light dark:bg-main-dark transition-all duration-300'>
                 <Link className='h-16 w-fit pl-5' to={'/'} onClick={handleReload}><img src={smLogo} alt="logo-small" className='h-16 w-16' /></Link>
                 <div className='flex flex-row  gap-3 items-center'>
-                    <Link to={''} className='w-fit h-fit relative'>
+                    {/* <Link to={''} className='w-fit h-fit relative'> */}
+                    <div className='w-fit h-fit relative'>
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
                         <p className='absolute right-0 -top-2 z-10 bg-verde-light  rounded-full  font-bold'>0</p>
-                    </Link>
+                    </div>
+                    {/* </Link> */}
                     <button><MdMenu onClick={handleClick} className='h-14 w-14 pr-5' /></button>
                 </div>
 
@@ -140,7 +135,7 @@ const NavBar = () => {
                                 <Button classname={'mb-3'} type={'registrarse'} />
                                 <Button className='my-3' type={'ingresar'} />
 
-                                <button onClick={hadndleTheme} className='border rounded-md border-main-dark dark:border-verde-dark w-fit p-3'>
+                                <button onClick={handleTheme} className='border rounded-md border-main-dark dark:border-verde-dark w-fit p-3'>
                                     {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
                                 </button>
 
@@ -209,11 +204,13 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className='flex flex-row h-fit gap-2 xl:gap-5  mr-5 items-center'>
-                    <Link to={'/'} className='w-fit h-fit relative'>
+                    {/* <Link to={'/'} className='w-fit h-fit relative'> */}
+                    <div className='w-fit h-fit relative'>
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
                         <p className='absolute right-0 -top-2 z-10 bg-verde-light  rounded-full  font-bold'>0</p>
-                    </Link>
-                    <button onClick={hadndleTheme} className='border rounded-md h-12 border-main-dark dark:border-verde-dark hover:bg-verde-light hover:border-verde-light dark:hover:bg-gris-dark dark:hover:border-botvmioleta-light transition-all duration-300 '>
+                    </div>
+                    {/* </Link> */}
+                    <button onClick={handleTheme} className='border rounded-md h-12 border-main-dark dark:border-verde-dark hover:bg-verde-light hover:border-verde-light dark:hover:bg-gris-dark dark:hover:border-botvmioleta-light transition-all duration-300 '>
                         {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
                     </button>
                     {/* <Button type={'registrarse'} />
