@@ -19,6 +19,7 @@ const ImageXDataProduct = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    setOrdenimg ('');
     dispatch(getDetailId(id));
     dispatch(getStock(id));
   }, [dispatch, id]);
