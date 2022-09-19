@@ -34,14 +34,15 @@ const ImageXDataProduct = () => {
   }
   console.log(ordenimg, "orden");
   return (
-    <div className="flex flex-row mt-[100px] ml-36 space-x-10">
-      <div className="flex flex-col items-center">
-        <div>
+    <div className="flex flex-row mt-[100px] ml-36 space-x-10 dark:bg-main-dark  dark:text-main-light ">
+      <div className="flex flex-col items-center  dark:bg-main-dark" >
+        <div className=" dark:bg-main-dark">
           <img
             src={ordenimg === "" ? imagenes[0] : ordenimg}
             alt="imagen del product"
             width="550px"
             height="550px"
+            className="dark:bg-main-dark"
           />
         </div>
         <div className="flex flex-row items-center gap-[20px]">

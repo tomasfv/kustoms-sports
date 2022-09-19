@@ -15,7 +15,7 @@ const Details = () => {
   }, [])
 
   return (
-    <div className="flex flex-col  bg-main-light w-10/12 mx-auto">
+    <div className="flex flex-col  bg-main-light w-10/12 mx-auto dark:bg-main-dark">
       <ImageXDataProduct />
       <SelectoresProduct />
       <div className="flex flex-col  mt-[20px]">
