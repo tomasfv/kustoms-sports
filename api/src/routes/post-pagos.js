@@ -9,7 +9,7 @@ const stripe = new Stripe("sk_test_51Lj7u9Dukzk6GqlmiBb7Ni7KQkYghO7iUja0Sqsavauw
 const cors = require("cors");
 const app = express();
 
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "/" }));
 app.use(express.json());
 
 const router = Router();
