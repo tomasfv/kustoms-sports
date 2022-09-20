@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { changeTheme, getNavData } from '../redux/actions'
 import { useEffect } from 'react'
 import { LoginButton } from './Login';
-import { LogoutButton } from './Logout';
+
 import { Profile } from './Profile';
 import { useAuth0 } from "@auth0/auth0-react";
 import { createnewuser } from '../redux/actions'
@@ -216,7 +216,7 @@ const NavBar = () => {
                     {isAuthenticated ? (
                                  <>
                                  <Profile />
-                                {/* <LogoutButton /> */}
+                                
                                  </> ) : ( <LoginButton/> ) }
                 </div>
             </nav>

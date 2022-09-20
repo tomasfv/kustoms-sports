@@ -2,16 +2,12 @@ import logoLargo from '../assets/logoLargo.png'
 import { GrLinkedinOption } from 'react-icons/gr'
 import { BsFacebook, BsInstagram } from 'react-icons/bs'
 import { MdCopyright } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import { LoginButton } from './Login';
-import { LogoutButton } from './Logout';
-import { Profile } from './Profile';
-import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 
 const Footer = () => {
-  const { isAuthenticated } = useAuth0();
+  
 
     return (
         
@@ -84,8 +80,7 @@ const Footer = () => {
             </div>
 
         </footer>
-        
-       
+    
     )
 }
 

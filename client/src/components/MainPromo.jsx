@@ -2,7 +2,7 @@ import { Carrousel } from './index'
 import { Link } from 'react-router-dom'
 import { getByCategory, clearCategory } from "../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import im1 from '../assets/bannerCam.png'
 import im2 from '../assets/qatar.png'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,7 +23,7 @@ const MainPromo = () => {
     useEffect(() => {
         dispatch(clearCategory())
         dispatch(getByCategory('collection', 'Qatar'))
-    }, [])
+    }, [dispatch])
 
 
 
