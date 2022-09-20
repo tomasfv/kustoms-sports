@@ -204,12 +204,10 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className='flex flex-row h-fit gap-2 xl:gap-5  mr-5 items-center'>
-                    {/* <Link to={'/'} className='w-fit h-fit relative'> */}
-                    <div className='w-fit h-fit relative'>
+                    <Link to={'/'} className='w-fit h-fit relative'>
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
                         <p className='absolute right-0 -top-2 z-10 bg-verde-light  rounded-full  font-bold'>0</p>
-                    </div>
-                    {/* </Link> */}
+                    </Link>
                     <button onClick={handleTheme} className='border rounded-md h-12 border-main-dark dark:border-verde-dark hover:bg-verde-light hover:border-verde-light dark:hover:bg-gris-dark dark:hover:border-botvmioleta-light transition-all duration-300 '>
                         {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
                     </button>
