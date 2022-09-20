@@ -7,7 +7,8 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     try {
-            const productsdate = await Products.findAll({
+            const productsdate = await Products.findAll({ 
+                where : { available : true},
                 order: [['createdAt', 'DESC' ]]
             })    
             let aux = []

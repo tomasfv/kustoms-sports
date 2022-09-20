@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     let {sport, name, collection, gender, brand} = req.query
     try {
         if(sport){
-            const productsport = await Products.findAll({where : { sport: sport }})
+            const productsport = await Products.findAll({where : { sport: sport , available: true}})
             
             let aux = []
             // aux.push(productsport[0])
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
             res.status(200).json(aux):
             res.status(400).json("sports was not found")
         }else if(name){
-            const productsname = await Products.findAll({ where : { name : {[Op.substring]: name}}})
+            const productsname = await Products.findAll({ where : { name : {[Op.substring]: name} , available: true}})
             let aux = []
             // aux.push(productsport[0])
             productsname.forEach(element => {
@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
             res.status(200).json(aux):
             res.status(400).json("name was not found")
         }else if(collection){
-            const productscollection = await Products.findAll({ where : { collection: collection }})
+            const productscollection = await Products.findAll({ where : { collection: collection , available: true }})
             let aux = []
             // aux.push(productsport[0])
             productscollection.forEach(element => {
@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
             res.status(200).json(aux):
             res.status(400).json("name was not found")
         }else if(gender){
-            const productsgender = await Products.findAll({ where : { gender: gender }})
+            const productsgender = await Products.findAll({ where : { gender: gender , available: true }})
             let aux = []
             // aux.push(productsport[0])
             productsgender.forEach(element => {
@@ -69,7 +69,7 @@ router.get('/', async (req, res) => {
             res.status(200).json(aux):
             res.status(400).json("name was not found")
         }else if(brand){
-            const productsbrand = await Products.findAll({ where : { brand: brand }})
+            const productsbrand = await Products.findAll({ where : { brand: brand , available: true }})
             let aux = []
             // aux.push(productsport[0])
             productsbrand.forEach(element => {
