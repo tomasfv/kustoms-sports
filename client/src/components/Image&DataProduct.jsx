@@ -15,25 +15,44 @@ const ImageXDataProduct = () => {
   console.log(details);
   console.log(stock);
   const [ordenimg, setOrdenimg] = useState("");
+  const [cambio, setCambio] = useState(false);
   const params = useParams();
   const id = params.id;
-  // const name = details.name[0].toUpperCase() + details.name.substring(1)
 
-  function postuserClick(){
-    
+  const [buyProduct, setbuyProduct] = useState({
+    name: "",
+    collection: "",
+    color: "",
+    size: "",
+  });
+
+  function postuserClick() {}
+  function handleSize(e) {
+    setCambio(e.target.value);
+    setbuyProduct({
+      ...buyProduct,
+      size: e.target.value,
+    });
   }
-
+  console.log(buyProduct, "buy");
   const dispatch = useDispatch();
   useEffect(() => {
-    setOrdenimg ('');
+    setOrdenimg("");
     dispatch(getDetailId(id));
     dispatch(getStock(id));
-  }, [dispatch, id,isAuthenticated]);
+    setbuyProduct({
+      name: details.name,
+      collection: details.collection,
+      color: color.color,
+      size: "",
+    });
+  }, [dispatch, id, isAuthenticated]);
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [details])
-  const stockgender = stock.filter(e=>{return(e.gender == details.gender)})
-  console.log(stockgender,"stock")
+    window.scrollTo(0, 0);
+  }, [details]);
+  const stockgender = stock.filter((e) => {
+    return e.gender == details.gender;
+  });
 
   function handleImage(e) {
     setOrdenimg(e.target.src);
@@ -41,7 +60,7 @@ const ImageXDataProduct = () => {
   console.log(ordenimg, "orden");
   return (
     <div className="flex flex-row mt-[100px] ml-36 space-x-10 dark:bg-main-dark  dark:text-main-light ">
-      <div className="flex flex-col items-center  dark:bg-main-dark" >
+      <div className="flex flex-col items-center  dark:bg-main-dark">
         <div className=" dark:bg-main-dark">
           <img
             src={ordenimg === "" ? imagenes[0] : ordenimg}
@@ -54,13 +73,16 @@ const ImageXDataProduct = () => {
         <div className="flex flex-row items-center gap-[20px]">
           {imagenes.map((d) => {
             return (
-              <button onClick={(e) => handleImage(e)} value={d}className="hover:shadow-xl transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-100 mt-[10px]" >
+              <button
+                onClick={(e) => handleImage(e)}
+                value={d}
+                className="hover:shadow-xl transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-100 mt-[10px]"
+              >
                 <img
                   src={d}
                   alt="imagen del product"
                   width="120px"
                   height="120px"
-                  
                 />
               </button>
             );
@@ -73,37 +95,72 @@ const ImageXDataProduct = () => {
         <div className=" flex ml-0 pl-0 "> ${details.price}</div>
         <div className=" flex ml-0 pl-0 "> {color.color}</div>
         <div className="flex flex-col gap-[10px]">
-          <div className="flex flex-row gap-[5px]"><div className="font-bold">Género:</div> {details.gender}</div>
-          <div className=" flex flex-row gap-[5px]"><div className="font-bold">Deporte:</div> {details.sport}</div>
-          <div className=" flex flex-row gap-[5px]"> <div className="font-bold">Colección:</div> {details.collection}</div>
+          <div className="flex flex-row gap-[5px]">
+            <div className="font-bold">Género:</div> {details.gender}
+          </div>
+          <div className=" flex flex-row gap-[5px]">
+            <div className="font-bold">Deporte:</div> {details.sport}
+          </div>
+          <div className=" flex flex-row gap-[5px]">
+            {" "}
+            <div className="font-bold">Colección:</div> {details.collection}
+          </div>
         </div>
         <div className="flex flex-col">
           <div className="flex font-bold">Talles disponibles</div>
           <div className="flex flex-row  ">
             {stockgender.map((el) => {
               return (
-                <div className=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]">
-                  {el.size}
+                <div>
+                  <div>
+                    <input type="checkbox" id={el.id} class="peer hidden" onClick={(e) => handleSize(e)}  value={el.size} />
+                    <label
+                      
+                     
+                      for={el.id}
+                      class=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]
+ transition-colors duration-200 ease-in-out peer-checked:bg-main-dark peer-checked:text-main-light peer-checked:border-gray-200 "
+                    >
+                      {" "}
+                      {el.size}
+                    </label>
+                  </div>
+                  {/* <button
+                    
+                    className={`border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px]} place-items-center border-[indigo-500/50] ${
+                      buyProduct.size === cambio &&
+                      "text-main-light bg-main-dark"
+                    }`}
+                    onClick={(e) => handleSize(e)}
+                    value={el.size}
+                  >
+                    {el.size}
+                  </button> */}
                 </div>
               );
             })}
           </div>
-        </div>{ isAuthenticated?
-          
+        </div>
+        {isAuthenticated ? (
           <button
-          onClick={postuserClick}
-          type="button "
-          className="flex break-inside bg-[#2ea44f] text-main-light border-2 border-transparent  px-6 py-3 mb-4 w-fit h-fit pt-1 pb-1 mt-[200px]"
-        >
-          <div className="m-auto">
-           <div className="flex items-center justify-start flex-1 space-x-4 #f8fafc">
-              <span className="font-medium ">Add Carrito</span>
+            onClick={postuserClick}
+            type="button "
+            className="flex break-inside bg-[#2ea44f] text-main-light border-2 border-transparent  px-6 py-3 mb-4 w-fit h-fit pt-1 pb-1 mt-[200px]"
+          >
+            <div className="m-auto">
+              <div className="flex items-center justify-start flex-1 space-x-4 #f8fafc">
+                <span className="font-medium ">Add Carrito</span>
+              </div>
             </div>
+          </button>
+        ) : (
+          <div className="flex flex-col">
+            <p>
+              Para poder realizar un pedido,debe registrarse/ingresar en la
+              página.
+            </p>
           </div>
-        </button>:<div className="flex flex-col"><p>Para poder realizar un pedido,debe registrarse/ingresar en la página.</p></div>
-           
-        }
-        
+        )}
       </div>
     </div>
   );
