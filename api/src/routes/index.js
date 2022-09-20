@@ -5,6 +5,8 @@ const productsquery = require('./get-products-query.js')
 const productsdate = require('./get-products-date.js')
 const productsnavbar = require('./get-products-navbar.js')
 const createuser = require ('./post-usuario.js')
+const pagos = require ('./post-pagos.js')
+
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -21,6 +23,7 @@ router.use('/date', productsdate)
 router.use('/', chargeproducts)
 router.use('/', productsId)
 router.use('/', productsquery)
+router.use('/api/checkout', pagos)
 
 
 
