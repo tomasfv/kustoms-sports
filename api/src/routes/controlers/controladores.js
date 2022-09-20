@@ -10,6 +10,7 @@ module.exports = {
     let navbar = {}
     
     const productsMarcas = await Products.findAll({
+        where : { available : true},
         attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('brand')), 'brand']]
     })  
     
@@ -17,6 +18,7 @@ module.exports = {
     navbar.brand = marcas
     
     const productsCollection = await Products.findAll({
+        where : { available : true},
         attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('collection')), 'collection']]
     }) 
     
@@ -24,6 +26,7 @@ module.exports = {
     navbar.collection = collection
     
     const productsGender = await Products.findAll({
+        where : { available : true},
         attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('gender')), 'gender']]
     })  
     
@@ -31,6 +34,7 @@ module.exports = {
     navbar.gender = gender
     
     const productsSport = await Products.findAll({
+        where : { available : true},
         attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('sport')), 'sport']]
     })  
     
@@ -58,7 +62,8 @@ infoDetail: async function (id){
         where:{
             name: productdetail.name,
             brand: productdetail.brand,
-            clotheType: productdetail.clotheType
+            clotheType: productdetail.clotheType,
+            available: true
         }
     })
 
