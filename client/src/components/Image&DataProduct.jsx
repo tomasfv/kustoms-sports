@@ -19,6 +19,9 @@ const ImageXDataProduct = () => {
   const params = useParams();
   const id = params.id;
 
+  
+
+
   const [buyProduct, setbuyProduct] = useState({
     name: "",
     collection: "",
@@ -33,6 +36,7 @@ const ImageXDataProduct = () => {
       ...buyProduct,
       size: e.target.value,
     });
+    
   }
   console.log(buyProduct, "buy");
   const dispatch = useDispatch();
@@ -111,31 +115,37 @@ const ImageXDataProduct = () => {
           <div className="flex flex-row  ">
             {stockgender.map((el) => {
               return (
-                <div>
+                <div> 
+                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                   <div>
-                    <input type="checkbox" id={el.id} class="peer hidden" onClick={(e) => handleSize(e)}  value={el.size} />
+                   
+                    {/* <input type="checkbox" id={el.id} class="peer hidden radio" onClick={(e) => handleSize(e)}  value={el.size} />
                     <label
-                      
-                     
+                      type= "radio"
+                      name="check"
+                      value= "1"
                       for={el.id}
-                      class=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]
- transition-colors duration-200 ease-in-out peer-checked:bg-main-dark peer-checked:text-main-light peer-checked:border-gray-200 "
+                      className=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]
+ transition-colors duration-200 ease-in-out peer-checked:bg-main-dark peer-checked:text-main-light peer-checked:border-gray-200 radio"
                     >
                       {" "}
                       {el.size}
+                    </label> */}
+                    {/* <script> $('input[type="checkbox"]'').on("change", function(){
+$("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
+});
+</script>                 */}
+                  <label class=" block input:cursor-pointer">
+                    <input type="radio"  name="radio" onClick={(e) => handleSize(e)}  value={el.size} className="  relative"/>
+                    <div>
+                    <span className=" flex  w-[30px] h-[30px]   t-[0px] checked:bg-main-black relative input-checked:bg-main-black " >{el.size}</span>
+                    </div>
+                     
                     </label>
+
                   </div>
-                  {/* <button
-                    
-                    className={`border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px]} place-items-center border-[indigo-500/50] ${
-                      buyProduct.size === cambio &&
-                      "text-main-light bg-main-dark"
-                    }`}
-                    onClick={(e) => handleSize(e)}
-                    value={el.size}
-                  >
-                    {el.size}
-                  </button> */}
+                  
+                  
                 </div>
               );
             })}
