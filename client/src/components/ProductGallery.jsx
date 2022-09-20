@@ -4,7 +4,7 @@ import { PreviewCard, Filters } from "./index"
 import { useSelector } from "react-redux"
 
 const ProductGallery = ({ productos }) => {
-    const [isFiltering, setIsFiltering] = useState(false)
+    //const [isFiltering, setIsFiltering] = useState(false)
     const [displaying, setDisplaying] = useState([])
     const filtering = useSelector(state => state.filteredProducts)
     const [nShowing, setNShowing] = useState(20)
@@ -60,7 +60,7 @@ const ProductGallery = ({ productos }) => {
                 return (
                     <button key={index}
                         onClick={() => handleClick(e)}
-                        className={`text-main-dark dark:text-main-light ${e == page ? ' text-main-dark bg-verde-light dark:bg-verde-dark' : 'hover:bg-opacity-10 hover:bg-main-dark dark:hover:bg-main-light dark:hover:text-main-dark'} p-2 rounded-full `}
+                        className={`text-main-dark dark:text-main-light ${e === page ? ' text-main-dark bg-verde-light dark:bg-verde-dark' : 'hover:bg-opacity-10 hover:bg-main-dark dark:hover:bg-main-light dark:hover:text-main-dark'} p-2 rounded-full `}
                     >
                         {e}
                     </button>

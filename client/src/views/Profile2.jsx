@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from '../components/Logout';
-import logoLargo from '../assets/logoLargo.png'
+
 
 
 console.log('afuera')
