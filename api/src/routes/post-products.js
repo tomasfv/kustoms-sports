@@ -6,7 +6,7 @@ const { ARRAY } = require('sequelize');
 
 const router = Router();
 
-router.post('/chargeproducts', async (req , res) => {
+router.post('/', async (req , res) => {
     let {
         clotheType,
         brand,

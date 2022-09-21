@@ -13,7 +13,7 @@ id: {
 },
 totalamount: {
 
-    type: DataTypes.DECIMAL,
+    type: DataTypes.FLOAT,
     allowNull: false
 },
 
