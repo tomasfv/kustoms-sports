@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import  Payment  from './Payment'
 
 
 
@@ -16,6 +17,7 @@ const Carrito = ()=>{
     <h1>Carrito</h1>
     <h1>Carrito</h1>
     <h1>Carrito</h1>
+    <Payment/>
 </div>
     )
 
