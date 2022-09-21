@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { getDetailId, getStock, postDataBuy } from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import swal from'sweetalert2';
 
 const ImageXDataProduct = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -37,9 +38,15 @@ const ImageXDataProduct = () => {
     if(buyProduct.size === ""){
       setErrors(!false)
     }else{
-      alert("Producto agregado con éxito")
+      swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Producto agregado al Carrito',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch(postDataBuy(buyProduct))
-      reload()
+      // reload()
     }
     
   }
@@ -53,6 +60,7 @@ const ImageXDataProduct = () => {
     });
     
   }
+
   function reload() {
     window.location.href = window.location.href;
   }
