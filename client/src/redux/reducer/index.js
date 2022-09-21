@@ -12,7 +12,7 @@ const initialState={
     newest:[],
     filteredProducts:[],
     cacheNotFiltered:[],
-    databuy:[],
+    dataBuy:[],
     
 }
 
@@ -65,9 +65,10 @@ export const rootReducer=(state=initialState, action)=>{
                     navData:action.payload
                 }
         case types.POSTDATABUY:
+            console.log(action.payload)
             return{
                 ...state,
-                databuy:action.payload
+                dataBuy:action.payload
             }
         case types.FILTER:
             let filter=action.payload

@@ -15,11 +15,13 @@ const ImageXDataProduct = () => {
   console.log(details);
   console.log(stock);
   const [ordenimg, setOrdenimg] = useState("");
-  const [cambio, setCambio] = useState(false);
+  const [errors, setErrors] = useState(false);
   const params = useParams();
   const id = params.id;
 
   
+  
+
 
 
   const [buyProduct, setbuyProduct] = useState({
@@ -32,10 +34,17 @@ const ImageXDataProduct = () => {
   });
 
   function postuserClick() {
-    dispatch(postDataBuy(buyProduct))
+    if(buyProduct.size === ""){
+      setErrors(!false)
+    }else{
+      alert("Producto agregado con éxito")
+      dispatch(postDataBuy(buyProduct))
+      reload()
+    }
+    
   }
   function handleSize(e) {
-    setCambio(e.target.value);
+    setErrors(!true)
     setbuyProduct({
       ...buyProduct,
       size: e.target.value,
@@ -43,6 +52,9 @@ const ImageXDataProduct = () => {
       id: e.target.id,
     });
     
+  }
+  function reload() {
+    window.location.href = window.location.href;
   }
   console.log(buyProduct, "buy");
   const dispatch = useDispatch();
@@ -120,10 +132,10 @@ const ImageXDataProduct = () => {
         </div>
         <div className="flex flex-col">
           <div className="flex font-bold">Talles disponibles</div>
-          <div className="flex flex-row  ">
+          <div className="flex flex-row ">
             {stockgender.map((el) => {
               return (
-                <div> 
+                <div className="flex flex-row"> 
                   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                   <div>
                    
@@ -150,15 +162,17 @@ $("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
                     </div>
                      
                     </label>
-
+                     
                   </div>
                   
                   
                 </div>
               );
             })}
+            
           </div>
         </div>
+        {errors !== false && <p>Porfavor seleccione una talla</p>}
         {isAuthenticated ? (
           <button
             onClick={postuserClick}
