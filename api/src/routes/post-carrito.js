@@ -24,6 +24,7 @@ router.post("/", async (req, res) => {
       where: { userId: finduser.id, open: "true" },
       include: {
         model: Users,
+        model: Products
       },
     });
 
@@ -43,10 +44,15 @@ router.post("/", async (req, res) => {
           ? parseInt(product.price) * (1 - parseInt(product.promotion))
           : parseInt(product.price))
     ).toFixed(2);
-    cart.addProducts(product);
-    await cart.update({
-      totalamount: pricepromotion,
-    });
+    let repeatedProduct = cart.dataValues.products.filter((el) => el.id === id);
+		if (repeatedProduct.length > 0) {
+			return res.status(400).send(`${product.name} is already in the cart`)
+    }else{
+      cart.addProducts(product);
+      await cart.update({
+        totalamount: pricepromotion,
+      });
+    }
     return res.status(200).send("Se agrego el producto");
   } catch (error) {
     console.log(error);

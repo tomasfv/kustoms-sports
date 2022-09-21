@@ -9,6 +9,7 @@ const pagos = require ('./post-pagos.js')
 const carros = require ('./post-carrito.js');
 const getcarrito = require ('./get-data-carrito.js');
 const putcarrito = require ('./remove-prod-cart')
+const postBuy = require ('./post-buy')
 
 
 
@@ -22,6 +23,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
 router.use('/getDatacarrito', getcarrito)
+router.use('/postBuy', postBuy)
 router.use('/putcarrito', putcarrito)
 router.use('/user', createuser)
 router.use('/navbar', productsnavbar)
