@@ -6,7 +6,7 @@ const {Users, Carts, Products} = require('../db.js');
 const router =  Router();
 
 router.post("/", async (req,res) => {
-    let { email, id } = req.body
+    // let { email, id } = req.body
     const data = req.body
     return res.status(200).json(data)
     // try {

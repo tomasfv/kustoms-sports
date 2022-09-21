@@ -116,13 +116,16 @@ export function getStock(id) {
     };
 
   }
-  export const postDataBuy = (payload) => {
+  export const postDataBuy = (info) => {
+    console.log(info)
     return async function (dispatch) {
       try {
-        var json = await axios.post(`${URL}dataBuy`, payload);
+        var jsonbuy = await axios.post(`${URL}dataBuy`, info);
+        console.log(jsonbuy.data)
         return {
+
           type:types.POSTDATABUY,
-          payload:json.data
+          payload:jsonbuy.data
         }
       } catch (error) {
         console.log(error);
