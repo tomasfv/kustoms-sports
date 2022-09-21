@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getDetailId, getStock } from "../redux/actions";
+import { getDetailId, getStock, postDataBuy } from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -23,18 +23,24 @@ const ImageXDataProduct = () => {
 
 
   const [buyProduct, setbuyProduct] = useState({
+    id:"",
     name: "",
     collection: "",
     color: "",
     size: "",
+    email: "",
   });
 
-  function postuserClick() {}
+  function postuserClick() {
+    dispatch(postDataBuy(buyProduct))
+  }
   function handleSize(e) {
     setCambio(e.target.value);
     setbuyProduct({
       ...buyProduct,
       size: e.target.value,
+      email:user.email,
+      id: e.target.id,
     });
     
   }
@@ -45,10 +51,12 @@ const ImageXDataProduct = () => {
     dispatch(getDetailId(id));
     dispatch(getStock(id));
     setbuyProduct({
+      id:"",
       name: details.name,
       collection: details.collection,
       color: color.color,
       size: "",
+      email: "",
     });
   }, [dispatch, id, isAuthenticated]);
   useEffect(() => {
@@ -136,7 +144,7 @@ $("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
 });
 </script>                 */}
                   <label class=" block input:cursor-pointer">
-                    <input type="radio"  name="radio" onClick={(e) => handleSize(e)}  value={el.size} className="  relative"/>
+                    <input type="radio"  name="radio" id={el.id}  onClick={(e) => handleSize(e)}  value={el.size} className="  relative"/>
                     <div>
                     <span className=" flex  w-[30px] h-[30px]   t-[0px] checked:bg-main-black relative input-checked:bg-main-black " >{el.size}</span>
                     </div>

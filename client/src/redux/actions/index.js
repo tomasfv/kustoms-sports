@@ -13,6 +13,7 @@ export const types={
     GET_BY_DATE:"GET_DATE",
     FILTER:"FILTER",
     POST_USER: "POST_USER",
+    POSTDATABUY:"POSTDATABUY",
 }
 
 
@@ -109,6 +110,20 @@ export function getStock(id) {
       try {
         var json = await axios.post(`${URL}user`, payload);
         return json
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  }
+  export const postDataBuy = (payload) => {
+    return async function (dispatch) {
+      try {
+        var json = await axios.post(`${URL}dataBuy`, payload);
+        return {
+          type:types.POSTDATABUY,
+          payload:json.data
+        }
       } catch (error) {
         console.log(error);
       }
