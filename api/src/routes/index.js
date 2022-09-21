@@ -7,6 +7,8 @@ const productsnavbar = require('./get-products-navbar.js')
 const createuser = require ('./post-usuario.js')
 const pagos = require ('./post-pagos.js')
 const carros = require ('./post-carrito.js');
+const getcarrito = require ('./get-data-carrito.js');
+const putcarrito = require ('./remove-prod-cart')
 
 
 
@@ -19,10 +21,12 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
+router.use('/getDatacarrito', getcarrito)
+router.use('/putcarrito', putcarrito)
 router.use('/user', createuser)
 router.use('/navbar', productsnavbar)
 router.use('/date', productsdate)
-router.use('/', chargeproducts)
+router.use('/chargeproducts', chargeproducts)
 router.use('/', productsId)
 router.use('/', productsquery)
 router.use('/api/checkout', pagos)
