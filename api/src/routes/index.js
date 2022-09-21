@@ -6,6 +6,8 @@ const productsdate = require('./get-products-date.js')
 const productsnavbar = require('./get-products-navbar.js')
 const createuser = require ('./post-usuario.js')
 const pagos = require ('./post-pagos.js')
+const carros = require ('./post-carrito.js');
+
 
 
 // Importar todos los routers;
@@ -24,6 +26,7 @@ router.use('/', chargeproducts)
 router.use('/', productsId)
 router.use('/', productsquery)
 router.use('/api/checkout', pagos)
+router.use('/dataBuy', carros)
 
 
 
