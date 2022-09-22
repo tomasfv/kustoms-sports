@@ -14,6 +14,7 @@ export const types={
     FILTER:"FILTER",
     POST_USER: "POST_USER",
     POSTDATABUY:"POSTDATABUY",
+    GET_PRODUCTINFO:"GET_PRODUCTINFO"
 }
 
 
@@ -83,6 +84,19 @@ export function getStock(id) {
         let response= await axios.get(`${URL}navbar`)
         return dispatch({
           type: types.GET_NAVBAR,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getProductInfo=(email)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}getDatacarrito`, email )
+        return dispatch({
+          type: types.GET_PRODUCTINFO,
           payload:response.data
         })
       } catch (error) {
