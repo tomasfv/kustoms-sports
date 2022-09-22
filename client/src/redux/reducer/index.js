@@ -68,6 +68,11 @@ export const rootReducer=(state=initialState, action)=>{
             console.log(action.payload)
             return{
                 ...state,
+                
+            }
+        case types.GET_PRODUCTINFO:
+            return{
+                ...state,
                 dataBuy:action.payload
             }
         case types.FILTER:

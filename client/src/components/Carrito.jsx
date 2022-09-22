@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import  Payment  from './Payment'
+import { getProductInfo } from "../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 
@@ -8,10 +10,15 @@ import  Payment  from './Payment'
 
 
 const Carrito = ()=>{
+    const { isAuthenticated, user } = useAuth0()
+    const dispatch= useDispatch()
+    const email = user.email
+    useEffect(() => {
+        dispatch(getProductInfo(email))
+      }, [dispatch,isAuthenticated,user]);
     const databuy = useSelector((state) => state.dataBuy);
-    console.log(databuy)
-   
-   
+
+
    return(
 <div className="mt-[800px]">
     <h1>Carrito</h1>

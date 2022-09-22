@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams , } from "react-router-dom";
 import { getDetailId, getStock, postDataBuy } from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -13,12 +13,13 @@ const ImageXDataProduct = () => {
   const imagenes = useSelector((state) => state.images);
   const stock = useSelector((state) => state.stock);
   const color = useSelector((state) => state.color);
-  console.log(details);
-  console.log(stock);
+  // console.log(details);
+  // console.log(stock);
   const [ordenimg, setOrdenimg] = useState("");
   const [errors, setErrors] = useState(false);
   const params = useParams();
   const id = params.id;
+ 
 
   
   
@@ -46,7 +47,7 @@ const ImageXDataProduct = () => {
         timer: 1500
       })
       dispatch(postDataBuy(buyProduct))
-      // reload()
+      window.history.back ()
     }
     
   }
@@ -61,15 +62,16 @@ const ImageXDataProduct = () => {
     
   }
 
-  function reload() {
-    window.location.href = window.location.href;
-  }
+  
   console.log(buyProduct, "buy");
   const dispatch = useDispatch();
   useEffect(() => {
     setOrdenimg("");
     dispatch(getDetailId(id));
     dispatch(getStock(id));
+    
+  }, [dispatch, id, isAuthenticated]);
+  useEffect(() => {
     setbuyProduct({
       id:"",
       name: details.name,
@@ -78,8 +80,6 @@ const ImageXDataProduct = () => {
       size: "",
       email: "",
     });
-  }, [dispatch, id, isAuthenticated]);
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, [details]);
   const stockgender = stock.filter((e) => {
