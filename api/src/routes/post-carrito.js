@@ -44,7 +44,11 @@ router.post("/", async (req, res) => {
           ? parseInt(product.price) * (1 - parseInt(product.promotion))
           : parseInt(product.price))
     ).toFixed(2);
-    let repeatedProduct = cart.dataValues.products.filter((el) => el.id === id);
+    console.log(cart)
+    let repeatedProduct = []
+    if (Object.hasOwn(cart.dataValues, 'products')){
+      repeatedProduct = cart.dataValues.products.filter((el) => el.id === id);
+    }
 		if (repeatedProduct.length > 0) {
 			return res.status(400).send(`${product.name} is already in the cart`)
     }else{
@@ -53,6 +57,7 @@ router.post("/", async (req, res) => {
         totalamount: pricepromotion,
       });
     }
+    console.log(cart)
     return res.status(200).send("Se agrego el producto");
   } catch (error) {
     console.log(error);
