@@ -68,18 +68,18 @@ router.post("/", async (req, res) => {
 
     
     //     //mandamos correo de compra con detalles
-    //     // const transs = await transporter.sendMail(
+        const transs = await transporter.sendMail(
       
-      //     //     {
+              {
         
-    //     //         from: "kustomssports@gmail.com",
-    //     //         to: email,
-    //     //         subject: "REGISTRADO!",
-    //     //         html: `Gracias por registrarse a KUSTOMS SPORTS!, para entrar a tu cuenta ingrese a este link <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">KUSTOMSSPORTS</a>`
+                from: "kustomssports@gmail.com",
+                to: email,
+                subject: "Tu compra se realizó con éxito",
+                html: `Gracias por tu compra realizada en <a href="https://kustoms-sports.vercel.app/">Kustoms-Sports</a> por un monto de $ ${amount} `
     
-    //     //     }
+            }
     
-    //     // )
+        )
     //     //fidelidad?si es posible¡¡
     
     return res.status(200).json({ message: "Successful Payment" });
