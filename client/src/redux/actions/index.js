@@ -94,7 +94,7 @@ export function getStock(id) {
   export const getProductInfo=(email)=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}getDatacarrito`, email )
+        let response= await axios.get(`${URL}getDatacarrito?email=${email}`)
         return dispatch({
           type: types.GET_PRODUCTINFO,
           payload:response.data
@@ -131,10 +131,10 @@ export function getStock(id) {
 
   }
   export const postDataBuy = (info) => {
-    console.log(info)
+    console.log("addtocart:",info)
     return async function (dispatch) {
       try {
-        var jsonbuy = await axios.post(`${URL}dataBuy`, info);
+        var jsonbuy = await axios.post(`${URL}addTocart`, info);
         console.log(jsonbuy.data)
         return {
 
