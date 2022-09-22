@@ -1,12 +1,38 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import axios from "axios";
 
-const stripePromise = loadStripe("pk_test_51Lj7u9Dukzk6GqlmMVPMHwx3lemmPxbgy32HRrVczr7jnBiVC4MGYPQBzrrQz99uhWYB1KLstQ6PKDBJVDyROyXz00qQ34D93u");
 
-const CheckoutForm = () => {
+const CARD_OPTIONS = {
+  iconStyle: "solid",
+	style: {
+    base: {
+      iconColor: "#fff",
+			color: "#fff",
+			fontWeight: 500,
+			fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+			fontSize: "16px",
+			fontSmoothing: "antialiased",
+			"::placeholder": { color: "#fff" },
+      
+		},
+		// invalid: {
+      // 	iconColor: "#ffc7ee",
+      // 	color: "#ffc7ee"
+      // }
+	  },
+    hidePostalCode: true,
+  }
+  
+  const stripePromise = loadStripe("pk_test_51Lj7u9Dukzk6GqlmMVPMHwx3lemmPxbgy32HRrVczr7jnBiVC4MGYPQBzrrQz99uhWYB1KLstQ6PKDBJVDyROyXz00qQ34D93u");
+  
+  const CheckoutForm = () => {
+  const dataBuy = useSelector((state) => state.dataBuy);
+  const { user } = useAuth0()
   const stripe = useStripe();
   const elements = useElements();
 
@@ -29,7 +55,9 @@ const CheckoutForm = () => {
           "/api/checkout",
           {
             id,
-            amount: 10000, //cents
+            amount: dataBuy.totalamount,
+            email: user.email,
+            
           }
         );
         console.log(data);
@@ -45,48 +73,59 @@ const CheckoutForm = () => {
   console.log(!stripe || loading);
 
   return (
-    <form className="card card-body" onSubmit={handleSubmit}>
-      {/* Product Information */}
-      <img
-        src="https://www.corsair.com/medias/sys_master/images/images/h80/hdd/9029904465950/-CH-9109011-ES-Gallery-K70-RGB-MK2-01.png"
-        alt="Corsair Gaming Keyboard RGB"
-        className="w-20 h-20"
-      />
+    <div className="">
+      <form className="border rounded-md w-[450px] grid grid-col justify-items-center m-4 p-4 bg-gris-light" onSubmit={handleSubmit}>
+        {/* Product Information */}
+        <img
+          src="https://www.paymentsjournal.com/wp-content/uploads/2018/06/bank-3487033_1920.png"
+          alt="Corsair Gaming Keyboard RGB"
+          className="w-[400px] h-[300px]"
+        />
 
-      <h3 className="text-center my-2">Price: 100$</h3>
+        <h3 className="font-bold">Total: ${dataBuy.totalamount}</h3>
+      <div className="rounded-lg">
+        
+        {/* <div className="flex justify-start border">
+          <input type='text' size="20" maxLength="20000" placeholder=" email..."/><br></br>
+        </div> */}
+        
+        {/* User Card Input */}
+        <div className="bg-main-dark m-4 p-4">
+          <CardElement options={CARD_OPTIONS}/>
+          
+        </div>
 
-      {/* User Card Input */}
-      <div className="form-group">
-        <CardElement />
-      </div>
+        <button disabled={!stripe} className="font-bold rounded bg-verde-light text-main-light w-[420px] p-4">
+          {loading ? (
+            <div className="" role="status">
+              <span className="">Loading...</span>
+            </div>
+          ) : (
+            "Comprar"
+          )}
+        </button>
+      </div>  
+      </form>
+    </div>
 
-      <button disabled={!stripe} className="btn btn-success">
-        {loading ? (
-          <div className="spinner-border text-light" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-        ) : (
-          "Buy"
-        )}
-      </button>
-    </form>
+    
   );
 };
 
 function Payment() {
   
     return (
-     <div>
-  {/* stripe */}
-  <Elements stripe={stripePromise}>
-  <div className='grid gap-4 m-4 justify-items-center'>
-    <div>
-      <div className='w-80 border'>
-        <CheckoutForm />
-      </div>
-    </div>
-  </div>
-  </Elements>
+     <div className="">
+        {/* stripe */}
+          <Elements stripe={stripePromise}>
+            <div className=''>
+              <div>
+                <div className=''>
+                  <CheckoutForm />
+                </div>
+              </div>
+            </div>
+          </Elements>
       </div>
       
     );
