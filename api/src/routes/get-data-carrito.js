@@ -6,7 +6,7 @@ const { Users, Carts, Products, cartproducts } = require("../db.js");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  let { email } = req.body;
+  let { email } = req.query;
   try {
     const user = await Users.findOne({
       where: { email: email },
