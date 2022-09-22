@@ -7,6 +7,7 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   let { email, id } = req.body;
+  console.log(req.body)
   try {
     const finduser = await Users.findOne({
       where: { email: email },

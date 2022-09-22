@@ -5,11 +5,11 @@ const productsquery = require('./get-products-query.js')
 const productsdate = require('./get-products-date.js')
 const productsnavbar = require('./get-products-navbar.js')
 const createuser = require ('./post-usuario.js')
-const pagos = require ('./post-pagos.js')
+const pagos = require ('./post-Payment.js')
 const addcarros = require ('./post-carrito.js');
 const getcarrito = require ('./get-data-carrito.js');
 const putcarrito = require ('./remove-prod-cart')
-const postBuy = require ('./post-buy')
+const postBuy = require ('./post-Payment')
 
 
 

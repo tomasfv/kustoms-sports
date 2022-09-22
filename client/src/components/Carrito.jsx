@@ -16,13 +16,12 @@ const Carrito = ()=>{
     useEffect(() => {
         dispatch(getProductInfo(email))
       }, [dispatch,isAuthenticated,user]);
-    const databuy = useSelector((state) => state.dataBuy);
-
-
+    const dataBuy = useSelector((state) => state.dataBuy);
+      
    return(
 <div className="mt-[800px]">
     <h1>Carrito</h1>
-    <div>ddsds{databuy.name}</div>
+    <div>ddsds{dataBuy.totalamount}</div>
     <h1>Carrito</h1>
     <h1>Carrito</h1>
     <h1>Carrito</h1>
