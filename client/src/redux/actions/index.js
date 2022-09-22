@@ -13,6 +13,8 @@ export const types={
     GET_BY_DATE:"GET_DATE",
     FILTER:"FILTER",
     POST_USER: "POST_USER",
+    POSTDATABUY:"POSTDATABUY",
+    GET_PRODUCTINFO:"GET_PRODUCTINFO"
 }
 
 
@@ -89,6 +91,19 @@ export function getStock(id) {
       }
     }
   }
+  export const getProductInfo=(email)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}getDatacarrito?email=${email}`)
+        return dispatch({
+          type: types.GET_PRODUCTINFO,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
   export const filterProducts=(payload)=>{
     return{
@@ -109,6 +124,23 @@ export function getStock(id) {
       try {
         var json = await axios.post(`${URL}user`, payload);
         return json
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  }
+  export const postDataBuy = (info) => {
+    console.log("addtocart:",info)
+    return async function (dispatch) {
+      try {
+        var jsonbuy = await axios.post(`${URL}addTocart`, info);
+        console.log(jsonbuy.data)
+        return {
+
+          type:types.POSTDATABUY,
+          payload:jsonbuy.data
+        }
       } catch (error) {
         console.log(error);
       }

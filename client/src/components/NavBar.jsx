@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { changeTheme, getNavData } from '../redux/actions'
 import { useEffect } from 'react'
 import { LoginButton } from './Login';
-import { LogoutButton } from './Logout';
+
 import { Profile } from './Profile';
 import { useAuth0 } from "@auth0/auth0-react";
 import { createnewuser } from '../redux/actions'
@@ -75,12 +75,12 @@ const NavBar = () => {
             <nav className='z-50 fixed top-0 lg:hidden w-full flex flex-row justify-between text-main-dark dark:text-main-light h-16 bg-main-light dark:bg-main-dark transition-all duration-300'>
                 <Link className='h-16 w-fit pl-5' to={'/'} onClick={handleReload}><img src={smLogo} alt="logo-small" className='h-16 w-16' /></Link>
                 <div className='flex flex-row  gap-3 items-center'>
-                    {/* <Link to={''} className='w-fit h-fit relative'> */}
-                    <div className='w-fit h-fit relative'>
+                    <Link to={'/carrito'} className='w-fit h-fit relative'>
+                   
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
                         <p className='absolute right-0 -top-2 z-10 bg-verde-light  rounded-full  font-bold'>0</p>
-                    </div>
-                    {/* </Link> */}
+                    
+                    </Link>
                     <button><MdMenu onClick={handleClick} className='h-14 w-14 pr-5' /></button>
                 </div>
 
@@ -204,7 +204,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className='flex flex-row h-fit gap-2 xl:gap-5  mr-5 items-center'>
-                    <Link to={'/'} className='w-fit h-fit relative'>
+                    <Link to={'/carrito'} className='w-fit h-fit relative'>
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
                         <p className='absolute right-0 -top-2 z-10 bg-verde-light  rounded-full  font-bold'>0</p>
                     </Link>
@@ -216,7 +216,7 @@ const NavBar = () => {
                     {isAuthenticated ? (
                                  <>
                                  <Profile />
-                                {/* <LogoutButton /> */}
+                                
                                  </> ) : ( <LoginButton/> ) }
                 </div>
             </nav>

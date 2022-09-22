@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getDetailId, getStock } from "../redux/actions";
+import { Link, useParams , } from "react-router-dom";
+import { getDetailId, getStock, postDataBuy } from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import swal from'sweetalert2';
 
 const ImageXDataProduct = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -12,42 +13,73 @@ const ImageXDataProduct = () => {
   const imagenes = useSelector((state) => state.images);
   const stock = useSelector((state) => state.stock);
   const color = useSelector((state) => state.color);
-  console.log(details);
-  console.log(stock);
+  // console.log(details);
+  // console.log(stock);
   const [ordenimg, setOrdenimg] = useState("");
-  const [cambio, setCambio] = useState(false);
+  const [errors, setErrors] = useState(false);
   const params = useParams();
   const id = params.id;
+ 
+
+  
+  
+
+
 
   const [buyProduct, setbuyProduct] = useState({
+    id:"",
     name: "",
     collection: "",
     color: "",
     size: "",
+    email: "",
   });
 
-  function postuserClick() {}
+  function postuserClick() {
+    if(buyProduct.size === ""){
+      setErrors(!false)
+    }else{
+      swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Producto agregado al Carrito',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      dispatch(postDataBuy(buyProduct))
+      window.history.back ()
+    }
+    
+  }
   function handleSize(e) {
-    setCambio(e.target.value);
+    setErrors(!true)
     setbuyProduct({
       ...buyProduct,
       size: e.target.value,
+      email:user.email,
+      id: e.target.id,
     });
+    
   }
+
+  
   console.log(buyProduct, "buy");
   const dispatch = useDispatch();
   useEffect(() => {
     setOrdenimg("");
     dispatch(getDetailId(id));
     dispatch(getStock(id));
+    
+  }, [dispatch, id, isAuthenticated]);
+  useEffect(() => {
     setbuyProduct({
+      id:"",
       name: details.name,
       collection: details.collection,
       color: color.color,
       size: "",
+      email: "",
     });
-  }, [dispatch, id, isAuthenticated]);
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, [details]);
   const stockgender = stock.filter((e) => {
@@ -108,39 +140,47 @@ const ImageXDataProduct = () => {
         </div>
         <div className="flex flex-col">
           <div className="flex font-bold">Talles disponibles</div>
-          <div className="flex flex-row  ">
+          <div className="flex flex-row ">
             {stockgender.map((el) => {
               return (
-                <div>
+                <div className="flex flex-row"> 
+                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                   <div>
-                    <input type="checkbox" id={el.id} class="peer hidden" onClick={(e) => handleSize(e)}  value={el.size} />
+                   
+                    {/* <input type="checkbox" id={el.id} class="peer hidden radio" onClick={(e) => handleSize(e)}  value={el.size} />
                     <label
-                      
-                     
+                      type= "radio"
+                      name="check"
+                      value= "1"
                       for={el.id}
-                      class=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]
- transition-colors duration-200 ease-in-out peer-checked:bg-main-dark peer-checked:text-main-light peer-checked:border-gray-200 "
+                      className=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]
+ transition-colors duration-200 ease-in-out peer-checked:bg-main-dark peer-checked:text-main-light peer-checked:border-gray-200 radio"
                     >
                       {" "}
                       {el.size}
+                    </label> */}
+                    {/* <script> $('input[type="checkbox"]'').on("change", function(){
+$("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
+});
+</script>                 */}
+                  <label class=" block input:cursor-pointer">
+                    <input type="radio"  name="radio" id={el.id}  onClick={(e) => handleSize(e)}  value={el.size} className="  relative"/>
+                    <div>
+                    <span className=" flex  w-[30px] h-[30px]   t-[0px] checked:bg-main-black relative input-checked:bg-main-black " >{el.size}</span>
+                    </div>
+                     
                     </label>
+                     
                   </div>
-                  {/* <button
-                    
-                    className={`border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px]} place-items-center border-[indigo-500/50] ${
-                      buyProduct.size === cambio &&
-                      "text-main-light bg-main-dark"
-                    }`}
-                    onClick={(e) => handleSize(e)}
-                    value={el.size}
-                  >
-                    {el.size}
-                  </button> */}
+                  
+                  
                 </div>
               );
             })}
+            
           </div>
         </div>
+        {errors !== false && <p>Porfavor seleccione una talla</p>}
         {isAuthenticated ? (
           <button
             onClick={postuserClick}

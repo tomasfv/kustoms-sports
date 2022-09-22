@@ -13,14 +13,14 @@ id: {
 },
 totalamount: {
 
-    type: DataTypes.DECIMAL,
+    type: DataTypes.FLOAT,
     allowNull: false
 },
 
 open: {
   
     type: DataTypes.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
     allowNull: false
 },
 

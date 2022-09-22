@@ -12,6 +12,7 @@ const initialState={
     newest:[],
     filteredProducts:[],
     cacheNotFiltered:[],
+    dataBuy:[],
     
 }
 
@@ -63,6 +64,17 @@ export const rootReducer=(state=initialState, action)=>{
                     ...state,
                     navData:action.payload
                 }
+        case types.POSTDATABUY:
+            console.log(action.payload)
+            return{
+                ...state,
+                
+            }
+        case types.GET_PRODUCTINFO:
+            return{
+                ...state,
+                dataBuy:action.payload
+            }
         case types.FILTER:
             let filter=action.payload
             let toFilter=state.productByCategory
