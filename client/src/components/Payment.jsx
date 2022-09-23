@@ -52,9 +52,10 @@ const CheckoutForm = () => {
       type:"card",
       card: elements.getElement(CardElement),
     });
-    setLoading(true);
+    //setLoading(true);
 
     if (!error) {
+    setLoading(true);
       console.log(paymentMethod)
       const { id } = paymentMethod;
       try {
@@ -88,7 +89,15 @@ const CheckoutForm = () => {
         console.log(error);
       }
       setLoading(false);
-    }
+    } else {
+      swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Error en el pago',
+        showConfirmButton: false,
+        timer: 2000
+      })
+     }
   };
 
   console.log(!stripe || loading);
@@ -118,6 +127,7 @@ const CheckoutForm = () => {
           
         </div>
 
+       
         <button disabled={!stripe} className="font-bold rounded bg-verde-light text-main-light w-[420px] p-4">
           {loading ? (
             <div className="flex justify-center" role="status">

@@ -4,7 +4,7 @@ import { getByDate } from "../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import hombre from '../assets/hombre.jpg'
 import mujer from '../assets/mujer.jpg'
-import ninos from '../assets/ninos.jpg'
+import unisex from '../assets/unisex.jpg'
 import { useEffect } from "react"
 
 const Home = () => {
@@ -31,9 +31,9 @@ const Home = () => {
                         <img className=" w-96 h-[27.5rem] object-cover group-hover:blur-sm group-hover:brightness-50 transition-all duration-500" src={mujer} alt="womens category access" />
                         <p className="absolute hidden text-6xl text-main-light  font-bold top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 group-hover:block">Mujeres</p>
                     </Link>
-                    <Link to='/categories/collection/Qatar' className=" w-96 h-[27.5rem] relative group">
-                        <img className=" w-96 h-[27.5rem] object-cover group-hover:blur-sm group-hover:brightness-50 transition-all duration-500" src={ninos} alt="kids category access" />
-                        <p className="absolute hidden text-6xl text-main-light  font-bold top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 group-hover:block">Niños</p>
+                    <Link to='/categories/gender/Unisex' className=" w-96 h-[27.5rem] relative group">
+                        <img className=" w-96 h-[27.5rem] object-cover group-hover:blur-sm group-hover:brightness-50 transition-all duration-500" src={unisex} alt="unisex category access" />
+                        <p className="absolute hidden text-6xl text-main-light  font-bold top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 group-hover:block">Unisex</p>
                     </Link>
                 </section>
             </section>

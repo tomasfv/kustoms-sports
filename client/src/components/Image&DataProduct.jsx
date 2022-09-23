@@ -5,10 +5,12 @@ import { Link, useParams , } from "react-router-dom";
 import { getDetailId, getProductInfo, getStock, postDataBuy } from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "./Login";
 import swal from'sweetalert2';
 
 const ImageXDataProduct = () => {
   const { isAuthenticated, user } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   const details = useSelector((state) => state.details);
   const imagenes = useSelector((state) => state.images);
   const stock = useSelector((state) => state.stock);
@@ -225,8 +227,7 @@ $("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
         ) : (
           <div className="flex flex-col">
             <p>
-              Para poder realizar un pedido,debe registrarse/ingresar en la
-              página.
+              Para poder realizar un pedido,debe <button onClick={() => loginWithRedirect()} className="text-verde-dark font-bold "> registrarse / ingresar </button> en la página.
             </p>
           </div>
         )}
