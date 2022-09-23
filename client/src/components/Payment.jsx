@@ -78,7 +78,9 @@ const CheckoutForm = () => {
             showConfirmButton: false,
             timer: 3000
           })
-          window.location.replace('/')
+          window.setTimeout(function() {
+            window.location.href = '/';
+        }, 1500);
         }
 
         elements.getElement(CardElement).clear();
@@ -118,8 +120,9 @@ const CheckoutForm = () => {
 
         <button disabled={!stripe} className="font-bold rounded bg-verde-light text-main-light w-[420px] p-4">
           {loading ? (
-            <div className="" role="status">
-              <span className="">Loading...</span>
+            <div className="flex justify-center" role="status">
+              {/* <span className="">Loading...</span> */}
+              <img src='https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif' className="h-[30px] w-[30px] m-0" />
             </div>
           ) : (
             "Comprar"
