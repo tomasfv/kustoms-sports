@@ -15,6 +15,7 @@ export const types={
     POST_USER: "POST_USER",
     POSTDATABUY:"POSTDATABUY",
     GET_PRODUCTINFO:"GET_PRODUCTINFO",
+    GET_DELETEPRODUCT:"GET_DELETEPRODUCT"
     
 }
 
@@ -152,10 +153,10 @@ export function getStock(id) {
   export const deleteProduct=(email,id)=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.put(`${URL}delFromcart?email=${email}?id=${id}`)
+        let response= await axios.put(`${URL}delFromcart?email=${email}&id=${id}`)
         return dispatch({
-          type: types.GET_DELATEPRODUCT,
-          payload:response.data.products
+          type: types.GET_DELETEPRODUCT,
+          
         })
       } catch (error) {
         console.log(error)
