@@ -11,7 +11,7 @@ const Carrito = () => {
   useEffect(() => {
     dispatch(getProductInfo(email));
   }, [dispatch, isAuthenticated, user]);
-  deletear();
+  // deletear();
   const dataBuy = useSelector((state) => state.dataBuy);
   const data = useSelector((state) => state.data);
   //const name = dataBuy.products.name
@@ -23,14 +23,14 @@ const Carrito = () => {
   function handleDelete(e) {
     dispatch(deleteProduct(email, e.target.id));
     //  window.location.reload()
-    // deletear()
+     deletear()
   }
 
   return (
     <div>
       <div className="flex flex-col mt[100px]">
         <div className=" flex ml-[200px] text-[30px] font-bold mt-[100px]">
-          TU CARRITO : {dataBuy.length} items total:{data.totalamount}
+          TU CARRITO : {dataBuy.length} items 
         </div>
         <div className="mt-[50px] flex flex-row gap-[300px] mb-[100px]">
           <div>
@@ -50,8 +50,10 @@ const Carrito = () => {
                       <h1 className="text-[20px] font-bold">{e.name}</h1>
                       <div>{e.collection}</div>
                       <div>{e.color}</div>
+                      <div> Talle : {e.size}</div>
                       <div className="mt-[30px]"> Cantidad :</div>
                       <div> Precio por unidad : ${e.price}</div>
+                      
                     </div>
                     <div>
                       <div className="ml-[166px]">
@@ -69,14 +71,15 @@ const Carrito = () => {
               })}
             </div>
           </div>
-          <div className="flex flex-col w-[400px] h-[500px] bg-gris-light">
+          <div className="flex flex-col w-[400px] h-[500px] bg-gris-light border-2" >
             <div className=" text-[30px]">Resumen de compra</div>
-            <div className="flex flex-row mt-[200px]"><div className="flex font-bold text-[15px]">Total:<div className=" flex ml-[270px]">{data.totalamount}</div></div></div>
+            <hr className="m-2"></hr>
+            <div className="flex flex-row mt-[200px]"><div className="flex font-bold text-[25px]">Total:<div className=" flex ml-[250px]">{data.totalamount}</div></div></div>
 
-
+          
              
 
-          <a href="/payment" className="border font-bold bg-verde-dark w-[200px] ">
+          <a href="/payment" className="border text-[white] bg-verde-light w-[300px] ml-[50px] text-[20px]  justify-center items-center">
           COMPRAR
         </a>
 
