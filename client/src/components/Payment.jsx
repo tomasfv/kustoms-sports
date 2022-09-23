@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useAuth0 } from "@auth0/auth0-react";
+import swal from'sweetalert2';
+
 
 import axios from "axios";
+import { getProductInfo } from "../redux/actions";
 
+const stripePromise = loadStripe("pk_test_51Lj7u9Dukzk6GqlmMVPMHwx3lemmPxbgy32HRrVczr7jnBiVC4MGYPQBzrrQz99uhWYB1KLstQ6PKDBJVDyROyXz00qQ34D93u");
 
 const CARD_OPTIONS = {
   iconStyle: "solid",
@@ -20,23 +24,26 @@ const CARD_OPTIONS = {
 			"::placeholder": { color: "#fff" },
       
 		},
-		// invalid: {
-      // 	iconColor: "#ffc7ee",
-      // 	color: "#ffc7ee"
-      // }
-	  },
-    hidePostalCode: true,
-  }
-  
-  const stripePromise = loadStripe("pk_test_51Lj7u9Dukzk6GqlmMVPMHwx3lemmPxbgy32HRrVczr7jnBiVC4MGYPQBzrrQz99uhWYB1KLstQ6PKDBJVDyROyXz00qQ34D93u");
-  
-  const CheckoutForm = () => {
-  const dataBuy = useSelector((state) => state.dataBuy);
-  const { user } = useAuth0()
-  const stripe = useStripe();
-  const elements = useElements();
+    
+  },
+  hidePostalCode: true,
+}
 
-  const [loading, setLoading] = useState(false);
+
+
+const CheckoutForm = () => {
+    const dispatch = useDispatch();
+    const { isAuthenticated, user } = useAuth0()
+    const dataInfo = useSelector((state) => state.data);
+    const stripe = useStripe();
+    const elements = useElements();
+    const [loading, setLoading] = useState(false);
+    const email = user?.email;
+    console.log(user)
+    useEffect(() => {
+      dispatch(getProductInfo(email));
+    }, [dispatch, email, user]);
+    
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,12 +62,24 @@ const CARD_OPTIONS = {
           "/api/checkout",
           {
             id,
-            amount: dataBuy.totalamount,
+            amount: dataInfo.totalamount,
             email: user.email,
             
           }
         );
-        console.log(data);
+
+        console.log(data)
+        console.log(data.message)
+        if(data.message === "Successful Payment"){
+          swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Compra exitosa!',
+            showConfirmButton: false,
+            timer: 3000
+          })
+          window.location.replace('/')
+        }
 
         elements.getElement(CardElement).clear();
       } catch (error) {
@@ -72,6 +91,8 @@ const CARD_OPTIONS = {
 
   console.log(!stripe || loading);
 
+  
+
   return (
     <div className="">
       <form className="border rounded-md w-[450px] grid grid-col justify-items-center m-4 p-4 bg-gris-light" onSubmit={handleSubmit}>
@@ -82,7 +103,7 @@ const CARD_OPTIONS = {
           className="w-[400px] h-[300px]"
         />
 
-        <h3 className="font-bold">Total: ${dataBuy.totalamount}</h3>
+        <h3 className="font-bold">Total: ${dataInfo.totalamount}</h3>
       <div className="rounded-lg">
         
         {/* <div className="flex justify-start border">
@@ -115,7 +136,7 @@ const CARD_OPTIONS = {
 function Payment() {
   
     return (
-     <div className="">
+     <div className="relative top-40 mb-80 flex flex-row justify-center">
         {/* stripe */}
           <Elements stripe={stripePromise}>
             <div className=''>
