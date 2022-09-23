@@ -38,14 +38,15 @@ const ImageXDataProduct = () => {
   });
    
   function postuserClick() {
+    const dataid = dataBuy.filter(e=>{
+      return( e.id == buyProduct.id)
+   })
     if(buyProduct.size === ""){
       setErrors(!false)
 
     }
-    const dataid = dataBuy.filter(e=>{
-      return( e.id == buyProduct.id)
-   })
-    if(dataid.length){
+    
+   else if(dataid.length){
       swal.fire({
         position: 'top-end',
         icon: 'error',
