@@ -69,9 +69,9 @@ const Carrito = () => {
               })}
             </div>
           </div>
-          <div>
+          <div className="flex flex-col">
             <div>Resumen de compra</div>
-            <div className="flex flex-row"><div>Total:<div className="ml-[400px}">{data.totalamount}</div></div></div>
+            <div className="flex flex-row"><div>Total:<div className="ml-[400px]">{data.totalamount}</div></div></div>
 
 
 
