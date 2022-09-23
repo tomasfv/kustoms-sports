@@ -6,6 +6,7 @@ import hombre from '../assets/hombre.jpg'
 import mujer from '../assets/mujer.jpg'
 import ninos from '../assets/ninos.jpg'
 import { useEffect } from "react"
+import Chatbot from "../components/Chatbot"
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -41,6 +42,7 @@ const Home = () => {
                 <h2 className="my-5 text-3xl text-main-dark dark:text-main-light ">Ultimas novedades</h2>
                 <Carrousel collection={newest} />
             </section>
+            <Chatbot/>
         </div>
 
     )
