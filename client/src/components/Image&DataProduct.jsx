@@ -21,7 +21,7 @@ const ImageXDataProduct = () => {
   const id = params.id;
   
  
-   const email = user.email
+   const email = user?.email
    
   
   
