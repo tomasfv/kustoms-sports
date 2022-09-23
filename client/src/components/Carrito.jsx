@@ -69,8 +69,8 @@ const Carrito = () => {
               })}
             </div>
           </div>
-          <div className="flex flex-col w-[400px] h-[500px] dark:bg-gris-dark">
-            <div>Resumen de compra</div>
+          <div className="flex flex-col w-[400px] h-[500px] bg-gris-light">
+            <div className=" text-[40px]">Resumen de compra</div>
             <div className="flex flex-row"><div className="flex ">Total:<div className=" flex ml-[400px]">{data.totalamount}</div></div></div>
 
 
