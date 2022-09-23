@@ -46,19 +46,19 @@ const Carrito = () => {
                         height="200px"
                       />
                     </div>
-                    <div className="flex flex-col ml-[10px] items-start ">
+                    <div className="flex flex-col ml-[10px] items-start gap-[15px]">
                       <h1 className="text-[20px] font-bold">{e.name}</h1>
                       <div>{e.collection}</div>
                       <div>{e.color}</div>
                       <div> Talle : {e.size}</div>
-                      <div className="mt-[30px]"> Cantidad :</div>
+                      {/* <div className="mt-[30px]"> Cantidad :</div> */}
                       <div> Precio por unidad : ${e.price}</div>
                       
                     </div>
                     <div>
-                      <div className="ml-[166px]">
+                      <div className="">
                         <button
-                          className="bg-neutral px-3 py-1 border-neutral  text-neutral-600 hover:text-[white] hover:shadow-[inset_13rem_0_0_0] hover:shadow-[red] duration-[400ms,700ms] transition-[color,box-shadow] "
+                          className="bg-neutral px-3 py-1 border-neutral  text-neutral-600 hover:text-[white] hover:shadow-[inset_13rem_0_0_0] hover:shadow-[red] duration-[400ms,700ms] transition-[color,box-shadow]  ml-[150px]  "
                           id={e.id}
                           onClick={handleDelete}
                         >
@@ -71,15 +71,15 @@ const Carrito = () => {
               })}
             </div>
           </div>
-          <div className="flex flex-col w-[400px] h-[500px] bg-gris-light border-2" >
+          <div className="flex flex-col w-[400px] h-[400px] bg-gris-light border-2" >
             <div className=" text-[30px]">Resumen de compra</div>
             <hr className="m-2"></hr>
-            <div className="flex flex-row mt-[200px]"><div className="flex font-bold text-[25px]">Total:<div className=" flex ml-[250px]">{data.totalamount}</div></div></div>
+            <div className="flex flex-row mt-[200px]"><div className="flex font-bold text-[25px] ml-[15px]">Total:<div className=" flex ml-[200px] mr-[200px]">${data.totalamount}</div></div></div>
 
           
              
 
-          <a href="/payment" className="border text-[white] bg-verde-light w-[300px] ml-[50px] text-[20px]  justify-center items-center">
+          <a href="/payment" className="border text-[white] bg-verde-light w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">
           COMPRAR
         </a>
 
