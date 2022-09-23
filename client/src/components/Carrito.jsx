@@ -71,12 +71,12 @@ const Carrito = () => {
           </div>
           <div className="flex flex-col w-[400px] h-[500px] bg-gris-light">
             <div className=" text-[30px]">Resumen de compra</div>
-            <div className="flex flex-row "><div className="flex font-bold text-[15px]">Total:<div className=" flex ml-[250px]">{data.totalamount}</div></div></div>
+            <div className="flex flex-row mt-[200px]"><div className="flex font-bold text-[15px]">Total:<div className=" flex ml-[270px]">{data.totalamount}</div></div></div>
 
 
+             
 
-
-          <a href="/payment" className="border font-bold bg-verde-dark w-[200px]">
+          <a href="/payment" className="border font-bold bg-verde-dark w-[200px] ">
           COMPRAR
         </a>
 
