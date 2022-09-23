@@ -132,8 +132,13 @@ const NavBar = () => {
                                 </li>
                             </ul>
                             <div className='gap-6 flex flex-col ml-6 mt-10'>
-                                <Button classname={'mb-3'} type={'registrarse'} />
-                                <Button className='my-3' type={'ingresar'} />
+                                {/* <Button classname={'mb-3'} type={'registrarse'} />
+                                <Button className='my-3' type={'ingresar'} /> */}
+                                {isAuthenticated ? (
+                                 <>
+                                 <Profile />
+                                
+                                 </> ) : ( <LoginButton/> ) }
 
                                 <button onClick={handleTheme} className='border rounded-md border-main-dark dark:border-verde-dark w-fit p-3'>
                                     {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
