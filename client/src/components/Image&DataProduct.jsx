@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link, useParams , } from "react-router-dom";
-import { getDetailId, getStock, postDataBuy } from "../redux/actions";
+import { getDetailId, getProductInfo, getStock, postDataBuy } from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import swal from'sweetalert2';
@@ -19,8 +19,10 @@ const ImageXDataProduct = () => {
   const [errors, setErrors] = useState(false);
   const params = useParams();
   const id = params.id;
+  
  
-
+   const email = user?.email
+   
   
   
 
@@ -34,11 +36,27 @@ const ImageXDataProduct = () => {
     size: "",
     email: "",
   });
-
+   
   function postuserClick() {
+    const dataid = dataBuy.filter(e=>{
+      return( e.id == buyProduct.id)
+   })
     if(buyProduct.size === ""){
       setErrors(!false)
-    }else{
+
+    }
+    
+   else if(dataid.length){
+      swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'El producto ya existe!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      window.history.back ()
+    }
+    else{
       swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -53,6 +71,7 @@ const ImageXDataProduct = () => {
   }
   function handleSize(e) {
     setErrors(!true)
+    
     setbuyProduct({
       ...buyProduct,
       size: e.target.value,
@@ -66,11 +85,18 @@ const ImageXDataProduct = () => {
   console.log(buyProduct, "buy");
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getProductInfo(email));
+  }, [dispatch, isAuthenticated, user]);
+  useEffect(() => {
+    
     setOrdenimg("");
     dispatch(getDetailId(id));
     dispatch(getStock(id));
     
-  }, [dispatch, id, isAuthenticated]);
+    
+    
+  }, [dispatch, id, isAuthenticated,user]);
+
   useEffect(() => {
     setbuyProduct({
       id:"",
@@ -82,10 +108,13 @@ const ImageXDataProduct = () => {
     });
     window.scrollTo(0, 0);
   }, [details]);
+
+  const dataBuy = useSelector((state) => state.dataBuy);
+  console.log(dataBuy,"data")
   const stockgender = stock.filter((e) => {
     return e.gender == details.gender;
   });
-
+console.log(stockgender,"stock")
   function handleImage(e) {
     setOrdenimg(e.target.src);
   }

@@ -41,7 +41,7 @@ if (finduser === null) {
                 from: "kustomssports@gmail.com",
                 to: email,
                 subject: "REGISTRADO!",
-                html: `Gracias por registrarse a KUSTOMS SPORTS!, para entrar a tu cuenta ingrese a este link <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">KUSTOMSSPORTS</a>`
+                html: `Gracias por registrarse a KUSTOMS SPORTS!, para entrar a tu cuenta ingrese a este link <a href="https://kustoms-sports.vercel.app/">KUSTOMSSPORTS</a>`
     
             }
     

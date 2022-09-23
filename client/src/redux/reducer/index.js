@@ -13,6 +13,7 @@ const initialState={
     filteredProducts:[],
     cacheNotFiltered:[],
     dataBuy:[],
+    data:[],
     
 }
 
@@ -48,6 +49,11 @@ export const rootReducer=(state=initialState, action)=>{
                 ...state,
                 newest:action.payload
             }
+            case types.GET_DELETEPRODUCT:
+            return{
+                ...state,
+                
+            }
         case types.CLEAR_CATEGORY:
             return{
                 ...state,
@@ -71,10 +77,15 @@ export const rootReducer=(state=initialState, action)=>{
                 
             }
         case types.GET_PRODUCTINFO:
+            const images = action.payload.products.map(e=>{return(e.image[0])})
+            
             return{
                 ...state,
-                dataBuy:action.payload
+                dataBuy:action.payload.products,
+                imageCarrito:images,
+                data:action.payload
             }
+        
         case types.FILTER:
             let filter=action.payload
             let toFilter=state.productByCategory

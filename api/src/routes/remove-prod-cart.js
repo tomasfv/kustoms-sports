@@ -6,14 +6,14 @@ const { Users, Carts, Products, cartproducts } = require("../db.js");
 const router = Router();
 
 router.put("/", async (req, res) => {
-    let { email, id } = req.body;
+    let { email, id } = req.query;
   try {
     const finduser = await Users.findOne({
       where: { email: email },
     });
     if (!finduser) return res.status(400).send("User is not found");
 
-    const product = await Products.findByPk(id);
+    const product = await Products.findByPk(parseInt(id));
     if (product.available === false) return res.status(400).send("Product is not found");
     console.log(product)
 
@@ -25,7 +25,7 @@ router.put("/", async (req, res) => {
     });
     let encontro = false
     cart.products.forEach(element => {
-        if (element.id === id) encontro = true;
+        if (element.id === parseInt(id)) encontro = true;
     });
     if (!encontro) return res.status(400).send("No esta")
     let pricepromotion = Number.parseFloat(
@@ -38,9 +38,10 @@ router.put("/", async (req, res) => {
         await cart.update({
             totalamount: pricepromotion,
           });
+          return res.status(200).send(cart);
     }
     
-    return res.status(200).send(cart);
+    
   } catch (error) {
     console.log(error);
   }
