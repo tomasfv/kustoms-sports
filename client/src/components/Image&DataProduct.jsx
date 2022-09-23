@@ -25,7 +25,8 @@ const ImageXDataProduct = () => {
  
    const email = user?.email
    
-  
+   
+
   
 
 
@@ -40,15 +41,17 @@ const ImageXDataProduct = () => {
   });
    
   function postuserClick() {
+    dispatch(getProductInfo(email))
     const dataid = dataBuy.filter(e=>{
       return( e.id == buyProduct.id)
    })
     if(buyProduct.size === ""){
       setErrors(!false)
-
+      dispatch(getProductInfo(email))
     }
     
-   else if(dataid.length){
+    if(dataid.length){
+      
       swal.fire({
         position: 'top-end',
         icon: 'error',
@@ -56,9 +59,13 @@ const ImageXDataProduct = () => {
         showConfirmButton: false,
         timer: 1500
       })
+      dispatch(getProductInfo(email))
+      window.location.reload()
       window.history.back ()
+      
     }
     else{
+      
       swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -66,8 +73,12 @@ const ImageXDataProduct = () => {
         showConfirmButton: false,
         timer: 1500
       })
+      dispatch(getProductInfo(email))
       dispatch(postDataBuy(buyProduct))
+      
+      window.location.reload()
       window.history.back ()
+      
     }
     
   }
@@ -87,8 +98,8 @@ const ImageXDataProduct = () => {
   console.log(buyProduct, "buy");
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProductInfo(email));
-  }, [dispatch, isAuthenticated, user]);
+    
+  }, [dispatch, isAuthenticated, user,email]);
   useEffect(() => {
     
     setOrdenimg("");
@@ -98,7 +109,9 @@ const ImageXDataProduct = () => {
     
     
   }, [dispatch, id, isAuthenticated,user]);
-
+  useEffect(() => {
+    dispatch(getProductInfo(email))
+},[dispatch,email])
   useEffect(() => {
     setbuyProduct({
       id:"",
@@ -174,37 +187,35 @@ console.log(stockgender,"stock")
           <div className="flex flex-row ">
             {stockgender.map((el) => {
               return (
-                <div className="flex flex-row"> 
-                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <div className="flex flex-row">
                   <div>
-                   
-                    {/* <input type="checkbox" id={el.id} class="peer hidden radio" onClick={(e) => handleSize(e)}  value={el.size} />
-                    <label
-                      type= "radio"
-                      name="check"
-                      value= "1"
-                      for={el.id}
-                      className=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]
- transition-colors duration-200 ease-in-out peer-checked:bg-main-dark peer-checked:text-main-light peer-checked:border-gray-200 radio"
-                    >
-                      {" "}
-                      {el.size}
-                    </label> */}
-                    {/* <script> $('input[type="checkbox"]'').on("change", function(){
-$("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
-});
-</script>                 */}
-                  <label class=" block input:cursor-pointer">
+                    <div class="flex items-center justify-center">
+                      <div class="flex">
+                        <input
+                          
+                          onClick={(e) => handleSize(e)}
+                          type="checkbox"
+                          id={el.id}
+                          className="peer hidden"
+                        />
+                        <label
+                          
+                          for={el.id}
+                          className={`select-none cursor-pointer rounded-lg border-2 border-gris-light
+   py-3 px-6 font-bold text-main-black transition-colors duration-200 ease-in-out peer-checked:bg-gris-light ${el.id}-checked:text-main-black peer-checked:border-gris-light `}
+                        >
+                         {el.size}
+                        </label>
+                      </div>
+                    </div>
+                    {/* <label class=" block input:cursor-pointer">
                     <input type="radio"  name="radio" id={el.id}  onClick={(e) => handleSize(e)}  value={el.size} className="  relative"/>
                     <div>
                     <span className=" flex  w-[30px] h-[30px]   t-[0px] checked:bg-main-black relative input-checked:bg-main-black " >{el.size}</span>
                     </div>
                      
-                    </label>
-                     
+                    </label> */}
                   </div>
-                  
-                  
                 </div>
               );
             })}

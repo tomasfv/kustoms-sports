@@ -66,12 +66,15 @@ const NavBar = () => {
     useEffect(() => {
         setIsShowing(false)
         dispatch(getNavData())
+        
+       
         // eslint-disable-next-line
     }, [])
-
+    
     useEffect(() => {
         dispatch(getProductInfo(email))
-    })
+        
+    },[ dispatch,email])
 
 
     return (
