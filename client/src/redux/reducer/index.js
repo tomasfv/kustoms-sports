@@ -49,6 +49,11 @@ export const rootReducer=(state=initialState, action)=>{
                 ...state,
                 newest:action.payload
             }
+            case types.GET_DELETEPRODUCT:
+            return{
+                ...state,
+                
+            }
         case types.CLEAR_CATEGORY:
             return{
                 ...state,
