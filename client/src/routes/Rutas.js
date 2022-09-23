@@ -3,6 +3,7 @@ import Layout from './Layout'
 import { Home, Details, Categories } from '../views/index'
 import { Profile2 } from '../views/Profile2';
 import { Carrito } from '../components';
+import Payment from '../components/Payment'
 
 const Rutas = () => {
     return (
@@ -14,6 +15,7 @@ const Rutas = () => {
                     <Route path={'categories/:category/:value'} element={<Categories/>} />
                     <Route path={'/profile'} element={<Profile2/>} />
                     <Route path={'/carrito'} element={<Carrito/>} />
+                    <Route path={'/payment'} element={<Payment/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

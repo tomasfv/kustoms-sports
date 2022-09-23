@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
-import Payment from "./Payment";
 import { getProductInfo } from "../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -59,8 +58,8 @@ const Carrito = () => {
             </div>
           </div>
 
-          <Payment />
         </div>
+              <a href="/payment" className="border font-bold bg-verde-dark w-[200px]">COMPRAR</a>
       </div>
     </div>
   );
