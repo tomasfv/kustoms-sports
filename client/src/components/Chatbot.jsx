@@ -17,7 +17,7 @@ class Chatbot extends React.Component {
      };
   
     render () {
-      return (<div>hola</div>)
+      return(<div></div>)
     }  }
   
   export default Chatbot

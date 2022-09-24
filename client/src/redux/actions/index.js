@@ -109,10 +109,10 @@ export function getStock(id) {
       }
     }
   }
-  export const getComments=(nameproduct)=>{
+  export const getComments=(nameproduct,gender)=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}getcomments?name=${nameproduct}`)
+        let response= await axios.get(`${URL}getcomments?name=${nameproduct}&gender=${gender}`)
         return dispatch({
           type: types.GET_COMMENTS,
           payload:response.data
