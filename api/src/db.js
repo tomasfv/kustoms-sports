@@ -70,8 +70,8 @@ const {Products, Carts, Cartsdetails, Comments, Invoices, Profiles, Users, Payme
 Users.hasMany(Carts)
 Carts.belongsTo(Users)
 
-Comments.hasMany(Users)
-Users.belongsTo(Comments)
+Users.hasMany(Comments)
+Comments.belongsTo(Users)
 
 Carts.belongsToMany(Products, {through: "cartproducts"})
 Products.belongsToMany(Carts, {through: "cartproducts"})
