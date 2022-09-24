@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom"
 import { ProductGallery } from "../components"
 import { useDispatch, useSelector } from "react-redux"
-import { getByCategory, clearCategory } from "../redux/actions"
+import { getByCategory, clearCategory, getProductInfo } from "../redux/actions"
 import { useEffect, useState } from "react"
+import { useAuth0 } from "@auth0/auth0-react"
 
 
 const Categories = () => {
+    const { isAuthenticated, user } = useAuth0()
+    const email = user?.email
     const [products, setProducts] = useState([])
     const llamada = useSelector(state => state.productByCategory)
     const dispatch = useDispatch()
@@ -21,9 +24,10 @@ const Categories = () => {
     }
 
     useEffect(() => {
+        dispatch(getProductInfo(email))
         dispatch(clearCategory())
         dispatch(getByCategory(category, value))
-    }, [value])
+    }, [value,email])
     useEffect(() => {
         setProducts([...llamada])
     }, [llamada])

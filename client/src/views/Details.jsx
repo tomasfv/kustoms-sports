@@ -1,18 +1,22 @@
 import { useEffect } from "react";
-import { getByDate } from "../redux/actions"
+import { getByDate, getProductInfo } from "../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 
 import ImageXDataProduct from "../components/Image&DataProduct";
 import SelectoresProduct from "../components/SelectoresProduct";
 import { Carrousel } from "../components";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Details = () => {
+  const { isAuthenticated, user } = useAuth0();
+  const email = user?.email
   const dispatch = useDispatch()
   const newest = useSelector(state => state.newest)
   useEffect(() => {
     dispatch(getByDate())
+    dispatch(getProductInfo(email))
     // eslint-disable-next-line
-  }, [])
+  }, [email])
 
   return (
     <div className="flex flex-col  bg-main-light w-10/12 mx-auto dark:bg-main-dark">

@@ -1,19 +1,23 @@
 import { MainPromo, KustomPromo, Carrousel } from "../components"
 import { Link } from "react-router-dom"
-import { getByDate } from "../redux/actions"
+import { getByDate, getProductInfo } from "../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import hombre from '../assets/hombre.jpg'
 import mujer from '../assets/mujer.jpg'
 import unisex from '../assets/unisex.jpg'
 import { useEffect } from "react"
+import { useAuth0 } from "@auth0/auth0-react"
 
 const Home = () => {
+    const { isAuthenticated, user } = useAuth0()
+  const email = user?.email
     const dispatch = useDispatch()
     const newest = useSelector(state => state.newest)
     useEffect(() => {
+        dispatch(getProductInfo(email))
         dispatch(getByDate())
         // eslint-disable-next-line
-    }, [])
+    }, [email])
 
     return (
 

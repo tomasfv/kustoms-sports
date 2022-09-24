@@ -74,7 +74,7 @@ const NavBar = () => {
     useEffect(() => {
         dispatch(getProductInfo(email))
         
-    },[ dispatch,email])
+    },[email])
 
 
     return (
