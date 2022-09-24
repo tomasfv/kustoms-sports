@@ -6,7 +6,7 @@ const { Users, Carts, Products, cartproducts } = require("../../db.js");
 const router = Router();
 
 router.get('/', async (req, res) => {
-    let { email, id } = req.query;
+    let { email, name } = req.query;
   try {
     const user = await Users.findOne({
       where: { email: email },
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
         const prodxcart = cart[i].products
         console.log("prodxcart", prodxcart)
         for (let j = 0; j < prodxcart.length; j++) {
-            if (prodxcart[j].id == id){
+            if (prodxcart[j].name === name){
                 return res.status(200).send("User allowed")
             }
         }        

@@ -15,7 +15,10 @@ export const types={
     POST_USER: "POST_USER",
     POSTDATABUY:"POSTDATABUY",
     GET_PRODUCTINFO:"GET_PRODUCTINFO",
-    GET_DELETEPRODUCT:"GET_DELETEPRODUCT"
+    GET_DELETEPRODUCT:"GET_DELETEPRODUCT",
+    GET_COMMENTS:"GET_COMMENTS",
+    POSTCOMMENT:"POSTCOMMENT",
+    GET_ALLOWED:"GET_ALLOWED"
     
 }
 
@@ -106,7 +109,32 @@ export function getStock(id) {
       }
     }
   }
-  
+  export const getComments=(nameproduct)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}getcomments?name=${nameproduct}`)
+        return dispatch({
+          type: types.GET_COMMENTS,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getAllowed=(email,name)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}allowed?email=${email}&name=${name}`)
+        return dispatch({
+          type: types.GET_ALLOWED,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
   
   export const filterProducts=(payload)=>{
@@ -143,6 +171,23 @@ export function getStock(id) {
         return {
 
           type:types.POSTDATABUY,
+          payload:jsonbuy.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  }
+  export const postComment = (info) => {
+    
+    return async function (dispatch) {
+      try {
+        var jsonbuy = await axios.post(`${URL}addcomment`, info);
+        console.log(jsonbuy.data)
+        return {
+
+          type:types.POSTCOMMENT,
           payload:jsonbuy.data
         }
       } catch (error) {
