@@ -79,9 +79,10 @@ const Carrito = () => {
           
              
 
-          <a href="/payment" className="border text-[white] bg-verde-light w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">
-          COMPRAR
-        </a>
+            {data.totalamount === 0 ? 
+            <p className="border text-main-light bg-main-dark w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">Tu carrito está vacío</p>
+            :<a href="/payment" className="border text-[white] bg-verde-light w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">COMPRAR</a>
+          } 
 
 
           </div>
