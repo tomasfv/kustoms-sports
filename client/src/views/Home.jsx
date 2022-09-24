@@ -6,7 +6,9 @@ import hombre from '../assets/hombre.jpg'
 import mujer from '../assets/mujer.jpg'
 import unisex from '../assets/unisex.jpg'
 import { useEffect } from "react"
-import { useAuth0 } from "@auth0/auth0-react"
+
+import Chatbot from "../components/Chatbot"
+
 
 const Home = () => {
     const { isAuthenticated, user } = useAuth0()
@@ -45,6 +47,7 @@ const Home = () => {
                 <h2 className="my-5 text-3xl text-main-dark dark:text-main-light ">Ultimas novedades</h2>
                 <Carrousel collection={newest} />
             </section>
+            <Chatbot/>
         </div>
 
     )
