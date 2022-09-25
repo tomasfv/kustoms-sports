@@ -122,10 +122,10 @@ export function getStock(id) {
       }
     }
   }
-  export const getAllowed=(email,name)=>{
+  export const getAllowed=(email,name,gender)=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}allowed?email=${email}&name=${name}`)
+        let response= await axios.get(`${URL}allowed?email=${email}&name=${name}&gender=${gender}`)
         return dispatch({
           type: types.GET_ALLOWED,
           payload:response.data

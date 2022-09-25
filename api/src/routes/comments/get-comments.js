@@ -6,12 +6,12 @@ const { Users, Carts, Products, Comments, cartproducts } = require("../../db.js"
 const router = Router();
 
 router.get('/', async (req, res) => {
-    let { name } = req.query;
+    let { name,  gender } = req.query;
   try {
     let comments = await Comments.findAll({
-      where: { productname: name, available: "true"},
+      where: { productname: name, productgender: gender ,available: "true"},
       include: {
-        model: Users,
+        model: Users
     },
     });
     
