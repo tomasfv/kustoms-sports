@@ -29,16 +29,18 @@ const SelectoresProduct = () => {
     name: "",
     text: "",
     rank: 5,
+    gender: "",
   });
-
+  
   useEffect(() => {
-    dispatch(getAllowed(email,details.name))
+    dispatch(getAllowed(email,details.name,details.gender))
     dispatch(getComments(details.name));
     setInput({
       email: email,
       name: details.name,
       text: "",
       rank: 5,
+      gender: details.gender,
     });
   }, [details, user, email]);
   console.log(allowed,"allowed")
@@ -55,7 +57,7 @@ const SelectoresProduct = () => {
     setComentarios(!comentarios);
   }
   function get(){
-    dispatch(getComments(details.name));
+    dispatch(getComments(details.name, details.gender));
   }
   function closer(){
     get()

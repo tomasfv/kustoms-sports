@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
            type: DataTypes.STRING,
            allowNull: false 
         },
+        productgender:{
+         type: DataTypes.STRING,
+         allowNull: false
+        },
         texto:{
            type: DataTypes.TEXT,
            allowNull: false 

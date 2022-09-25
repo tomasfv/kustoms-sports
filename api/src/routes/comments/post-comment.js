@@ -7,7 +7,7 @@ const comments = require("../../models/comments.js");
 const router = Router();
 
 router.post('/', async (req, res) => {
-    let { email, name, text, rank } = req.body;
+    let { email, name, text, rank, gender } = req.body;
   try {
     const finduser = await Users.findOne({
         where: { email: email },
@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
         productname: name,
         texto: text,
         rank: rank,
+        productgender: gender
     })
 
     finduser.addComments(comment);
