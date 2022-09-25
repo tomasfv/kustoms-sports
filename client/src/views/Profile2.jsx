@@ -35,17 +35,17 @@ export const Profile2 = () => {
             <LogoutButton/>
           </div>
         </div>
-          <div>
+          {/* <div>
               <hr className="m-4"></hr>
-          </div>
+          </div> */}
             <>
-              <div>
+              {/* <div>
                 <button onClick={() => setIsOpen(true)} className='border rounded p-4 m-4 font-bold'>Comentarios</button>
 
-                <Modal open={isOpen} onClose={() => setIsOpen(false)}>    {/*este es children de Modal.jsx */}
+                <Modal open={isOpen} onClose={() => setIsOpen(false)}>   
                   Excelente la página!
                 </Modal>
-              </div>
+              </div> */}
             </>
       </div>
     )
