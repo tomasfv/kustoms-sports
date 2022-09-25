@@ -70,7 +70,7 @@ const SelectoresProduct = () => {
       text: "",
     });
     dispatch(postComment(input));
-    get()
+    get()  
   }
   function handleChangue(e) {
     setInput({
@@ -143,7 +143,8 @@ const SelectoresProduct = () => {
                       ></input>
                       <button
                         className="absolute bottom-[20px] right-0 border-[2px] m-2 p-1"
-                        onClick={handleComment}
+                        //onClick={handleComment} onclick={setIsOpen(false)}
+                        onClick={() => {handleComment(); closer()}}
                       >
                         Comentar
                       </button>
