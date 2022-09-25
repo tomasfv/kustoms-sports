@@ -34,7 +34,7 @@ const SelectoresProduct = () => {
   
   useEffect(() => {
     dispatch(getAllowed(email,details.name,details.gender))
-    dispatch(getComments(details.name));
+    dispatch(getComments(details.name, details.gender));
     setInput({
       email: email,
       name: details.name,
@@ -43,7 +43,7 @@ const SelectoresProduct = () => {
       gender: details.gender,
     });
   }, [details, user, email]);
-  console.log(allowed,"allowed")
+  console.log(input, "gender")
   function handleClick(e) {
     setDesplegable(!desplegable);
   }
