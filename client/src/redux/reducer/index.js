@@ -85,7 +85,7 @@ export const rootReducer=(state=initialState, action)=>{
                     navData:action.payload
                 }
         case types.GET_COMMENTS:
-            const texts = action.payload.map(e=>e.texto)
+            const texts = action.payload.map(e=>[e.texto, e.rank])
             const user= action.payload.map(l=>l.user)
             const name= action.payload.map(n=>n.user.name)
             return{

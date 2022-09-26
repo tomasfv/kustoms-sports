@@ -56,21 +56,18 @@ const SelectoresProduct = () => {
   function handleClickComent(e) {
     setComentarios(!comentarios);
   }
-  function get(){
-    dispatch(getComments(details.name, details.gender));
-  }
   function closer(){
-    get()
+    dispatch(getComments(details.name, details.gender));
     setIsOpen(false)
   }
   function handleComment() {
-    
+    dispatch(postComment(input));
+    dispatch(getComments(details.name, details.gender));   
     setInput({
       ...input,
       text: "",
+      rank:""
     });
-    dispatch(postComment(input));
-    get()  
   }
   function handleChangue(e) {
     setInput({
@@ -111,7 +108,9 @@ const SelectoresProduct = () => {
 
                 <div className="flex flex-col gap-[130px] ml-[30px] mt-[35px]">
                   {comments.map((e) => {
-                    return <div>{e}</div>;
+                    return <div><p>{e[0]}</p>
+                                <p className="rating"><input type="radio" name="rating-2" className="mask mask-star-2 bg-success " checked />{e[1]}</p>
+                                </div>;
                   })}
                 </div>
               </div>
@@ -134,6 +133,7 @@ const SelectoresProduct = () => {
                     {" "}
                     {/*este es children de Modal.jsx */}
                     <div className="flex flex-flex row">
+                      <label>Comentario:</label>
                       <input
                         className="border-[2px]  mr-[20px]"
                         type="text"
@@ -141,10 +141,17 @@ const SelectoresProduct = () => {
                         name="text"
                         onChange={(e) => handleChangue(e)}
                       ></input>
+                      <div className="rating"  onClick={(e) => handleChangue(e)}>
+                        <input type="radio" value={1} name="rank" className="mask mask-star-2 bg-verde-light " />
+                        <input type="radio" value={2} name="rank" className="mask mask-star-2 bg-verde-light " />
+                        <input type="radio" value={3} name="rank" className="mask mask-star-2 bg-verde-light " />
+                        <input type="radio" value={4} name="rank" className="mask mask-star-2 bg-verde-light " />
+                        <input type="radio" value={5} name="rank" className="mask mask-star-2 bg-verde-light " />
+                      </div>
                       <button
                         className="absolute bottom-[20px] right-0 border-[2px] m-2 p-1"
                         //onClick={handleComment} onclick={setIsOpen(false)}
-                        onClick={() => {handleComment(); closer()}}
+                        onClick={() => {handleComment()}}
                       >
                         Comentar
                       </button>
