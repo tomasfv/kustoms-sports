@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const SelectoresProduct = () => {
   const { isAuthenticated, user } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   const email = user?.email;
   const dispatch = useDispatch();
   const [desplegable, setDesplegable] = useState(false);
@@ -53,21 +54,29 @@ const SelectoresProduct = () => {
   function handleClickD(e) {
     setDescripcion(!descripcion);
   }
+  
   function handleClickComent(e) {
     setComentarios(!comentarios);
   }
   function closer(){
-    dispatch(getComments(details.name, details.gender));
+    get()
     setIsOpen(false)
   }
+  function get() {
+    dispatch(getComments(details.name, details.gender));  
+  }
   function handleComment() {
+    
+    get()
+    if(input.text !== ""){
     dispatch(postComment(input));
-    dispatch(getComments(details.name, details.gender));   
+     
     setInput({
       ...input,
       text: "",
       rank:""
-    });
+    });}
+    
   }
   function handleChangue(e) {
     setInput({
@@ -106,7 +115,7 @@ const SelectoresProduct = () => {
                   })}
                 </div>
 
-                <div className="flex flex-col gap-[130px] ml-[30px] mt-[35px]">
+                <div className="flex flex-col gap-[90px] ml-[30px] mt-[15px]">
                   {comments.map((e) => {
                     return <div><p>{e[0]}</p>
                                 <p className="rating"><input type="radio" name="rating-2" className="mask mask-star-2 bg-success " checked />{e[1]}</p>
@@ -116,17 +125,30 @@ const SelectoresProduct = () => {
               </div>
 
               <div className="flex flex-row">
-                <div className=" flex bottom-0 right-0 ml-[1000px]">
+                <div className=" flex ">
                   {isAuthenticated?
                   <div>
                     {allowed === "User allowed" ?
                     <button
-                    onClick={() => setIsOpen(true)}
-                    className="border rounded  text-[20px] p-1 mr-[10px]font-bold h-[30px]"
+                    onClick={()=> setIsOpen(true)}
+                    
+                    className="flex bottom-0 right-0 ml-[1000px] border rounded  text-[20px] p-1 mr-[10px]font-bold h-[30px]"
                   >
                     Comentar
                   </button>:<p>Debe comprar el producto para poder comentar</p>}
-                  </div>:<div>Porfavor ingrese sesion</div>
+                  </div>:<div className="flex ">
+            <p>
+              Para poder realizar un comentario,debe{" "}
+              <button
+                onClick={() => loginWithRedirect()}
+                className="text-verde-dark font-bold "
+              >
+                {" "}
+                registrarse / ingresar{" "}
+              </button>{" "}
+              en la página.
+            </p>
+          </div>
                   }
 
                   <Modal open={isOpen} onClose={closer}>
