@@ -21,7 +21,7 @@ const Details = () => {
     dispatch(getProductInfo(email))
     dispatch(getDetailId(id));
     // eslint-disable-next-line
-    dispatch(getComments(details.name, details.gender));
+    // dispatch(getComments(details.name, details.gender));
   }, [email])
  console.log(details)
   return (
