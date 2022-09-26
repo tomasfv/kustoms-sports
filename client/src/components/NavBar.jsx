@@ -4,9 +4,8 @@ import smLogo from '../assets/smLogo.png'
 import logoLargo from '../assets/logoLargo.png'
 import logoLargoLight from '../assets/logoLargoLight.png'
 import { Link } from 'react-router-dom'
-import { Button } from './index'
 import { useSelector, useDispatch } from 'react-redux'
-import { changeTheme, getNavData } from '../redux/actions'
+import { changeTheme, getNavData, getProductInfo } from '../redux/actions'
 import { useEffect } from 'react'
 import { LoginButton } from './Login';
 
@@ -21,6 +20,8 @@ const NavBar = () => {
     const [showingMarca, setShowingMarca] = useState(false)
     const [showingDeporte, setShowingDeporte] = useState(false)
     const [showingColeccion, setShowingColeccion] = useState(false)
+    const email = user?.email;
+    const dataBuy = useSelector((state) => state.dataBuy);
 
     const dispatch = useDispatch()
     let navData = { gender: [], collection: [], sport: [], brand: [] }
@@ -65,8 +66,15 @@ const NavBar = () => {
     useEffect(() => {
         setIsShowing(false)
         dispatch(getNavData())
+        
+       
         // eslint-disable-next-line
     }, [])
+    
+    useEffect(() => {
+        dispatch(getProductInfo(email))
+        
+    },[email])
 
 
     return (
@@ -209,10 +217,13 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className='flex flex-row h-fit gap-2 xl:gap-5  mr-5 items-center'>
+                    {isAuthenticated &&
                     <Link to={'/carrito'} className='w-fit h-fit relative'>
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
-                        <p className='absolute right-0 -top-2 z-10 bg-verde-light  rounded-full  font-bold'>0</p>
+                        <p className='absolute right-0 -top-2 z-10 w-4 bg-verde-light  rounded-full  font-bold'>{dataBuy.length}</p>
                     </Link>
+                        }
+                    
                     <button onClick={handleTheme} className='border rounded-md h-12 border-main-dark dark:border-verde-dark hover:bg-verde-light hover:border-verde-light dark:hover:bg-gris-dark dark:hover:border-botvmioleta-light transition-all duration-300 '>
                         {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
                     </button>

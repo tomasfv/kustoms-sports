@@ -18,7 +18,7 @@ const Footer = () => {
                 <div className="flex flex-col">
                     <div className="font-bold">Community</div>
                     <a href='https://blog.soyhenry.com/' target="_blank" rel="noreferrer">Henry Blog</a>
-                    <a href='https://www.adidas.com/us' target='_blank' rel="noreferrer">The Portal</a>
+                    <a href='https://www.sportline.com.ar/' target='_blank' rel="noreferrer">The Portal</a>
                 </div>
                 <div className="flex flex-col">
                     <div className="font-bold">Company</div>

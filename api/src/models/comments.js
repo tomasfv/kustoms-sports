@@ -8,26 +8,26 @@ module.exports = (sequelize) => {
             allowNull: false,
             primaryKey: true
         },
-        name:{
+        productname:{
            type: DataTypes.STRING,
            allowNull: false 
         },
+        productgender:{
+         type: DataTypes.STRING,
+         allowNull: false
+        },
         texto:{
            type: DataTypes.TEXT,
-           allowNull: false 
-        },
-        date:{
-           type: DataTypes.DATE,
            allowNull: false 
         },
         rank:{
            type: DataTypes.INTEGER,
            allowNull: false 
         },
-        review:{
-           type: DataTypes.BOOLEAN,
-           allowNull: false 
-        },
+      //   review:{
+      //      type: DataTypes.BOOLEAN,
+      //      allowNull: false 
+      //   },
         available:{
            type: DataTypes.BOOLEAN,
            defaultValue: true,

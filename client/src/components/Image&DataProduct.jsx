@@ -1,14 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link, useParams , } from "react-router-dom";
-import { getDetailId, getProductInfo, getStock, postDataBuy } from "../redux/actions";
+import { Link, useParams } from "react-router-dom";
+import {
+  getDetailId,
+  getProductInfo,
+  getStock,
+  postDataBuy,
+} from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import swal from'sweetalert2';
+import { LoginButton } from "./Login";
+import swal from "sweetalert2";
 
 const ImageXDataProduct = () => {
   const { isAuthenticated, user } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   const details = useSelector((state) => state.details);
   const imagenes = useSelector((state) => state.images);
   const stock = useSelector((state) => state.stock);
@@ -19,87 +26,79 @@ const ImageXDataProduct = () => {
   const [errors, setErrors] = useState(false);
   const params = useParams();
   const id = params.id;
-  
- 
-   const email = user?.email
-   
-  
-  
 
-
+  const email = user?.email;
 
   const [buyProduct, setbuyProduct] = useState({
-    id:"",
+    id: "",
     name: "",
     collection: "",
     color: "",
     size: "",
     email: "",
   });
-   
-  function postuserClick() {
-    const dataid = dataBuy.filter(e=>{
-      return( e.id == buyProduct.id)
-   })
-    if(buyProduct.size === ""){
-      setErrors(!false)
 
+  function postuserClick() {
+    dispatch(getProductInfo(email));
+    const dataid = dataBuy.filter((e) => {
+      return e.id == buyProduct.id;
+    });
+    if (buyProduct.size === "") {
+      setErrors(!false);
+      dispatch(getProductInfo(email));
     }
-    
-   else if(dataid.length){
+
+    else if (dataid.length) {
       swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'El producto ya existe!',
+        position: "top-end",
+        icon: "error",
+        title: "El producto ya existe!",
         showConfirmButton: false,
-        timer: 1500
-      })
-      window.history.back ()
-    }
-    else{
+        timer: 1500,
+      });
+      dispatch(getProductInfo(email));
+      window.location.reload();
+      window.history.back();
+    } else {
       swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Producto agregado al Carrito',
+        position: "top-end",
+        icon: "success",
+        title: "Producto agregado al Carrito",
         showConfirmButton: false,
-        timer: 1500
-      })
-      dispatch(postDataBuy(buyProduct))
-      window.history.back ()
+        timer: 1500,
+      });
+      dispatch(getProductInfo(email));
+      dispatch(postDataBuy(buyProduct));
+
+      window.location.reload();
+      window.history.back();
     }
-    
   }
   function handleSize(e) {
-    setErrors(!true)
-    
+    setErrors(!true);
+
     setbuyProduct({
       ...buyProduct,
       size: e.target.value,
-      email:user.email,
+      email: user.email,
       id: e.target.id,
     });
-    
   }
 
-  
   console.log(buyProduct, "buy");
   const dispatch = useDispatch();
+  useEffect(() => {}, [dispatch, isAuthenticated, user, email]);
   useEffect(() => {
-    dispatch(getProductInfo(email));
-  }, [dispatch, isAuthenticated, user]);
-  useEffect(() => {
-    
     setOrdenimg("");
     dispatch(getDetailId(id));
     dispatch(getStock(id));
-    
-    
-    
-  }, [dispatch, id, isAuthenticated,user]);
-
+  }, [dispatch, id, isAuthenticated, user]);
+  useEffect(() => {
+    dispatch(getProductInfo(email));
+  }, [dispatch, email]);
   useEffect(() => {
     setbuyProduct({
-      id:"",
+      id: "",
       name: details.name,
       collection: details.collection,
       color: color.color,
@@ -110,11 +109,11 @@ const ImageXDataProduct = () => {
   }, [details]);
 
   const dataBuy = useSelector((state) => state.dataBuy);
-  console.log(dataBuy,"data")
+  console.log(dataBuy, "data");
   const stockgender = stock.filter((e) => {
     return e.gender == details.gender;
   });
-console.log(stockgender,"stock")
+  console.log(stockgender, "stock");
   function handleImage(e) {
     setOrdenimg(e.target.src);
   }
@@ -172,44 +171,42 @@ console.log(stockgender,"stock")
           <div className="flex flex-row ">
             {stockgender.map((el) => {
               return (
-                <div className="flex flex-row"> 
-                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <div className="flex flex-row">
                   <div>
-                   
-                    {/* <input type="checkbox" id={el.id} class="peer hidden radio" onClick={(e) => handleSize(e)}  value={el.size} />
-                    <label
-                      type= "radio"
-                      name="check"
-                      value= "1"
-                      for={el.id}
-                      className=" border-[1px] text-[20px] w-[65px] h-[50px] pt-[9px] place-items-center border-[indigo-500/50]
- transition-colors duration-200 ease-in-out peer-checked:bg-main-dark peer-checked:text-main-light peer-checked:border-gray-200 radio"
-                    >
-                      {" "}
-                      {el.size}
-                    </label> */}
-                    {/* <script> $('input[type="checkbox"]'').on("change", function(){
-$("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
-});
-</script>                 */}
-                  <label class=" block input:cursor-pointer">
-                    <input type="radio"  name="radio" id={el.id}  onClick={(e) => handleSize(e)}  value={el.size} className="  relative"/>
-                    <div>
-                    <span className=" flex  w-[30px] h-[30px]   t-[0px] checked:bg-main-black relative input-checked:bg-main-black " >{el.size}</span>
+                    <div class="flex items-center justify-center">
+                      <ul class="flex gap-[10px] w-auto md:grid-cols-2">
+                        <li>
+                          <input
+                             onClick={(e)=>handleSize(e)}
+                            type="radio"
+                            id={el.id}
+                            name="hosting"
+                            value={el.size}
+                            className="hidden peer"
+                            required=""
+                          />
+                          <label
+                          
+                      
+                            for={el.id}
+                            className="inline-flex justify-between items-center p-5 w-[auto] h-[40px] text-main-dark bg-main-light  border border-gris-light cursor-pointer dark:hover:text-main-dark dark:border-main-dark dark:peer-checked:text-main-light peer-checked:border-main-dark peer-checked:text-main-light  peer-checked:bg-main-dark hover:text-main-dark hover:bg-gris-light dark:text-main-dark dark:bg-gris-light dark:hover:bg-gris-light "
+                          >
+                            <div className="flex items-center">
+                              <div className="w-full text-lg font-semibold ">
+                                {el.size}
+                              </div>
+                            </div>
+                          </label>
+                        </li>
+                      </ul>
                     </div>
-                     
-                    </label>
-                     
                   </div>
-                  
-                  
                 </div>
               );
             })}
-            
           </div>
         </div>
-        {errors !== false && <p>Porfavor seleccione una talla</p>}
+        {errors !== false && <p className=" flex mt-0 text-[red]">Porfavor seleccione una talla</p>}
         {isAuthenticated ? (
           <button
             onClick={postuserClick}
@@ -218,15 +215,22 @@ $("input[name=" " + this.name + " "] ").not(this).prop("checked", false);
           >
             <div className="m-auto">
               <div className="flex items-center justify-start flex-1 space-x-4 #f8fafc">
-                <span className="font-medium ">Add Carrito</span>
+                <span className="font-medium ">Agregar al Carrito</span>
               </div>
             </div>
           </button>
         ) : (
           <div className="flex flex-col">
             <p>
-              Para poder realizar un pedido,debe registrarse/ingresar en la
-              página.
+              Para poder realizar un pedido,debe{" "}
+              <button
+                onClick={() => loginWithRedirect()}
+                className="text-verde-dark font-bold "
+              >
+                {" "}
+                registrarse / ingresar{" "}
+              </button>{" "}
+              en la página.
             </p>
           </div>
         )}

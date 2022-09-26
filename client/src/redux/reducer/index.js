@@ -14,6 +14,10 @@ const initialState={
     cacheNotFiltered:[],
     dataBuy:[],
     data:[],
+    comments:[],
+    userCom:[],
+    nameComments:[],
+    allowed:"",
     
 }
 
@@ -29,6 +33,16 @@ export const rootReducer=(state=initialState, action)=>{
                 return {...state, theme:'dark'}
             }
         }
+        case types.GET_ALLOWED:
+            return{
+                ...state,
+                allowed:action.payload
+
+            }
+        case types.POSTCOMMENT:
+            return{
+                ...state
+            }
         case types.POST_USER:
             return{
                 ...state
@@ -70,6 +84,16 @@ export const rootReducer=(state=initialState, action)=>{
                     ...state,
                     navData:action.payload
                 }
+        case types.GET_COMMENTS:
+            const texts = action.payload.map(e=>[e.texto, e.rank])
+            const user= action.payload.map(l=>l.user)
+            const name= action.payload.map(n=>n.user.name)
+            return{
+                ...state,
+                comments:texts,
+                userCom:user,
+                
+            }
         case types.POSTDATABUY:
             console.log(action.payload)
             return{

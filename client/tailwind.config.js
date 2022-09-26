@@ -2,7 +2,7 @@
 module.exports = {
   darkMode: 'class',
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",'./node_modules/tw-elements/dist/js/**/*.js','./src/**/*.{html,js}',
   ],
   theme: {
     colors:{
@@ -33,5 +33,18 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require("daisyui")
+  ],
+  daisyui: {
+    styled: true,
+    themes: false,
+    base: false,
+    utils: false,
+    logs: false,
+    rtl: false,
+    prefix: "",
+    darkTheme: "dark",
+  },
+
 }
