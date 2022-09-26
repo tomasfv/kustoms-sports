@@ -13,12 +13,10 @@ const postBuy = require ('./post-Payment')
 const userallowed = require('./comments/get-user-allowed.js')
 const addcomment = require('./comments/post-comment')
 const getcomment = require('./comments/get-comments')
- 
-
+const upgusuario = require('./dashboard/admin-upg-user.js')
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-
 
 const router = Router();
 
@@ -39,7 +37,7 @@ router.use('/', productsquery)
 router.use('/api/checkout', pagos)
 router.use('/addTocart', addcarros)
 router.use('/addcomment', addcomment)
-
+router.use('/dashboard/upgUsuario', upgusuario)
 
 
 
