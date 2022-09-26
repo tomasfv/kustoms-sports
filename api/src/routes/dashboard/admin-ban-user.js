@@ -14,13 +14,13 @@ router.post("/", async (req, res) => {
     });
     if (!finduser) return res.status(200).send("User is not found");
     // console.log("finduser: ", finduser)
-    finduser.profile === "Client"
-      ? (newProfile = "Admin")
-      : (newProfile = "Client");
-    // console.log("newProfile: ", newProfile)
+    finduser.available === true
+      ? (newAvailable = false)
+      : (newAvailable = true);
+    // console.log("newAvailable: ", newAvailable)
 
     await finduser.update({
-      profile: newProfile,
+        available: newAvailable,
     });
     return res.status(200).json(finduser);
   } catch (error) {
