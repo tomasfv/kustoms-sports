@@ -14,6 +14,9 @@ const userallowed = require('./comments/get-user-allowed.js')
 const addcomment = require('./comments/post-comment')
 const getcomment = require('./comments/get-comments')
 const upgusuario = require('./dashboard/admin-upg-user.js')
+const banusuario = require('./dashboard/admin-ban-user.js')
+const banproduct = require('./dashboard/admin-ban-product.js')
+const bancomment = require('./dashboard/admin-ban-comment.js')
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -37,7 +40,10 @@ router.use('/', productsquery)
 router.use('/api/checkout', pagos)
 router.use('/addTocart', addcarros)
 router.use('/addcomment', addcomment)
-router.use('/dashboard/upgUsuario', upgusuario)
+router.use('/dashboard/upgUser', upgusuario)
+router.use('/dashboard/banUser', banusuario)
+router.use('/dashboard/banProduct', banproduct)
+router.use('/dashboard/banComment', bancomment)
 
 
 
