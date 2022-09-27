@@ -19,8 +19,9 @@ router.post("/", async (req, res) => {
         email: email,
       },
     });
-    console.log(finduser);
-    if (!finduser.available) return res.status(200).send('Banned user')
+    if (finduser){
+      if (!(finduser.available)) return res.status(200).send('Banned user')
+    }
 
     if (finduser === null) {
       const createuser = await Users.create({
@@ -36,7 +37,6 @@ router.post("/", async (req, res) => {
         subject: "REGISTRADO!",
         html: `Gracias por registrarse a KUSTOMS SPORTS!, para entrar a tu cuenta ingrese a este link <a href="https://kustoms-sports.vercel.app/">KUSTOMSSPORTS</a>`,
       });
-      console.log(transs);
 
       return res.status(200).send('User created');
     }
