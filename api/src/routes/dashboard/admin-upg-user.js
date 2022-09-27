@@ -5,7 +5,7 @@ const { Users } = require("../../db.js");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  let { email } = req.query;
+  let { email } = req.body;
 
   try {
     //me fijo si existe el usuario
