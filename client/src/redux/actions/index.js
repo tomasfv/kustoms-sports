@@ -18,7 +18,9 @@ export const types={
     GET_DELETEPRODUCT:"GET_DELETEPRODUCT",
     GET_COMMENTS:"GET_COMMENTS",
     POSTCOMMENT:"POSTCOMMENT",
-    GET_ALLOWED:"GET_ALLOWED"
+    GET_ALLOWED:"GET_ALLOWED",
+    GET_USER_COMMENTS: "GET_USER_COMMENTS",
+    GET_USER_CARTS: "GET_USER_CARTS"
     
 }
 
@@ -103,6 +105,32 @@ export function getStock(id) {
         return dispatch({
           type: types.GET_PRODUCTINFO,
           payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getUserComments=(email)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}/profile/getcommemail?email=${email}`)
+        return dispatch({
+          type: types.GET_USER_COMMENTS,
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getUserCarts=(email)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}/profile/getclosecart?email=${email}`)
+        return dispatch({
+          type: types.GET_USER_CARTS,
+          payload: response.data
         })
       } catch (error) {
         console.log(error)
