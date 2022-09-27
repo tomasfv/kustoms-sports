@@ -3,6 +3,6 @@ module.exports = (sequelize) => {
 
 sequelize.define('parameters', {
     carrousel:{
-        type: DataTypes.ARRAY(DataTypes.STRING),    
+        type: DataTypes.STRING,    
     }
 })}

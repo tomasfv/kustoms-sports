@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
       if (element.stock === 0) nombre = element.name;
     });
     //de no encontrar stock error
-    if (nombre !== "") return res.status(400).send(`No hay stock de el producto: ${nombre}`);
+    if (nombre !== "") return res.status(200).send(`No hay stock de el producto: ${nombre}`);
     //esperamos respuesta de stripe y luego:
     const payment = await stripe.paymentIntents.create({
       amount,

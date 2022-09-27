@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
             const productsport = await Products.findAll({where : { sport: sport , available: true}})
             
             let aux = []
-            // aux.push(productsport[0])
             productsport.forEach(element => {
                 let flag = true
                 for (let i = 0; i < aux.length; i++) {
@@ -25,7 +24,7 @@ router.get('/', async (req, res) => {
             
             aux.length ?
             res.status(200).json(aux):
-            res.status(400).json("sports was not found")
+            res.status(200).json("sports was not found")
         }else if(name){
             const productsname = await Products.findAll({ where : { name : {[Op.substring]: name} , available: true}})
             let aux = []
@@ -39,7 +38,7 @@ router.get('/', async (req, res) => {
             });
             aux.length ?
             res.status(200).json(aux):
-            res.status(400).json("name was not found")
+            res.status(200).json("name was not found")
         }else if(collection){
             const productscollection = await Products.findAll({ where : { collection: collection , available: true }})
             let aux = []
@@ -53,7 +52,7 @@ router.get('/', async (req, res) => {
             });
             aux.length ?
             res.status(200).json(aux):
-            res.status(400).json("name was not found")
+            res.status(200).json("name was not found")
         }else if(gender){
             const productsgender = await Products.findAll({ where : { gender: gender , available: true }})
             let aux = []
@@ -67,7 +66,7 @@ router.get('/', async (req, res) => {
             });
             aux.length ?
             res.status(200).json(aux):
-            res.status(400).json("name was not found")
+            res.status(200).json("name was not found")
         }else if(brand){
             const productsbrand = await Products.findAll({ where : { brand: brand , available: true }})
             let aux = []
@@ -81,7 +80,7 @@ router.get('/', async (req, res) => {
             });
             aux.length ?
             res.status(200).json(aux):
-            res.status(400).json("name was not found")
+            res.status(200).json("name was not found")
         }
     } catch (error) {
         return res.status(400).json(error.message)

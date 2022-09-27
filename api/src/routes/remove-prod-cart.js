@@ -11,10 +11,10 @@ router.put("/", async (req, res) => {
     const finduser = await Users.findOne({
       where: { email: email },
     });
-    if (!finduser) return res.status(400).send("User is not found");
+    if (!finduser) return res.status(200).send("User is not found");
 
     const product = await Products.findByPk(parseInt(id));
-    if (product.available === false) return res.status(400).send("Product is not found");
+    if (product.available === false) return res.status(200).send("Product is not found");
     console.log(product)
 
     let cart = await Carts.findOne({
@@ -27,7 +27,7 @@ router.put("/", async (req, res) => {
     cart.products.forEach(element => {
         if (element.id === parseInt(id)) encontro = true;
     });
-    if (!encontro) return res.status(400).send("No esta")
+    if (!encontro) return res.status(200).send("No esta")
     let pricepromotion = Number.parseFloat(
       parseInt(cart.totalamount) -
         (product.promotion
