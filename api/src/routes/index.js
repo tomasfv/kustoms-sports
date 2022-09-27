@@ -21,6 +21,7 @@ const getclosecart = require('./profile/get-close-cart.js')
 const getcommemail = require('./profile/get-comm-email.js')
 const bestsold = require('./dashboard/admin-best-sold.js')
 const userdata = require('./get-user.js')
+// const prueba = require('./dashboard/admin-search.js')
 
 
 // Importar todos los routers;
@@ -32,6 +33,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
 router.use('/userdata', userdata)
+// router.use('/prueba', prueba)
 router.use('/allowed', userallowed)
 router.use('/getcomments', getcomment)
 router.use('/getDatacarrito', getcarrito)
