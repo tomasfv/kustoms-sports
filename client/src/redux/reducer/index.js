@@ -18,8 +18,10 @@ const initialState={
     userCom:[],
     nameComments:[],
     allowed:"",
+    dashUser:"",
     profileCom:[],
-    profileCarts:[]
+    profileCarts:[],
+
     
 }
 
@@ -35,6 +37,16 @@ export const rootReducer=(state=initialState, action)=>{
                 return {...state, theme:'dark'}
             }
         }
+        case types.GET_USER_COMMENTS:
+            return{
+                ...state,
+                profileCom: action.payload,
+            }    
+        case types.GET_USER_CARTS:
+            return{
+                ...state,
+                profileCarts: action.payload,
+            }
         case types.GET_ALLOWED:
             return{
                 ...state,
@@ -49,6 +61,11 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state
                        }
+        case types.GET_DASHUSER:
+            return{
+                ...state,
+                dashUser:action.payload
+            }
         case types.GET_DETAILS:
             return{
                 ...state,

@@ -19,6 +19,10 @@ const banproduct = require('./dashboard/admin-ban-product.js')
 const bancomment = require('./dashboard/admin-ban-comment.js')
 const getclosecart = require('./profile/get-close-cart.js')
 const getcommemail = require('./profile/get-comm-email.js')
+const bestsold = require('./dashboard/admin-best-sold.js')
+const userdata = require('./get-user.js')
+// const prueba = require('./dashboard/admin-search.js')
+
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -28,6 +32,8 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
+router.use('/userdata', userdata)
+// router.use('/prueba', prueba)
 router.use('/allowed', userallowed)
 router.use('/getcomments', getcomment)
 router.use('/getDatacarrito', getcarrito)
@@ -48,7 +54,7 @@ router.use('/dashboard/upgUser', upgusuario)
 router.use('/dashboard/banUser', banusuario)
 router.use('/dashboard/banProduct', banproduct)
 router.use('/dashboard/banComment', bancomment)
-
+router.use('/dashboard/bestsold', bestsold)
 
 
 
