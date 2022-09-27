@@ -1,16 +1,45 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from '../components/Logout';
-import { useState } from 'react'
-import Modal from './Modal'
+import { useState, useEffect } from 'react'
+import { getUserComments, getUserCarts } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { AiFillStar } from "react-icons/ai";
+
+import ProfileUserCom from './ProfileUserCom'
+import ProfileUserCarts from './ProfileUserCarts'
+
 
 
 
 export const Profile2 = () => {
-  const [isOpen, setIsOpen] = useState(false)               //Modal
+  const [isOpenCom, setIsOpenCom] = useState(false)               //Modal
+  const [isOpenCarts, setIsOpenCarts] = useState(false)               //Modal
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const dispatch = useDispatch();
+  const comments = useSelector ((state) => state.profileCom);
+  const carts = useSelector((state) => state.profileCarts)
+  const email = user?.email;
+
+
+  useEffect (() =>{                                
+        dispatch(getUserComments(email));                    
+     }, [dispatch]);
+  useEffect (() =>{                                
+        dispatch(getUserCarts(email));                    
+      }, [dispatch]);
+
+  //console.log(carts[0].products[0].nombre)
+
+  const products = carts.map(e => e.products)
+  const productsInfo = products.map(e =>{ return e } )
+  const productsInfoName = productsInfo.map(n =>{return n.map(l =>{ return l.nombre + l.image + l.precio})})
+  
+  console.log(productsInfoName)
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
 
   return (
     isAuthenticated && (
@@ -35,18 +64,30 @@ export const Profile2 = () => {
             <LogoutButton/>
           </div>
         </div>
-          {/* <div>
+        <div>
+          <ul className="text-xl font-bold flex flex-row">
+            <li className="mr-4 ml-4 p-4 border rounded-lg">
+              <button onClick={() => setIsOpenCom(true)}>Comentarios</button>
+            </li>
+            <li className="mr-4 p-4 border rounded-lg">
+              <button onClick={() => setIsOpenCarts(true)}>Compras</button>
+            </li>
+          </ul>
+        </div>
+          <div>
               <hr className="m-4"></hr>
-          </div> */}
-            <>
-              {/* <div>
-                <button onClick={() => setIsOpen(true)} className='border rounded p-4 m-4 font-bold'>Comentarios</button>
-
-                <Modal open={isOpen} onClose={() => setIsOpen(false)}>   
-                  Excelente la página!
-                </Modal>
-              </div> */}
-            </>
+          </div>
+            <div>
+              <div>
+                {/* comentarios */}
+                <ProfileUserCom openCom={isOpenCom} onClose={() => setIsOpenCom(false)}/>   
+              </div>
+              <div>
+                {/* compras */}
+                <ProfileUserCarts openCarts={isOpenCarts} onClose={() => setIsOpenCarts(false)}/>   
+              </div>
+      
+            </div>
       </div>
     )
   );

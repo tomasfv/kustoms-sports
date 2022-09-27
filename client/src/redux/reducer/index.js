@@ -21,6 +21,7 @@ const initialState={
     dashUser:"",
     profileCom:[],
     profileCarts:[],
+
     
 }
 
@@ -105,7 +106,6 @@ export const rootReducer=(state=initialState, action)=>{
         case types.GET_COMMENTS:
             const texts = action.payload.map(e=>[e.texto, e.rank])
             const user= action.payload.map(l=>l.user)
-            const name= action.payload.map(n=>n.user.name)
             return{
                 ...state,
                 comments:texts,
@@ -127,7 +127,16 @@ export const rootReducer=(state=initialState, action)=>{
                 imageCarrito:images,
                 data:action.payload
             }
-        
+        case types.GET_USER_COMMENTS:
+            return{
+                ...state,
+                profileCom: action.payload,
+            }    
+        case types.GET_USER_CARTS:
+            return{
+                ...state,
+                profileCarts: action.payload,
+            } 
         case types.FILTER:
             let filter=action.payload
             let toFilter=state.productByCategory

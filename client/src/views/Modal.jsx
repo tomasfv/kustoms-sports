@@ -1,7 +1,9 @@
 import React from 'react'
 
+
 export default function Modal({ open, children, onClose }) {
     if (!open) return null      // si open es false no renderizo el modal
+
   
     return(
         <>
@@ -11,5 +13,6 @@ export default function Modal({ open, children, onClose }) {
                 {children}
             </div>
       </>
+      
     )
   }
