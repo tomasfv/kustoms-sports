@@ -28,7 +28,7 @@ export default function ProfileUserCarts({ openCarts, children, onClose }) {
         <>
        
             {/* compras */}
-                <div className="font-bold justify-items-center mb-[200px]">
+                <div className="font-bold justify-items-center mb-[50px]">
                   <div className="">
                     <button onClick={onClose} className="border m-2 p-5 rounded-lg text-2xl bg-verde-light h-[70px] w-[99%]">COMPRAS</button> 
                     {productsInfo.map(n =>{return n.map(l =>{
