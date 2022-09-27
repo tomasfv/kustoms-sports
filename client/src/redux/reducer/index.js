@@ -18,6 +18,7 @@ const initialState={
     userCom:[],
     nameComments:[],
     allowed:"",
+    dashUser:"",
     
 }
 
@@ -47,6 +48,11 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state
                        }
+        case types.GET_DASHUSER:
+            return{
+                ...state,
+                dashUser:action.payload
+            }
         case types.GET_DETAILS:
             return{
                 ...state,
