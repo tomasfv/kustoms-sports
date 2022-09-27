@@ -1,6 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from '../components/Logout';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { getUserComments, getUserCarts } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+
 import Modal from './Modal'
 
 
@@ -8,9 +11,31 @@ import Modal from './Modal'
 export const Profile2 = () => {
   const [isOpen, setIsOpen] = useState(false)               //Modal
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const dispatch = useDispatch();
+  const comments = useSelector ((state) => state.profileCom);
+  const carts = useSelector((state) => state.profileCarts)
+  const email = user?.email;
+
+
+  useEffect (() =>{                                
+        dispatch(getUserComments(email));                    
+     }, [dispatch]);
+  useEffect (() =>{                                
+        dispatch(getUserCarts(email));                    
+      }, [dispatch]);
+
+  //console.log(carts[0].products[0].nombre)
+
+  const products = carts.map(e => e.products)
+  const productsInfo = products.map(e =>{ return e } )
+  const productsInfoName = productsInfo.map(n =>{return n.map(l =>{ return l.nombre + l.image + l.precio})})
+  
+  console.log(productsInfoName)
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
 
   return (
     isAuthenticated && (
@@ -35,18 +60,67 @@ export const Profile2 = () => {
             <LogoutButton/>
           </div>
         </div>
-          {/* <div>
+          <div>
               <hr className="m-4"></hr>
-          </div> */}
-            <>
-              {/* <div>
+          </div>
+            {/* <>
+              <div>
                 <button onClick={() => setIsOpen(true)} className='border rounded p-4 m-4 font-bold'>Comentarios</button>
 
-                <Modal open={isOpen} onClose={() => setIsOpen(false)}>   
-                  Excelente la página!
+                <Modal open={isOpen} onClose={() => setIsOpen(false)} className='grid grid-col justify-items-center'>   
+                  {comments.map(e => e.texto)}
                 </Modal>
-              </div> */}
-            </>
+              </div>
+            </> */}
+            <div className="flex flex-row justify-around">
+            <div className="grid grid-col font-bold justify-items-center">
+                <div className="">
+                  <p className="border rounded-lg text-2xl bg-verde-light h-[70px]">COMENTARIOS</p> {comments.map(e =>{
+                    return (
+                      <div className="border rounded-lg m-[10px] w-[400px] p-4">
+                        <div>
+                        {e.producto}
+                        </div>
+                        <div>
+                        {e.fecha}
+                        </div>
+                        <div>
+                        {e.texto+' - Puntaje: '+e.rank}
+                        </div>
+                      </div>
+                      
+                      )
+                    })}
+                  </div>
+
+
+            </div>
+            <div className="grid grid-col font-bold justify-items-center">
+                <div className="">
+                  <p className="border rounded-lg text-2xl bg-verde-light h-[70px]">COMPRAS</p> {productsInfo.map(n =>{return n.map(l =>{
+                    return (
+                      <div className="border rounded-lg m-[10px] w-[400px] p-4">
+                        <div>
+                          <div>
+                            {l.nombre}
+                          </div>
+                          <div>
+                            ${l.precio}
+                          </div>
+                          <div>
+                            <img src={l.image} className='w-[100px] h-[100px]'/>
+                          </div>
+                        </div>
+              
+                      </div>
+                      
+                      )
+                    })})}
+                  </div>
+
+
+            </div>
+            </div>
       </div>
     )
   );

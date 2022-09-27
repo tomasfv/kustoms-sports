@@ -114,7 +114,7 @@ export function getStock(id) {
   export const getUserComments=(email)=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}/profile/getcommemail?email=${email}`)
+        let response= await axios.get(`${URL}profile/getcommemail?email=${email}`)
         return dispatch({
           type: types.GET_USER_COMMENTS,
           payload: response.data
@@ -127,7 +127,7 @@ export function getStock(id) {
   export const getUserCarts=(email)=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}/profile/getclosecart?email=${email}`)
+        let response= await axios.get(`${URL}profile/getclosecart?email=${email}`)
         return dispatch({
           type: types.GET_USER_CARTS,
           payload: response.data
