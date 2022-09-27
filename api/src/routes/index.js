@@ -20,7 +20,7 @@ const bancomment = require('./dashboard/admin-ban-comment.js')
 const getclosecart = require('./profile/get-close-cart.js')
 const getcommemail = require('./profile/get-comm-email.js')
 const bestsold = require('./dashboard/admin-best-sold.js')
-const userdata = require('./user.js')
+const userdata = require('./get-user.js')
 
 
 // Importar todos los routers;
