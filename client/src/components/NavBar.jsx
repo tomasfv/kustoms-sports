@@ -5,10 +5,10 @@ import logoLargo from '../assets/logoLargo.png'
 import logoLargoLight from '../assets/logoLargoLight.png'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { changeTheme, getNavData, getProductInfo } from '../redux/actions'
+import { changeTheme, getDashUser, getNavData, getProductInfo } from '../redux/actions'
 import { useEffect } from 'react'
 import { LoginButton } from './Login';
-
+import { RiDashboardFill } from "react-icons/ri";
 import { Profile } from './Profile';
 import { useAuth0 } from "@auth0/auth0-react";
 import { createnewuser } from '../redux/actions'
@@ -22,6 +22,7 @@ const NavBar = () => {
     const [showingColeccion, setShowingColeccion] = useState(false)
     const email = user?.email;
     const dataBuy = useSelector((state) => state.dataBuy);
+    const dashuser = useSelector((state) => state.dashUser);
 
     const dispatch = useDispatch()
     let navData = { gender: [], collection: [], sport: [], brand: [] }
@@ -73,6 +74,7 @@ const NavBar = () => {
     
     useEffect(() => {
         dispatch(getProductInfo(email))
+        dispatch(getDashUser(email))
         
     },[email])
 
@@ -222,7 +224,12 @@ const NavBar = () => {
                         <MdShoppingCart className='h-10 w-10 dark:text-main-light' />
                         <p className='absolute right-0 -top-2 z-10 w-4 bg-verde-light  rounded-full  font-bold'>{dataBuy.length}</p>
                     </Link>
+                    
                         }
+                     {dashuser === "Admin" &&<Link to={'/dashboard'}>
+                       <RiDashboardFill className='h-10 w-10 dark:text-main-light'/> 
+                       </Link>
+                     }
                     
                     <button onClick={handleTheme} className='border rounded-md h-12 border-main-dark dark:border-verde-dark hover:bg-verde-light hover:border-verde-light dark:hover:bg-gris-dark dark:hover:border-botvmioleta-light transition-all duration-300 '>
                         {theme === 'light' ? <MdLightbulb className='w-10 text-main-dark' /> : <MdLightbulbOutline className='w-10 text-verde-light' />}
