@@ -139,32 +139,6 @@ export function getStock(id, email) {
       }
     }
   }
-  export const getUserComments=(email)=>{
-    return async (dispatch)=>{
-      try {
-        let response= await axios.get(`${URL}profile/getcommemail?email=${email}`)
-        return dispatch({
-          type: types.GET_USER_COMMENTS,
-          payload: response.data
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
-  export const getUserCarts=(email)=>{
-    return async (dispatch)=>{
-      try {
-        let response= await axios.get(`${URL}profile/getclosecart?email=${email}`)
-        return dispatch({
-          type: types.GET_USER_CARTS,
-          payload: response.data
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
   export const getComments=(nameproduct,gender)=>{
     return async (dispatch)=>{
       try {
