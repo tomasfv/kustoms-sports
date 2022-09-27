@@ -19,7 +19,7 @@ const Details = () => {
   useEffect(() => {
     dispatch(getByDate())
     dispatch(getProductInfo(email))
-    dispatch(getDetailId(id));
+    dispatch(getDetailId(id, email));
     // eslint-disable-next-line
     dispatch(getComments(details.name, details.gender));
   }, [email])

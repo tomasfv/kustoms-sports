@@ -90,8 +90,8 @@ const ImageXDataProduct = () => {
   useEffect(() => {}, [dispatch, isAuthenticated, user, email]);
   useEffect(() => {
     setOrdenimg("");
-    dispatch(getDetailId(id));
-    dispatch(getStock(id));
+    dispatch(getDetailId(id, email));
+    dispatch(getStock(id, email));
   }, [dispatch, id, isAuthenticated, user]);
   useEffect(() => {
     dispatch(getProductInfo(email));

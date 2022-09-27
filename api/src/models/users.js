@@ -30,15 +30,14 @@ module.exports = (sequelize) => {
          type: DataTypes.ENUM(['Admin', 'Client']),
          defaultValue: 'Client'
         },
-       fidelity:{
-           type: DataTypes.DECIMAL,
-           allowNull: false, 
-           defaultValue: 0
-        },
+      //  fidelity:{
+      //      type: DataTypes.DECIMAL,
+      //      allowNull: false, 
+      //      defaultValue: 0
+      //   },
         visited:{
-           type: DataTypes.INTEGER,
-          
-           defaultValue: 0
+           type: DataTypes.ARRAY(DataTypes.INTEGER),
+           defaultValue: []
         },
         available:{
            type: DataTypes.BOOLEAN,

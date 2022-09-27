@@ -33,10 +33,10 @@ export const changeTheme=(payload)=>{
     })
 }
 
-export function getDetailId(id) {
+export function getDetailId(id, email) {
     return async function (dispatch) {
       try {
-        var json = await axios.get(`${URL}${id}`);
+        var json = await axios.get(`${URL}${id}?email=${email}`);
         return dispatch({
           type: types.GET_DETAILS,
           payload: json.data[0],
@@ -46,10 +46,10 @@ export function getDetailId(id) {
       }
     };
   }
-export function getStock(id) {
+export function getStock(id, email) {
     return async function (dispatch) {
       try {
-        var json = await axios.get(`${URL}${id}`);
+        var json = await axios.get(`${URL}${id}?email=${email}`);
         return dispatch({
           type: types.GET_STOCK,
           payload: json.data[1],
