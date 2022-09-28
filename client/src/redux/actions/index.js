@@ -227,7 +227,7 @@ export function getStock(id, email) {
     
     return async function (dispatch) {
       try {
-        var json = await axios.post(`${URL}/chargeproducts`, payload);
+        var json = await axios.post(`${URL}dashboard/adminpostproduct`, payload);
         console.log(json)
         return {
 
