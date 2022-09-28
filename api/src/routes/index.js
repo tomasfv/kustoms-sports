@@ -23,6 +23,7 @@ const getcommemail = require('./profile/get-comm-email.js')
 const bestsold = require('./dashboard/admin-best-sold.js')
 const userdata = require('./get-user.js')
 const productosstock = require("./dashboard/admin-get-stock.js")
+const viewcarrousel = require ("./dashboard/carrousel-views.js")
 // const prueba = require('./dashboard/admin-search.js')
 
 
@@ -34,6 +35,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
+router.use('/dashboard/carrouselview', viewcarrousel)
 router.use('/userdata', userdata)
 // router.use('/prueba', prueba)
 router.use('/allowed', userallowed)
@@ -59,6 +61,8 @@ router.use('/dashboard/banProduct', banproduct)
 router.use('/dashboard/banComment', bancomment)
 router.use('/dashboard/bestsold', bestsold)
 router.use('/dashboard/adminpostproduct', adminpostproduct)
+
+
 
 
 

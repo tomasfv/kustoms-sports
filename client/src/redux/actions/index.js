@@ -23,7 +23,7 @@ export const types={
     GET_USER_COMMENTS: "GET_USER_COMMENTS",
     GET_USER_CARTS: "GET_USER_CARTS",
     POSTADDPRODUCT:"POSTADDPRODUCT",
-
+    GET_VIEWSCARROUSEL: "GET_VIEWSCARROUSEL",
     
 }
 
@@ -268,3 +268,16 @@ export function getStock(id, email) {
       
     }
   }
+export const visitedcarrousel = (email)=>{
+
+  return async function (dispatch){
+try{
+    let userviews = await axios.get(`${URL}dashboard/carrouselview?email=${email}`)
+    console.log("batman",userviews)
+  return dispatch({
+    type : types.GET_VIEWSCARROUSEL,
+    payload: userviews.data
+   })
+  }catch(e){console.log(e)}
+  }
+}
