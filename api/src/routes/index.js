@@ -22,6 +22,7 @@ const getclosecart = require('./profile/get-close-cart.js')
 const getcommemail = require('./profile/get-comm-email.js')
 const bestsold = require('./dashboard/admin-best-sold.js')
 const userdata = require('./get-user.js')
+const productosstock = require("./dashboard/admin-get-stock.js")
 // const prueba = require('./dashboard/admin-search.js')
 
 
@@ -41,6 +42,7 @@ router.use('/getDatacarrito', getcarrito)
 router.use('/profile/getclosecart', getclosecart)
 router.use('/profile/getcommemail', getcommemail)
 // router.use('/Buy', postBuy)
+router.use('/dashboard/productos', productosstock)
 router.use('/delFromcart', putcarrito)
 router.use('/user', createuser)
 router.use('/navbar', productsnavbar)
@@ -57,6 +59,7 @@ router.use('/dashboard/banProduct', banproduct)
 router.use('/dashboard/banComment', bancomment)
 router.use('/dashboard/bestsold', bestsold)
 router.use('/dashboard/adminpostproduct', adminpostproduct)
+
 
 
 
