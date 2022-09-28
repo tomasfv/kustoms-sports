@@ -85,7 +85,7 @@ const ImageXDataProduct = () => {
     });
   }
 
-  console.log(buyProduct, "buy");
+  //console.log(buyProduct, "buy");
   const dispatch = useDispatch();
   useEffect(() => {}, [dispatch, isAuthenticated, user, email]);
   useEffect(() => {
@@ -109,15 +109,16 @@ const ImageXDataProduct = () => {
   }, [details]);
 
   const dataBuy = useSelector((state) => state.dataBuy);
-  console.log(dataBuy, "data");
+  //console.log(dataBuy, "data");
   const stockgender = stock.filter((e) => {
     return e.gender == details.gender;
   });
-  console.log(stockgender, "stock");
+  //console.log(stockgender, "stock");
   function handleImage(e) {
     setOrdenimg(e.target.src);
   }
-  console.log(ordenimg, "orden");
+  //console.log(ordenimg, "orden");
+  console.log('DETAIL:', details)
   return (
     <div className="flex flex-row mt-[100px] ml-36 space-x-10 dark:bg-main-dark  dark:text-main-light ">
       <div className="flex flex-col items-center  dark:bg-main-dark">
@@ -152,7 +153,11 @@ const ImageXDataProduct = () => {
 
       <div className="flex flex-col gap-10 ">
         <div className=" flex text-[30px] ">{details.name}</div>
-        <div className=" flex ml-0 pl-0 "> ${details.price}</div>
+        {details.promotion > 0?
+          <div className="flex flex-row"><p>Antes: </p><div className=" flex ml-1 pl-0 line-through ">${details.price}</div></div>:
+          <div className=" flex ml-0 pl-0"> ${details.price}</div>}
+        {details.promotion > 0 &&
+        <div className=" flex ml-0 pl-0 text-verde-dark font-bold"> Ahora: ${details.price * (1 - details.promotion)}</div>}
         <div className=" flex ml-0 pl-0 "> {color.color}</div>
         <div className="flex flex-col gap-[10px]">
           <div className="flex flex-row gap-[5px]">

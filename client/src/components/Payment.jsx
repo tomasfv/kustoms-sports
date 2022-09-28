@@ -33,13 +33,15 @@ const CARD_OPTIONS = {
 
 const CheckoutForm = () => {
     const dispatch = useDispatch();
-    const { isAuthenticated, user } = useAuth0()
+    const { user } = useAuth0()
     const dataInfo = useSelector((state) => state.data);
+    const dataBuy = useSelector((state) => state.dataBuy);
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
     const email = user?.email;
-    console.log(user)
+    
+    
     useEffect(() => {
       dispatch(getProductInfo(email));
     }, [dispatch, email, user]);
@@ -82,6 +84,14 @@ const CheckoutForm = () => {
           window.setTimeout(function() {
             window.location.href = '/';
         }, 1500);
+        } else {
+          swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: data.message,
+            showConfirmButton: false,
+            timer: 2000
+          })
         }
 
         elements.getElement(CardElement).clear();
@@ -102,7 +112,10 @@ const CheckoutForm = () => {
 
   console.log(!stripe || loading);
 
-  
+  const descuento = dataBuy.map(e => e.price * (1 - e.promotion)) 
+  const final = descuento.reduce(function(acc, elemento){ 
+    return acc + elemento 
+    },0);
 
   return (
     <div className="">
@@ -114,7 +127,7 @@ const CheckoutForm = () => {
           className="w-[400px] h-[300px]"
         />
 
-        <h3 className="font-bold">Total: ${dataInfo.totalamount}</h3>
+        <h3 className="font-bold">Total: ${final}</h3>
       <div className="rounded-lg">
         
         {/* <div className="flex justify-start border">
@@ -132,7 +145,7 @@ const CheckoutForm = () => {
           {loading ? (
             <div className="flex justify-center" role="status">
               {/* <span className="">Loading...</span> */}
-              <img src='https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif' className="h-[30px] w-[30px] m-0" />
+              <img src='https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif' alt='card' className="h-[30px] w-[30px] m-0" />
             </div>
           ) : (
             "Comprar"
