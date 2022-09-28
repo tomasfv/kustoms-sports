@@ -139,7 +139,6 @@ export function getStock(id, email) {
       }
     }
   }
-  
   export const getComments=(nameproduct,gender)=>{
     return async (dispatch)=>{
       try {

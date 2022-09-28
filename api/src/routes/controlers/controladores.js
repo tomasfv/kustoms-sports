@@ -3,7 +3,6 @@ const axios = require("axios");
 const { Products, Users } = require("../../db.js");
 const { Sequelize } = require("sequelize");
 
-
 module.exports = {
   infoNavbar: async function () {
     let navbar = {};
@@ -51,8 +50,6 @@ module.exports = {
     const productdetail = await Products.findByPk(parseInt(id));
     let infoprod = {};
 
-    
-
     (infoprod.name = productdetail.name),
       (infoprod.clotheType = productdetail.clotheType),
       (infoprod.brand = productdetail.brand),
@@ -71,7 +68,7 @@ module.exports = {
         available: true,
       },
     });
-    
+
     detail.push(infoprod);
     infostock = asociados.map((el) => {
       return {
@@ -83,24 +80,7 @@ module.exports = {
       };
     });
     detail.push(infostock);
-    
-    
-    
-    const finduser = await Users.findOne({
-        where: { email: email },
-    });
-    let visitados = [...finduser.visited];
-    if (!visitados.includes(parseInt(id))) {
-        if (visitados.length > 10) visitados.shift();
-        visitados.push(parseInt(id));
-    }
-    await finduser.update({
-        visited: visitados,
-    });
-    // let visitas = productdetail.visits +1
-    // await productdetail.update({ 
-    //     visits : visitas
-    // })
-    return detail;
-},
+
+   return detail;
+  },
 };
