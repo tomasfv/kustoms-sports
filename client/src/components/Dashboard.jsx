@@ -1,20 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
+import Cloudinary from './Cloudinary'
+import { useDispatch } from "react-redux"
+import { postAddProduct } from "../redux/actions";
+
+
 
 const Dashboard = () => {
   const [productos, setProductos] = useState(false);
   const [state, setState] = useState(false);
-
+ 
+  const dispatch = useDispatch()
+  const [addproduct, setAddProduct] = useState({
+    clotheType: "",
+        brand: "",
+        name: "",
+        gender: "Masculino",
+        sport:"",
+        collection:"",
+        color:"",
+        size:"S",
+        image:[],
+        stock:"",
+        price:"",
+        promotion:"0,5"
+  });
   function handleClickD(e) {
     setProductos(!productos);
   }
   function handleAgregar(){
     setState(!state)
   }
+  function handleChange(e){
+    setAddProduct({
+      ...addproduct,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function postProduct (){
+    dispatch(postAddProduct(addproduct))
+  }
+  console.log(addproduct)
+  
   return (
     <div className="mt-[150px] ml-[250px] mb-[100px] flex flex-row">
       <div class="min-h-screen bg-gray-100">
-        <div class="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r border-l border-b border-t w-56 bg-white shadow-lg">
+        <div class="sidebar min-h-screen  overflow-hidden border-r border-l border-b border-t w-56 bg-white shadow-lg">
           <div class="flex h-screen flex-col justify-between pt-2 pb-6">
             <div>
               <div class="w-max p-2.5">
@@ -247,50 +278,66 @@ const Dashboard = () => {
               <div class="grid gap-6 mb-6 lg:grid-cols-2">
                   <div>
                       <label for="first_name" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nombre del Producto</label>
-                      <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Camiseta Selección Argentina" required/>
+                      <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Camiseta Selección Argentina" required onChange={(e)=>handleChange(e)} name="name" value={addproduct.name}/>
                   </div>
                   <div>
                       <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Marca</label>
-                      <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nike" required/>
+                      <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nike" required onChange={(e)=>handleChange(e)} name="brand" value={addproduct.brand}/>
                   </div>
                   <div>
                       <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Colección</label>
-                      <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Qatar" required/>
+                      <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Qatar" required onChange={(e)=>handleChange(e)} name="collection" value={addproduct.collection}/>
                   </div>  
                   <div>
                       <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Precio</label>
-                      <input type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$20000"  required/>
+                      <input type="text" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$20000"  required onChange={(e)=>handleChange(e)} name="price" value={addproduct.price}/>
                   </div>
                   <div>
                       <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Colores del Producto</label>
-                      <input type="url" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Celeste/Blanco" required/>
+                      <input type="text" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Celeste/Blanco" required onChange={(e)=>handleChange(e)} name="color" value={addproduct.color}/>
                   </div>
                   <div>
                       <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stock </label>
-                      <input type="number" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="5" required/>
+                      <input type="number" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="5" required onChange={(e)=>handleChange(e)} name="stock" value={addproduct.stock}/>
                   </div>
+                  <div >
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Deporte</label>
+                  <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fútbol" required onChange={(e)=>handleChange(e)} name="sport" value={addproduct.sport}/>
               </div>
-              <div class="mb-6">
-                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email address</label>
-                  <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required/>
-              </div> 
-              <div class="mb-6">
-                  <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-                  <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required/>
-              </div> 
-              <div class="mb-6">
-                  <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm password</label>
-                  <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required/>
-              </div> 
-              <div class="flex items-start mb-6">
-                  <div class="flex items-center h-5">
-                  <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required/>
-                  </div>
-                  <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+              <div >
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de Producto</label>
+                  <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Camiseta" required onChange={(e)=>handleChange(e)} name="clotheType" value={addproduct.clotheType}/>
               </div>
-              <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+              
+              </div>
+               
+              <div className="flex flex-row">
+              <div class=" flex items-start mb-6 ">
+                Género:
+                <select className="border-[1px] rounded-sm ml-[100px] " onChange={(e)=>handleChange(e)} name="gender" value={addproduct.gender}>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                  <option>Unisex</option>
+                </select>
+              </div> 
+              <div class=" flex ml-[20px] mb-6 ">
+                Talle:
+                <select className="border-[1px] rounded-sm ml-[5px] " onChange={(e)=>handleChange(e)} name="size" value={addproduct.size}>
+                  <option>S</option>
+                  <option>M</option>
+                  <option>L</option>
+                  <option>XL</option>
+                  <option>XL</option>
+                </select>
+              </div> 
+              </div>
+              
+              
+              <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={postProduct()}>Submit</button>
           </form>
-          
+              <div>
+                <Cloudinary addproduct={addproduct}/>
+              </div>
             
           </div>
         )}

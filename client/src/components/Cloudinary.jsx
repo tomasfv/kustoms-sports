@@ -3,11 +3,11 @@ import axios from "axios"
 
 
 
-const Cloudinary = () => {
+const Cloudinary = ({addproduct}) => {
   
   const  [imageSelected , setImageSelected] = useState("")
-  const  [image , setImage] = useState("")
-
+  const  [image , setImage] = useState([])
+   addproduct.image = image
   const uploadImage = async e => {
     const formData = new FormData();
     formData.append("file", imageSelected);
@@ -15,8 +15,9 @@ const Cloudinary = () => {
 
     const res = await axios.post("https://api.cloudinary.com/v1_1/kustoms/image/upload", formData)
     const file = await res.data
-    setImage(file.secure_url)
+    setImage([...image,file.secure_url])
   }
+  console.log(image)
     return (
     <div className="App">
       <input
