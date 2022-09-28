@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 const PreviewCard = ({ data }) => {
+    console.log('DATA: ', data)
     const [loadedImage, setLoadedImage] = useState(false)
     if (data) {
         return (
@@ -10,10 +11,18 @@ const PreviewCard = ({ data }) => {
                 <Link to={`/producto/${data.id}`} className={`min-w-[16.3rem] shadow-md h-72 ${loadedImage ? 'block' : 'hidden'}`}>
                     < div className='relative' >
                         <img src={data.image[0]} onLoad={() => setLoadedImage(true)} alt="Imagen producto" className='w-full h-52 object-scale-down bg-main-light' />
+                        {data.promotion > 0 ?
+                        <div className='absolute bottom-1 left-1 flex flex-row items-center bg-main-light dark:bg-main-dark px-1'>
+                            <span className='text-lg text-main-dark dark:text-main-light line-through'>$</span>
+                            <p className=' text-main-dark dark:text-main-light   text-xsm line-through'>{data.price}</p>
+                            <span className='text-lg text-verde-dark font-bold ml-2'>$</span>
+                            <p className=' text-verde-dark font-bold  text-xsm'>{data.price * (1 - data.promotion)}</p>
+                        </div>: 
                         <div className='absolute bottom-1 left-1 flex flex-row items-center bg-main-light dark:bg-main-dark px-1'>
                             <span className='text-lg text-main-dark dark:text-main-light'>$</span>
                             <p className=' text-main-dark dark:text-main-light   text-xsm'>{data.price}</p>
                         </div>
+                        }
                     </div >
                     <div className='bg-main-light dark:bg-main-dark text-center flex flex-col gap-1 mt-1'>
                         <h2 className=' text-main-dark dark:text-main-light text-base font-bold'>{`${data.name} ${data?.gender}`}</h2>
