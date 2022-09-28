@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import axios from "axios"
-
+import { GrDocumentUpload} from 'react-icons/gr'
 
 
 const Cloudinary = ({addproduct}) => {
@@ -19,13 +19,16 @@ const Cloudinary = ({addproduct}) => {
   }
   console.log(image)
     return (
-    <div className="App">
+    <div className="App flex flex-col">
+      <div className="flex flex-row">
       <input
       type="file"
       onChange={(e) => {setImageSelected(e.target.files[0])}}
       />
-      <button onClick={uploadImage}>Upload Image</button>
-      <a href={image}>
+      <button onClick={uploadImage}><GrDocumentUpload className="w-[30px] h-[30px]"/></button>
+      </div>
+     
+      <a href={image} className="flex flex-col">
         <img src={image} width="300px" height="300px" />
       </a> 
     </div>
