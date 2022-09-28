@@ -21,6 +21,7 @@ const initialState={
     dashUser:"",
     profileCom:[],
     profileCarts:[],
+    viewscarrousel: [],
 
     
 }
@@ -85,6 +86,11 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state,
                 newest:action.payload
+            }
+         case types.GET_VIEWSCARROUSEL:
+            return{
+                ...state,
+                viewscarrousel:action.payload
             }
             case types.GET_DELETEPRODUCT:
             return{
