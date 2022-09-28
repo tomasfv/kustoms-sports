@@ -1,13 +1,12 @@
-require ('dotenv').config();
 const { Router } = require('express');
-const axios = require('axios')
-const {Products} = require('../db.js');
-const { ARRAY } = require('sequelize');
+const {Products} = require('../../db.js');
+//const { ARRAY } = require('sequelize');
 
 const router = Router();
 
 router.post('/', async (req , res) => {
     let {
+        id,
         clotheType,
         brand,
         name,
@@ -35,23 +34,50 @@ router.post('/', async (req , res) => {
     if(typeof promotion !== 'number')return res.status(200).json("promotion should be a number")
     
     try {
-        
-        let productCreated = await Products.create({
-            clotheType,
-            brand,
-            name,
-            gender,
-            sport,
-            collection,
-            color,
-            size,
-            image,
-            stock,
-            price,
-            promotion
-        })
+        let product
+        if (id!=='') {
+            let productExists = Products.findByPk(id)
+            if (productExists){
 
-        return res.status(200).json("Create")
+                product = await Products.update({
+                   clotheType: clotheType,
+                   brand: brand,
+                   name: name,
+                   gender: gender,
+                   sport: sport,
+                   collection: collection,
+                   color: color,
+                   size: size,
+                   image: image,
+                   stock: stock,
+                   price: price,
+                   promotion: promotion
+               },
+               {where: {id: id}}
+               )
+            } else{
+                return res.status(200).json({message: 'El id enviado no pertenece a un producto en stock'})
+            }
+            return res.status(200).json({message: `Producto con id ${id} actualizado con éxito`})
+        }
+        else{
+             product = await Products.create({
+                clotheType,
+                brand,
+                name,
+                gender,
+                sport,
+                collection,
+                color,
+                size,
+                image,
+                stock,
+                price,
+                promotion
+            })
+        }
+
+        return res.status(200).json(product)
     } catch (error) {
         return res.status(400).json(error.message)
     }

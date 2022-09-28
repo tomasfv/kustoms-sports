@@ -41,11 +41,15 @@ router.get("/", async (req, res) => {
         nuevoArreglo.push({
             nombre : datos.name,
             gender : datos.gender,
+            collection: datos.collection,
+            sport: datos.sport,
+            brand: datos.brand,
             size : datos.size,
             stock : datos.stock,
             sold: objeto[claves[i]]
         })
        }
+    nuevoArreglo.sort((a,b)=> (a.sold > b.sold ? -1 : 1)) //ordeno para que vayan los más vendidos primero
 
     return res.status(200).json(nuevoArreglo);
   } catch (error) {
