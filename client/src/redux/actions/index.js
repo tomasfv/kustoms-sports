@@ -22,6 +22,7 @@ export const types={
     GET_DASHUSER:"GET_DASHUSER",
     GET_USER_COMMENTS: "GET_USER_COMMENTS",
     GET_USER_CARTS: "GET_USER_CARTS",
+    POSTADDPRODUCT:"POSTADDPRODUCT",
 
     
 }
@@ -215,6 +216,23 @@ export function getStock(id, email) {
 
           type:types.POSTDATABUY,
           payload:jsonbuy.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  }
+  export const postAddProduct = (payload) => {
+    
+    return async function (dispatch) {
+      try {
+        var json = await axios.post(`${URL}/chargeproducts`, payload);
+        console.log(json)
+        return {
+
+          type:types.POSTADDPRODUCT,
+          payload:json.data
         }
       } catch (error) {
         console.log(error);

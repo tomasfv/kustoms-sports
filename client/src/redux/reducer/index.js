@@ -57,6 +57,10 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state
             }
+        case types.POSTADDPRODUCT:
+            return{
+                ...state
+            }
         case types.POST_USER:
             return{
                 ...state
