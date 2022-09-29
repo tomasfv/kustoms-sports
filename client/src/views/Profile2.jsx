@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import BarChart from "../components/BarChart";
 import { LogoutButton } from '../components/Logout';
 import Tab from '../components/Tab'
 
@@ -38,6 +39,9 @@ export const Profile2 = () => {
           </div>
           <Tab/>
         </div>
+        <div>
+     <BarChart/>
+    </div>
       </div>
     )
   );
