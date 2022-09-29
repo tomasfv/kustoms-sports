@@ -24,8 +24,10 @@ export const types={
     GET_USER_CARTS: "GET_USER_CARTS",
     POSTADDPRODUCT:"POSTADDPRODUCT",
     GET_VIEWSCARROUSEL: "GET_VIEWSCARROUSEL",
-    GET_ALL_USERS: "GET_ALL_USERS"
-    
+    GET_ALL_USERS: "GET_ALL_USERS",
+    GET_SOLD: "GET_SOLD"
+
+
     
 }
 
@@ -294,5 +296,19 @@ try{
     payload: userviews.data
    })
   }catch(e){console.log(e)}
+  }
+}
+
+export const bestsold = () => {
+  return async function (dispatch){
+    try {
+      let sold = await axios.get(`${URL}dashboard/bestsold`)
+      return dispatch({
+        type : types.GET_SOLD,
+        payload: sold.data
+       })
+    } catch (e) {
+      {console.log(e)}
+    }
   }
 }

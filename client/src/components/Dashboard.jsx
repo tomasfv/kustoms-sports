@@ -4,12 +4,14 @@ import Cloudinary from "./Cloudinary";
 import { useDispatch } from "react-redux";
 import { postAddProduct } from "../redux/actions";
 import swal from "sweetalert2";
+import ModificarProd from "./ModificarProd";
 
 const Dashboard = () => {
   const [productos, setProductos] = useState(false);
   const [state, setState] = useState(false);
   const [errors, setErrors] = useState(false);
   const [errorImg, setErrorImg] = useState(false);
+  const [modificar, setModificar] = useState(false);
 
   const dispatch = useDispatch();
   const [addproduct, setAddProduct] = useState({
@@ -109,6 +111,9 @@ const Dashboard = () => {
   }
   function handleAgregar() {
     setState(!state);
+    if(modificar === true){
+      setModificar(!modificar)
+    }
   }
   function handleChange(e) {
     setAddProduct({
@@ -123,7 +128,7 @@ const Dashboard = () => {
       })
     );
   }
-  console.log(errors);
+  
   function handleNumber(e) {
     setAddProduct({
       ...addproduct,
@@ -194,6 +199,12 @@ const Dashboard = () => {
       });
       window.location.reload()
     }
+  }
+  function handleModificar(e){
+     setModificar(!modificar)
+     if(state === true){
+      setState(!state)
+     }
   }
 
   return (
@@ -274,7 +285,7 @@ const Dashboard = () => {
                               </li>
                               <li>
                                 <input
-                                  //  onClick={(e)=>handleSize(e)}
+                                  onClick={(e) =>handleModificar(e)}
                                   type="radio"
                                   id="modificar"
                                   name="hosting"
@@ -670,6 +681,10 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+        {modificar !== false&& 
+        <div>
+          <ModificarProd/>
+          </div>}
       </div>
     </div>
   );

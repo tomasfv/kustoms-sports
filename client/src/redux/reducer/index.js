@@ -22,7 +22,9 @@ const initialState={
     profileCom:[],
     profileCarts:[],
     viewscarrousel: [],
-    allUsers:[]
+    allUsers:[],
+    sold:[],
+
 
     
 }
@@ -64,6 +66,11 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state
             }
+            case types.GET_SOLD:
+                return{
+                    ...state,
+                    sold: action.payload,
+                } 
         case types.POSTADDPRODUCT:
             return{
                 ...state
@@ -243,5 +250,6 @@ export const rootReducer=(state=initialState, action)=>{
             }
         default: return {...state}
     }
+
 
 }
