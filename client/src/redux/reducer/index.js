@@ -22,6 +22,7 @@ const initialState={
     profileCom:[],
     profileCarts:[],
     viewscarrousel: [],
+    allUsers:[]
 
     
 }
@@ -48,6 +49,11 @@ export const rootReducer=(state=initialState, action)=>{
                 ...state,
                 profileCarts: action.payload,
             }
+        case types.GET_ALL_USERS:
+            return{
+                ...state,
+                allUsers: action.payload,
+            }    
         case types.GET_ALLOWED:
             return{
                 ...state,

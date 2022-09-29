@@ -24,6 +24,8 @@ export const types={
     GET_USER_CARTS: "GET_USER_CARTS",
     POSTADDPRODUCT:"POSTADDPRODUCT",
     GET_VIEWSCARROUSEL: "GET_VIEWSCARROUSEL",
+    GET_ALL_USERS: "GET_ALL_USERS"
+    
     
 }
 
@@ -94,6 +96,19 @@ export function getStock(id, email) {
         let response= await axios.get(`${URL}profile/getclosecart?email=${email}`)
         return dispatch({
           type: types.GET_USER_CARTS,
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getAllUsers=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}dashboard/usersadmin`)
+        return dispatch({
+          type: types.GET_ALL_USERS,
           payload: response.data
         })
       } catch (error) {
