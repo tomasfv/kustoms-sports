@@ -30,9 +30,9 @@ import {
       const dispatch = useDispatch()
       const vendido = useSelector(state => state.sold)
       // console.log("acaaaaaaaaaaaa", vendido)
-      useEffect(() => {
+/*       useEffect(() => {
        dispatch(bestsold())
-      },[])
+      },[]) */
       
     let objeto = {}
     for (let i = 0; i < vendido.length; i++) {
@@ -72,8 +72,9 @@ import {
           },
         },
       });
-    }, []);
-   
+      dispatch(bestsold())
+    }, [objeto]);
+    
     return (
       <div className=" w-50 h-30 mx-px">
         <Bar options={chartOptions} data={chartData} />
