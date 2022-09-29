@@ -25,8 +25,8 @@ const userdata = require('./get-user.js')
 const productosstock = require("./dashboard/admin-get-stock.js")
 const viewcarrousel = require ("./dashboard/carrousel-views.js")
 // const prueba = require('./dashboard/admin-search.js')
-const usersadmin = require (".//dashboard/admin-get-users.js")
-
+const usersadmin = require ("./dashboard/admin-get-users.js")
+const adminproducts = require("./dashboard/admin-get-prod")
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -63,6 +63,7 @@ router.use('/dashboard/banProduct', banproduct)
 router.use('/dashboard/banComment', bancomment)
 router.use('/dashboard/bestsold', bestsold)
 router.use('/dashboard/adminpostproduct', adminpostproduct)
+router.use('/dashboard/getprod', adminproducts )
 
 
 
