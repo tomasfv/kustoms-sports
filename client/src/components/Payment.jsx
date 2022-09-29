@@ -34,7 +34,7 @@ const CARD_OPTIONS = {
 const CheckoutForm = () => {
     const dispatch = useDispatch();
     const { user } = useAuth0()
-    const dataInfo = useSelector((state) => state.data);
+    //const dataInfo = useSelector((state) => state.data);
     const dataBuy = useSelector((state) => state.dataBuy);
     const stripe = useStripe();
     const elements = useElements();
@@ -65,7 +65,7 @@ const CheckoutForm = () => {
           "/api/checkout",
           {
             id,
-            amount: dataInfo.totalamount,
+            amount: final,
             email: user.email,
             
           }
