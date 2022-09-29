@@ -20,7 +20,8 @@ router.get('/', async (req, res) => {
             genero: e.productgender,
             texto: e.texto,
             rank: e.rank,
-            fecha: e.updatedAt
+            fecha: e.updatedAt,
+            id: e.id
         }
       })
     return res.status(200).send(comentarios)
