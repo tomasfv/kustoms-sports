@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { getUserComments, getUserCarts } from "../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -24,6 +25,7 @@ function Tab() {
     setToggleState(index);
   };
 
+  console.log('COMMENTS: ', comments)
   return (
     <div className="flex flex-col ml-4 w-[800px]">
       {/* Tabs */}
@@ -47,18 +49,18 @@ function Tab() {
           {comments.map(e =>{
                       return (
                         <div className="border flex flex-row justify-between bg-main-dark bg-opacity-[10%] rounded-lg m-[10px] p-[20px] text-xl">
-                          <div className="mr-[20px]">
-                          {e.producto}
-                          </div>
-                          <div className="mr-[20px] flex flex-col justify-start">
-                            <div>
-                                "{e.texto}"
+                          <div className="ml-0 mr-[20px] justify-start">
+                            <div>    
+                              {e.producto}                           
                             </div>
                             <div className='flex flex-row'>
-                                {e.rank+' '}<AiFillStar className='mt-1'/>
-                            </div>
+                              <AiFillStar className='mt-1'/>{e.rank+' '}
+                            </div>   
                           </div>
-                          <div>
+                            <div className='font-bold italic'>
+                                "{e.texto}"
+                            </div>
+                          <div className='ml-[20px]'>
                             Fecha: {e.fecha.split('T')[0]}
                           </div>
                         </div>
@@ -72,13 +74,17 @@ function Tab() {
                       return (
                         <div className="border flex flex-row justify-between bg-main-dark bg-opacity-[10%] rounded-lg m-[10px] p-[20px] text-xl">
                             <div className="mr-[20px]">
-                              <img src={l.image} className='w-[100px] h-[100px] rounded-full'/>
+                              <Link to={`/producto/${l.id}`}>
+                                <img src={l.image} className='w-[100px] h-[100px] rounded-full'/>
+                              </Link>
                             </div>
-                              <div className="m-4">
-                                {l.nombre}
+                              <div className="m-4 font-bold">
+                                <Link to={`/producto/${l.id}`}>
+                                  {l.nombre}
+                                </Link>
                               </div>
                               <div className="m-4">
-                                ${l.precio}
+                                ${Math.round((l.precio * (1 - l.promotion)))}
                               </div>
                         </div>
                         
