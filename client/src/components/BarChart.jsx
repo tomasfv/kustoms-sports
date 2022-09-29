@@ -9,6 +9,8 @@ import {
   } from "chart.js";
   import { Bar } from "react-chartjs-2";
   import React, { useState, useEffect } from "react";
+  import { useDispatch, useSelector } from "react-redux";
+  import {bestsold} from "../redux/actions/index"
    
   ChartJS.register(
     CategoryScale,
@@ -17,22 +19,42 @@ import {
     Title,
     Tooltip,
     Legend
-  );
-   
-  function BarChart() {
-    const [chartData, setChartData] = useState({
-      datasets: [],
-    });
-   
-    const [chartOptions, setChartOptions] = useState({});
-   
+    );
+    
+    function BarChart() {
+      const [chartData, setChartData] = useState({
+        datasets: [],
+      });
+      
+      const [chartOptions, setChartOptions] = useState({});
+      const dispatch = useDispatch()
+      const vendido = useSelector(state => state.sold)
+      // console.log("acaaaaaaaaaaaa", vendido)
+      useEffect(() => {
+       dispatch(bestsold())
+      },[])
+      
+    let objeto = {}
+    for (let i = 0; i < vendido.length; i++) {
+      // console.log("carlitos", vendido[i].sold)
+      // console.log("branddddd", vendido[i].brand)
+      if(objeto[vendido[i].brand]) {objeto[vendido[i].brand] = objeto[vendido[i].brand] + vendido[i].sold}
+      else{(objeto[vendido[i].brand] = vendido[i].sold)}
+    }
+    
+    // console.log("objetito", objeto)
+    const labels = Object.keys(objeto)
+    const data = Object.values(objeto)
+    // console.log(labels)
+    // console.log(data)
+
     useEffect(() => {
       setChartData({
-        labels: ["John", "Kevin", "Geroge", "Micheal", "Oreo"],
+        labels: labels,
         datasets: [
           {
-            label: "Whom'st let the dogs out",
-            data: [12, 55, 34, 120, 720],
+            label: "Marcas más vendidas",
+            data: data,
             borderColor: "rgb(53, 162, 235)",
             backgroundColor: "rgba(53, 162, 235, 0.4)",
           },
@@ -46,14 +68,14 @@ import {
           },
           title: {
             display: true,
-            text: "Whom'st let the dogs out",
+            text: "Kustoms-Sports",
           },
         },
       });
     }, []);
    
     return (
-      <div className="App">
+      <div className=" w-50 h-30 mx-px">
         <Bar options={chartOptions} data={chartData} />
       </div>
     );
