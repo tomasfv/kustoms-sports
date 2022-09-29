@@ -112,7 +112,7 @@ const CheckoutForm = () => {
 
   console.log(!stripe || loading);
 
-  const descuento = dataBuy.map(e => e.price * (1 - e.promotion)) 
+  const descuento = dataBuy.map(e => Math.round((e.price * (1 - e.promotion)))) 
   const final = descuento.reduce(function(acc, elemento){ 
     return acc + elemento 
     },0);

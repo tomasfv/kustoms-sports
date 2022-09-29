@@ -157,7 +157,7 @@ const ImageXDataProduct = () => {
           <div className="flex flex-row"><p>Antes: </p><div className=" flex ml-1 pl-0 line-through ">${details.price}</div></div>:
           <div className=" flex ml-0 pl-0"> ${details.price}</div>}
         {details.promotion > 0 &&
-        <div className=" flex ml-0 pl-0 text-verde-dark font-bold"> Ahora: ${details.price * (1 - details.promotion)}</div>}
+        <div className=" flex ml-0 pl-0 text-verde-dark font-bold"> Ahora: ${Math.round(details.price * (1 - details.promotion))}</div>}
         <div className=" flex ml-0 pl-0 "> {color.color}</div>
         <div className="flex flex-col gap-[10px]">
           <div className="flex flex-row gap-[5px]">

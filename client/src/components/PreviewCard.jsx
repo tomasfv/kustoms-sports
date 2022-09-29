@@ -16,7 +16,7 @@ const PreviewCard = ({ data }) => {
                             <span className='text-lg text-main-dark dark:text-main-light line-through'>$</span>
                             <p className=' text-main-dark dark:text-main-light   text-xsm line-through'>{data.price}</p>
                             <span className='text-lg text-verde-dark font-bold ml-2'>$</span>
-                            <p className=' text-verde-dark font-bold  text-xsm'>{data.price * (1 - data.promotion)}</p>
+                            <p className=' text-verde-dark font-bold  text-xsm'>{Math.round(data.price * (1 - data.promotion))}</p>
                         </div>: 
                         <div className='absolute bottom-1 left-1 flex flex-row items-center bg-main-light dark:bg-main-dark px-1'>
                             <span className='text-lg text-main-dark dark:text-main-light'>$</span>
