@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
-import { PreviewCard, Filters } from "./index"
+import { PreviewCard, DashFilter } from "./index"
 import { useSelector } from "react-redux"
 
 const DashProdGallery = ({ productos }) => {
     //const [isFiltering, setIsFiltering] = useState(false)
     const [displaying, setDisplaying] = useState([])
-    const filtering = useSelector(state => state.filteredProducts)
+    const filtering = useSelector(state => state.dashfilteredProducts)
     const [nShowing, setNShowing] = useState(20)
     const [page, setPage] = useState(1)
     const totalProducts = displaying?.length
@@ -40,8 +40,9 @@ const DashProdGallery = ({ productos }) => {
     useEffect(() => {
         setDisplaying(productos)
     }, [productos])
+    console.log("filtering",filtering)
     useEffect(() => {
-        if (filtering[0]) {
+        if (filtering=== undefined) {
             return setDisplaying(filtering)
         }
         if (filtering !== productos) setDisplaying(productos)
@@ -75,16 +76,16 @@ const DashProdGallery = ({ productos }) => {
 
     return (
         <section>
-            <Filters data={productos} />
+            <DashFilter data={productos} />
             <section className="w-10/12 my-5 mx-auto flex flex-row flex-wrap gap-6 justify-center">
-                {onDisplay[0] === 'vacio'
+                {/* {onDisplay[0] === 'vacio'
                     ? <section className="w-full shadow-lg border rounded-md py-10 text-main-dark dark:text-main-light bg-main-light dark:bg-main-dark border-verde-light dark:border-verde-dark">
                         La busqueda no produjo ningun resultado, intente cambiando algunos parametros
-                    </section>
-                    : onDisplay?.map((data, index) => (
+                    </section> */}
+                    { onDisplay?.map((data, index) => (
                         <PreviewCard data={data} key={index} />
                     ))}
-
+                    
             </section>
             <Pagination />
         </section>

@@ -333,7 +333,7 @@ const Dashboard = () => {
                         d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
                       />
                     </svg>
-                    <span class="group-hover:text-gray-700">Categories</span>
+                    <span class="group-hover:text-gray-700">Comentarios</span>
                   </a>
                 </li>
                 <li class="min-w-max">

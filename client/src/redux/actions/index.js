@@ -11,7 +11,9 @@ export const types={
     GET_STOCK:"GET_STOCK",
     GET_NAVBAR:"GET_NAVBAR",
     GET_BY_DATE:"GET_DATE",
+    GET_ALL_PROD:"GET_ALL_PROD",
     FILTER:"FILTER",
+    DASH_FILTER:"DASH_FILTER",
     POST_USER: "POST_USER",
     POSTDATABUY:"POSTDATABUY",
     GET_PRODUCTINFO:"GET_PRODUCTINFO",
@@ -131,6 +133,19 @@ export function getStock(id, email) {
       }
     }
   }
+  export const getAllProd=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}date`)
+        return dispatch({
+          type: types.GET_ALL_PROD,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
   export const getNavData=()=>{
     return async (dispatch)=>{
       try {
@@ -201,6 +216,12 @@ export function getStock(id, email) {
   export const filterProducts=(payload)=>{
     return{
       type: types.FILTER,
+      payload
+    }
+  }
+  export const dashfilterProducts=(payload)=>{
+    return{
+      type: types.DASH_FILTER,
       payload
     }
   }
