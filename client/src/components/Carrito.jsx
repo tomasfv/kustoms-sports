@@ -27,9 +27,15 @@ const Carrito = () => {
      deletear()
   }
 
-  const descuento = dataBuy.map(e => e.price * (1 - e.promotion)) 
-  const final = descuento.reduce((acc, elemento) => { return acc + elemento; })
+  if(data.length === 0) data.totalamount = 0
+  let descuento = 0
+  let final = 0
+  if (dataBuy.length > 0){
+    descuento = dataBuy.map(e => Math.round(e.price * (1 - e.promotion))) 
+    final = descuento.reduce((acc, elemento) => { return acc + elemento; })
+  }
  
+
   console.log('DATABUY: ', dataBuy) 
   console.log('PRECIOS C/DESC: ', descuento)
   console.log('FINAL: ', final)
@@ -68,7 +74,7 @@ const Carrito = () => {
                       <>
                         <div> 
                           <div className="flex flex-row">Precio por unidad: <p className="ml-10 line-through text-red-dark">${e.price}</p></div>
-                          <p className="flex flex-row">Precio con descuento:<p className="text-verde-dark font-bold ml-2">${e.price * (1 - e.promotion)}</p></p>
+                          <p className="flex flex-row">Precio con descuento:<p className="text-verde-dark font-bold ml-2">${Math.round(e.price * (1 - e.promotion))}</p></p>
                         </div>
                       </>: <div> Precio por unidad : ${e.price}</div>
                         }
