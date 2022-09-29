@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react"
 import DashProdGallery from "../components/DashProdGallery"
 
 
-const Categories = () => {
+const DashCategories = () => {
     const { isAuthenticated, user } = useAuth0()
     const email = user?.email
     const [products, setProducts] = useState([])
@@ -37,10 +37,10 @@ const Categories = () => {
     return (
         <main className="mb-10 mt-16 pt-14 min-h-screen">
             <h1 className="text-4xl text-main-dark dark:text-main-light uppercase font-bold ">{paramValue}</h1>
-            <ProductGallery productos={products} />
+            <DashProdGallery productos={products} />
            
         </main>
     )
 }
 
-export default Categories
+export default DashCategories;
