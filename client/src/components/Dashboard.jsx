@@ -1,69 +1,201 @@
 import React, { useEffect, useState } from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
-import Cloudinary from './Cloudinary'
-import { useDispatch } from "react-redux"
+import Cloudinary from "./Cloudinary";
+import { useDispatch } from "react-redux";
 import { postAddProduct } from "../redux/actions";
-
-
+import swal from "sweetalert2";
 
 const Dashboard = () => {
   const [productos, setProductos] = useState(false);
   const [state, setState] = useState(false);
- 
-  const dispatch = useDispatch()
+  const [errors, setErrors] = useState(false);
+  const [errorImg, setErrorImg] = useState(false);
+
+  const dispatch = useDispatch();
   const [addproduct, setAddProduct] = useState({
-        id:"",
-        clotheType: "",
-        brand: "",
-        name: "",
-        gender: "Masculino",
-        sport:"",
-        collection:"",
-        color:"",
-        size:"S",
-        image:[],
-        stock:0,
-        price:0,
-        promotion:0.16
+    id: "",
+    clotheType: "",
+    brand: "",
+    name: "",
+    gender: "Masculino",
+    sport: "",
+    collection: "",
+    color: "",
+    size: "S",
+    image: [],
+    stock: 0,
+    price: 0,
+    promotion: 0,
   });
+  function validate(addproduct) {
+    let errors = {};
+
+    if (addproduct.name.length > 15) {
+      errors.name = "Inserte un nombre menor a 15 caracteres";
+    }
+    if (addproduct.name === "") {
+      errors.name = "Inserte un nombre para el producto";
+    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+      errors.name = "El nombre no puede contener,carácteres o números";
+    }
+    if (addproduct.sport.length > 15) {
+      errors.sport = "Inserte un nombre de deporte menor a 15 caracteres";
+    }
+    if (addproduct.sport === "") {
+      errors.sport = "Inserte un tipo de  deporte para el producto";
+    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+      errors.sport =
+        "El nombre del deporte no puede contener,carácteres o números";
+    }
+    if (addproduct.clotheType.length > 15) {
+      errors.clotheType = "Inserte un tipo de producto menor a 15 caracteres";
+    }
+    if (addproduct.clotheType === "") {
+      errors.clotheType = "Inserte un tipo de producto ";
+    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+      errors.clotheType =
+        "El nombre del tipode producto no puede contener,carácteres o números";
+    }
+    if (addproduct.brand.length > 15) {
+      errors.brand = "Inserte una marca menor a 15 caracteres";
+    }
+    if (addproduct.brand === "") {
+      errors.brand = "Inserte un nombre para la marca del producto";
+    }
+    if (addproduct.collection.length > 15) {
+      errors.collection =
+        "Inserte una  tipo de colección menor a 15 caracteres";
+    }
+    if (addproduct.collection === "") {
+      errors.collection =
+        "Inserte un nombre para el tipo de colección del producto";
+    }
+    if (
+      addproduct.price < 0 ||
+      addproduct.price === 0 ||
+      !addproduct.price ||
+      !/^[0-9]+$/.test(addproduct.price)
+    ) {
+      errors.price = "Declarar un precio con valor mayor a 0 ";
+    }
+    if (addproduct.color.length > 20) {
+      errors.color = "Inserte colores menores  a 20 caracteres en total";
+    }
+    if (addproduct.color === "") {
+      errors.color = "Inserte colores para el producto";
+    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+      errors.color =
+        "El tipo de color del producto no puede contener,carácteres o números";
+    }
+    if (
+      addproduct.stock < 0 ||
+      addproduct.stock === 0 ||
+      !addproduct.stock ||
+      !/^[0-9]+$/.test(addproduct.stock)
+    ) {
+      errors.stock = "Declarar un precio con valor mayor a 0 ";
+    }
+    if (
+      addproduct.promotion < 0 ||
+      addproduct.promotion === 0 ||
+      addproduct.promotion > 100
+    ) {
+      errors.promotion = "Declarar un precio con valor entre  0 y 100 ";
+    }
+    return errors;
+  }
   function handleClickD(e) {
     setProductos(!productos);
   }
-  function handleAgregar(){
-    setState(!state)
+  function handleAgregar() {
+    setState(!state);
   }
-  function handleChange(e){
+  function handleChange(e) {
     setAddProduct({
       ...addproduct,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      validate({
+        ...addproduct,
+        [e.target.name]: e.target.value,
+
+      })
+    );
   }
-  function handleNumber(e){
+  console.log(errors);
+  function handleNumber(e) {
     setAddProduct({
       ...addproduct,
       [e.target.name]: parseInt(e.target.value),
     });
+    setErrors(
+      validate({
+        ...addproduct,
+        [e.target.name]: parseInt(e.target.value),
+      })
+    );
   }
-  function postProduct (){
-    dispatch(postAddProduct(addproduct))
-    setAddProduct({
-      id:"",
+  function postProduct() {
+    if(addproduct.image.length === 0){
+      setErrorImg(!errorImg)
+    }
+    if (
+      errors.name ||
+      errors.price ||
+      errors.stock ||
+      errors.clotheType ||
+      errors.brand ||
+      errors.sport ||
+      errors.collection ||
+      errors.color ||
+      errors.promotion ||
+      addproduct.name === "" ||
+      addproduct.collection === "" ||
+      addproduct.color === "" ||
+      addproduct.sport === "" ||
+      addproduct.price === 0 ||
+      addproduct.image.length === 0 ||
+      addproduct.stock === 0 ||
+      addproduct.promotion === 0 ||
+      addproduct.clotheType === "" ||
+      addproduct.brand === ""
+    ) {
+      swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Error,corriga los errores!",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    } else {
+      dispatch(postAddProduct(addproduct));
+      swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Producto agregado !",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+      setAddProduct({
+        id: "",
         clotheType: "",
         brand: "",
         name: "",
         gender: "Masculino",
-        sport:"",
-        collection:"",
-        color:"",
-        size:"S",
-        image:[],
-        stock:0,
-        price:0,
-        promotion:0.16
-    })
+        sport: "",
+        collection: "",
+        color: "",
+        size: "S",
+        image: [],
+        stock: 0,
+        price: 0,
+        promotion: 0,
+      });
+      window.location.reload()
+    }
   }
-  console.log("producto",addproduct)
-  
+
   return (
     <div className="mt-[150px] ml-[250px] mb-[100px] flex flex-row">
       <div class="min-h-screen bg-gray-100">
@@ -121,7 +253,7 @@ const Dashboard = () => {
                             <ul class="flex flex-col gap-[5px] w-auto md:grid-cols-2">
                               <li>
                                 <input
-                                   onClick={(e)=>handleAgregar(e)}
+                                  onClick={(e) => handleAgregar(e)}
                                   type="radio"
                                   id="agregar"
                                   name="hosting"
@@ -292,87 +424,255 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="w-[1000px] h-[939px] border-[1px]">
-        {state !== false&& (
-          
+        {state !== false && (
           <div class="max-w-2xl mx-auto bg-white p-16">
-          
             <form>
               <div class="grid gap-6 mb-6 lg:grid-cols-2">
-                  <div>
-                      <label for="first_name" class=" block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nombre del Producto</label>
-                      <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Camiseta Selección Argentina" required onChange={(e)=>handleChange(e)} name="name" value={addproduct.name}/>
-                  </div>
-                  <div>
-                      <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Marca</label>
-                      <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nike" required onChange={(e)=>handleChange(e)} name="brand" value={addproduct.brand}/>
-                  </div>
-                  <div>
-                      <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Colección</label>
-                      <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Qatar" required onChange={(e)=>handleChange(e)} name="collection" value={addproduct.collection}/>
-                  </div>  
-                  <div>
-                      <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Precio</label>
-                      <input type="number" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$20000"  required onChange={(e)=>handleNumber(e)} name="price" value={addproduct.price}/>
-                  </div>
-                  <div>
-                      <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Colores del Producto</label>
-                      <input type="text" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Celeste/Blanco" required onChange={(e)=>handleChange(e)} name="color" value={addproduct.color}/>
-                  </div>
-                  <div>
-                      <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stock </label>
-                      <input type="number" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="5" required onChange={(e)=>handleNumber(e)} name="stock" value={addproduct.stock}/>
-                  </div>
-                  <div>
-                      <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Promoción </label>
-                      <input type="number" id="visitors" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="5" required onChange={(e)=>handleNumber(e)} name="promotion" value={addproduct.promotion}/>
-                  </div>
-                  <div >
-                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Deporte</label>
-                  <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fútbol" required onChange={(e)=>handleChange(e)} name="sport" value={addproduct.sport}/>
+                <div>
+                  <label
+                    for="first_name"
+                    className=" block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Nombre del Producto
+                  </label>
+                  <input
+                    type="text"
+                    id="first_name"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Camiseta Selección Argentina"
+                    onChange={(e) => handleChange(e)}
+                    name="name"
+                    value={addproduct.name}
+                  />
+                  {errors?.name && (
+                    <p className="text-[15px] text-[red]">{errors.name}</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="last_name"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Marca
+                  </label>
+                  <input
+                    type="text"
+                    id="last_name"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Nike"
+                    required
+                    onChange={(e) => handleChange(e)}
+                    name="brand"
+                    value={addproduct.brand}
+                  />
+                  {errors?.brand && (
+                    <p className="text-[15px] text-[red]">{errors.brand}</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="company"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Colección
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Qatar"
+                    required
+                    onChange={(e) => handleChange(e)}
+                    name="collection"
+                    value={addproduct.collection}
+                  />
+                  {errors?.collection && (
+                    <p className="text-[15px] text-[red]">
+                      {errors.collection}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="phone"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Precio
+                  </label>
+                  <input
+                    type="number"
+                    id="phone"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="$20000"
+                    required
+                    onChange={(e) => handleNumber(e)}
+                    name="price"
+                    value={addproduct.price}
+                  />
+                  {errors?.price && (
+                    <p className="text-[15px] text-[red]">{errors.price}</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="website"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Colores del Producto
+                  </label>
+                  <input
+                    type="text"
+                    id="website"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Celeste/Blanco"
+                    required
+                    onChange={(e) => handleChange(e)}
+                    name="color"
+                    value={addproduct.color}
+                  />
+                  {errors?.color && (
+                    <p className="text-[15px] text-[red]">{errors.color}</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="visitors"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Stock{" "}
+                  </label>
+                  <input
+                    type="number"
+                    id="visitors"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="5"
+                    required
+                    onChange={(e) => handleNumber(e)}
+                    name="stock"
+                    value={addproduct.stock}
+                  />
+                  {errors?.stock && (
+                    <p className="text-[15px] text-[red]">{errors.stock}</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="visitors"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Promoción{" "}
+                  </label>
+                  <input
+                    type="number"
+                    id="visitors"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                    placeholder="0.5"
+                    required
+                    onChange={(e) => handleNumber(e)}
+                    value={addproduct.promotion}
+                    name="promotion"
+                  />
+                  {errors?.promotion && (
+                    <p className="text-[15px] text-[red]">{errors.promotion}</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Deporte
+                  </label>
+                  <input
+                    type="text"
+                    id="email"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Fútbol"
+                    required
+                    onChange={(e) => handleChange(e)}
+                    name="sport"
+                    value={addproduct.sport}
+                  />
+                  {errors?.sport && (
+                    <p className="text-[15px] text-[red]">{errors.sport}</p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Tipo de Producto
+                  </label>
+                  <input
+                    type="text"
+                    id="email"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Camiseta"
+                    required
+                    onChange={(e) => handleChange(e)}
+                    name="clotheType"
+                    value={addproduct.clotheType}
+                  />
+                  {errors?.clotheType && (
+                    <p className="text-[15px] text-[red]">
+                      {errors.clotheType}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div >
-                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de Producto</label>
-                  <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Camiseta" required onChange={(e)=>handleChange(e)} name="clotheType" value={addproduct.clotheType}/>
-              </div>
-              
-              </div>
-               
+
               <div className="flex flex-row">
-              <div class=" flex items-start mb-6 ">
-                Género:
-                <select className="border-[1px] rounded-sm ml-[100px] " onChange={(e)=>handleChange(e)} name="gender" value={addproduct.gender}>
-                  <option>Masculino</option>
-                  <option>Femenino</option>
-                  <option>Unisex</option>
-                </select>
-              </div> 
-              <div class=" flex ml-[20px] mb-6 ">
-                Talle:
-                <select className="border-[1px] rounded-sm ml-[5px] " onChange={(e)=>handleChange(e)} name="size" value={addproduct.size}>
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                  <option>XL</option>
-                </select>
-              </div> 
+                <div className=" flex items-start mb-6 ">
+                  Género:
+                  <select
+                    className="border-[1px] rounded-sm ml-[100px] "
+                    onChange={(e) => handleChange(e)}
+                    name="gender"
+                    value={addproduct.gender}
+                  >
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Unisex</option>
+                  </select>
+                </div>
+                <div className=" flex ml-[20px] mb-6 ">
+                  Talle:
+                  <select
+                    className="border-[1px] rounded-sm ml-[5px] "
+                    onChange={(e) => handleChange(e)}
+                    name="size"
+                    value={addproduct.size}
+                  >
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>XL</option>
+                  </select>
+                </div>
               </div>
-              
-              
-          </form>
-          <div className="flex flex-row">
+            </form>
+            <div className="flex flex-row">
               <div>
-                <Cloudinary addproduct={addproduct}/>
+                <Cloudinary addproduct={addproduct} />
               </div>
-              <div><button type="submit" class="text-white  text-[30px] ml-[80px] border-[1px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={postProduct}>Enviar</button></div>
+              {errorImg !== false || addproduct.image.length === 0 &&<p className="text-[15px] text-[red]">Porfavor cargue una imágen</p>}
+              <div>
+                <button
+                  type="submit"
+                  className="text-white  text-[30px] ml-[80px] border-[1px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  onClick={postProduct}
+                >
+                  Enviar
+                </button>
+              </div>
             </div>
           </div>
-
         )}
-        </div>
+      </div>
     </div>
   );
 };
 
 export default Dashboard;
-
