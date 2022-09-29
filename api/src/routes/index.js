@@ -26,7 +26,11 @@ const productosstock = require("./dashboard/admin-get-stock.js")
 const viewcarrousel = require ("./dashboard/carrousel-views.js")
 // const prueba = require('./dashboard/admin-search.js')
 const usersadmin = require ("./dashboard/admin-get-users.js")
+
 const adminproducts = require("./dashboard/admin-get-prod")
+
+
+
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
