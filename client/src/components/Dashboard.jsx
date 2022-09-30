@@ -16,9 +16,6 @@ const Dashboard = () => {
   const [errors, setErrors] = useState(false);
   const [errorImg, setErrorImg] = useState(false);
   const [modificar, setModificar] = useState(false);
-  const [comentarios, setComentarios] = useState(false);
-  const [graph, setGraph] = useState(false);
-  const [users, setUsers] = useState(false);
   const [show, setShow] = useState("x")
 
 
@@ -130,6 +127,7 @@ const Dashboard = () => {
       setShow("comentario")
       setModificar(false)
       setState(false)
+      setProductos(false)
     }
     
   }
@@ -138,6 +136,7 @@ const Dashboard = () => {
       setShow("graph")
       setModificar(false)
       setState(false)
+      setProductos(false)
     }
      
   }
@@ -146,6 +145,7 @@ const Dashboard = () => {
       setShow("users")
       setModificar(false)
       setState(false)
+      setProductos(false)
     }
   }
   function handleChange(e) {
@@ -276,7 +276,7 @@ const Dashboard = () => {
                     </svg>
                     <div className="flex flex-col ">
                       <div className="flex flex-row">
-                        <span class="-mr-1 font-medium">Dashboard</span>
+                        <span class="-mr-1 font-medium">Productos</span>
                         <button
                           onClick={(e) => handleClickD(e)}
                           className=" ml-[10px]"
@@ -464,7 +464,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="w-[1000px] h-[939px] border-[1px]">
+      <div className="w-[1000px] h-[1009px] border-[1px]">
         {state !== false && (
           <div class="max-w-2xl mx-auto bg-white p-16">
             <form>
