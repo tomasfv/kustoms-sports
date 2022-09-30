@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import Cloudinary from "./Cloudinary";
-import { useDispatch } from "react-redux";
-import { postAddProduct } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getDashUser, postAddProduct } from "../redux/actions";
 import swal from "sweetalert2";
 import ModificarProd from "./ModificarProd";
 import AllComentarios from "./AllComentarios";
 import BarChart from "./BarChart";
 import DashUserTable from "./DashUserTable"
 import logoLargoLight from '../assets/logoLargoLight.png'
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
+
 
 const Dashboard = () => {
+  const dashuser = useSelector((state) => state.dashUser);
   const [productos, setProductos] = useState(false);
   const [state, setState] = useState(false);
   const [errors, setErrors] = useState(false);
   const [errorImg, setErrorImg] = useState(false);
   const [modificar, setModificar] = useState(false);
   const [show, setShow] = useState("x")
-
-
+  const { isAuthenticated, user } = useAuth0();
+  const email = user?.email;
   const dispatch = useDispatch();
   const [addproduct, setAddProduct] = useState({
     id: "",
@@ -240,9 +244,32 @@ const Dashboard = () => {
        setState(!state)
      }
   }
+  useEffect(() => {
+    dispatch(getDashUser(email))
+    
+},[email])
 
   return (
-    <div className="mt-[150px] ml-[250px] mb-[100px] flex flex-row">
+    <div>{ dashuser !== "Admin" ? <main class="h-screen w-full flex flex-col justify-center items-center bg-main-dark ">
+    <h1 class="text-9xl font-extrabold text-main-light tracking-widest">404</h1>
+    <div class="bg-verde-light px-2 text-sm rounded rotate-12 absolute">
+      Page Not Found
+    </div>
+    <button class="mt-5">
+        <a
+          class="relative inline-block text-sm font-medium text-verde-light  group active:text-main-dark focus:outline-none focus:ring"
+        >
+          <span
+            class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-verde-light group-hover:bg-verde-light   group-hover:translate-y-0 group-hover:translate-x-0"
+          ></span>
+  
+          <span class="relative block px-8 py-3 bg-main-dark hover:bg-main-light hover:text-main-dark   border border-current">
+            <Link to="/">Go Home</Link>
+          </span>
+        </a>
+      </button>
+  </main>
+      :<div className="mt-[150px] ml-[250px] mb-[100px] flex flex-row">
       <div class="min-h-screen bg-gray-100">
         <div class="sidebar min-h-screen  overflow-hidden border-r border-l border-b border-t w-56 bg-white shadow-lg">
           <div class="flex h-screen flex-col justify-between pt-2 pb-6">
@@ -464,8 +491,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="w-[1000px] h-[1009px] border-[1px]">
-        {state !== false && (
+      <div className="w-[1000px] h-[1009px] border-[1px] ">
+       {state !== false && (
           <div class="max-w-2xl mx-auto bg-white p-16">
             <form>
               <div class="grid gap-6 mb-6 lg:grid-cols-2">
@@ -724,7 +751,9 @@ const Dashboard = () => {
             </div>
           }
       </div>
+    </div>}
     </div>
+          
   );
 };
 
