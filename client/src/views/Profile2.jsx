@@ -43,10 +43,6 @@ export const Profile2 = () => {
           </div>
           <Tab/>
         </div>
-        <div>
-     <BarChart/>
-    </div>
-      <DashUserTable/>
     </div>
     )
   );

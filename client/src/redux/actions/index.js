@@ -30,6 +30,7 @@ export const types={
     GET_SOLD: "GET_SOLD",
     UPDATE_BAN_USER: "UPDATE_BAN_USER",
     DASH_POST:"DASH_POST",
+    UPDATE_USER:"UPDATE_USER",
 
 
 
@@ -132,6 +133,22 @@ export function getStock(id, email) {
         return {
 
           type: types.UPDATE_BAN_USER,
+          payload: jsonUser.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+  export let updateUser = (email) => {
+    
+    return async function (dispatch) {
+      try {
+        var jsonUser = await axios.post(`${URL}dashboard/upgUser?email=${email}`);
+        console.log('JASON ACTION: ',jsonUser.data)
+        return {
+
+          type: types.UPDATE_USER,
           payload: jsonUser.data
         }
       } catch (error) {

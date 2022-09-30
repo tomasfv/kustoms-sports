@@ -52,8 +52,8 @@ const AllComentarios = () =>{
                              <tr>
                                 
                                 <td className="border max-w-[500px] ">{t.texto}</td>
-                              <td className="border" >
-                              <button onClick={(e)=>handleBan(e)} id={t.id} >{t.available.toString()} </button></td>
+                              <td className="border hover:bg-gris-light">
+                              <button  onClick={(e)=>handleBan(e)} id={t.id} >{t.available.toString()} </button></td>
                                 </tr>
                         )
                     }))})}
