@@ -2,6 +2,7 @@ import logoLargo from '../assets/logoLargo.png'
 import { GrLinkedinOption } from 'react-icons/gr'
 import { BsFacebook, BsInstagram } from 'react-icons/bs'
 import { MdCopyright } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 
 
@@ -22,7 +23,7 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col">
                     <div className="font-bold">Company</div>
-                    <p>About us</p>
+                    <Link to={"/about"}><p>About us</p></Link>
                     <p>Contact us</p>
                     <p>History</p>
                 </div>
