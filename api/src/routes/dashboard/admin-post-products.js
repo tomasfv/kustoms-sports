@@ -32,7 +32,8 @@ router.post('/', async (req , res) => {
     if(typeof stock !== 'number')return res.status(200).json("stock should be a number")
     if(typeof price !== 'number')return res.status(200).json("price should be a number")
     if(typeof promotion !== 'number')return res.status(200).json("promotion should be a number")
-    
+    promotion = (promotion/100)
+
     try {
         let product
         if (id!=='') {
