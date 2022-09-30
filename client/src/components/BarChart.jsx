@@ -74,6 +74,7 @@ import {
       });
       dispatch(bestsold())
     }, [dispatch]);
+
     
     return (
       <div className=" w-50 h-30 mx-px">
