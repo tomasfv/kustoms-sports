@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
       repeatedProduct = cart.dataValues.products.filter((el) => el.id === id);
     }
 		if (repeatedProduct.length > 0) {
-			return res.status(400).send(`${product.name} is already in the cart`)
+			return res.status(200).send(`${product.name} is already in the cart`)
     }else{
       cart.addProducts(product);
       await cart.update({

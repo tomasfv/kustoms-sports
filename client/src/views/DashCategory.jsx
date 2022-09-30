@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom"
 import { ProductGallery } from "../components"
 import { useDispatch, useSelector } from "react-redux"
-import { getByCategory, clearCategory, getProductInfo } from "../redux/actions"
+import { getAllProd, clearCategory, getProductInfo } from "../redux/actions"
 import { useEffect, useState } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
 import DashProdGallery from "../components/DashProdGallery"
 
 
-const Categories = () => {
+const DashCategories = () => {
     const { isAuthenticated, user } = useAuth0()
     const email = user?.email
     const [products, setProducts] = useState([])
-    const llamada = useSelector(state => state.productByCategory)
+    const llamada = useSelector(state => state.dashproducts)
     const dispatch = useDispatch()
     const category = useParams().category
     const paramValue = useParams().value
@@ -27,7 +27,7 @@ const Categories = () => {
     useEffect(() => {
         dispatch(getProductInfo(email))
         dispatch(clearCategory())
-        dispatch(getByCategory(category, value))
+        dispatch(getAllProd())
     }, [value,email])
     useEffect(() => {
         setProducts([...llamada])
@@ -37,10 +37,10 @@ const Categories = () => {
     return (
         <main className="mb-10 mt-16 pt-14 min-h-screen">
             <h1 className="text-4xl text-main-dark dark:text-main-light uppercase font-bold ">{paramValue}</h1>
-            <ProductGallery productos={products} />
+            <DashProdGallery productos={products} />
            
         </main>
     )
 }
 
-export default Categories
+export default DashCategories;

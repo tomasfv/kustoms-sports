@@ -3,6 +3,7 @@ module.exports = {
   darkMode: 'class',
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",'./node_modules/tw-elements/dist/js/**/*.js','./src/**/*.{html,js}',
+    
   ],
   theme: {
     colors:{
@@ -34,7 +35,8 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require("daisyui")
+    require("daisyui"),
+    
   ],
   daisyui: {
     styled: true,

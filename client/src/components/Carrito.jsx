@@ -16,8 +16,8 @@ const Carrito = () => {
   const dataBuy = useSelector((state) => state.dataBuy);
   const data = useSelector((state) => state.data);
   //const name = dataBuy.products.name
-  console.log(dataBuy);
-  console.log(data);
+  // console.log(dataBuy);
+  //console.log(data);
   function deletear() {
     dispatch(getProductInfo(email));
   }
@@ -27,6 +27,18 @@ const Carrito = () => {
      deletear()
   }
 
+  if(data.length === 0) data.totalamount = 0
+  let descuento = 0
+  let final = 0
+  if (dataBuy.length > 0){
+    descuento = dataBuy.map(e => Math.round(e.price * (1 - e.promotion))) 
+    final = descuento.reduce((acc, elemento) => { return acc + elemento; })
+  }
+ 
+
+  console.log('DATABUY: ', dataBuy) 
+  console.log('PRECIOS C/DESC: ', descuento)
+  console.log('FINAL: ', final)
   return (
     <div>
       <div className="flex flex-col mt[100px]">
@@ -42,7 +54,7 @@ const Carrito = () => {
               {data.totalamount === undefined || data.totalamount === 0 ?<div className="flex flex-col ml-[200px] items-start justify-items-start mt-[10px]"><p>Una vez que realices un pedido,aparecerá acá.</p><p>Podrías comenzar viendo nuestra nueva colección de <Link to="/categories/collection/Qatar" className="text-verde-dark font-bold">Qatar</Link></p></div>:dataBuy?.map((e) => {
                 return (
                   <div className="flex flex-col gap-[50px] mt-[50px]">
-                  <div className="flex flex- row border-[2px] ml-[200px] w-[700px] h-[220px]">
+                  <div className="flex flex- row border-[2px] ml-[200px] w-[700px] h-[250px]">
                     <div>
                       <img
                         src={e.image[0]}
@@ -57,7 +69,16 @@ const Carrito = () => {
                       <div>{e.color}</div>
                       <div> Talle : {e.size}</div>
                       {/* <div className="mt-[30px]"> Cantidad :</div> */}
-                      <div> Precio por unidad : ${e.price}</div>
+                      
+                      {e.promotion > 0? 
+                      <>
+                        <div> 
+                          <div className="flex flex-row">Precio por unidad: <p className="ml-10 line-through text-red-dark">${e.price}</p></div>
+                          <p className="flex flex-row">Precio con descuento:<p className="text-verde-dark font-bold ml-2">${Math.round(e.price * (1 - e.promotion))}</p></p>
+                        </div>
+                      </>: <div> Precio por unidad : ${e.price}</div>
+                        }
+                     
                       
                     </div>
                     <div>
@@ -80,11 +101,29 @@ const Carrito = () => {
           <div className="flex flex-col w-[400px] h-[400px] bg-gris-light border-2" >
             <div className=" text-[30px]">Resumen de compra</div>
             <hr className="m-2"></hr>
-            <div className="flex flex-row mt-[200px]"><div className="flex font-bold text-[25px] ml-[15px]">Total:<div className=" flex ml-[200px] mr-[200px]">${data.totalamount}</div></div></div>
+            
+            <div className="flex flex-row mt-[20px]">
+              <div className="flex font-bold text-[25px] ml-[15px]">Subtotal:
+                <div className=" flex ml-[154px] mr-[200px]">${data.totalamount}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-row mt-[20px]">
+              <div className="flex font-bold text-[25px] ml-[15px]">Descuento:
+                <div className=" flex ml-[124px] mr-[200px]">${data.totalamount - final}
+                </div>
+              </div>
+            </div> 
+            <div className="flex flex-row mt-[80px]">
+              <div className="flex font-bold text-[25px] ml-[15px]">Total:
+                <div className=" flex ml-[200px] mr-[200px]">${final}
+                </div>
+              </div>
+            </div>
 
           
              
-            {console.log("data",data)}
+            {/* {console.log("data",data)} */}
             {data.totalamount === undefined || data.totalamount === 0 ? 
             <p className="border text-main-light bg-main-dark w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">Tu carrito está vacío</p>
             :<a href="/payment" className="border text-[white] bg-verde-light w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">COMPRAR</a>

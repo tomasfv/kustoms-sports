@@ -18,6 +18,17 @@ const initialState={
     userCom:[],
     nameComments:[],
     allowed:"",
+    dashUser:"",
+    profileCom:[],
+    profileCarts:[],
+    viewscarrousel: [],
+
+    
+    
+    dashproducts: [],
+
+    allUsers:[],
+    sold:[],
     
 }
 
@@ -33,6 +44,39 @@ export const rootReducer=(state=initialState, action)=>{
                 return {...state, theme:'dark'}
             }
         }
+        case types.DASH_POST:
+            return{
+                ...state
+            }
+        case types.GET_USER_COMMENTS:
+            return{
+                ...state,
+                profileCom: action.payload,
+            }    
+        case types.GET_USER_CARTS:
+            return{
+                ...state,
+                profileCarts: action.payload,
+            }
+
+        case types.GET_ALL_PROD:
+                return{
+                    ...state,
+                    dashproducts: action.payload
+                }
+        case types.GET_ALL_USERS:
+            return{
+                ...state,
+                allUsers: action.payload,
+            }
+        case types.UPDATE_BAN_USER:
+            return{
+                ...state
+            }
+            case types.UPDATE_USER:
+            return{
+                ...state
+            }
         case types.GET_ALLOWED:
             return{
                 ...state,
@@ -43,10 +87,24 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state
             }
+            case types.GET_SOLD:
+                return{
+                    ...state,
+                    sold: action.payload,
+                } 
+        case types.POSTADDPRODUCT:
+            return{
+                ...state
+            }
         case types.POST_USER:
             return{
                 ...state
                        }
+        case types.GET_DASHUSER:
+            return{
+                ...state,
+                dashUser:action.payload
+            }
         case types.GET_DETAILS:
             return{
                 ...state,
@@ -62,6 +120,11 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state,
                 newest:action.payload
+            }
+         case types.GET_VIEWSCARROUSEL:
+            return{
+                ...state,
+                viewscarrousel:action.payload
             }
             case types.GET_DELETEPRODUCT:
             return{
@@ -87,7 +150,6 @@ export const rootReducer=(state=initialState, action)=>{
         case types.GET_COMMENTS:
             const texts = action.payload.map(e=>[e.texto, e.rank])
             const user= action.payload.map(l=>l.user)
-            const name= action.payload.map(n=>n.user.name)
             return{
                 ...state,
                 comments:texts,
@@ -109,7 +171,16 @@ export const rootReducer=(state=initialState, action)=>{
                 imageCarrito:images,
                 data:action.payload
             }
-        
+        case types.GET_USER_COMMENTS:
+            return{
+                ...state,
+                profileCom: action.payload,
+            }    
+        case types.GET_USER_CARTS:
+            return{
+                ...state,
+                profileCarts: action.payload,
+            } 
         case types.FILTER:
             let filter=action.payload
             let toFilter=state.productByCategory
@@ -198,7 +269,92 @@ export const rootReducer=(state=initialState, action)=>{
                 //     filteredProducts:finalShow
                 // }
             }
+            case types.DASH_FILTER:
+            let dashfilter=action.payload
+            let dashtoFilter=state.dashproducts
+            let dashfinalShow=[]
+            if(dashfilter.brand==='all' && dashfilter.clotheType==='all' && dashfilter.collection==='all' && dashfilter.gender==='all' && dashfilter.color==='all' /* && filter.size==='all' */ && dashfilter.sport==='all'){
+                return {
+                    ...state,
+                    dashfilteredProducts:false
+                }
+            } else{
+                let empty=false
+                const checker=()=>{
+                    if(dashfinalShow.length===0) empty=true
+                }
+                    if (dashfilter.brand!=='all'){
+                        if(dashfinalShow.length){
+                            dashfinalShow=dashfinalShow.filter(e=> e.brand===dashfilter.brand)
+                        } else{
+                            dashfinalShow=dashtoFilter.filter(e=> e.brand===dashfilter.brand)
+                        }
+                        checker()
+                    } 
+                    if (dashfilter.clotheType!=='all'){
+                        if(dashfinalShow.length){
+                            dashfinalShow=dashfinalShow.filter(e=> e.clotheType===dashfilter.clotheType)
+                        } else{
+                            dashfinalShow=dashtoFilter.filter(e=> e.clotheType===dashfilter.clotheType)
+                        }
+                        checker()
+                    } 
+                    if (dashfilter.collection!=='all'){
+                        if(dashfinalShow.length){
+                            dashfinalShow=dashfinalShow.filter(e=> e.collection===dashfilter.collection)
+                        } else{
+                            dashfinalShow=dashtoFilter.filter(e=> e.collection===dashfilter.collection)
+                        }
+                        checker()
+                    } 
+                    if (dashfilter.gender!=='all'){
+                        if(dashfinalShow.length){
+                            dashfinalShow=dashfinalShow.filter(e=> e.gender===dashfilter.gender)
+                        } else{
+                            dashfinalShow=dashtoFilter.filter(e=> e.gender===dashfilter.gender)
+                        }
+                        checker()
+                    } 
+                    if (dashfilter.color!=='all'){
+                        if(dashfinalShow.length){
+                            dashfinalShow=dashfinalShow.filter(e=> e.color===dashfilter.color)
+                        } else{
+                            dashfinalShow=dashtoFilter.filter(e=> e.color===dashfilter.color)
+                        }
+                        checker()
+                    } 
+                    /* if (filter.size!=='all'){
+                        if(finalShow.length){
+                            finalShow=finalShow.filter(e=> e.size===filter.size)
+                        } else{
+                            finalShow=toFilter.filter(e=> e.size===filter.size)
+                        }
+                        checker()
+                    }  */
+                    if (dashfilter.sport!=='all'){
+                        if(dashfinalShow.length){
+                            dashfinalShow=dashfinalShow.filter(e=> e.sport===dashfilter.sport)
+                        } else{
+                            dashfinalShow=dashtoFilter.filter(e=> e.sport===dashfilter.sport)
+                        }
+                        checker()
+                    } 
+
+                if(empty===true){
+                    return{
+                        ...state,
+                        dashfilteredProducts:['vacio']
+                    }
+                } else{
+                    return{
+                        ...state,
+                        dashfilteredProducts:dashfinalShow
+                    }
+                    
+                }
+            }
         default: return {...state}
     }
+
 
 }

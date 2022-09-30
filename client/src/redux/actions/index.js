@@ -11,14 +11,29 @@ export const types={
     GET_STOCK:"GET_STOCK",
     GET_NAVBAR:"GET_NAVBAR",
     GET_BY_DATE:"GET_DATE",
+    GET_ALL_PROD:"GET_ALL_PROD",
     FILTER:"FILTER",
+    DASH_FILTER:"DASH_FILTER",
     POST_USER: "POST_USER",
     POSTDATABUY:"POSTDATABUY",
     GET_PRODUCTINFO:"GET_PRODUCTINFO",
     GET_DELETEPRODUCT:"GET_DELETEPRODUCT",
     GET_COMMENTS:"GET_COMMENTS",
     POSTCOMMENT:"POSTCOMMENT",
-    GET_ALLOWED:"GET_ALLOWED"
+    GET_ALLOWED:"GET_ALLOWED",
+    GET_DASHUSER:"GET_DASHUSER",
+    GET_USER_COMMENTS: "GET_USER_COMMENTS",
+    GET_USER_CARTS: "GET_USER_CARTS",
+    POSTADDPRODUCT:"POSTADDPRODUCT",
+    GET_VIEWSCARROUSEL: "GET_VIEWSCARROUSEL",
+    GET_ALL_USERS: "GET_ALL_USERS",
+    GET_SOLD: "GET_SOLD",
+    UPDATE_BAN_USER: "UPDATE_BAN_USER",
+    DASH_POST:"DASH_POST",
+    UPDATE_USER:"UPDATE_USER",
+
+
+
     
 }
 
@@ -30,10 +45,10 @@ export const changeTheme=(payload)=>{
     })
 }
 
-export function getDetailId(id) {
+export function getDetailId(id, email) {
     return async function (dispatch) {
       try {
-        var json = await axios.get(`${URL}${id}`);
+        var json = await axios.get(`${URL}${id}?email=${email}`);
         return dispatch({
           type: types.GET_DETAILS,
           payload: json.data[0],
@@ -43,10 +58,10 @@ export function getDetailId(id) {
       }
     };
   }
-export function getStock(id) {
+export function getStock(id, email) {
     return async function (dispatch) {
       try {
-        var json = await axios.get(`${URL}${id}`);
+        var json = await axios.get(`${URL}${id}?email=${email}`);
         return dispatch({
           type: types.GET_STOCK,
           payload: json.data[1],
@@ -70,12 +85,96 @@ export function getStock(id) {
       }
     }
   }
+  export const getUserComments=(email)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}profile/getcommemail?email=${email}`)
+        return dispatch({
+          type: types.GET_USER_COMMENTS,
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getUserCarts=(email)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}profile/getclosecart?email=${email}`)
+        return dispatch({
+          type: types.GET_USER_CARTS,
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getAllUsers=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}dashboard/usersadmin`)
+        return dispatch({
+          type: types.GET_ALL_USERS,
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export let updateBanUser = (email) => {
+    
+    return async function (dispatch) {
+      try {
+        var jsonUser = await axios.post(`${URL}dashboard/banUser?email=${email}`);
+        console.log('JASON ACTION: ',jsonUser.data)
+        return {
+
+          type: types.UPDATE_BAN_USER,
+          payload: jsonUser.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+  export let updateUser = (email) => {
+    
+    return async function (dispatch) {
+      try {
+        var jsonUser = await axios.post(`${URL}dashboard/upgUser?email=${email}`);
+        console.log('JASON ACTION: ',jsonUser.data)
+        return {
+
+          type: types.UPDATE_USER,
+          payload: jsonUser.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
   export const getByDate=()=>{
     return async (dispatch)=>{
       try {
         let response= await axios.get(`${URL}date`)
         return dispatch({
           type: types.GET_BY_DATE,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getAllProd=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}date`)
+        return dispatch({
+          type: types.GET_ALL_PROD,
           payload:response.data
         })
       } catch (error) {
@@ -135,11 +234,30 @@ export function getStock(id) {
       }
     }
   }
+  export const getDashUser=(email)=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}userdata?email=${email}`)
+        return dispatch({
+          type: types.GET_DASHUSER,
+          payload:response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
   
   export const filterProducts=(payload)=>{
     return{
       type: types.FILTER,
+      payload
+    }
+  }
+  export const dashfilterProducts=(payload)=>{
+    return{
+      type: types.DASH_FILTER,
       payload
     }
   }
@@ -150,12 +268,26 @@ export function getStock(id) {
 
 
   }
-
+  
   export const createnewuser = (payload) => {
     return async function (dispatch) {
       try {
         var json = await axios.post(`${URL}user`, payload);
         return json
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  }
+  export const dashComment = (id) => {
+    console.log(id)
+    return async function (dispatch) {
+      try {
+        var json1= await axios.post(`${URL}dashboard/banComment?id=${id} `);
+        console.log(json1.data,"json")
+        return  {type:types.DASH_POST,
+          payload:json1.data}
       } catch (error) {
         console.log(error);
       }
@@ -172,6 +304,23 @@ export function getStock(id) {
 
           type:types.POSTDATABUY,
           payload:jsonbuy.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  }
+  export const postAddProduct = (payload) => {
+    
+    return async function (dispatch) {
+      try {
+        var json = await axios.post(`${URL}dashboard/adminpostproduct`, payload);
+        console.log(json)
+        return {
+
+          type:types.POSTADDPRODUCT,
+          payload:json.data
         }
       } catch (error) {
         console.log(error);
@@ -197,15 +346,40 @@ export function getStock(id) {
 
   }
   export const deleteProduct=(email,id)=>{
-    return async (dispatch)=>{
-      try {
+    return async function (dispatch){
+      
         let response= await axios.put(`${URL}delFromcart?email=${email}&id=${id}`)
         return dispatch({
           type: types.GET_DELETEPRODUCT,
-          
+          payload:response
         })
-      } catch (error) {
-        console.log(error)
-      }
+      
     }
   }
+export const visitedcarrousel = (email)=>{
+
+  return async function (dispatch){
+try{
+    let userviews = await axios.get(`${URL}dashboard/carrouselview?email=${email}`)
+    console.log("batman",userviews)
+  return dispatch({
+    type : types.GET_VIEWSCARROUSEL,
+    payload: userviews.data
+   })
+  }catch(e){console.log(e)}
+  }
+}
+
+export const bestsold = () => {
+  return async function (dispatch){
+    try {
+      let sold = await axios.get(`${URL}dashboard/bestsold`)
+      return dispatch({
+        type : types.GET_SOLD,
+        payload: sold.data
+       })
+    } catch (e) {
+      {console.log(e)}
+    }
+  }
+}
