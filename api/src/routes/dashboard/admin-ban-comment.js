@@ -5,8 +5,8 @@ const { Comments } = require("../../db.js");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  let { id } = req.body;
-
+  let { id } = req.query;
+  
   try {
     //me fijo si existe el comentario
     const findcomment = await Comments.findByPk(id);

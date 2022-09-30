@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { postAddProduct } from "../redux/actions";
 import swal from "sweetalert2";
 import ModificarProd from "./ModificarProd";
+import AllComentarios from "./AllComentarios";
 
 const Dashboard = () => {
   const [productos, setProductos] = useState(false);
@@ -12,6 +13,8 @@ const Dashboard = () => {
   const [errors, setErrors] = useState(false);
   const [errorImg, setErrorImg] = useState(false);
   const [modificar, setModificar] = useState(false);
+  const [comentarios, setComentarios] = useState(false);
+
 
   const dispatch = useDispatch();
   const [addproduct, setAddProduct] = useState({
@@ -114,6 +117,9 @@ const Dashboard = () => {
     if(modificar === true){
       setModificar(!modificar)
     }
+  }
+  function handleCom (){
+    setComentarios(!comentarios)
   }
   function handleChange(e) {
     setAddProduct({
@@ -333,7 +339,7 @@ const Dashboard = () => {
                         d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
                       />
                     </svg>
-                    <span class="group-hover:text-gray-700">Comentarios</span>
+                    <button onClick={handleCom}><span class="group-hover:text-gray-700">Comentarios</span></button>
                   </a>
                 </li>
                 <li class="min-w-max">
@@ -685,6 +691,12 @@ const Dashboard = () => {
         <div>
           <ModificarProd/>
           </div>}
+          {
+            comentarios !== false &&
+            <div>
+              <AllComentarios/>
+            </div>
+          }
       </div>
     </div>
   );

@@ -44,6 +44,10 @@ export const rootReducer=(state=initialState, action)=>{
                 return {...state, theme:'dark'}
             }
         }
+        case types.DASH_POST:
+            return{
+                ...state
+            }
         case types.GET_USER_COMMENTS:
             return{
                 ...state,
@@ -55,7 +59,7 @@ export const rootReducer=(state=initialState, action)=>{
                 profileCarts: action.payload,
             }
 
-            case types.GET_ALL_PROD:
+        case types.GET_ALL_PROD:
                 return{
                     ...state,
                     dashproducts: action.payload
