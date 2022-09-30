@@ -29,10 +29,12 @@ const Cloudinary = ({addproduct}) => {
       />
       <button onClick={uploadImage}><GrDocumentUpload className="w-[30px] h-[30px]"/></button>
       </div>
-     
-      <a href={image} className="flex flex-col">
-        <img src={image} width="300px" height="300px" />
-      </a> 
+
+     {
+     image?.map(e=> {return (
+        <p id={e.image}>Imagen cargada</p>
+    )})
+     }
     </div>
   );
 }
