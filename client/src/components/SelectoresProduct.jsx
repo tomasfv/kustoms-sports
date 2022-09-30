@@ -128,14 +128,16 @@ const SelectoresProduct = () => {
                 <div className=" flex ">
                   {isAuthenticated?
                   <div>
-                    {allowed === "User allowed" ?
+                    {allowed === "usuario baneado"? 
+                      <p className="font-bold text-red-dark">ESTAS BANEADO</p>
+                      : allowed === "User allowed" ?
                     <button
                     onClick={()=> setIsOpen(true)}
                     
                     className="flex bottom-0 right-0 ml-[1000px] border rounded  text-[20px] p-1 mr-[10px]font-bold h-[30px]"
                   >
                     Comentar
-                  </button>:<p>Debe comprar el producto para poder comentar</p>}
+                  </button>:<p>Debe comprar el producto para poder comentar</p>} 
                   </div>:<div className="flex ">
             <p>
               Para poder realizar un comentario,debe{" "}

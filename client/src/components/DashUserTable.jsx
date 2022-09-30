@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUsers } from "../redux/actions";
+import { getAllUsers, updateBanUser } from "../redux/actions";
 
 
 function DashUserTable() {
@@ -8,6 +8,7 @@ function DashUserTable() {
     const dispatch = useDispatch();
     const [searchName, setSearchName] = useState("");
     const [filtName, setFiltName] = useState();
+    const [emailBan, setEmailBan] = useState("")
 
     useEffect(() => {
         dispatch(getAllUsers());
@@ -19,14 +20,17 @@ function DashUserTable() {
           setSearchName(e.target.value);
       }
 
+      
+      dispatch(updateBanUser(emailBan))
+      console.log('BANEADO: ', emailBan)
+      
       function handleSubmit(e){
-        e.preventDefault();
-        let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
-        setFiltName(nombreFinal);
-        console.log('FILTRADO: ', nombreFinal) 
+          e.preventDefault();
+          let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
+          setFiltName(nombreFinal);
+          //console.log('FILTRADO: ', nombreFinal) 
         }
         
-    console.log('FILTNAME: ', filtName)
 
     return (
     <div>
@@ -45,7 +49,9 @@ function DashUserTable() {
                     <th className="border">email</th>
                     <th className="border">picture</th>
                     <th className="border">profile</th>
+                    <th className="border">profile</th>
                     <th className="border">available</th>
+                    <th className="border">set available</th>
                     <th className="border">createdAt</th>
                 </tr>
             </thead>
@@ -74,7 +80,20 @@ function DashUserTable() {
                                 <td className="border">{e.email}</td>
                                 <td className="border"><img src={e.picture} className='w-[60px] h-[60px] rounded-full ml-[25%]'/></td>
                                 <td className="border">{e.profile}</td>
+                                <td className="border">
+                                    <select>
+                                        <option>Admin</option>
+                                        <option value='default'>Client</option>
+                                        
+                                    </select>
+                                </td>
                                 <td className="border">{e.available.toString()}</td>
+                                <td className="border">
+                                    <button onClick={() => setEmailBan(e.email)}>
+                                        CHANGE
+                                        
+                                    </button>
+                                </td>
                                 <td className="border">{e.createdAt}</td>
                             </tr>
                             </>

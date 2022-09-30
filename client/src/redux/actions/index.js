@@ -28,7 +28,9 @@ export const types={
     GET_VIEWSCARROUSEL: "GET_VIEWSCARROUSEL",
     GET_ALL_USERS: "GET_ALL_USERS",
     GET_SOLD: "GET_SOLD",
+    UPDATE_BAN_USER: "UPDATE_BAN_USER"
     DASH_POST:"DASH_POST",
+
 
 
     
@@ -120,6 +122,22 @@ export function getStock(id, email) {
         console.log(error)
       }
     }
+  }
+  export let updateBanUser = (email) => {
+    
+    return async function (dispatch) {
+      try {
+        var jsonUser = await axios.post(`${URL}dashboard/banUser?email=${email}`);
+        console.log('JASON ACTION: ',jsonUser.data)
+        return {
+
+          type: types.UPDATE_BAN_USER,
+          payload: jsonUser.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
   }
   export const getByDate=()=>{
     return async (dispatch)=>{
