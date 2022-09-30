@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dashComment, getAllUsers } from "../redux/actions";
-
+import swal from "sweetalert2";
 
 const AllComentarios = () =>{
 
@@ -12,11 +12,23 @@ const AllComentarios = () =>{
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getAllUsers())
-    },[dispatch,allusers])
+    },[dispatch])
     
+    function reload (){
+        window.location.reload();
+    }
+
     function handleBan(e){
         let id = e.target.id
        dispatch(dashComment(id))
+       swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Comentario baneado",
+        showConfirmButton: false,
+        timer: 2500,
+      })
+      reload();
     }
     return(
         <div>
