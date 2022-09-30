@@ -6,6 +6,9 @@ import { postAddProduct } from "../redux/actions";
 import swal from "sweetalert2";
 import ModificarProd from "./ModificarProd";
 import AllComentarios from "./AllComentarios";
+import BarChart from "./BarChart";
+import DashUserTable from "./DashUserTable"
+import logoLargoLight from '../assets/logoLargoLight.png'
 
 const Dashboard = () => {
   const [productos, setProductos] = useState(false);
@@ -14,6 +17,9 @@ const Dashboard = () => {
   const [errorImg, setErrorImg] = useState(false);
   const [modificar, setModificar] = useState(false);
   const [comentarios, setComentarios] = useState(false);
+  const [graph, setGraph] = useState(false);
+  const [users, setUsers] = useState(false);
+  const [show, setShow] = useState("x")
 
 
   const dispatch = useDispatch();
@@ -35,12 +41,12 @@ const Dashboard = () => {
   function validate(addproduct) {
     let errors = {};
 
-    if (addproduct.name.length > 15) {
-      errors.name = "Inserte un nombre menor a 15 caracteres";
+    if (addproduct.name.length > 50) {
+      errors.name = "Inserte un nombre menor a 50 caracteres";
     }
     if (addproduct.name === "") {
       errors.name = "Inserte un nombre para el producto";
-    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
       errors.name = "El nombre no puede contener,carácteres o números";
     }
     if (addproduct.sport.length > 15) {
@@ -48,7 +54,7 @@ const Dashboard = () => {
     }
     if (addproduct.sport === "") {
       errors.sport = "Inserte un tipo de  deporte para el producto";
-    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
       errors.sport =
         "El nombre del deporte no puede contener,carácteres o números";
     }
@@ -57,7 +63,7 @@ const Dashboard = () => {
     }
     if (addproduct.clotheType === "") {
       errors.clotheType = "Inserte un tipo de producto ";
-    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
       errors.clotheType =
         "El nombre del tipode producto no puede contener,carácteres o números";
     }
@@ -88,7 +94,7 @@ const Dashboard = () => {
     }
     if (addproduct.color === "") {
       errors.color = "Inserte colores para el producto";
-    } else if (!/^[A-Z]+$/i.test(addproduct.name)) {
+    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
       errors.color =
         "El tipo de color del producto no puede contener,carácteres o números";
     }
@@ -114,12 +120,33 @@ const Dashboard = () => {
   }
   function handleAgregar() {
     setState(!state);
+    setShow("x")
     if(modificar === true){
       setModificar(!modificar)
     }
   }
   function handleCom (){
-    setComentarios(!comentarios)
+    if (show.length){ 
+      setShow("comentario")
+      setModificar(false)
+      setState(false)
+    }
+    
+  }
+  function handleGraf (){
+    if (show.length){
+      setShow("graph")
+      setModificar(false)
+      setState(false)
+    }
+     
+  }
+  function handleUser (){
+    if (show.length){
+      setShow("users")
+      setModificar(false)
+      setState(false)
+    }
   }
   function handleChange(e) {
     setAddProduct({
@@ -208,8 +235,9 @@ const Dashboard = () => {
   }
   function handleModificar(e){
      setModificar(!modificar)
+     setShow("x")
      if(state === true){
-      setState(!state)
+       setState(!state)
      }
   }
 
@@ -220,11 +248,7 @@ const Dashboard = () => {
           <div class="flex h-screen flex-col justify-between pt-2 pb-6">
             <div>
               <div class="w-max p-2.5">
-                <img
-                  src="https://tailus.io/images/logo.svg"
-                  class="w-32"
-                  alt=""
-                />
+              <img src={logoLargoLight} className='h-10 w-auto ' alt="logo-kustoms" />
               </div>
               <ul class="mt-6 space-y-2 tracking-wide">
                 <li class=" min-w-max">
@@ -364,7 +388,7 @@ const Dashboard = () => {
                         d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
                       />
                     </svg>
-                    <span class="group-hover:text-gray-700">Reports</span>
+                    <span onClick={handleUser} class="group-hover:text-gray-700">Usuarios</span>
                   </a>
                 </li>
                 <li class="min-w-max">
@@ -387,7 +411,7 @@ const Dashboard = () => {
                         d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
                       />
                     </svg>
-                    <span class="group-hover:text-gray-700">Other data</span>
+                    <span onClick={handleGraf} class="group-hover:text-gray-700">Graficos</span>
                   </a>
                 </li>
                 <li class="min-w-max">
@@ -655,18 +679,7 @@ const Dashboard = () => {
                 </div>
                 <div className=" flex ml-[20px] mb-6 ">
                   Talle:
-                  <select
-                    className="border-[1px] rounded-sm ml-[5px] "
-                    onChange={(e) => handleChange(e)}
-                    name="size"
-                    value={addproduct.size}
-                  >
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                    <option>XL</option>
-                  </select>
+                  <input type="text" value={addproduct.size} onChange={(e)=>handleChange(e)} name="size" className="border-[1px] w-[70px] pl-2 text-s pr-2 rounded-sm ml-[5px] "/>
                 </div>
               </div>
             </form>
@@ -692,9 +705,22 @@ const Dashboard = () => {
           <ModificarProd/>
           </div>}
           {
-            comentarios !== false &&
+           show === "comentario" &&
             <div>
               <AllComentarios/>
+            </div>
+          }
+          {
+            show === "users" &&
+            <div>
+              <DashUserTable/>
+            </div>
+          }
+
+          {
+            show === "graph" &&
+            <div>
+              <BarChart/>
             </div>
           }
       </div>

@@ -125,11 +125,12 @@ function BarChart() {
 
   return (
     <div>
-      <select
+      <select 
         className={` z-20 md:w-52 w-fit h-14 uppercase text-center `}
         onChange={(e) => handleSelect(e)}
       >
-        <option className={`uppercase `} selected="selected" value="Marcas">
+        <option className={`uppercase text-sm`} selected value="default" disabled>Opciones</option>
+        <option className={`uppercase `} value="Marcas">
           Marcas
         </option>
         <option className={`uppercase `} value="Colecciones">
