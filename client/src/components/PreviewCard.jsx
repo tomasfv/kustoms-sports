@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 
 const PreviewCard = ({ data }) => {
-    console.log('DATA: ', data)
     const [loadedImage, setLoadedImage] = useState(false)
     if (data) {
         return (

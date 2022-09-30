@@ -4,7 +4,7 @@ const {Products, Users} = require('./src/db.js');
 const {products} = require( './src/bulk/products.json' );
 
 
-conn.sync({ force: false}).then(() => {
+conn.sync({ force: true}).then(() => {
   server.listen(process.env.PORT || 3001, () => {
     console.log('%s listening at 3001'); 
 
@@ -20,13 +20,13 @@ conn.sync({ force: false}).then(() => {
 
         //cargo usuario admin
         let user = await Users.findOne({
-          where: { email: "KustomsSports@gmail.com" },
+          where: { email: "kustomssports@gmail.com" },
         });
         // console.log(user)
         if (user === null) {
           let nickname = "KustomsSports"
           let name = "KustomsSports"
-          let email = "KustomsSports@gmail.com"
+          let email = "kustomssports@gmail.com"
           let profile = "Admin"
           const createuser = await Users.create({
               nickname,
