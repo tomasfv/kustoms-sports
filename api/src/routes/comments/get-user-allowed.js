@@ -11,6 +11,11 @@ router.get('/', async (req, res) => {
     const user = await Users.findOne({
       where: { email: email },
     });
+
+    if(user.available == false){
+      return res.status(200).send('usuario baneado')
+    }
+
     let cart = await Carts.findAll({
       where: { userId: user.id, open: "false" },
       include: {
