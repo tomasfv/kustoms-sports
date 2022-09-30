@@ -73,7 +73,7 @@ import {
         },
       });
       dispatch(bestsold())
-    }, [objeto]);
+    }, [dispatch]);
     
     return (
       <div className=" w-50 h-30 mx-px">

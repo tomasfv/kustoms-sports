@@ -64,7 +64,11 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state,
                 allUsers: action.payload,
-            }    
+            }
+        case types.UPDATE_BAN_USER:
+            return{
+                ...state
+            }
         case types.GET_ALLOWED:
             return{
                 ...state,
