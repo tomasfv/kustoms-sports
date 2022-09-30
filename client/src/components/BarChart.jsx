@@ -139,7 +139,7 @@ function BarChart() {
           Deporte
         </option>
       </select>
-
+  
       <div className=" w-50 h-30 mx-px">
         <Bar options={chartOptions} data={chartData} />
       </div>
