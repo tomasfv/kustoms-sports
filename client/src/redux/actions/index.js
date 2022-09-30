@@ -27,7 +27,8 @@ export const types={
     POSTADDPRODUCT:"POSTADDPRODUCT",
     GET_VIEWSCARROUSEL: "GET_VIEWSCARROUSEL",
     GET_ALL_USERS: "GET_ALL_USERS",
-    GET_SOLD: "GET_SOLD"
+    GET_SOLD: "GET_SOLD",
+    DASH_POST:"DASH_POST",
 
 
     
@@ -232,12 +233,26 @@ export function getStock(id, email) {
 
 
   }
-
+  
   export const createnewuser = (payload) => {
     return async function (dispatch) {
       try {
         var json = await axios.post(`${URL}user`, payload);
         return json
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  }
+  export const dashComment = (id) => {
+    console.log(id)
+    return async function (dispatch) {
+      try {
+        var json1= await axios.post(`${URL}dashboard/banComment?id=${id} `);
+        console.log(json1.data,"json")
+        return  {type:types.DASH_POST,
+          payload:json1.data}
       } catch (error) {
         console.log(error);
       }
