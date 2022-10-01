@@ -31,11 +31,12 @@ export const types={
     UPDATE_BAN_USER: "UPDATE_BAN_USER",
     DASH_POST:"DASH_POST",
     UPDATE_USER:"UPDATE_USER",
+    GET_ALLSTOCK:"GET_ALLSTOCK",
+    DASH_GET_DETAILS: "DASH_GET_DETAILS",
+    DASH_ID:"DASH_ID",
+    DASH_GET_STOCK:"DASH_GET_STOCK",
     GET_FINANCE: "GET_FINANCE",
-    GET_ALLSTOCK:"GET_ALLSTOCK"
-
-
-
+    
     
 }
 
@@ -60,12 +61,45 @@ export function getDetailId(id, email) {
       }
     };
   }
+export function DashgetDetailId(id) {
+    return async function (dispatch) {
+      try {
+        var json = await axios.get(`${URL}${id}` + "?email=undefined");
+        return dispatch({
+          type: types.DASH_GET_DETAILS,
+          payload: json.data[0],
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+  export const dashId=(payload)=>{
+    console.log("payload", payload)
+    return{
+      type: types.DASH_ID,
+      payload:payload
+    }
+  }
 export function getStock(id, email) {
     return async function (dispatch) {
       try {
         var json = await axios.get(`${URL}${id}?email=${email}`);
         return dispatch({
           type: types.GET_STOCK,
+          payload: json.data[1],
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+export function dashgetStock(id, email) {
+    return async function (dispatch) {
+      try {
+        var json = await axios.get(`${URL}${id}` + "?email=undefined");
+        return dispatch({
+          type: types.DASH_GET_STOCK,
           payload: json.data[1],
         });
       } catch (error) {

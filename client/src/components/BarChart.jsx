@@ -145,9 +145,6 @@ function BarChart() {
       <div className=" w-50 h-30 ">
         <Bar options={chartOptions} data={chartData} />
       </div>
-      <div className = "mt-0">
-        <DashLowStock/>
-      </div>
     </div>
 
   );

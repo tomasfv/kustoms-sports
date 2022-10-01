@@ -1,14 +1,20 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { dashId } from "../redux/actions/index.js"
 
-
-const PreviewCard = ({ data }) => {
-    console.log('DATA: ', data)
+const DashPreviewCard = ({ data, stock, color }) => {
+    const dispatch = useDispatch()
+    const handleId = (e) => {
+        console.log("dashid dashprod",data.id)
+        dispatch(dashId(data.id))
+    }
+    console.log("DATA-id", data.id)
     const [loadedImage, setLoadedImage] = useState(false)
     if (data) {
         return (
             <>
-                <Link to={`/producto/${data.id}`} className={`min-w-[16.3rem] shadow-md h-72 ${loadedImage ? 'block' : 'hidden'}`}>
+                 <button id={data?.id} onClick={(e) => {handleId(e)}} >
                     < div className='relative' >
                         <img src={data.image[0]} onLoad={() => setLoadedImage(true)} alt="Imagen producto" className='w-full h-52 object-scale-down bg-main-light' />
                         {data.promotion > 0 ?
@@ -25,11 +31,12 @@ const PreviewCard = ({ data }) => {
                         }
                     </div >
                     <div className='bg-main-light dark:bg-main-dark text-center flex flex-col gap-1 mt-1'>
+                        {/* <h2 className=' text-main-dark dark:text-main-light text-base font-bold'>{data.size}</h2> */}
                         <h2 className=' text-main-dark dark:text-main-light text-base font-bold'>{`${data.name} ${data?.gender}`}</h2>
-                        <h2 className=' text-main-dark dark:text-main-light text-base'>{data.brand}</h2>
+                        <h2 className=' text-main-dark dark:text-main-light text-base'><div className='flex flex-row items-center justify-center'>{data.brand} Talle:<div className='font-bold'>{data.size}</div></div></h2>
                         <h4 className=' text-main-dark dark:text-main-light text-xsm'>{`${data.clotheType} ${data.sport}`}</h4>
                     </div>
-                </Link >
+                    </button>
                 <div className={`min-w-[16.3rem] shadow-md h-72 animate-pulse ${loadedImage ? 'hidden' : 'block'}`}>
                     < div className='relative w-full h-52 bg-gris-light dark:bg-gris-dark' >
                         <span className='w-full h-52 ' />
@@ -45,4 +52,4 @@ const PreviewCard = ({ data }) => {
     }
 }
 
-export default PreviewCard
+export default DashPreviewCard

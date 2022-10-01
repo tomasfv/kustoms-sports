@@ -4,10 +4,13 @@ import { types} from "../actions";
 const initialState={
     theme:"light",
     details:[],
+    dashdetails:[],
     images:[],
     productByCategory:[],
     navData:{},
     stock:[],
+    dashstock:[],
+    dashcolor:{},
     color:{},
     newest:[],
     filteredProducts:[],
@@ -25,9 +28,9 @@ const initialState={
     dashproducts: [],
     allUsers:[],
     sold:[],
+    allStock:[],  
+    dashid:"",
     finances: [],
-    allStock:[],    
-
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -56,7 +59,11 @@ export const rootReducer=(state=initialState, action)=>{
                 ...state,
                 profileCarts: action.payload,
             }
-
+        case types.DASH_ID:
+            return{
+                ...state,
+                dashid:action.payload
+            }
         case types.GET_ALL_PROD:
                 return{
                     ...state,
@@ -114,6 +121,11 @@ export const rootReducer=(state=initialState, action)=>{
                 details:action.payload,
                 images:action.payload.image.map(e=>e)
             }
+        case types.DASH_GET_DETAILS:
+            return{
+                ...state,
+                dashdetails:action.payload,
+            }
         case types.GET_CATEGORY:
             return{
                 ...state,
@@ -144,7 +156,13 @@ export const rootReducer=(state=initialState, action)=>{
                     ...state,
                     stock:action.payload.map(d=>d),
                     color:action.payload[0]
-                }   
+                }
+        case types.DASH_GET_STOCK:
+                return{
+                    ...state,
+                    dashstock:action.payload.map(d=>d),
+                    dashcolor:action.payload[0]
+                    }   
         case types.GET_ALLSTOCK:
             return{
                 ...state,
