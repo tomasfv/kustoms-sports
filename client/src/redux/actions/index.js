@@ -172,7 +172,7 @@ export function getStock(id, email) {
   export const getAllProd=()=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}date`)
+        let response= await axios.get(`${URL}dashboard/getprod`)
         return dispatch({
           type: types.GET_ALL_PROD,
           payload:response.data

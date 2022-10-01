@@ -14,10 +14,13 @@ const DashProdGallery = ({ productos }) => {
     const firstShowing = lastShowing - nShowing
     const amountPages = []
     let onDisplay = []
+ 
+    // console.log("PRODUCTOS", productos)
 
     for (let p = 0; p < Math.ceil(totalProducts / nShowing); p++) {
         amountPages.push(p)
     }
+    console.log("displaying",displaying)
     displaying && (onDisplay = displaying?.slice(firstShowing, lastShowing))
     const handleClick = (numero) => {
         setPage(numero)
@@ -40,13 +43,14 @@ const DashProdGallery = ({ productos }) => {
     useEffect(() => {
         setDisplaying(productos)
     }, [productos])
-    console.log("filtering",filtering)
     useEffect(() => {
-        if (filtering=== undefined) {
+        console.log("filtering",filtering)
+        if(filtering){
+        if (filtering[0]) {
             return setDisplaying(filtering)
         }
         if (filtering !== productos) setDisplaying(productos)
-
+    }
     }, [filtering])
 
     const Pagination = () => (
@@ -78,14 +82,14 @@ const DashProdGallery = ({ productos }) => {
         <section>
             <DashFilter data={productos} />
             <section className="w-10/12 my-5 mx-auto flex flex-row flex-wrap gap-6 justify-center">
-                {/* {onDisplay[0] === 'vacio'
+                {onDisplay[0] === 'vacio'
                     ? <section className="w-full shadow-lg border rounded-md py-10 text-main-dark dark:text-main-light bg-main-light dark:bg-main-dark border-verde-light dark:border-verde-dark">
                         La busqueda no produjo ningun resultado, intente cambiando algunos parametros
-                    </section> */}
-                    { onDisplay?.map((data, index) => (
+                    </section>
+                    : onDisplay?.map((data, index) => (
                         <PreviewCard data={data} key={index} />
                     ))}
-                    
+    
             </section>
             <Pagination />
         </section>
