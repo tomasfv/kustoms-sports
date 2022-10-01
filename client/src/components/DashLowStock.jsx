@@ -15,7 +15,7 @@ function DashLowStock() {
 
     return (
     <div className="grid grid-col justify-items-center  ">
-        <div className=" text-xl mt-[50px] font-bold">
+        <div className=" text-xl mt-[50px] mb-4 font-bold">
             Productos ordenados por Stock
         </div>
         <table className="border block w-[780px] h-[700px] ml-10 mr-2 mb-[200px] overflow-y-scroll" >

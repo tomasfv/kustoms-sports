@@ -27,6 +27,7 @@ const initialState={
     viewscarrousel: [],
     dashproducts: [],
     allUsers:[],
+    allComments:[],
     sold:[],
     allStock:[],  
     dashid:"",
@@ -78,6 +79,11 @@ export const rootReducer=(state=initialState, action)=>{
             return{
                 ...state,
                 allUsers: action.payload,
+            }
+        case types.GET_ALL_COMMENTS:
+            return{
+                ...state,
+                allComments: action.payload,
             }
         case types.UPDATE_BAN_USER:
             return{
