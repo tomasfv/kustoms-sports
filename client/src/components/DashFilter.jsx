@@ -10,6 +10,8 @@ const DashFilter = ({ data }) => {
     const [filters, setFilters] = useState({ marca: [], categoria: [], genero: [], color: [], coleccion: [], deporte: [], /* talle: [] */ })
     const [accent, setAccent] = useState({ marca: false, categoria: false, genero: false, color: false, coleccion: false, deporte: false, /* talle: false */ })
 
+    // console.log("PRODUCTOS", data)
+
     const translate = (word) => {
         switch (word) {
             case 'marca':
