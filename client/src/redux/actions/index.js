@@ -35,6 +35,8 @@ export const types={
     DASH_GET_DETAILS: "DASH_GET_DETAILS",
     DASH_ID:"DASH_ID",
     DASH_GET_STOCK:"DASH_GET_STOCK",
+    GET_FINANCE: "GET_FINANCE",
+    
     
 }
 
@@ -430,4 +432,19 @@ export const bestsold = () => {
       {console.log(e)}
     }
   }
+}
+export const getfinance = () =>{
+return async function (dispatch){
+  try {
+    let finances = await axios.get(`${URL}dashboard/financial`)
+    return dispatch({
+      type: types.GET_FINANCE,
+      payload: finances.data
+    })
+  } catch (e) {
+    {console.log(e)}
+    
+  }
+}
+
 }
