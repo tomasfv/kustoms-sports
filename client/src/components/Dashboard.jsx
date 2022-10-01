@@ -10,6 +10,7 @@ import BarChart from "./BarChart";
 import DashUserTable from "./DashUserTable"
 import logoLargoLight from '../assets/logoLargoLight.png'
 import logoLargo from '../assets/logoLargo.png'
+import DashLowStock from "./DashLowStock";
 
 const Dashboard = () => {
   const [productos, setProductos] = useState(false);
@@ -106,7 +107,6 @@ const Dashboard = () => {
     }
     if (
       addproduct.promotion < 0 ||
-      addproduct.promotion === 0 ||
       addproduct.promotion > 100
     ) {
       errors.promotion = "Declarar un precio con valor entre  0 y 100 ";
@@ -141,6 +141,18 @@ const Dashboard = () => {
   function handleGraf (){
     if (show.length){
       setShow("graph")
+      setModificar(false)
+      setState(false)
+      setProductos(false)
+    }
+    if(logo === false){
+      setLogo(!logo)
+     }
+    
+  }
+  function handleStock (){
+    if (show.length){
+      setShow("stock")
       setModificar(false)
       setState(false)
       setProductos(false)
@@ -456,10 +468,8 @@ const Dashboard = () => {
                     <span class="group-hover:text-gray-700">Finance</span>
                   </a>
                 </li>
-              </ul>
-            </div>
-            <div class="w-max -mb-3">
-              <a
+                <li>
+                <a
                 href="#"
                 class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
               >
@@ -475,13 +485,16 @@ const Dashboard = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span class="group-hover:text-gray-700">Settings</span>
+                <span onClick={handleStock} class="group-hover:text-gray-700">Stock</span>
               </a>
+              </li>
+              </ul>
             </div>
+            
           </div>
         </div>
       </div>
-      <div className="w-[1000px] h-[940px] border-[1px] bg-gris-light  ">
+      <div className="w-[1000px] h-[940px] border-[1px]">
         {logo === false?<div  className="flex items-center justify-center"><img src={logoLargo} className="  w-[600px] h-[200px]"/></div>:<div>
         {state !== false && (
           <div class="max-w-2xl mx-auto bg-white p-16">
@@ -739,6 +752,12 @@ const Dashboard = () => {
             show === "graph" &&
             <div>
               <BarChart/>
+            </div>
+          }
+          {
+            show === "stock" &&
+            <div>
+              <DashLowStock/>
             </div>
           }
         </div>}

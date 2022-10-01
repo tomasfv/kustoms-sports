@@ -18,7 +18,7 @@ function DashLowStock() {
         <div className=" text-xl mt-[50px] font-bold">
             Productos ordenados por Stock
         </div>
-        <table className="border block w-[780px] h-[300px] ml-10 mr-2 mb-[200px] overflow-y-scroll" >
+        <table className="border block w-[780px] h-[700px] ml-10 mr-2 mb-[200px] overflow-y-scroll" >
             <thead className="" >
                 <tr className=" sticky top-0 bg-gris-light border-[1px] w-[780px] mb-[20px] text-md mr-4">
                     <th className="border pl-2 pr-2">Tipo</th>

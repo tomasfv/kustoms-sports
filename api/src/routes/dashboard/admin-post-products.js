@@ -20,26 +20,45 @@ router.post('/', async (req , res) => {
         price,
         promotion
     } = req.body
+    // if(typeof clotheType !== 'string')return res.status(200).json("clotheType should be a word")
+    // if(typeof brand !== 'string')return res.status(200).json("brand should be a word")
+    // if(typeof name !== 'string')return res.status(200).json("name should be a word")
+    // if(typeof gender !== 'string')return res.status(200).json("gender should be a word")
+    // if(typeof sport !== 'string')return res.status(200).json("sport should be a word")
+    // if(typeof collection !== 'string')return res.status(200).json("collection should be a word")
+    // if(typeof color !== 'string')return res.status(200).json("color should be a word")
+    // if(!Array.isArray(image))return res.status(200).json("image should be an array")
+    // if(typeof stock !== 'number')return res.status(200).json("stock should be a number")
+    // if(typeof price !== 'number')return res.status(200).json("price should be a number")
+    // if(typeof promotion !== 'number')return res.status(200).json("promotion should be a number")
+    if (promotion !== 0 ) promotion = (promotion/100)
     
-    if(typeof clotheType !== 'string')return res.status(200).json("clotheType should be a word")
-    if(typeof brand !== 'string')return res.status(200).json("brand should be a word")
-    if(typeof name !== 'string')return res.status(200).json("name should be a word")
-    if(typeof gender !== 'string')return res.status(200).json("gender should be a word")
-    if(typeof sport !== 'string')return res.status(200).json("sport should be a word")
-    if(typeof collection !== 'string')return res.status(200).json("collection should be a word")
-    if(typeof color !== 'string')return res.status(200).json("color should be a word")
-    if(!Array.isArray(image))return res.status(200).json("image should be an array")
-    if(typeof stock !== 'number')return res.status(200).json("stock should be a number")
-    if(typeof price !== 'number')return res.status(200).json("price should be a number")
-    if(typeof promotion !== 'number')return res.status(200).json("promotion should be a number")
-    promotion = (promotion/100)
-
     try {
         let product
         if (id!=='') {
-            let productExists = Products.findByPk(id)
+            let productExists = await Products.findByPk(id)
+            console.log("product",productExists)
             if (productExists){
-
+                const asociados = await Products.findAll({
+                    where: {
+                      name: productExists.name,
+                      brand: productExists.brand,
+                      color: productExists.color,
+                      gender: productExists.gender,
+                    },
+                  });
+                  asociados.map( async (e) => 
+                  productosasociados = await e.update({
+                   clotheType: clotheType,
+                   brand: brand,
+                   name: name,
+                   gender: gender,
+                   sport: sport,
+                   collection: collection,
+                   price: price,
+                   promotion: promotion
+                },{where: {id: e.id}}
+                )) 
                 product = await Products.update({
                    clotheType: clotheType,
                    brand: brand,
@@ -49,13 +68,13 @@ router.post('/', async (req , res) => {
                    collection: collection,
                    color: color,
                    size: size,
-                   image: image,
                    stock: stock,
                    price: price,
                    promotion: promotion
                },
                {where: {id: id}}
                )
+               console.log("asociados",asociados)
             } else{
                 return res.status(200).json({message: 'El id enviado no pertenece a un producto en stock'})
             }

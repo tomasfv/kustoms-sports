@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
-import { PreviewCard, DashFilter } from "./index"
-import { useSelector } from "react-redux"
+import { DashPreviewCard, DashFilter } from "./index"
+import { useSelector, useDispatch } from "react-redux"
+import {DashgetDetailId, dashId} from "../redux/actions/index.js"
 
 const DashProdGallery = ({ productos }) => {
     //const [isFiltering, setIsFiltering] = useState(false)
     const [displaying, setDisplaying] = useState([])
     const filtering = useSelector(state => state.dashfilteredProducts)
-    const [nShowing, setNShowing] = useState(20)
+    const [nShowing, setNShowing] = useState(4)
     const [page, setPage] = useState(1)
     const totalProducts = displaying?.length
     const lastShowing = page * nShowing
     const firstShowing = lastShowing - nShowing
     const amountPages = []
     let onDisplay = []
+    const dispatch = useDispatch()
  
     // console.log("PRODUCTOS", productos)
-
+   
     for (let p = 0; p < Math.ceil(totalProducts / nShowing); p++) {
         amountPages.push(p)
     }
@@ -25,7 +27,7 @@ const DashProdGallery = ({ productos }) => {
     const handleClick = (numero) => {
         setPage(numero)
     }
-
+    
     const handleLeftClick = () => {
         page > 1 && (
             setPage(page - 1)
@@ -57,10 +59,10 @@ const DashProdGallery = ({ productos }) => {
 
 
         <div className="mt-6 flex flex-row mx-auto justify-center gap-6 items-center">
-            <button onClick={handleLeftClick} disabled={page === 1 ? true : false} className="text-main-dark dark:text-main-light cursor-pointer hover:bg-opacity-10 hover:bg-main-dark dark:hover:bg-main-light dark:hover:text-main-dark p-2 rounded-full">
+            <button onClick={handleLeftClick} disabled={page === 1 ? true : false} className="text-main-dark dark:text-main-light cursor-pointer hover:bg-verde-dark dark:hover:bg-verde-light dark:hover:text-main-dark p-2 rounded-full">
                 <MdChevronLeft />
             </button>
-            {amountPages && amountPages.map((e, index) => {
+            {/* {amountPages && amountPages.map((e, index) => {
                 e = e + 1
                 return (
                     <button key={index}
@@ -70,8 +72,8 @@ const DashProdGallery = ({ productos }) => {
                         {e}
                     </button>
                 )
-            })}
-            <button onClick={handleRightClick} disabled={page === amountPages.length ? true : false} className="text-main-dark dark:text-main-light cursor-pointer hover:bg-opacity-10 hover:bg-main-dark dark:hover:bg-main-light dark:hover:text-main-dark p-2 rounded-full">
+            })}  */}
+            <button onClick={handleRightClick} disabled={page === amountPages.length ? true : false} className="text-main-dark dark:text-main-light cursor-pointer  hover:bg-verde-dark dark:hover:bg-verde-light dark:hover:text-main-dark p-2 rounded-full">
                 <MdChevronRight onClick={handleRightClick} className="text-main-dark dark:text-main-light cursor-pointer " />
             </button>
         </div >
@@ -87,7 +89,7 @@ const DashProdGallery = ({ productos }) => {
                         La busqueda no produjo ningun resultado, intente cambiando algunos parametros
                     </section>
                     : onDisplay?.map((data, index) => (
-                        <PreviewCard data={data} key={index} />
+                       <DashPreviewCard data={data} key={index}/>
                     ))}
     
             </section>
