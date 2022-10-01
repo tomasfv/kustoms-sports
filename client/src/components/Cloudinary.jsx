@@ -19,7 +19,7 @@ const Cloudinary = ({addproduct}) => {
     const file = await res.data
     setImage([...image,file.secure_url])
   }
-  console.log(image)
+  console.log("image: ",image)
     return (
     <div className="App flex flex-col">
       <div className="flex flex-row">
@@ -29,10 +29,21 @@ const Cloudinary = ({addproduct}) => {
       />
       <button onClick={uploadImage}><GrDocumentUpload className="w-[30px] h-[30px]"/></button>
       </div>
-     
-      <a href={image} className="flex flex-col">
-        <img src={image} width="300px" height="300px" />
-      </a> 
+
+     {
+     image?.map((e,i)=> {
+      console.log("e,i:", e,i)
+      return (
+        <div>
+          <img id={i}
+            src={e}
+            alt="imagen del product"
+            width="300px"
+            height="300px"
+          />
+        </div>
+    )})
+     }
     </div>
   );
 }

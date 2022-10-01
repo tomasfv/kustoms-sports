@@ -31,7 +31,8 @@ export const types={
     UPDATE_BAN_USER: "UPDATE_BAN_USER",
     DASH_POST:"DASH_POST",
     UPDATE_USER:"UPDATE_USER",
-    GET_FINANCE: "GET_FINANCE"
+    GET_FINANCE: "GET_FINANCE",
+    GET_ALLSTOCK:"GET_ALLSTOCK"
 
 
 
@@ -72,6 +73,20 @@ export function getStock(id, email) {
       }
     };
   }
+
+export function getAllStock(id, email) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`${URL}dashboard/productos`);
+      return dispatch({
+        type: types.GET_ALLSTOCK,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
   export const getByCategory=(category, value)=>{
     return async (dispatch)=>{
@@ -173,7 +188,7 @@ export function getStock(id, email) {
   export const getAllProd=()=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}date`)
+        let response= await axios.get(`${URL}dashboard/getprod`)
         return dispatch({
           type: types.GET_ALL_PROD,
           payload:response.data
