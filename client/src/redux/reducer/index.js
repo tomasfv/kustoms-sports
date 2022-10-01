@@ -22,14 +22,10 @@ const initialState={
     profileCom:[],
     profileCarts:[],
     viewscarrousel: [],
-
-    
-    
     dashproducts: [],
-
     allUsers:[],
     sold:[],
-    
+    allStock:[],    
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -142,11 +138,16 @@ export const rootReducer=(state=initialState, action)=>{
                     stock:action.payload.map(d=>d),
                     color:action.payload[0]
                 }   
+        case types.GET_ALLSTOCK:
+            return{
+                ...state,
+                allStock:action.payload
+            }      
         case types.GET_NAVBAR:
-                return{
-                    ...state,
-                    navData:action.payload
-                }
+            return{
+                ...state,
+                navData:action.payload
+            }
         case types.GET_COMMENTS:
             const texts = action.payload.map(e=>[e.texto, e.rank])
             const user= action.payload.map(l=>l.user)

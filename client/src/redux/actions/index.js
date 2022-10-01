@@ -31,7 +31,7 @@ export const types={
     UPDATE_BAN_USER: "UPDATE_BAN_USER",
     DASH_POST:"DASH_POST",
     UPDATE_USER:"UPDATE_USER",
-
+    GET_ALLSTOCK:"GET_ALLSTOCK"
 
 
     
@@ -71,6 +71,20 @@ export function getStock(id, email) {
       }
     };
   }
+
+export function getAllStock(id, email) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`${URL}dashboard/productos`);
+      return dispatch({
+        type: types.GET_ALLSTOCK,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
   export const getByCategory=(category, value)=>{
     return async (dispatch)=>{
