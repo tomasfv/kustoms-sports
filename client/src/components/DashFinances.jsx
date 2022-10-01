@@ -22,7 +22,8 @@ console.log("holi",financedata)
         <table className="border w-[580px] ml-10 mr-2" >
             <thead className="" >
                 <tr className=" sticky top-0 bg-gris-light border-[1px] w-[780px] mb-[20px] text-md mr-4">
-                    <th className="border pl-2 pr-2">UserId</th>
+                <th className="border pl-2 pr-2">Imagen</th>
+                    <th className="border pl-2 pr-2">Email</th>
                     <th className="border pl-2 pr-2">Total</th>
                     <th className="border pl-2 pr-2">Fecha de pago</th>
                
@@ -34,7 +35,8 @@ console.log("holi",financedata)
                         return (
                             <>
                             <tr className="text-l mr-4">
-                                <td className="border pl-2 pr-2">{e.userId}</td>
+                                <td className="border"><img src={e.picture} className='w-[30px] h-[30px] rounded-full ml-[25%]'/></td>
+                                <td className="border pl-2 pr-2">{e.email}</td>
                                 <td className="border pl-2 pr-2">{e.totalamount}</td>
                                 <td className="border pl-2 pr-2">{e.updatedAt.split("T")[0]}</td>
                             
