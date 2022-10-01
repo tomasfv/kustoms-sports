@@ -10,6 +10,7 @@ import BarChart from "./BarChart";
 import DashUserTable from "./DashUserTable"
 import logoLargoLight from '../assets/logoLargoLight.png'
 import logoLargo from '../assets/logoLargo.png'
+import DashFinances from "./DashFinances";
 
 const Dashboard = () => {
   const [productos, setProductos] = useState(false);
@@ -257,6 +258,18 @@ const Dashboard = () => {
      }
      
   }
+  function handleFin (){
+    if (show.length){ 
+      setShow("finances")
+      setModificar(false)
+      setState(false)
+      setProductos(false)
+    }
+    if(logo === false){
+      setLogo(!logo)
+     }
+    
+  }
 
   return (
     <div className="mt-[150px] ml-[250px] mb-[100px] flex flex-row">
@@ -453,7 +466,7 @@ const Dashboard = () => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                    <span class="group-hover:text-gray-700">Finance</span>
+                    <span   onClick={handleFin} class="group-hover:text-gray-700">Finance</span>
                   </a>
                 </li>
               </ul>
@@ -741,6 +754,13 @@ const Dashboard = () => {
               <BarChart/>
             </div>
           }
+            {
+            show === "finances" &&
+            <div>
+              <DashFinances/>
+            </div>
+          }
+
         </div>}
       </div>
     </div>
