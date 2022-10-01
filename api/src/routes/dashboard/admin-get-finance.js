@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 
   userId: e.userId,
   totalamount: e.totalamount,
-  createdAt: e.createdAt,
+  updatedAt: e.updatedAt,
   products : e.products.map(t => { return { promotion: t.promotion }})
 
 }})

@@ -25,7 +25,9 @@ const initialState={
     dashproducts: [],
     allUsers:[],
     sold:[],
+    finances: [],
     allStock:[],    
+
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -59,6 +61,11 @@ export const rootReducer=(state=initialState, action)=>{
                 return{
                     ...state,
                     dashproducts: action.payload
+                }
+        case types.GET_FINANCE:
+                return{
+                    ...state,
+                    finances: action.payload
                 }
         case types.GET_ALL_USERS:
             return{
