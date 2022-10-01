@@ -75,6 +75,7 @@ router.post("/", async (req, res) => {
     //cerrar el carrito
     await cart.update({
       open: false,
+      totalamount: amount 
     });
 
     //console.log(payment);

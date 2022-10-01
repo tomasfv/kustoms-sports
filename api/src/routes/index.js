@@ -28,8 +28,7 @@ const viewcarrousel = require ("./dashboard/carrousel-views.js")
 const usersadmin = require ("./dashboard/admin-get-users.js")
 
 const adminproducts = require("./dashboard/admin-get-prod")
-
-
+const financials = require ("./dashboard/admin-get-finance.js")
 
 
 // Importar todos los routers;
@@ -40,6 +39,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
+router.use("/dashboard/financial", financials)
 router.use("/dashboard/usersadmin", usersadmin)
 router.use('/dashboard/carrouselview', viewcarrousel)
 router.use('/userdata', userdata)
