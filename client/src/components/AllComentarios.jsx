@@ -1,17 +1,16 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { dashComment, getAllUsers } from "../redux/actions";
+import { dashComment, getAllComments} from "../redux/actions";
 import swal from "sweetalert2";
 
 const AllComentarios = () =>{
 
-    const allusers = useSelector((state) => state.allUsers);
-    const comentarios = allusers.map(e=>{return(e.comments)})
-    console.log(comentarios)
+    const allcomments = useSelector((state) => state.allComments);
+    
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(getAllUsers())
+        dispatch(getAllComments())
     },[dispatch])
     
     function reload (){
@@ -30,33 +29,47 @@ const AllComentarios = () =>{
       })
       reload();
     }
+    // let datos = {}
+    
+    //     let hola = allusers.map(e => {
+    //         return{ 
+    //         email: e.email,
+    //         imagen: e.picture,
+    //         comentarios:           
+    //     }
+            
+    //     })
+
     return(
+            <div className="flex  items-center justify-center">
         <div>
-            <div className="flex  items-center justify-center mt-[100px]">
-                
+            <div className=" text-xl mt-[50px] font-bold mb-4">
+            Comentarios
+            </div>
                       <table >
                                 <thead className="max-w-[500px]">
                                  <tr>
-                                    {/* <th className="border">picture</th>
-                                    <th className="border">Email</th> */}
+                                    <th className="border">Email</th>
+                                    <th className="border">picture</th>
                                     <th className="border max-w-[500px]">Comentarios</th>
+                                    <th className="border max-w-[500px]">Puntuacion</th>
                                     <th className="border">Available</th>
                                     
                                  </tr>
                                  
                                 </thead>
                                 <tbody>
-                                {comentarios?.map(c=>{return(c.map(t=>{
+                                {allcomments?.map((e) => {return(
+                            <tr>
+                                <td className="border">{e.user.email}</td>
+                                <td className="border"><img src={e.user.picture} className='w-[30px] h-[30px] rounded-full ml-[25%]'/></td>
+                                <td className="border max-w-[500px] ">{e.texto}</td>
+                                <td className="border max-w-[500px] ">{e.rank}</td>
+                                <td className="border hover:bg-gris-light">
+                                <button  onClick={(e)=>handleBan(e)} id={e.id} >{e.available.toString()} </button></td>
+                            </tr>
+                                )})}
                                     
-                        return(
-                             <tr>
-                                
-                                <td className="border max-w-[500px] ">{t.texto}</td>
-                              <td className="border hover:bg-gris-light">
-                              <button  onClick={(e)=>handleBan(e)} id={t.id} >{t.available.toString()} </button></td>
-                                </tr>
-                        )
-                    }))})}
                                 </tbody>
                             
                       </table>

@@ -36,9 +36,9 @@ function DashUserTable() {
 
     return (
     <div >
-        {/* <div className=" text-4xl mt-[200px] font-bold">
-            DASHBOARD USERS TABLE
-        </div> */}
+        <div className="text-xl mt-[50px] font-bold mb-4">
+           Usuarios
+        </div>
         <div className="m-4">
             <input type = 'text' placeholder = 'buscar...' className="border" onChange={(e) => handleInputChange(e)}/>
             <button className="border font-bold pl-2 pr-2 ml-1" type = 'submit' onClick={(e) => handleSubmit(e)}>BUSCAR</button>
@@ -100,7 +100,7 @@ function DashUserTable() {
                                         
                                     </button>
                                 </td> */}
-                                <td className="border">{e.createdAt.slice(0,10)}</td>
+                                <td className="border">{e.createdAt}</td>
                             </tr>
                             </>
                         )

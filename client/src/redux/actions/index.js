@@ -36,6 +36,7 @@ export const types={
     DASH_ID:"DASH_ID",
     DASH_GET_STOCK:"DASH_GET_STOCK",
     GET_FINANCE: "GET_FINANCE",
+    GET_ALL_COMMENTS: "GET_ALL_COMMENTS",
     
     
 }
@@ -167,6 +168,19 @@ export function getAllStock(id, email) {
         let response= await axios.get(`${URL}dashboard/usersadmin`)
         return dispatch({
           type: types.GET_ALL_USERS,
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getAllComments=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}dashboard/commentsadmin`)
+        return dispatch({
+          type: types.GET_ALL_COMMENTS,
           payload: response.data
         })
       } catch (error) {
