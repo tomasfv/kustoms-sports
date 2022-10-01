@@ -44,7 +44,7 @@ function Tab() {
         </div>
       {/* Content */}
       <div className="grow">
-        <div className={toggleState === 1 ? "bg-main-light p-[20px] w-[100%] h-[100%] block" : "bg-main-light p-[20px] w-[100%] h-[100%] hidden"}>
+        <div className={toggleState === 1 ? "bg-main-light dark:bg-main-dark dark:text-main-light p-[20px] w-[100%] h-[100%] block" : "bg-main-light dark:bg-main-dark dark:text-main-light p-[20px] w-[100%] h-[100%] hidden"}>
           {/* Comentarios */}
           {comments.map(e =>{
                       return (
@@ -68,7 +68,7 @@ function Tab() {
                         )
                       })}
         </div>
-        <div className={toggleState === 2 ? "bg-main-light p-[20px] w-[100%] h-[100%] block" : "bg-main-light p-[20px] w-[100%] h-[100%] hidden"}>
+        <div className={toggleState === 2 ? "bg-main-light dark:bg-main-dark dark:text-main-light p-[20px] w-[100%] h-[100%] block" : "bg-main-light dark:bg-main-dark dark:text-main-light p-[20px] w-[100%] h-[100%] hidden"}>
           {/* compras */}
           {productsInfo.map(n =>{return n.map(l =>{
                       return (
