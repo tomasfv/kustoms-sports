@@ -9,17 +9,19 @@ router.get("/", async (req, res) => {
     let financial = await Carts.findAll({
       where :{ open: "false"},
       include :{
-        model: Products
+        model: Products,
+        /* model: Users */
       },
     });
-    
+
   const finduserid = financial.map(e => { return{
 
   userId: e.userId,
   totalamount: e.totalamount,
   updatedAt: e.updatedAt,
-  products : e.products.map(t => { return { promotion: t.promotion }})
-
+  products : e.products.map(t => { return { promotion: t.promotion }}),
+  name : e.products.map(t => { return { name: t.name }}),
+  /* email: e.users.email */
 }})
 
 
