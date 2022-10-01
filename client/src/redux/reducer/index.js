@@ -22,13 +22,10 @@ const initialState={
     profileCom:[],
     profileCarts:[],
     viewscarrousel: [],
-
-    
-    
     dashproducts: [],
-
     allUsers:[],
     sold:[],
+    finances: []
     
 }
 
@@ -63,6 +60,11 @@ export const rootReducer=(state=initialState, action)=>{
                 return{
                     ...state,
                     dashproducts: action.payload
+                }
+        case types.GET_FINANCE:
+                return{
+                    ...state,
+                    finances: action.payload
                 }
         case types.GET_ALL_USERS:
             return{

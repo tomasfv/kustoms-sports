@@ -31,6 +31,7 @@ export const types={
     UPDATE_BAN_USER: "UPDATE_BAN_USER",
     DASH_POST:"DASH_POST",
     UPDATE_USER:"UPDATE_USER",
+    GET_FINANCE: "GET_FINANCE"
 
 
 
@@ -382,4 +383,19 @@ export const bestsold = () => {
       {console.log(e)}
     }
   }
+}
+export const getfinance = () =>{
+return async function (dispatch){
+  try {
+    let finances = await axios.get(`${URL}dashboard/financial`)
+    return dispatch({
+      type: types.GET_FINANCE,
+      payload: finances.data
+    })
+  } catch (e) {
+    {console.log(e)}
+    
+  }
+}
+
 }
