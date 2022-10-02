@@ -20,7 +20,7 @@ const SelectoresProduct = () => {
   const [comentarios, setComentarios] = useState(false);
   const comments = useSelector((state) => state.comments);
   const User = useSelector((state) => state.userCom);
-  const allowed= useSelector((state) => state.allowed);
+  const allowed = useSelector((state) => state.allowed);
   const nameCom = useSelector((state) => state.nameComments);
   const details = useSelector((state) => state.details);
   const imagenes = useSelector((state) => state.images);
@@ -33,9 +33,9 @@ const SelectoresProduct = () => {
     rank: 5,
     gender: "",
   });
-  
+
   useEffect(() => {
-    dispatch(getAllowed(email,details.name,details.gender))
+    dispatch(getAllowed(email, details.name, details.gender));
     dispatch(getComments(details.name, details.gender));
     setInput({
       email: email,
@@ -45,7 +45,7 @@ const SelectoresProduct = () => {
       gender: details.gender,
     });
   }, [details, user, email]);
-  console.log(input, "gender")
+  console.log(input, "gender");
   function handleClick(e) {
     setDesplegable(!desplegable);
   }
@@ -55,29 +55,28 @@ const SelectoresProduct = () => {
   function handleClickD(e) {
     setDescripcion(!descripcion);
   }
-  
+
   function handleClickComent(e) {
     setComentarios(!comentarios);
   }
-  function closer(){
-    get()
-    setIsOpen(false)
+  function closer() {
+    get();
+    setIsOpen(false);
   }
   function get() {
-    dispatch(getComments(details.name, details.gender));  
+    dispatch(getComments(details.name, details.gender));
   }
   function handleComment() {
-    
-    get()
-    if(input.text !== ""){
-    dispatch(postComment(input));
-     
-    setInput({
-      ...input,
-      text: "",
-      rank:""
-    });}
-    
+    get();
+    if (input.text !== "") {
+      dispatch(postComment(input));
+
+      setInput({
+        ...input,
+        text: "",
+        rank: "",
+      });
+    }
   }
   function handleChangue(e) {
     setInput({
@@ -118,41 +117,60 @@ const SelectoresProduct = () => {
 
                 <div className="flex flex-col gap-[90px] ml-[30px] mt-[15px]">
                   {comments.map((e) => {
-                    return <div><p>{e[0]}</p>
-                                <p className="rating"><input type="radio" name="rating-2" className="mask mask-star-2 bg-success " checked />{e[1]}</p>
-                                </div>;
+                    return (
+                      <div>
+                        <p>{e[0]}</p>
+                        <p className="rating">
+                          <input
+                            type="radio"
+                            name="rating-2"
+                            className="mask mask-star-2 bg-success "
+                            checked
+                          />
+                          {e[1]}
+                        </p>
+                      </div>
+                    );
                   })}
                 </div>
               </div>
 
               <div className="flex flex-row">
                 <div className=" flex ">
-                  {isAuthenticated?
-                  <div>
-                    {allowed === "usuario baneado"? 
-                      <p className=" flex flex-row font-bold text-red-dark mt-[20px]">ESTAS BANEADO <HiBan className="text-[20px]"/></p>
-                      : allowed === "User allowed" ?
-                    <button
-                    onClick={()=> setIsOpen(true)}
-                    
-                    className="flex bottom-0 right-0 ml-[1000px] border rounded  text-[20px] p-1 mr-[10px]font-bold h-[30px]"
-                  >
-                    Comentar
-                  </button>:<p className="mt-[20px]">Debe comprar el producto para poder comentar</p>} 
-                  </div>:<div className="flex ">
-            <p>
-              Para poder realizar un comentario,debe{" "}
-              <button
-                onClick={() => loginWithRedirect()}
-                className="text-verde-dark font-bold "
-              >
-                {" "}
-                registrarse / ingresar{" "}
-              </button>{" "}
-              en la página.
-            </p>
-          </div>
-                  }
+                  {isAuthenticated ? (
+                    <div>
+                      {allowed === "usuario baneado" ? (
+                        <p className=" flex flex-row font-bold text-red-dark mt-[20px]">
+                          ESTAS BANEADO <HiBan className="text-[20px]" />
+                        </p>
+                      ) : allowed === "User allowed" ? (
+                        <button
+                          onClick={() => setIsOpen(true)}
+                          className="flex bottom-0 right-0 ml-[1000px] border rounded  text-[20px] p-1 mr-[10px]font-bold h-[30px]"
+                        >
+                          Comentar
+                        </button>
+                      ) : (
+                        <p className="mt-[20px]">
+                          Debe comprar el producto para poder comentar
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="flex ">
+                      <p>
+                        Para poder realizar un comentario,debe{" "}
+                        <button
+                          onClick={() => loginWithRedirect()}
+                          className="text-verde-dark font-bold "
+                        >
+                          {" "}
+                          registrarse / ingresar{" "}
+                        </button>{" "}
+                        en la página.
+                      </p>
+                    </div>
+                  )}
 
                   <Modal open={isOpen} onClose={closer}>
                     {" "}
@@ -166,17 +184,44 @@ const SelectoresProduct = () => {
                         name="text"
                         onChange={(e) => handleChangue(e)}
                       ></input>
-                      <div className="rating"  onClick={(e) => handleChangue(e)}>
-                        <input type="radio" value={1} name="rank" className="mask mask-star-2 bg-verde-light " />
-                        <input type="radio" value={2} name="rank" className="mask mask-star-2 bg-verde-light " />
-                        <input type="radio" value={3} name="rank" className="mask mask-star-2 bg-verde-light " />
-                        <input type="radio" value={4} name="rank" className="mask mask-star-2 bg-verde-light " />
-                        <input type="radio" value={5} name="rank" className="mask mask-star-2 bg-verde-light " />
+                      <div className="rating" onClick={(e) => handleChangue(e)}>
+                        <input
+                          type="radio"
+                          value={1}
+                          name="rank"
+                          className="mask mask-star-2 bg-verde-light "
+                        />
+                        <input
+                          type="radio"
+                          value={2}
+                          name="rank"
+                          className="mask mask-star-2 bg-verde-light "
+                        />
+                        <input
+                          type="radio"
+                          value={3}
+                          name="rank"
+                          className="mask mask-star-2 bg-verde-light "
+                        />
+                        <input
+                          type="radio"
+                          value={4}
+                          name="rank"
+                          className="mask mask-star-2 bg-verde-light "
+                        />
+                        <input
+                          type="radio"
+                          value={5}
+                          name="rank"
+                          className="mask mask-star-2 bg-verde-light "
+                        />
                       </div>
                       <button
                         className="absolute bottom-[20px] right-0 border-[2px] m-2 p-1"
                         //onClick={handleComment} onclick={setIsOpen(false)}
-                        onClick={() => {handleComment()}}
+                        onClick={() => {
+                          handleComment();
+                        }}
                       >
                         Comentar
                       </button>
@@ -203,24 +248,30 @@ const SelectoresProduct = () => {
                     <p>diseñada para hinchas de verdad</p>
                   </div>
                 )}
+                {details.clotheType === "Pantalón" && (
+                  <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
+                    <p>El nuevo {details.name}</p>
+                    <p>con una comodidad única</p>
+                  </div>
+                )}
                 {details.clotheType === "Short" && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
                     <p>Los Clásicos {details.name}</p>
-                    <p>Hechos con materiales reciclados</p>
+                    <p>hechos con materiales reciclados</p>
                   </div>
                 )}
                 {details.clotheType === "Pelota" && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
                     <p>Escribe tu propia historia futbolística</p>
 
-                    <p>Con la nueva {details.name}</p>
+                    <p>con la nueva {details.name}</p>
                   </div>
                 )}
                 {details.clotheType === "Buzo" && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] mt-[100px] ">
                     <p>Lucí un estilo único y cómodo con</p>
 
-                    <p>El nuevo {details.name}</p>
+                    <p>el nuevo {details.name}</p>
                   </div>
                 )}
 
@@ -240,6 +291,26 @@ const SelectoresProduct = () => {
                         partir de desechos de producción, tales como recortes de
                         tela, y desechos domésticos postconsumo, para evitar un
                         mayor impacto ambiental al producir contenido virgen.
+                      </p>
+                    </div>
+                  )}
+                  {details.clotheType === "Pantalón" && (
+                    <div>
+                      <p className="w-[600px] mt-[10px]">
+                        Presentamos el nuevo {details.name}, un clásico
+                        atemporal llevado a nuevas alturas.
+                      </p>
+                      <p className="w-[600px] mt-[10px]">
+                        Este pantalón ha sido rediseñado con nuestro toque más
+                        prémium. La silueta estilizada y la entrepierna caída
+                        ofrecen un ajuste más moderno, mientras que los cierres
+                        en los tobillos te permiten personalizar la forma en que
+                        muestras tus rayas.
+                      </p>
+                      <p className="w-[600px] mt-[10px]">
+                        Los estribos integrados te mantienen listo para la
+                        acción intensa, pero seamos realistas, lo más probable
+                        es que lo usés para verte muy cool mientras descansás.
                       </p>
                     </div>
                   )}
