@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect , useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dashComment, getAllComments} from "../redux/actions";
 import swal from "sweetalert2";
@@ -7,27 +7,40 @@ import swal from "sweetalert2";
 const AllComentarios = () =>{
 
     const allcomments = useSelector((state) => state.allComments);
+    const [changed, setChanged] = useState(true);
     
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getAllComments())
-    },[dispatch])
+    },[dispatch, changed])
     
-    function reload (){
-        window.location.reload();
-    }
+    // function reload (){
+    //     window.location.reload();
+    // }
 
     function handleBan(e){
+        // console.log("changed: ",changed)
+        setChanged(!changed)
         let id = e.target.id
-       dispatch(dashComment(id))
-       swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Comentario baneado",
-        showConfirmButton: false,
-        timer: 2500,
-      })
-      reload();
+        // console.log("e.target.value: ",e.target.value)
+        // console.log("!!e.target.value: ",!!e.target.value)
+        // console.log("changed: ",changed)
+        let title = "Comentario baneado"
+        if (e.target.value !== 'true') {
+            title = "Comentario habilitado"
+        } else {
+            title = "Comentario baneado"
+        }
+        // console.log("title: ",title)
+        dispatch(dashComment(id))
+        swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: title,
+            showConfirmButton: false,
+            timer: 2000,
+        })  
+    //   reload();
     }
     // let datos = {}
     
@@ -66,7 +79,7 @@ const AllComentarios = () =>{
                                 <td className="border max-w-[500px] ">{e.texto}</td>
                                 <td className="border max-w-[500px] ">{e.rank}</td>
                                 <td className="border hover:bg-gris-light">
-                                <button  onClick={(e)=>handleBan(e)} id={e.id} >{e.available.toString()} </button></td>
+                                <button  onClick={(e)=>handleBan(e)} id={e.id} value={e.available}>{e.available.toString()} </button></td>
                             </tr>
                                 )})}
                                     

@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { ProductGallery } from ".";
 import {  useEffect } from "react"
-import { DashgetDetailId, dashgetStock } from "../redux/actions";
+import { DashgetDetailId, dashgetStock, DashDelDetail } from "../redux/actions";
 import { PreviewCard, Filters } from "./index"
 import { useDispatch, useSelector } from "react-redux"
 import DashNavBar from "./DashNavBar";
@@ -17,18 +17,26 @@ const ModificarProd = () =>{
     const datos = useSelector(state => state.dashdetails)
     const stock = useSelector(state => state.dashstock)
     const color = useSelector(state => state.dashcolor)
+
+    // const [carga, setCarga] = useState(false)
+
     console.log("dasdetail",datos) 
     const handleVolver = () => {
-        if (datos.length){
-            datos = []
-        } 
+        dispatch(DashDelDetail())
+        // if (datos.length && stock.length && color.length){
+        //     datos = {};
+        //     stock = {};
+        //     color = {};
+        //     // id = 0
+        // } 
+        // setCarga(!carga)
     }
 
     const dispatch = useDispatch()
     useEffect(()=> {
         dispatch(DashgetDetailId(id))
         dispatch(dashgetStock(id))
-    },[dispatch,id])
+    },[dispatch, id])
     // const filtering = useSelector(state => state.filteredProducts)
     return(
     <div>
