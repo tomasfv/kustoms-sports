@@ -29,11 +29,22 @@ const Carrito = () => {
 
   if(data.length === 0) data.totalamount = 0
   let descuento = 0
+  let descuento2 = 0
+  let precios = 0
   let final = 0
   if (dataBuy.length > 0){
     descuento = dataBuy.map(e => Math.round(e.price * (1 - e.promotion))) 
     final = descuento.reduce((acc, elemento) => { return acc + elemento; })
+    descuento2 = dataBuy.map(e => Math.round(e.price * e.promotion)) 
+    descuento2 = descuento2.reduce((acc, e) => { return acc + e })
+    precios = dataBuy.map(e => Math.round(e.price)) 
+    precios = precios.reduce((acc, e) => { return acc + e})
+    console.log("descuento2, precios ", descuento2, precios)
+
+
   }
+
+
  
 
   console.log('DATABUY: ', dataBuy) 
@@ -105,13 +116,15 @@ const Carrito = () => {
             
             <div className="flex flex-row mt-[20px]">
               <div className="flex font-bold text-[25px] ml-[15px]">Subtotal:
-                <div className=" flex ml-[154px] mr-[200px]">${data.totalamount}
+                {/* <div className=" flex ml-[154px] mr-[200px]">${data.totalamount} */}
+                <div className=" flex ml-[154px] mr-[200px]">${precios}
                 </div>
               </div>
             </div>
             <div className="flex flex-row mt-[20px]">
               <div className="flex font-bold text-[25px] ml-[15px]">Descuento:
-                <div className=" flex ml-[124px] mr-[200px]">${data.totalamount - final}
+                {/* <div className=" flex ml-[124px] mr-[200px]">${data.totalamount - final} */}
+                <div className=" flex ml-[124px] mr-[200px]">${descuento2}
                 </div>
               </div>
             </div> 
@@ -125,7 +138,7 @@ const Carrito = () => {
           
              
             {/* {console.log("data",data)} */}
-            {data.totalamount === undefined || data.totalamount === 0 ? 
+            {data.totalamount === undefined || final === 0 ? 
             <p className="border text-main-light bg-main-dark w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">Tu carrito está vacío</p>
             :<a href="/payment" className="border text-[white] bg-verde-light w-[350px] ml-[25px] text-[20px]  justify-center items-center mt-[20px] p-2">COMPRAR</a>
           } 

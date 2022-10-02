@@ -16,24 +16,27 @@ import swal from "sweetalert2";
     clotheType: datos.clotheType,
     brand: datos.brand,
     name: datos.name,
-    gender: color.gender,
     sport: datos.sport,
     collection: datos.collection,
-    color: color.color,
     size: datos.size,
-    stock: color.stock,
     price: datos.price,
+    gender: datos.gender,
+    color: datos.color,
+    stock: datos.stock,
+    /* gender: color.gender,
+    color: color.color,
+    stock: color.stock, */
     promotion: Math.round((datos.promotion*100)),
   });
   useEffect(()=> {
     if (datos.promotion === null){
       setAddProduct({
-        ...state,
+        ...addproduct,
         promotion: 0
       })
     }
     setAddProduct({
-      ...state,
+      ...addproduct,
       color: color.color,
       // size: datos.size,
       stock: color.stock,
