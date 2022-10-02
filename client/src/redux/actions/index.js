@@ -37,7 +37,7 @@ export const types={
     DASH_GET_STOCK:"DASH_GET_STOCK",
     GET_FINANCE: "GET_FINANCE",
     GET_ALL_COMMENTS: "GET_ALL_COMMENTS",
-    
+    DASH_DEL_DETAILS: "DASH_DEL_DETAILS",
     
 }
 
@@ -75,6 +75,15 @@ export function DashgetDetailId(id) {
       }
     };
   }
+export function DashDelDetail(){
+  return  function (dispatch){
+    return dispatch({
+      type: types.DASH_DEL_DETAILS,
+      // type: types.DASH_ID,
+    });
+  }
+}
+
   export const dashId=(payload)=>{
     console.log("payload", payload)
     return{

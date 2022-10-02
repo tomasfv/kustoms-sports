@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
       if (element.stock === 0) {
         nombre = element.name;
       } else {
-        let precioCompra = element.price * (1 - element.promotion);
+        let precioCompra = Math.round(element.price * (1 - element.promotion));
         console.log("precioCompra: ",precioCompra)
         productosComprados.push({
           nombre: element.name,
@@ -83,10 +83,33 @@ router.post("/", async (req, res) => {
     //     //mandamos correo de compra con detalles
     let texto = `<p>Gracias por tu compra realizada en <a href="https://kustoms-sports.vercel.app/">Kustoms-Sports</a> por un monto de $ ${amount} </p>`
     texto += `<p>El detalle de la misma es el siguiente: ....</p>`
-    texto += `<p>Producto                   Precio           </p>`
-    let begin= productosComprados.forEach(element => {
-      texto += `<p>${element.nombre}              ${element.precio}</p>`
-    })
+    texto += `<table className="border w-[900px] ml-10 mr-2 mb-[200px]">
+    <thead>
+        <tr className="text-sm">
+            <th className="border">Producto</th>
+            <th className="border">Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <>
+        <tr className="text-l">
+        `
+    for (let i = 0; i < productosComprados.length; i++) {
+      texto += `<td className="border">${productosComprados[i].nombre}</td>
+                <td className="border">$ ${productosComprados[i].precio}    </td>
+                `
+    }
+    // let begin= productosComprados.forEach(element => {
+    //   texto += `<td className="border">${element.nombre}</td>
+    //             <td className="border">$ ${element.precio}    </td>
+    //             `
+    // })
+    texto += `</tr></></body></table>`
+            
+    // texto += `<p>Producto                   Precio           </p>`
+    // let begin= productosComprados.forEach(element => {
+    //   texto += `<p>${element.nombre}              ${element.precio}</p>`
+    // })
     
 
     const transs = await transporter.sendMail({

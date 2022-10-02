@@ -132,7 +132,13 @@ export const rootReducer=(state=initialState, action)=>{
                 ...state,
                 dashdetails:action.payload,
             }
-        case types.GET_CATEGORY:
+            case types.DASH_DEL_DETAILS:
+                return{
+                    ...state,
+                    dashid: "",
+                    dashdetails:[],
+                }
+            case types.GET_CATEGORY:
             return{
                 ...state,
                 productByCategory:action.payload

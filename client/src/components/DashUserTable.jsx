@@ -1,38 +1,112 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllUsers, updateBanUser, updateUser} from "../redux/actions";
-
+import swal from "sweetalert2";
 
 function DashUserTable() {
     const allUsers = useSelector((state) => state.allUsers);
     const dispatch = useDispatch();
     const [searchName, setSearchName] = useState("");
-    const [filtName, setFiltName] = useState();
-    const [emailBan, setEmailBan] = useState("")
+    const [filtName, setFiltName] = useState("");
+    // const [emailBan, setEmailBan] = useState("")
     const [upgUser, setUpgUser] = useState("")
+    const [changed, setChanged] = useState(true);
 
     useEffect(() => {
         dispatch(getAllUsers());
-      }, [dispatch]);
+    }, [dispatch, changed]);
 
 
-      function handleInputChange(e){
-          e.preventDefault();
-          setSearchName(e.target.value);
-      }
+    function handleInputChange(e){
+        e.preventDefault();
+        setSearchName(e.target.value);
+    }
 
-      
-      dispatch(updateBanUser(emailBan))
-      dispatch(updateUser(upgUser))
-      console.log('BANEADO: ', emailBan)
-      
-      function handleSubmit(e){
-          e.preventDefault();
-          let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
-          setFiltName(nombreFinal);
-          //console.log('FILTRADO: ', nombreFinal) 
+    // dispatch(updateBanUser(emailBan))
+    // dispatch(updateUser(upgUser))
+    // console.log('BANEADO: ', emailBan)
+    
+    function handleSubmit(e){
+        e.preventDefault();
+        let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
+        setFiltName(nombreFinal);
+        //console.log('FILTRADO: ', nombreFinal) 
+    }
+
+    function handleClick(e){
+        console.log("e.target.value: ",e.target.value)
+        console.log("e.target.value typeof: ",typeof e.target.value)
+        setChanged(!changed)
+        let title = "..."
+        let values =  e.target.value.split(",")
+        let valor = false
+        if (values[1] !== 'true') {
+            valor = false
+            title = "Usuario habilitado"
+        } else {
+            title = "Usuario baneado"
+            valor = true
         }
-        
+        console.log("e.target.value[0]: ",values[0])
+        dispatch(updateBanUser(values[0]))
+        console.log("filtName: ",filtName)
+        if (filtName)  {
+            let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
+            console.log("nombreFinal: ",nombreFinal)
+            for (let i = 0; i < nombreFinal.length; i++) {
+               if ( nombreFinal[i].id == values[2]){
+                nombreFinal[i].available = !valor
+               }
+            }
+            setFiltName(nombreFinal);
+        }
+        swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: title,
+            showConfirmButton: false,
+            timer: 2000,
+        })  
+        //   reload();
+    }
+
+    function handleProfile(e){
+        console.log("e.target.value: ",e.target.value)
+        console.log("e.target.value typeof: ",typeof e.target.value)
+        setChanged(!changed)
+        let title = "..."
+        let values =  e.target.value.split(",")
+        let valor = 'Admin'
+        if (values[1] !== 'Admin') {
+            valor = "Admin"
+            title = "Usuario Admin"
+        } else {
+            title = "Usuario Client"
+            valor = "Client"
+        }
+        console.log("e.target.value[0]: ",values[0])
+        dispatch(updateUser(values[0]))
+        console.log("filtName: ",filtName)
+        if (filtName)  {
+            let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
+            console.log("nombreFinal: ",nombreFinal)
+            for (let i = 0; i < nombreFinal.length; i++) {
+               if ( nombreFinal[i].id == values[2]){
+                nombreFinal[i].profile = valor
+               }
+            }
+            setFiltName(nombreFinal);
+        }
+        swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: title,
+            showConfirmButton: false,
+            timer: 2000,
+        })  
+        //   reload();
+    }
+
 
     return (
     <div >
@@ -66,8 +140,10 @@ function DashUserTable() {
                                 <td className="border">{f.name}</td>
                                 <td className="border">{f.email}</td>
                                 <td className="border"><img src={f.picture} className='w-[30px] h-[30px] rounded-full ml-[25%]'/></td>
-                                <td className="border hover:bg-gris-light" ><button onClick={() => setUpgUser(f.email)}>{f.profile}</button></td>
-                                <td className="border hover:bg-gris-light" ><button onClick={() => setEmailBan(f.email)}>
+                                {/* <td className="border hover:bg-gris-light" ><button onClick={() => setUpgUser(f.email)}>{f.profile}</button></td> */}
+                                <td className="border hover:bg-gris-light" ><button value={[f.email, f.profile, f.id]} onClick={(e)=>handleProfile(e)}>{f.profile}</button></td>
+                                <td className="border hover:bg-gris-light" ><button value={[f.email, f.available, f.id]} onClick={(e)=>handleClick(e)}>
+                                    {/* <button onClick={() => setEmailBan(f.email)}> */}
                                 {f.available.toString()}
                                 </button></td>
                                 <td className="border">{f.createdAt}</td>
@@ -83,7 +159,8 @@ function DashUserTable() {
                                 <td className="border">{e.name}</td>
                                 <td className="border">{e.email}</td>
                                 <td className="border"><img src={e.picture} className='w-[30px] h-[30px] rounded-full ml-[25%]'/></td>
-                                <td className="border hover:bg-gris-light"><button onClick={() => setUpgUser(e.email)}>{e.profile}</button></td>
+                                {/* <td className="border hover:bg-gris-light"><button onClick={() => setUpgUser(e.email)}>{e.profile}</button></td> */}
+                                <td className="border hover:bg-gris-light"><button value={[e.email, e.profile, e.id]} onClick={(e)=>handleProfile(e)}>{e.profile}</button></td>
                                 {/* <td className="border">
                                     <select>
                                         <option>Admin</option>
@@ -91,7 +168,8 @@ function DashUserTable() {
                                         
                                     </select>
                                 </td> */}
-                                <td className="border hover:bg-gris-light"><button onClick={() => setEmailBan(e.email)}>
+                                <td className="border hover:bg-gris-light" ><button value={[e.email, e.available, e.id]} onClick={(e)=>handleClick(e)}>
+                                {/* onClick={() => setEmailBan(e.email)}> */}
                                 {e.available.toString()}
                                 </button></td>
                                 {/* <td className="border">

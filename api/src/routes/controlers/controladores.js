@@ -51,6 +51,9 @@ module.exports = {
     let infoprod = {};
 
     (infoprod.name = productdetail.name),
+    (infoprod.id = productdetail.id), // modif Carlos
+    (infoprod.size = productdetail.size), // modif Carlos
+    (infoprod.stock = productdetail.stock), // modif Carlos
       (infoprod.clotheType = productdetail.clotheType),
       (infoprod.brand = productdetail.brand),
       (infoprod.gender = productdetail.gender),
