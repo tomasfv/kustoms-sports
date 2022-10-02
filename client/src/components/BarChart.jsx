@@ -11,6 +11,7 @@ import { Bar, Line } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bestsold } from "../redux/actions/index";
+import DashLowStock from "./DashLowStock.jsx"
 
 ChartJS.register(
   CategoryScale,
@@ -141,10 +142,11 @@ function BarChart() {
         </option>
       </select>
   
-      <div className=" w-50 h-30 mx-px">
+      <div className=" w-50 h-30 ">
         <Bar options={chartOptions} data={chartData} />
       </div>
     </div>
+
   );
 }
 

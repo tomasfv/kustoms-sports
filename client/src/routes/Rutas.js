@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
 import { Home, Details, Categories, DashCategories } from '../views/index'
 import { Profile2 } from '../views/Profile2';
-import { Carrito, Dashboard,} from '../components';
+import { About, Carrito, Dashboard,} from '../components';
 import Payment from '../components/Payment'
 
 const Rutas = () => {
@@ -18,6 +18,7 @@ const Rutas = () => {
                     <Route path={'/carrito'} element={<Carrito/>} />
                     <Route path={'/payment'} element={<Payment/>} />
                     <Route path={'/dashboard'} element={<Dashboard/>} />
+                    <Route path={'/about'} element={<About/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

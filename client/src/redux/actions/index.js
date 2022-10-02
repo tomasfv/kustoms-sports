@@ -31,9 +31,13 @@ export const types={
     UPDATE_BAN_USER: "UPDATE_BAN_USER",
     DASH_POST:"DASH_POST",
     UPDATE_USER:"UPDATE_USER",
-
-
-
+    GET_ALLSTOCK:"GET_ALLSTOCK",
+    DASH_GET_DETAILS: "DASH_GET_DETAILS",
+    DASH_ID:"DASH_ID",
+    DASH_GET_STOCK:"DASH_GET_STOCK",
+    GET_FINANCE: "GET_FINANCE",
+    GET_ALL_COMMENTS: "GET_ALL_COMMENTS",
+    
     
 }
 
@@ -58,6 +62,26 @@ export function getDetailId(id, email) {
       }
     };
   }
+export function DashgetDetailId(id) {
+    return async function (dispatch) {
+      try {
+        var json = await axios.get(`${URL}${id}` + "?email=undefined");
+        return dispatch({
+          type: types.DASH_GET_DETAILS,
+          payload: json.data[0],
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+  export const dashId=(payload)=>{
+    console.log("payload", payload)
+    return{
+      type: types.DASH_ID,
+      payload:payload
+    }
+  }
 export function getStock(id, email) {
     return async function (dispatch) {
       try {
@@ -71,6 +95,33 @@ export function getStock(id, email) {
       }
     };
   }
+export function dashgetStock(id, email) {
+    return async function (dispatch) {
+      try {
+        var json = await axios.get(`${URL}${id}` + "?email=undefined");
+        return dispatch({
+          type: types.DASH_GET_STOCK,
+          payload: json.data[1],
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+export function getAllStock(id, email) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`${URL}dashboard/productos`);
+      return dispatch({
+        type: types.GET_ALLSTOCK,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
   export const getByCategory=(category, value)=>{
     return async (dispatch)=>{
@@ -117,6 +168,19 @@ export function getStock(id, email) {
         let response= await axios.get(`${URL}dashboard/usersadmin`)
         return dispatch({
           type: types.GET_ALL_USERS,
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  export const getAllComments=()=>{
+    return async (dispatch)=>{
+      try {
+        let response= await axios.get(`${URL}dashboard/commentsadmin`)
+        return dispatch({
+          type: types.GET_ALL_COMMENTS,
           payload: response.data
         })
       } catch (error) {
@@ -172,7 +236,7 @@ export function getStock(id, email) {
   export const getAllProd=()=>{
     return async (dispatch)=>{
       try {
-        let response= await axios.get(`${URL}date`)
+        let response= await axios.get(`${URL}dashboard/getprod`)
         return dispatch({
           type: types.GET_ALL_PROD,
           payload:response.data
@@ -382,4 +446,19 @@ export const bestsold = () => {
       {console.log(e)}
     }
   }
+}
+export const getfinance = () =>{
+return async function (dispatch){
+  try {
+    let finances = await axios.get(`${URL}dashboard/financial`)
+    return dispatch({
+      type: types.GET_FINANCE,
+      payload: finances.data
+    })
+  } catch (e) {
+    {console.log(e)}
+    
+  }
+}
+
 }

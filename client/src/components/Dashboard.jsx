@@ -9,8 +9,12 @@ import AllComentarios from "./AllComentarios";
 import BarChart from "./BarChart";
 import DashUserTable from "./DashUserTable"
 import logoLargoLight from '../assets/logoLargoLight.png'
+import logoLargo from '../assets/logoLargo.png'
+import DashLowStock from "./DashLowStock";
+import DashFinances from "./DashFinances";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
+
 
 
 const Dashboard = () => {
@@ -21,8 +25,10 @@ const Dashboard = () => {
   const [errorImg, setErrorImg] = useState(false);
   const [modificar, setModificar] = useState(false);
   const [show, setShow] = useState("x")
+  const [logo, setLogo] = useState(false);
   const { isAuthenticated, user } = useAuth0();
   const email = user?.email;
+
   const dispatch = useDispatch();
   const [addproduct, setAddProduct] = useState({
     id: "",
@@ -109,7 +115,6 @@ const Dashboard = () => {
     }
     if (
       addproduct.promotion < 0 ||
-      addproduct.promotion === 0 ||
       addproduct.promotion > 100
     ) {
       errors.promotion = "Declarar un precio con valor entre  0 y 100 ";
@@ -125,6 +130,9 @@ const Dashboard = () => {
     if(modificar === true){
       setModificar(!modificar)
     }
+    if(logo === false){
+      setLogo(!logo)
+     }
   }
   function handleCom (){
     if (show.length){ 
@@ -133,6 +141,9 @@ const Dashboard = () => {
       setState(false)
       setProductos(false)
     }
+    if(logo === false){
+      setLogo(!logo)
+     }
     
   }
   function handleGraf (){
@@ -142,7 +153,22 @@ const Dashboard = () => {
       setState(false)
       setProductos(false)
     }
-     
+    if(logo === false){
+      setLogo(!logo)
+     }
+    
+  }
+  function handleStock (){
+    if (show.length){
+      setShow("stock")
+      setModificar(false)
+      setState(false)
+      setProductos(false)
+    }
+    if(logo === false){
+      setLogo(!logo)
+     }
+    
   }
   function handleUser (){
     if (show.length){
@@ -151,6 +177,9 @@ const Dashboard = () => {
       setState(false)
       setProductos(false)
     }
+    if(logo === false){
+      setLogo(!logo)
+     }
   }
   function handleChange(e) {
     setAddProduct({
@@ -243,6 +272,22 @@ const Dashboard = () => {
      if(state === true){
        setState(!state)
      }
+     if(logo === false){
+      setLogo(!logo)
+     }
+     
+  }
+  function handleFin (){
+    if (show.length){ 
+      setShow("finances")
+      setModificar(false)
+      setState(false)
+      setProductos(false)
+    }
+    if(logo === false){
+      setLogo(!logo)
+     }
+    
   }
   useEffect(() => {
     dispatch(getDashUser(email))
@@ -463,13 +508,11 @@ const Dashboard = () => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                    <span class="group-hover:text-gray-700">Finance</span>
+                    <span   onClick={handleFin} class="group-hover:text-gray-700">Finance</span>
                   </a>
                 </li>
-              </ul>
-            </div>
-            <div class="w-max -mb-3">
-              <a
+                <li>
+                <a
                 href="#"
                 class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
               >
@@ -485,14 +528,20 @@ const Dashboard = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span class="group-hover:text-gray-700">Settings</span>
+                <span onClick={handleStock} class="group-hover:text-gray-700">Stock</span>
               </a>
+              </li>
+              </ul>
             </div>
+            
           </div>
         </div>
       </div>
-      <div className="w-[1000px] h-[1009px] border-[1px] ">
-       {state !== false && (
+
+      <div className="w-[1000px] h-[940px] border-[1px]">
+        {logo === false?<div  className="flex items-center justify-center"><img src={logoLargo} className="  w-[600px] h-[200px]"/></div>:<div>
+        {state !== false && (
+
           <div class="max-w-2xl mx-auto bg-white p-16">
             <form>
               <div class="grid gap-6 mb-6 lg:grid-cols-2">
@@ -750,6 +799,21 @@ const Dashboard = () => {
               <BarChart/>
             </div>
           }
+          {
+            show === "stock" &&
+            <div>
+              <DashLowStock/>
+            </div>
+          }
+            {
+            show === "finances" &&
+            <div>
+              <DashFinances/>
+            </div>
+          }
+
+
+        </div>}
       </div>
     </div>}
     </div>

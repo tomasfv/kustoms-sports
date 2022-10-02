@@ -4,10 +4,13 @@ import { types} from "../actions";
 const initialState={
     theme:"light",
     details:[],
+    dashdetails:[],
     images:[],
     productByCategory:[],
     navData:{},
     stock:[],
+    dashstock:[],
+    dashcolor:{},
     color:{},
     newest:[],
     filteredProducts:[],
@@ -22,14 +25,13 @@ const initialState={
     profileCom:[],
     profileCarts:[],
     viewscarrousel: [],
-
-    
-    
     dashproducts: [],
-
     allUsers:[],
+    allComments:[],
     sold:[],
-    
+    allStock:[],  
+    dashid:"",
+    finances: [],
 }
 
 export const rootReducer=(state=initialState, action)=>{
@@ -58,16 +60,30 @@ export const rootReducer=(state=initialState, action)=>{
                 ...state,
                 profileCarts: action.payload,
             }
-
+        case types.DASH_ID:
+            return{
+                ...state,
+                dashid:action.payload
+            }
         case types.GET_ALL_PROD:
                 return{
                     ...state,
                     dashproducts: action.payload
                 }
+        case types.GET_FINANCE:
+                return{
+                    ...state,
+                    finances: action.payload
+                }
         case types.GET_ALL_USERS:
             return{
                 ...state,
                 allUsers: action.payload,
+            }
+        case types.GET_ALL_COMMENTS:
+            return{
+                ...state,
+                allComments: action.payload,
             }
         case types.UPDATE_BAN_USER:
             return{
@@ -111,6 +127,11 @@ export const rootReducer=(state=initialState, action)=>{
                 details:action.payload,
                 images:action.payload.image.map(e=>e)
             }
+        case types.DASH_GET_DETAILS:
+            return{
+                ...state,
+                dashdetails:action.payload,
+            }
         case types.GET_CATEGORY:
             return{
                 ...state,
@@ -141,12 +162,23 @@ export const rootReducer=(state=initialState, action)=>{
                     ...state,
                     stock:action.payload.map(d=>d),
                     color:action.payload[0]
-                }   
-        case types.GET_NAVBAR:
+                }
+        case types.DASH_GET_STOCK:
                 return{
                     ...state,
-                    navData:action.payload
-                }
+                    dashstock:action.payload.map(d=>d),
+                    dashcolor:action.payload[0]
+                    }   
+        case types.GET_ALLSTOCK:
+            return{
+                ...state,
+                allStock:action.payload
+            }      
+        case types.GET_NAVBAR:
+            return{
+                ...state,
+                navData:action.payload
+            }
         case types.GET_COMMENTS:
             const texts = action.payload.map(e=>[e.texto, e.rank])
             const user= action.payload.map(l=>l.user)
