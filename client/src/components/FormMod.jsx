@@ -11,7 +11,8 @@ import swal from "sweetalert2";
 
   const dispatch = useDispatch();
   const [addproduct, setAddProduct] = useState({
-    id: color.id,
+    // id: color.id,
+    id: datos.id,
     clotheType: datos.clotheType,
     brand: datos.brand,
     name: datos.name,
@@ -19,7 +20,7 @@ import swal from "sweetalert2";
     sport: datos.sport,
     collection: datos.collection,
     color: color.color,
-    size: color.size,
+    size: datos.size,
     stock: color.stock,
     price: datos.price,
     promotion: Math.round((datos.promotion*100)),
@@ -34,10 +35,10 @@ import swal from "sweetalert2";
     setAddProduct({
       ...state,
       color: color.color,
-      size: color.size,
+      // size: datos.size,
       stock: color.stock,
       gender: color.gender,
-      id: color.id,
+      // id: color.id,
     })
   },[color])
   console.log("color", color)
@@ -188,11 +189,11 @@ import swal from "sweetalert2";
         clotheType: "",
         brand: "",
         name: "",
-        gender: "Masculino",
+        gender: "",
         sport: "",
         collection: "",
         color: "",
-        size: "S",
+        size: "",
         stock: 0,
         price: 0,
         promotion: 0,

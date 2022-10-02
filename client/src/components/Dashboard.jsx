@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import Cloudinary from "./Cloudinary";
 import { useDispatch, useSelector } from "react-redux";
-import { getDashUser, postAddProduct } from "../redux/actions";
+import { getDashUser, postAddProduct , DashDelDetail} from "../redux/actions";
 import swal from "sweetalert2";
 import ModificarProd from "./ModificarProd";
 import AllComentarios from "./AllComentarios";
@@ -121,10 +121,12 @@ const Dashboard = () => {
     }
     return errors;
   }
+  
   function handleClickD(e) {
     setProductos(!productos);
   }
   function handleAgregar() {
+    dispatch(DashDelDetail())
     setState(!state);
     setShow("x")
     if(modificar === true){
@@ -135,6 +137,7 @@ const Dashboard = () => {
      }
   }
   function handleCom (){
+    dispatch(DashDelDetail())
     if (show.length){ 
       setShow("comentario")
       setModificar(false)
@@ -147,6 +150,7 @@ const Dashboard = () => {
     
   }
   function handleGraf (){
+    dispatch(DashDelDetail())
     if (show.length){
       setShow("graph")
       setModificar(false)
@@ -159,6 +163,7 @@ const Dashboard = () => {
     
   }
   function handleStock (){
+    dispatch(DashDelDetail())
     if (show.length){
       setShow("stock")
       setModificar(false)
@@ -171,6 +176,7 @@ const Dashboard = () => {
     
   }
   function handleUser (){
+    dispatch(DashDelDetail())
     if (show.length){
       setShow("users")
       setModificar(false)
@@ -290,7 +296,8 @@ const Dashboard = () => {
     
   }
   useEffect(() => {
-    dispatch(getDashUser(email))
+    // dispatch(getDashUser(email))
+    dispatch(DashDelDetail())
     
 },[email])
 
@@ -298,7 +305,7 @@ const Dashboard = () => {
     <div>{ dashuser !== "Admin" ? <main class="h-screen w-full flex flex-col justify-center items-center bg-main-dark ">
     <h1 class="text-9xl font-extrabold text-main-light tracking-widest">404</h1>
     <div class="bg-verde-light px-2 text-sm rounded rotate-12 absolute">
-      Page Not Found
+      You don't have permission to use this page
     </div>
     <button class="mt-5">
         <a
