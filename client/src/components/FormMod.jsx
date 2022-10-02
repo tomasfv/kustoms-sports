@@ -11,33 +11,37 @@ import swal from "sweetalert2";
 
   const dispatch = useDispatch();
   const [addproduct, setAddProduct] = useState({
-    id: color.id,
+    // id: color.id,
+    id: datos.id,
     clotheType: datos.clotheType,
     brand: datos.brand,
     name: datos.name,
-    gender: color.gender,
     sport: datos.sport,
     collection: datos.collection,
-    color: color.color,
-    size: color.size,
-    stock: color.stock,
+    size: datos.size,
     price: datos.price,
+    gender: datos.gender,
+    color: datos.color,
+    stock: datos.stock,
+    /* gender: color.gender,
+    color: color.color,
+    stock: color.stock, */
     promotion: Math.round((datos.promotion*100)),
   });
   useEffect(()=> {
     if (datos.promotion === null){
       setAddProduct({
-        ...state,
+        ...addproduct,
         promotion: 0
       })
     }
     setAddProduct({
-      ...state,
+      ...addproduct,
       color: color.color,
-      size: color.size,
+      // size: datos.size,
       stock: color.stock,
       gender: color.gender,
-      id: color.id,
+      // id: color.id,
     })
   },[color])
   console.log("color", color)
@@ -188,11 +192,11 @@ import swal from "sweetalert2";
         clotheType: "",
         brand: "",
         name: "",
-        gender: "Masculino",
+        gender: "",
         sport: "",
         collection: "",
         color: "",
-        size: "S",
+        size: "",
         stock: 0,
         price: 0,
         promotion: 0,
