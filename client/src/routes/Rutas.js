@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
 import { Home, Details, Categories, DashCategories } from '../views/index'
 import { Profile2 } from '../views/Profile2';
-import { About, Carrito, Dashboard,} from '../components';
+import { About, Carrito, Dashboard, Page404} from '../components';
 import Payment from '../components/Payment'
 
 const Rutas = () => {
@@ -10,15 +10,16 @@ const Rutas = () => {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Layout/>}>
-                    <Route path={'/'} element={<Home/>} />
-                    <Route path={'/producto/:id'} element={<Details/>} />
-                    <Route path={'categories/:category/:value'} element={<Categories/>} />
-                    <Route path={'dashboard/:category/:value'} element={<DashCategories/>} />
-                    <Route path={'/profile'} element={<Profile2/>} />
-                    <Route path={'/carrito'} element={<Carrito/>} />
-                    <Route path={'/payment'} element={<Payment/>} />
-                    <Route path={'/dashboard'} element={<Dashboard/>} />
-                    <Route path={'/about'} element={<About/>} />
+                    <Route exact path={'/'} element={<Home/>} />
+                    <Route exact path={'/producto/:id'} element={<Details/>} />
+                    <Route exact path={'categories/:category/:value'} element={<Categories/>} />
+                    <Route exact path={'dashboard/:category/:value'} element={<DashCategories/>} />
+                    <Route exact path={'/profile'} element={<Profile2/>} />
+                    <Route exact path={'/carrito'} element={<Carrito/>} />
+                    <Route exact path={'/payment'} element={<Payment/>} />
+                    <Route exact path={'/dashboard'} element={<Dashboard/>} />
+                    <Route exact path={'/about'} element={<About/>} />
+                    <Route path='*' element={<Page404/>} />
                 </Route>
             </Routes>
         </BrowserRouter>
