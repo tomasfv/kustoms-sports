@@ -773,7 +773,7 @@ const Dashboard = () => {
               {errorImg !== false || addproduct.image.length === 0 &&<p className="text-[15px] text-[red]">Porfavor cargue una imágen</p>}
               <div>
                 <button
-                  type="submit"
+                  type="button"
                   className="text-white  text-[30px] ml-[80px] border-[1px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   onClick={postProduct}
                 >
