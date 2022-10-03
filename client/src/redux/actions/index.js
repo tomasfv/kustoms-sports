@@ -104,7 +104,7 @@ export function getStock(id, email) {
       }
     };
   }
-export function dashgetStock(id, email) {
+export function dashgetStock(id) {
     return async function (dispatch) {
       try {
         var json = await axios.get(`${URL}${id}` + "?email=undefined");
@@ -118,7 +118,7 @@ export function dashgetStock(id, email) {
     };
   }
 
-export function getAllStock(id, email) {
+export function getAllStock() {
   return async function (dispatch) {
     try {
       var json = await axios.get(`${URL}dashboard/productos`);
