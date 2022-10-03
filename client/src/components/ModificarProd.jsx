@@ -1,15 +1,9 @@
-import React, {useState} from "react"
-import { ProductGallery } from ".";
+import React from "react"
 import {  useEffect } from "react"
 import { DashgetDetailId, dashgetStock, DashDelDetail } from "../redux/actions";
-import { PreviewCard, Filters } from "./index"
 import { useDispatch, useSelector } from "react-redux"
-import DashNavBar from "./DashNavBar";
-import DashProdGallery from "./DashProdGallery";
 import DashCategories from "../views/DashCategory";
 import FormMod from "./FormMod";
-
-
 
 
 const ModificarProd = () =>{
@@ -18,18 +12,9 @@ const ModificarProd = () =>{
     const stock = useSelector(state => state.dashstock)
     const color = useSelector(state => state.dashcolor)
 
-    // const [carga, setCarga] = useState(false)
-
     console.log("dasdetail",datos) 
     const handleVolver = () => {
         dispatch(DashDelDetail())
-        // if (datos.length && stock.length && color.length){
-        //     datos = {};
-        //     stock = {};
-        //     color = {};
-        //     // id = 0
-        // } 
-        // setCarga(!carga)
     }
 
     const dispatch = useDispatch()
@@ -37,7 +22,7 @@ const ModificarProd = () =>{
         dispatch(DashgetDetailId(id))
         dispatch(dashgetStock(id))
     },[dispatch, id])
-    // const filtering = useSelector(state => state.filteredProducts)
+    
     return(
     <div>
         <div className="absolute top-0 w-[1000px] h-[939px] ">
