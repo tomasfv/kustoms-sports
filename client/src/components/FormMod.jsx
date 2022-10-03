@@ -201,7 +201,7 @@ import swal from "sweetalert2";
         price: 0,
         promotion: 0,
       });
-      window.location.reload()
+      // window.location.reload()
     }
   }
  

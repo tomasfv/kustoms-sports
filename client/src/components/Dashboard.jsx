@@ -269,7 +269,7 @@ const Dashboard = () => {
         price: 0,
         promotion: 0,
       });
-      window.location.reload()
+      // window.location.reload()
     }
   }
   function handleModificar(e){
