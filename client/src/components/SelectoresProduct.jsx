@@ -795,7 +795,7 @@ const SelectoresProduct = () => {
                       <li className="list-disc">
                          Plantilla OrthoLite®
                       </li>
-                      <li className="list-disc">Tejido absorbente</li>
+                      <li className="list-disc">Suela de caucho</li>
                       <li className="list-disc">Primegreen</li>
                     </ul>
                   </div>

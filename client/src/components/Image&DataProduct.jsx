@@ -197,7 +197,7 @@ const ImageXDataProduct = () => {
                           
                       
                             for={el.id}
-                            className="inline-flex justify-between items-center p-5 w-[auto] h-[40px] text-main-dark bg-main-light  border border-gris-light cursor-pointer dark:hover:text-main-dark dark:border-main-dark dark:peer-checked:text-main-light peer-checked:border-main-dark peer-checked:text-main-light  peer-checked:bg-main-dark hover:text-main-dark hover:bg-gris-light dark:text-main-dark dark:bg-gris-light dark:hover:bg-gris-light "
+                            className="inline-flex justify-between items-center p-5 w-[auto] h-[40px] text-main-dark bg-main-light  border border-gris-light cursor-pointer dark:hover:text-main-dark dark:border-main-dark dark:peer-checked:text-main-light peer-checked:border-main-dark peer-checked:text-main-light  peer-checked:bg-main-dark hover:text-main-dark hover:bg-gris-light dark:text-main-dark dark:bg-gris-light dark:hover:bg-gris-light peer-checked:border-main-light "
                           >
                             <div className="flex items-center">
                               <div className="w-full text-lg font-semibold ">
