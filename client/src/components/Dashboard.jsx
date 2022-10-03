@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import Cloudinary from "./Cloudinary";
 import { useDispatch, useSelector } from "react-redux";
-import { getDashUser, postAddProduct , DashDelDetail} from "../redux/actions";
+import { getNavData, postAddProduct , DashDelDetail} from "../redux/actions";
 import swal from "sweetalert2";
 import ModificarProd from "./ModificarProd";
 import AllComentarios from "./AllComentarios";
@@ -53,26 +53,26 @@ const Dashboard = () => {
     }
     if (addproduct.name === "") {
       errors.name = "Inserte un nombre para el producto";
-    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
-      errors.name = "El nombre no puede contener,carácteres o números";
+    } else if (!/^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ\u002F\s]*$/.test(addproduct.name)) {
+      errors.name = "El nombre solo puede contener letras, números, espacios y barras";
     }
     if (addproduct.sport.length > 15) {
       errors.sport = "Inserte un nombre de deporte menor a 15 caracteres";
     }
     if (addproduct.sport === "") {
       errors.sport = "Inserte un tipo de  deporte para el producto";
-    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
+    } else if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ\u002F\s]*$/.test(addproduct.sport)) {
       errors.sport =
-        "El nombre del deporte no puede contener,carácteres o números";
+        "El nombre del deporte no puede contener caracteres o números";
     }
     if (addproduct.clotheType.length > 15) {
       errors.clotheType = "Inserte un tipo de producto menor a 15 caracteres";
     }
     if (addproduct.clotheType === "") {
       errors.clotheType = "Inserte un tipo de producto ";
-    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
+    } else if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ\u002F\s]*$/.test(addproduct.clotheType)) {
       errors.clotheType =
-        "El nombre del tipode producto no puede contener,carácteres o números";
+        "El nombre del tipo de producto no puede contener caracteres o números";
     }
     if (addproduct.brand.length > 15) {
       errors.brand = "Inserte una marca menor a 15 caracteres";
@@ -82,7 +82,7 @@ const Dashboard = () => {
     }
     if (addproduct.collection.length > 15) {
       errors.collection =
-        "Inserte una  tipo de colección menor a 15 caracteres";
+        "Inserte un tipo de colección menor a 15 caracteres";
     }
     if (addproduct.collection === "") {
       errors.collection =
@@ -101,9 +101,9 @@ const Dashboard = () => {
     }
     if (addproduct.color === "") {
       errors.color = "Inserte colores para el producto";
-    } else if (!/^[a-zA-Z\s]*$/.test(addproduct.name)) {
+    } else if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ\u002F\s]*$/.test(addproduct.color)) {
       errors.color =
-        "El tipo de color del producto no puede contener,carácteres o números";
+        "El tipo de color del producto solo puede contener letras y barras";
     }
     if (
       addproduct.stock < 0 ||
@@ -111,13 +111,13 @@ const Dashboard = () => {
       !addproduct.stock ||
       !/^[0-9]+$/.test(addproduct.stock)
     ) {
-      errors.stock = "Declarar un precio con valor mayor a 0 ";
+      errors.stock = "El stock solo acepta valores numéricos";
     }
     if (
       addproduct.promotion < 0 ||
       addproduct.promotion > 100
     ) {
-      errors.promotion = "Declarar un precio con valor entre  0 y 100 ";
+      errors.promotion = "Solo se permiten porcentajes de descuento entre 0 y 100 ";
     }
     return errors;
   }
@@ -234,14 +234,14 @@ const Dashboard = () => {
       addproduct.price === 0 ||
       addproduct.image.length === 0 ||
       addproduct.stock === 0 ||
-      addproduct.promotion === 0 ||
+      // addproduct.promotion === 0 ||
       addproduct.clotheType === "" ||
       addproduct.brand === ""
     ) {
       swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Error,corriga los errores!",
+        title: "Error, corrija los errores!",
         showConfirmButton: false,
         timer: 1000,
       });
@@ -269,7 +269,8 @@ const Dashboard = () => {
         price: 0,
         promotion: 0,
       });
-      window.location.reload()
+      // window.location.reload()
+      dispatch(getNavData())
     }
   }
   function handleModificar(e){
