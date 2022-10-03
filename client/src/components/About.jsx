@@ -4,6 +4,7 @@ import Carlos from "../assets/About Us/Carlos.jpg"
 import Kenneth from "../assets/About Us/Kenneth.jpg"
 import Max from "../assets/About Us/Max.jpg"
 import TomasF from "../assets/About Us/TomasF.jpg"
+import LucaH from "../assets/About Us/Luca Haller.jpg"
 
 
 const About = () => {
@@ -133,14 +134,14 @@ const About = () => {
               </ul>
           </div>
           <div class="text-center text-gray-500 dark:text-gray-400">
-              <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/34d6e59d3c72a61be090374bff71a9bd~c5_100x100.jpeg?x-expires=1664222400&x-signature=2cLTaT9lAxsMMGTOMzMKlFghIrs%3D" alt="Luca Haller"/>
+              <img class="mx-auto mb-4 w-36 h-36 rounded-full" src={LucaH} alt="Luca Haller"/>
               <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                   <a href="https://www.linkedin.com/in/agustin-tomas-velazquez-1b2173245/">Luca Haller</a>
               </h3>
               
               <ul class="flex justify-center mt-4 space-x-4">
                   <li>
-                      <a href="https://www.linkedin.com/in/m-ovejak/" class="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white">
+                      <a href="https://www.linkedin.com/in/luca-haller-35a9991b4/" class="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white">
                           <img class="w-6 h-6 rounded-2xl" src='https://cdn.discordapp.com/attachments/1016350075192102954/1023323693625127063/linkedin.png'/>
                       </a> 
                   </li> 
