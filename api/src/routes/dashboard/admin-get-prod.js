@@ -1,19 +1,16 @@
-require("dotenv").config();
-const { Router } = require("express");
-const { Products } = require("../../db.js");
+const { Router } = require('express')
+const { Products } = require('../../db.js')
 
-const router = Router();
+const router = Router()
 
-router.get("/", async (req, res) => {
- try {
+router.get('/', async (req, res) => {
+  try {
     const products = await Products.findAll()
 
-    return res.status(200).json(products);
+    return res.status(200).json(products)
+  } catch (e) {
+    res.status(404).json(e.message)
+  }
+})
 
- } catch (e) {
-    res.status(404).json(e.message);
- }
-});
-
-
-module.exports = router;
+module.exports = router

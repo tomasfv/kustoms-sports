@@ -1,14 +1,14 @@
-const { Router } = require('express');
+const { Router } = require('express')
 const chargeproducts = require('./post-products.js')
 const productsId = require('./get-products-id.js')
 const productsquery = require('./get-products-query.js')
 const productsdate = require('./get-products-date.js')
 const productsnavbar = require('./get-products-navbar.js')
-const createuser = require ('./post-usuario.js')
-const pagos = require ('./post-Payment.js')
-const addcarros = require ('./post-carrito.js');
-const getcarrito = require ('./get-data-carrito.js');
-const putcarrito = require ('./remove-prod-cart')
+const createuser = require('./post-usuario.js')
+const pagos = require('./post-Payment.js')
+const addcarros = require('./post-carrito.js')
+const getcarrito = require('./get-data-carrito.js')
+const putcarrito = require('./remove-prod-cart')
 // const postBuy = require ('./post-Payment')
 const userallowed = require('./comments/get-user-allowed.js')
 const addcomment = require('./comments/post-comment')
@@ -22,27 +22,26 @@ const getclosecart = require('./profile/get-close-cart.js')
 const getcommemail = require('./profile/get-comm-email.js')
 const bestsold = require('./dashboard/admin-best-sold.js')
 const userdata = require('./get-user.js')
-const productosstock = require("./dashboard/admin-get-stock.js")
-const viewcarrousel = require ("./dashboard/carrousel-views.js")
+const productosstock = require('./dashboard/admin-get-stock.js')
+const viewcarrousel = require('./dashboard/carrousel-views.js')
 // const prueba = require('./dashboard/admin-search.js')
-const usersadmin = require ("./dashboard/admin-get-users.js")
-const commentsadmin = require ("./dashboard/Admin-get-comments.js")
+const usersadmin = require('./dashboard/admin-get-users.js')
+const commentsadmin = require('./dashboard/Admin-get-comments.js')
 
-const adminproducts = require("./dashboard/admin-get-prod")
-const financials = require ("./dashboard/admin-get-finance.js")
-
+const adminproducts = require('./dashboard/admin-get-prod')
+const financials = require('./dashboard/admin-get-finance.js')
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
-const router = Router();
+const router = Router()
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
-router.use("/dashboard/financial", financials)
-router.use("/dashboard/usersadmin", usersadmin)
-router.use("/dashboard/commentsadmin", commentsadmin)
+router.use('/dashboard/financial', financials)
+router.use('/dashboard/usersadmin', usersadmin)
+router.use('/dashboard/commentsadmin', commentsadmin)
 router.use('/dashboard/carrouselview', viewcarrousel)
 router.use('/userdata', userdata)
 // router.use('/prueba', prueba)
@@ -69,12 +68,6 @@ router.use('/dashboard/banProduct', banproduct)
 router.use('/dashboard/banComment', bancomment)
 router.use('/dashboard/bestsold', bestsold)
 router.use('/dashboard/adminpostproduct', adminpostproduct)
-router.use('/dashboard/getprod', adminproducts )
+router.use('/dashboard/getprod', adminproducts)
 
-
-
-
-
-
-
-module.exports = router;
+module.exports = router
