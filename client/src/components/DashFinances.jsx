@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react"
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
-import { PreviewCard, DashFilter } from "./index"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getfinance } from '../redux/actions'
 
@@ -12,7 +10,7 @@ const DashFinances = () => {
         dispatch(getfinance());
       }, [dispatch]);
     
-console.log("holi",financedata)
+
 
     return (
         <div className="grid grid-col justify-items-center  ">

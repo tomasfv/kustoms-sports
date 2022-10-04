@@ -1,12 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
-import BarChart from "../components/BarChart";
 import { LogoutButton } from '../components/Logout';
 import Tab from '../components/Tab'
-import DashUserTable from "../components/DashUserTable";
-
-
-
 
 
 export const Profile2 = () => {

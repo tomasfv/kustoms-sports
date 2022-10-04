@@ -25,7 +25,6 @@ function Tab() {
     setToggleState(index);
   };
 
-  console.log('COMMENTS: ', comments)
   return (
     <div className="flex flex-col ml-4 w-[800px]">
       {/* Tabs */}

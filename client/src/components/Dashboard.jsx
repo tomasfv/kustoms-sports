@@ -26,7 +26,7 @@ const Dashboard = () => {
   const [modificar, setModificar] = useState(false);
   const [show, setShow] = useState("x")
   const [logo, setLogo] = useState(false);
-  const { isAuthenticated, user } = useAuth0();
+  const { user } = useAuth0();
   const email = user?.email;
 
   const dispatch = useDispatch();

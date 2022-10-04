@@ -19,7 +19,7 @@ const Cloudinary = ({addproduct}) => {
     const file = await res.data
     setImage([...image,file.secure_url])
   }
-  console.log("image: ",image)
+
     return (
     <div className="App flex flex-col">
       <div className="flex flex-row">
@@ -32,7 +32,7 @@ const Cloudinary = ({addproduct}) => {
 
      {
      image?.map((e,i)=> {
-      console.log("e,i:", e,i)
+   
       return (
         <div>
           <img id={i}

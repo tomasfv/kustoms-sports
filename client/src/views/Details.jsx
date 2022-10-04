@@ -13,13 +13,12 @@ const Details = () => {
   const params = useParams();
   const id = params.id;
   const details = useSelector((state) => state.details);
-  const { isAuthenticated, user } = useAuth0();
+  const { user } = useAuth0();
   const email = user?.email
   const dispatch = useDispatch()
-  const newest = useSelector(state => state.newest)
-  console.log("new?",newest)
+  // const newest = useSelector(state => state.newest)
   const viewsuser = useSelector(state=> state.viewscarrousel)
-  console.log("views", viewsuser)
+
   useEffect(() => {
     dispatch(getByDate())
     dispatch(visitedcarrousel(email))
@@ -36,7 +35,6 @@ const Details = () => {
       <div className="flex flex-col  mt-[20px]">
 
         <Carrousel collection={viewsuser} />
-      {console.log("email",email)}
       </div>
     </div>
   );

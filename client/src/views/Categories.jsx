@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { getByCategory, clearCategory, getProductInfo } from "../redux/actions"
 import { useEffect, useState } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
-import DashProdGallery from "../components/DashProdGallery"
+
 
 
 const Categories = () => {
-    const { isAuthenticated, user } = useAuth0()
+    const { user } = useAuth0()
     const email = user?.email
     const [products, setProducts] = useState([])
     const llamada = useSelector(state => state.productByCategory)

@@ -1,4 +1,4 @@
-import { postAddProduct, getNavData } from "../redux/actions";
+import { postAddProduct } from "../redux/actions";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert2";
@@ -44,8 +44,6 @@ const FormMod = ({datos,color}) => {
       // id: color.id,
     })
   },[color])
-  console.log("color", color)
-  console.log("datos", datos)
   
   function validate(addproduct) {
     let errors = {};
@@ -177,7 +175,6 @@ const FormMod = ({datos,color}) => {
         timer: 1000,
       });
     } else {
-      console.log("producto", addproduct)
       dispatch(postAddProduct(addproduct));
       swal.fire({
         position: "top-end",

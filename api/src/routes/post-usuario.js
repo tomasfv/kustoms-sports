@@ -1,6 +1,4 @@
-require("dotenv").config();
 const { Router } = require("express");
-const axios = require("axios");
 const { Users } = require("../db.js");
 const { transporter } = require("../routes/controlers/email-controller.js");
 

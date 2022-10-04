@@ -7,11 +7,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bestsold } from "../redux/actions/index";
-import DashLowStock from "./DashLowStock.jsx"
+
 
 ChartJS.register(
   CategoryScale,
@@ -34,7 +34,7 @@ function BarChart() {
 
   let labels = [];
   let data = [];
-  let objeto = {};
+  // let objeto = {};
   let label = "";
   const handleSelect = (e) => {
     let objeto = {};
@@ -85,15 +85,9 @@ function BarChart() {
     labels = Object.keys(objeto);
     data = Object.values(objeto);
     setDatos({ labels, data, label });
-    console.log(labels);
-    console.log(data);
   };
   
   useEffect(() => {
-    console.log("estoy en useeffect");
-    console.log("labels:", labels);
-    console.log("data:", data);
-    console.log("datos:", datos);
     labels = datos.labels;
     data = datos.data;
     label = datos.label;

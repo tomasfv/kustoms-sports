@@ -1,7 +1,5 @@
-require("dotenv").config();
 const { Router } = require("express");
-const axios = require("axios");
-const { Users, Carts, Products, cartproducts } = require("../db.js");
+const { Users, Carts, Products } = require("../db.js");
 
 const router = Router();
 

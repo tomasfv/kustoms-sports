@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import { DashPreviewCard, DashFilter } from "./index"
-import { useSelector, useDispatch } from "react-redux"
-import {DashgetDetailId, dashId} from "../redux/actions/index.js"
+import { useSelector } from "react-redux"
 
 const DashProdGallery = ({ productos }) => {
     //const [isFiltering, setIsFiltering] = useState(false)
@@ -15,14 +14,13 @@ const DashProdGallery = ({ productos }) => {
     const firstShowing = lastShowing - nShowing
     const amountPages = []
     let onDisplay = []
-    const dispatch = useDispatch()
  
     // console.log("PRODUCTOS", productos)
    
     for (let p = 0; p < Math.ceil(totalProducts / nShowing); p++) {
         amountPages.push(p)
     }
-    console.log("displaying",displaying)
+    
     displaying && (onDisplay = displaying?.slice(firstShowing, lastShowing))
     const handleClick = (numero) => {
         setPage(numero)
@@ -46,7 +44,7 @@ const DashProdGallery = ({ productos }) => {
         setDisplaying(productos)
     }, [productos])
     useEffect(() => {
-        console.log("filtering",filtering)
+     
         if(filtering){
         if (filtering[0]) {
             return setDisplaying(filtering)

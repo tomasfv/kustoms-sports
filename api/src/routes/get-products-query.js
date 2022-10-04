@@ -1,9 +1,7 @@
-require ('dotenv').config();
 const { Router } = require('express');
-const axios = require('axios')
 const {Products} = require('../db.js');
-const { where } = require('sequelize');
-const {Sequelize, Op} = require('sequelize')
+
+const { Op } = require('sequelize')
 
 const router = Router();
 

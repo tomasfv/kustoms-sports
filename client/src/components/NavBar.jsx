@@ -49,8 +49,6 @@ const NavBar = () => {
     }
     useEffect(() => {
         if (isAuthenticated) {
-          console.log(isAuthenticated)
-          console.log(user)
           let bodydepost = {
             name: user.name,
             nickname: user.nickname,

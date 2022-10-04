@@ -58,7 +58,7 @@ export function getDetailId(id, email) {
           payload: json.data[0],
         });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
   }
@@ -71,7 +71,7 @@ export function DashgetDetailId(id) {
           payload: json.data[0],
         });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
   }
@@ -85,7 +85,6 @@ export function DashDelDetail(){
 }
 
   export const dashId=(payload)=>{
-    console.log("payload", payload)
     return{
       type: types.DASH_ID,
       payload:payload
@@ -100,7 +99,7 @@ export function getStock(id, email) {
           payload: json.data[1],
         });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
   }
@@ -113,7 +112,7 @@ export function dashgetStock(id) {
           payload: json.data[1],
         });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
   }
@@ -127,7 +126,7 @@ export function getAllStock() {
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 }
@@ -141,7 +140,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -154,7 +153,7 @@ export function getAllStock() {
           payload: response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -167,7 +166,7 @@ export function getAllStock() {
           payload: response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -180,7 +179,7 @@ export function getAllStock() {
           payload: response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -193,7 +192,7 @@ export function getAllStock() {
           payload: response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -209,7 +208,7 @@ export function getAllStock() {
           payload: jsonUser.data
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
   }
@@ -225,7 +224,7 @@ export function getAllStock() {
           payload: jsonUser.data
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
   }
@@ -238,7 +237,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -251,7 +250,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -264,7 +263,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -277,7 +276,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -290,7 +289,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -303,7 +302,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -316,7 +315,7 @@ export function getAllStock() {
           payload:response.data
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error);
       }
     }
   }
@@ -348,38 +347,34 @@ export function getAllStock() {
         var json = await axios.post(`${URL}user`, payload);
         return json
       } catch (error) {
-        console.log(error);
+        //console.log(error);;
       }
     };
 
   }
   export const dashComment = (id) => {
-    console.log(id)
     return async function (dispatch) {
       try {
         var json1= await axios.post(`${URL}dashboard/banComment?id=${id} `);
-        console.log(json1.data,"json")
         return  {type:types.DASH_POST,
           payload:json1.data}
       } catch (error) {
-        console.log(error);
+        //console.log(error);;
       }
     };
 
   }
   export const postDataBuy = (info) => {
-    console.log("addtocart:",info)
     return async function (dispatch) {
       try {
         var jsonbuy = await axios.post(`${URL}addTocart`, info);
-        console.log(jsonbuy.data)
         return {
 
           type:types.POSTDATABUY,
           payload:jsonbuy.data
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     };
 
@@ -389,14 +384,13 @@ export function getAllStock() {
     return async function (dispatch) {
       try {
         var json = await axios.post(`${URL}dashboard/adminpostproduct`, payload);
-        console.log(json)
         return {
 
           type:types.POSTADDPRODUCT,
           payload:json.data
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);;
       }
     };
 
@@ -406,14 +400,13 @@ export function getAllStock() {
     return async function (dispatch) {
       try {
         var jsonbuy = await axios.post(`${URL}addcomment`, info);
-        console.log(jsonbuy.data)
         return {
 
           type:types.POSTCOMMENT,
           payload:jsonbuy.data
         }
       } catch (error) {
-        console.log(error);
+        //console.log(error);;
       }
     };
 
@@ -434,7 +427,6 @@ export const visitedcarrousel = (email)=>{
   return async function (dispatch){
 try{
     let userviews = await axios.get(`${URL}dashboard/carrouselview?email=${email}`)
-    console.log("batman",userviews)
   return dispatch({
     type : types.GET_VIEWSCARROUSEL,
     payload: userviews.data
@@ -452,7 +444,7 @@ export const bestsold = () => {
         payload: sold.data
        })
     } catch (e) {
-      {console.log(e)}
+      console.log(e)
     }
   }
 }
@@ -465,7 +457,7 @@ return async function (dispatch){
       payload: finances.data
     })
   } catch (e) {
-    {console.log(e)}
+    console.log(e)
     
   }
 }

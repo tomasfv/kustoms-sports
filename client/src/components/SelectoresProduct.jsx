@@ -23,7 +23,7 @@ const SelectoresProduct = () => {
   const comments = useSelector((state) => state.comments);
   const User = useSelector((state) => state.userCom);
   const allowed = useSelector((state) => state.allowed);
-  const nameCom = useSelector((state) => state.nameComments);
+  // const nameCom = useSelector((state) => state.nameComments);
   const details = useSelector((state) => state.details);
   const imagenes = useSelector((state) => state.images);
   const color = useSelector((state) => state.color);
@@ -110,13 +110,10 @@ const SelectoresProduct = () => {
         for (let i = 0; i < malasPalabras.length; i++) {
           if (comm.includes(malasPalabras[i])){
             let str = new Array(malasPalabras[i].length +1 ).join( '*' );
-            console.log("str: ",str)
             comm = comm.replace(malasPalabras[i], str)
           }
-          console.log("comm: ", comm)
           
         }
-        console.log("comm: ", comm)
         setInput({
           ...input,
           text: comm

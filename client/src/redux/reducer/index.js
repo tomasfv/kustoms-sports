@@ -195,7 +195,6 @@ export const rootReducer=(state=initialState, action)=>{
                 
             }
         case types.POSTDATABUY:
-            console.log(action.payload)
             return{
                 ...state,
                 

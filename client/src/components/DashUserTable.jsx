@@ -9,7 +9,6 @@ function DashUserTable() {
     const [searchName, setSearchName] = useState("");
     const [filtName, setFiltName] = useState("");
     // const [emailBan, setEmailBan] = useState("")
-    const [upgUser, setUpgUser] = useState("")
     const [changed, setChanged] = useState(true);
 
     useEffect(() => {
@@ -34,8 +33,6 @@ function DashUserTable() {
     }
 
     function handleClick(e){
-        console.log("e.target.value: ",e.target.value)
-        console.log("e.target.value typeof: ",typeof e.target.value)
         setChanged(!changed)
         let title = "..."
         let values =  e.target.value.split(",")
@@ -47,12 +44,10 @@ function DashUserTable() {
             title = "Usuario baneado"
             valor = true
         }
-        console.log("e.target.value[0]: ",values[0])
+   
         dispatch(updateBanUser(values[0]))
-        console.log("filtName: ",filtName)
         if (filtName)  {
             let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
-            console.log("nombreFinal: ",nombreFinal)
             for (let i = 0; i < nombreFinal.length; i++) {
                if ( nombreFinal[i].id == values[2]){
                 nombreFinal[i].available = !valor
@@ -71,8 +66,6 @@ function DashUserTable() {
     }
 
     function handleProfile(e){
-        console.log("e.target.value: ",e.target.value)
-        console.log("e.target.value typeof: ",typeof e.target.value)
         setChanged(!changed)
         let title = "..."
         let values =  e.target.value.split(",")
@@ -84,12 +77,10 @@ function DashUserTable() {
             title = "Usuario Client"
             valor = "Client"
         }
-        console.log("e.target.value[0]: ",values[0])
+
         dispatch(updateUser(values[0]))
-        console.log("filtName: ",filtName)
         if (filtName)  {
             let nombreFinal = allUsers.filter(e => e.name.toLowerCase().includes(searchName.toLowerCase()))
-            console.log("nombreFinal: ",nombreFinal)
             for (let i = 0; i < nombreFinal.length; i++) {
                if ( nombreFinal[i].id == values[2]){
                 nombreFinal[i].profile = valor

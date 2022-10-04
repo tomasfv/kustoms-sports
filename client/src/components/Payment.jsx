@@ -58,7 +58,6 @@ const CheckoutForm = () => {
 
     if (!error) {
     setLoading(true);
-      console.log(paymentMethod)
       const { id } = paymentMethod;
       try {
         const { data } = await axios.post(
@@ -71,8 +70,7 @@ const CheckoutForm = () => {
           }
         );
 
-        console.log(data)
-        console.log(data.message)
+
         if(data.message === "Successful Payment"){
           swal.fire({
             position: 'top-end',
@@ -110,7 +108,7 @@ const CheckoutForm = () => {
      }
   };
 
-  console.log(!stripe || loading);
+
 
   const descuento = dataBuy.map(e => Math.round((e.price * (1 - e.promotion)))) 
   const final = descuento.reduce(function(acc, elemento){ 

@@ -39,7 +39,6 @@ const Carrito = () => {
     descuento2 = descuento2.reduce((acc, e) => { return acc + e })
     precios = dataBuy.map(e => Math.round(e.price)) 
     precios = precios.reduce((acc, e) => { return acc + e})
-    console.log("descuento2, precios ", descuento2, precios)
 
 
   }
@@ -47,9 +46,6 @@ const Carrito = () => {
 
  
 
-  console.log('DATABUY: ', dataBuy) 
-  console.log('PRECIOS C/DESC: ', descuento)
-  console.log('FINAL: ', final)
   return (
     <div>
       <div className="flex flex-col mt[100px]">

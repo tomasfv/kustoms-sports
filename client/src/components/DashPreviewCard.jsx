@@ -1,15 +1,14 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { dashId } from "../redux/actions/index.js"
 
-const DashPreviewCard = ({ data, stock, color }) => {
+const DashPreviewCard = ({ data }) => {
     const dispatch = useDispatch()
     const handleId = (e) => {
-        console.log("dashid dashprod",data.id)
+        
         dispatch(dashId(data.id))
     }
-    console.log("DATA-id", data.id)
+ 
     const [loadedImage, setLoadedImage] = useState(false)
     if (data) {
         return (

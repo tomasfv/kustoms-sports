@@ -12,7 +12,6 @@ const ModificarProd = () =>{
     const stock = useSelector(state => state.dashstock)
     const color = useSelector(state => state.dashcolor)
 
-    console.log("dasdetail",datos) 
     const handleVolver = () => {
         dispatch(DashDelDetail())
     }

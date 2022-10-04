@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllStock} from "../redux/actions";
 
@@ -11,7 +11,7 @@ function DashLowStock() {
         dispatch(getAllStock());
       }, [dispatch]);
 
-      console.log("allstock: ",allStock)
+   
 
     return (
     <div className="grid grid-col justify-items-center  ">

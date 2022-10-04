@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   getDetailId,
   getProductInfo,
@@ -10,7 +10,6 @@ import {
 } from "../redux/actions";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { LoginButton } from "./Login";
 import swal from "sweetalert2";
 import { BsFillCartPlusFill } from "react-icons/bs";
 
@@ -121,7 +120,6 @@ const ImageXDataProduct = () => {
     setOrdenimg(e.target.src);
   }
   //console.log(ordenimg, "orden");
-  console.log('DETAIL:', details)
   return (
     <div className="flex flex-row mt-[100px] ml-36 space-x-10 dark:bg-main-dark  dark:text-main-light ">
       <div className="flex flex-col items-center  dark:bg-main-dark">

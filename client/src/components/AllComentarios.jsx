@@ -75,7 +75,7 @@ const AllComentarios = () =>{
                                 {allcomments?.map((e) => {return(
                             <tr>
                                 <td className="border">{e.user.email}</td>
-                                <td className="border"><img src={e.user.picture} className='w-[30px] h-[30px] rounded-full ml-[25%]'/></td>
+                                <td className="border"><img alt="n" src={e.user.picture} className='w-[30px] h-[30px] rounded-full ml-[25%]'/></td>
                                 <td className="border max-w-[500px] ">{e.texto}</td>
                                 <td className="border max-w-[500px] ">{e.rank}</td>
                                 <td className="border hover:bg-gris-light">

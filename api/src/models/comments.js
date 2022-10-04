@@ -24,10 +24,6 @@ module.exports = (sequelize) => {
            type: DataTypes.INTEGER,
            allowNull: false 
         },
-      //   review:{
-      //      type: DataTypes.BOOLEAN,
-      //      allowNull: false 
-      //   },
         available:{
            type: DataTypes.BOOLEAN,
            defaultValue: true,

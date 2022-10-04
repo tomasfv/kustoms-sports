@@ -12,7 +12,7 @@ import Chatbot from "../components/Chatbot"
 
 
 const Home = () => {
-    const { isAuthenticated, user } = useAuth0()
+    const { user } = useAuth0()
   const email = user?.email
     const dispatch = useDispatch()
     const newest = useSelector(state => state.newest)
