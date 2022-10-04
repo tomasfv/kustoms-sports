@@ -67,18 +67,7 @@ const SelectoresProduct = () => {
   function get() {
     dispatch(getComments(details.name, details.gender));
   }
-  // function handleComment() {
-  //   get();
-  //   if (input.text !== "") {
-  //     dispatch(postComment(input));
 
-  //     setInput({
-  //       ...input,
-  //       text: "",
-  //       rank: "",
-  //     });
-  //   }
-  // }
   function handleComment() {
     get()
     //me fijo si ya tiene un comentario en el mismo producto
@@ -102,6 +91,7 @@ const SelectoresProduct = () => {
     } 
     else { //si el usuario no hizo comentario
       if(input.text !== ""){
+        
         dispatch(postComment(input));
         setInput({
           ...input,
@@ -113,9 +103,27 @@ const SelectoresProduct = () => {
   }
 
   function handleChangue(e) {
+    let malasPalabras= [
+      'culo', 'puto', 'puta', 'mierd', 'pene', 'teta'
+    ]
+    var comm = e.target.value
+        for (let i = 0; i < malasPalabras.length; i++) {
+          if (comm.includes(malasPalabras[i])){
+            let str = new Array(malasPalabras[i].length +1 ).join( '*' );
+            console.log("str: ",str)
+            comm = comm.replace(malasPalabras[i], str)
+          }
+          console.log("comm: ", comm)
+          
+        }
+        console.log("comm: ", comm)
+        setInput({
+          ...input,
+          text: comm
+        });
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: comm,
     });
   }
   
@@ -149,7 +157,7 @@ const SelectoresProduct = () => {
                   })}
                 </div>
 
-                <div className="flex flex-col gap-[90px] ml-[30px] mt-[15px]">
+                <div className="flex flex-col gap-[100px] ml-[30px] mt-[15px]">
                   {comments.map((e) => {
                     return (
                       <div>
