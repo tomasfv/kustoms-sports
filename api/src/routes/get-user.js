@@ -1,18 +1,18 @@
-const { Router } = require("express");
-const { Users} = require("../db.js");
+const { Router } = require('express')
+const { Users } = require('../db.js')
 
-const router = Router();
+const router = Router()
 
-router.get("/", async (req, res) => {
-  let { email } = req.query;
+router.get('/', async (req, res) => {
+  let { email } = req.query
   try {
     const user = await Users.findOne({
       where: { email: email },
-    });
-    return res.status(200).json(user.profile);
+    })
+    return res.status(200).json(user.profile)
   } catch (error) {
-    return res.status(400).json(error);
+    return res.status(400).json(error)
   }
-});
+})
 
-module.exports = router;
+module.exports = router

@@ -1,12 +1,95 @@
-const { Router } = require('express');
-const {Products} = require('../../db.js');
+const { Router } = require('express')
+const { Products } = require('../../db.js')
 //const { ARRAY } = require('sequelize');
 
-const router = Router();
+const router = Router()
 
-router.post('/', async (req , res) => {
-    let {
-        id,
+router.post('/', async (req, res) => {
+  let {
+    id,
+    clotheType,
+    brand,
+    name,
+    gender,
+    sport,
+    collection,
+    color,
+    size,
+    image,
+    stock,
+    price,
+    promotion,
+  } = req.body
+  // if(typeof clotheType !== 'string')return res.status(200).json("clotheType should be a word")
+  // if(typeof brand !== 'string')return res.status(200).json("brand should be a word")
+  // if(typeof name !== 'string')return res.status(200).json("name should be a word")
+  // if(typeof gender !== 'string')return res.status(200).json("gender should be a word")
+  // if(typeof sport !== 'string')return res.status(200).json("sport should be a word")
+  // if(typeof collection !== 'string')return res.status(200).json("collection should be a word")
+  // if(typeof color !== 'string')return res.status(200).json("color should be a word")
+  // if(!Array.isArray(image))return res.status(200).json("image should be an array")
+  // if(typeof stock !== 'number')return res.status(200).json("stock should be a number")
+  // if(typeof price !== 'number')return res.status(200).json("price should be a number")
+  // if(typeof promotion !== 'number')return res.status(200).json("promotion should be a number")
+  if (promotion !== 0) promotion = promotion / 100
+
+  try {
+    let product
+    if (id !== '') {
+      let productExists = await Products.findByPk(id)
+      console.log('product', productExists)
+      if (productExists) {
+        const asociados = await Products.findAll({
+          where: {
+            name: productExists.name,
+            brand: productExists.brand,
+            color: productExists.color,
+            gender: productExists.gender,
+          },
+        })
+        asociados.map(
+          async (e) =>
+            (productosasociados = await e.update(
+              {
+                clotheType: clotheType,
+                brand: brand,
+                name: name,
+                gender: gender,
+                sport: sport,
+                collection: collection,
+                price: price,
+                promotion: promotion,
+              },
+              { where: { id: e.id } },
+            )),
+        )
+        product = await Products.update(
+          {
+            clotheType: clotheType,
+            brand: brand,
+            name: name,
+            gender: gender,
+            sport: sport,
+            collection: collection,
+            color: color,
+            size: size,
+            stock: stock,
+            price: price,
+            promotion: promotion,
+          },
+          { where: { id: id } },
+        )
+        console.log('asociados', asociados)
+      } else {
+        return res.status(200).json({
+          message: 'El id enviado no pertenece a un producto en stock',
+        })
+      }
+      return res
+        .status(200)
+        .json({ message: `Producto con id ${id} actualizado con éxito` })
+    } else {
+      product = await Products.create({
         clotheType,
         brand,
         name,
@@ -18,90 +101,14 @@ router.post('/', async (req , res) => {
         image,
         stock,
         price,
-        promotion
-    } = req.body
-    // if(typeof clotheType !== 'string')return res.status(200).json("clotheType should be a word")
-    // if(typeof brand !== 'string')return res.status(200).json("brand should be a word")
-    // if(typeof name !== 'string')return res.status(200).json("name should be a word")
-    // if(typeof gender !== 'string')return res.status(200).json("gender should be a word")
-    // if(typeof sport !== 'string')return res.status(200).json("sport should be a word")
-    // if(typeof collection !== 'string')return res.status(200).json("collection should be a word")
-    // if(typeof color !== 'string')return res.status(200).json("color should be a word")
-    // if(!Array.isArray(image))return res.status(200).json("image should be an array")
-    // if(typeof stock !== 'number')return res.status(200).json("stock should be a number")
-    // if(typeof price !== 'number')return res.status(200).json("price should be a number")
-    // if(typeof promotion !== 'number')return res.status(200).json("promotion should be a number")
-    if (promotion !== 0 ) promotion = (promotion/100)
-    
-    try {
-        let product
-        if (id!=='') {
-            let productExists = await Products.findByPk(id)
-            console.log("product",productExists)
-            if (productExists){
-                const asociados = await Products.findAll({
-                    where: {
-                      name: productExists.name,
-                      brand: productExists.brand,
-                      color: productExists.color,
-                      gender: productExists.gender,
-                    },
-                  });
-                  asociados.map( async (e) => 
-                  productosasociados = await e.update({
-                   clotheType: clotheType,
-                   brand: brand,
-                   name: name,
-                   gender: gender,
-                   sport: sport,
-                   collection: collection,
-                   price: price,
-                   promotion: promotion
-                },{where: {id: e.id}}
-                )) 
-                product = await Products.update({
-                   clotheType: clotheType,
-                   brand: brand,
-                   name: name,
-                   gender: gender,
-                   sport: sport,
-                   collection: collection,
-                   color: color,
-                   size: size,
-                   stock: stock,
-                   price: price,
-                   promotion: promotion
-               },
-               {where: {id: id}}
-               )
-               console.log("asociados",asociados)
-            } else{
-                return res.status(200).json({message: 'El id enviado no pertenece a un producto en stock'})
-            }
-            return res.status(200).json({message: `Producto con id ${id} actualizado con éxito`})
-        }
-        else{
-             product = await Products.create({
-                clotheType,
-                brand,
-                name,
-                gender,
-                sport,
-                collection,
-                color,
-                size,
-                image,
-                stock,
-                price,
-                promotion
-            })
-        }
-
-        return res.status(200).json(product)
-    } catch (error) {
-        return res.status(400).json(error.message)
+        promotion,
+      })
     }
-        
-    })
 
-    module.exports = router;
+    return res.status(200).json(product)
+  } catch (error) {
+    return res.status(400).json(error.message)
+  }
+})
+
+module.exports = router

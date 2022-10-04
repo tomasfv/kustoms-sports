@@ -1,71 +1,71 @@
-import { useState } from "react";
-import { MdIron, MdNotInterested } from "react-icons/md";
-import { HiBan } from "react-icons/hi";
-import { VscChevronUp, VscChevronDown } from "react-icons/vsc";
-import { GiWashingMachine } from "react-icons/gi";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllowed, getComments, postComment } from "../redux/actions";
-import Modal from "../views/ModalComments";
-import { useAuth0 } from "@auth0/auth0-react";
-import { FaTemperatureHigh } from "react-icons/fa";
-import swal from "sweetalert2";
+import { useState } from 'react'
+import { MdIron, MdNotInterested } from 'react-icons/md'
+import { HiBan } from 'react-icons/hi'
+import { VscChevronUp, VscChevronDown } from 'react-icons/vsc'
+import { GiWashingMachine } from 'react-icons/gi'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getAllowed, getComments, postComment } from '../redux/actions'
+import Modal from '../views/ModalComments'
+import { useAuth0 } from '@auth0/auth0-react'
+import { FaTemperatureHigh } from 'react-icons/fa'
+import swal from 'sweetalert2'
 
 const SelectoresProduct = () => {
-  const { isAuthenticated, user } = useAuth0();
-  const { loginWithRedirect } = useAuth0();
-  const email = user?.email;
-  const dispatch = useDispatch();
-  const [desplegable, setDesplegable] = useState(false);
-  const [cuidados, setCuidados] = useState(false);
-  const [descripcion, setDescripcion] = useState(false);
-  const [comentarios, setComentarios] = useState(false);
-  const comments = useSelector((state) => state.comments);
-  const User = useSelector((state) => state.userCom);
-  const allowed = useSelector((state) => state.allowed);
+  const { isAuthenticated, user } = useAuth0()
+  const { loginWithRedirect } = useAuth0()
+  const email = user?.email
+  const dispatch = useDispatch()
+  const [desplegable, setDesplegable] = useState(false)
+  const [cuidados, setCuidados] = useState(false)
+  const [descripcion, setDescripcion] = useState(false)
+  const [comentarios, setComentarios] = useState(false)
+  const comments = useSelector((state) => state.comments)
+  const User = useSelector((state) => state.userCom)
+  const allowed = useSelector((state) => state.allowed)
   // const nameCom = useSelector((state) => state.nameComments);
-  const details = useSelector((state) => state.details);
-  const imagenes = useSelector((state) => state.images);
-  const color = useSelector((state) => state.color);
-  const [isOpen, setIsOpen] = useState(false);
+  const details = useSelector((state) => state.details)
+  const imagenes = useSelector((state) => state.images)
+  const color = useSelector((state) => state.color)
+  const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState({
-    email: "",
-    name: "",
-    text: "",
+    email: '',
+    name: '',
+    text: '',
     rank: 5,
-    gender: "",
-  });
+    gender: '',
+  })
 
   useEffect(() => {
-    dispatch(getAllowed(email, details.name, details.gender));
-    dispatch(getComments(details.name, details.gender));
+    dispatch(getAllowed(email, details.name, details.gender))
+    dispatch(getComments(details.name, details.gender))
     setInput({
       email: email,
       name: details.name,
-      text: "",
+      text: '',
       rank: 5,
       gender: details.gender,
-    });
-  }, [details, user, email]);
+    })
+  }, [details, user, email])
   function handleClick(e) {
-    setDesplegable(!desplegable);
+    setDesplegable(!desplegable)
   }
   function handleClickC(e) {
-    setCuidados(!cuidados);
+    setCuidados(!cuidados)
   }
   function handleClickD(e) {
-    setDescripcion(!descripcion);
+    setDescripcion(!descripcion)
   }
 
   function handleClickComent(e) {
-    setComentarios(!comentarios);
+    setComentarios(!comentarios)
   }
   function closer() {
-    get();
-    setIsOpen(false);
+    get()
+    setIsOpen(false)
   }
   function get() {
-    dispatch(getComments(details.name, details.gender));
+    dispatch(getComments(details.name, details.gender))
   }
 
   function handleComment() {
@@ -76,63 +76,60 @@ const SelectoresProduct = () => {
       if (User[i].email === user.email) {
         commented = true
         break
-      } 
+      }
     }
 
-    if (commented) { //si el usuario ya hizo un comentario
+    if (commented) {
+      //si el usuario ya hizo un comentario
       swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Sólo se admite un comentario por usuario en un producto",
+        position: 'top-end',
+        icon: 'error',
+        title: 'Sólo se admite un comentario por usuario en un producto',
         showConfirmButton: false,
         timer: 2000,
-      }) 
+      })
       setIsOpen(false)
-    } 
-    else { //si el usuario no hizo comentario
-      if(input.text !== ""){
-        
-        dispatch(postComment(input));
+    } else {
+      //si el usuario no hizo comentario
+      if (input.text !== '') {
+        dispatch(postComment(input))
         setInput({
           ...input,
-          text: "",
-          rank:""
-        });
+          text: '',
+          rank: '',
+        })
       }
     }
   }
 
   function handleChangue(e) {
-    let malasPalabras= [
-      'culo', 'puto', 'puta', 'mierd', 'pene', 'teta'
-    ]
+    let malasPalabras = ['culo', 'puto', 'puta', 'mierd', 'pene', 'teta']
     var comm = e.target.value
-        for (let i = 0; i < malasPalabras.length; i++) {
-          if (comm.includes(malasPalabras[i])){
-            let str = new Array(malasPalabras[i].length +1 ).join( '*' );
-            comm = comm.replace(malasPalabras[i], str)
-          }
-          
-        }
-        setInput({
-          ...input,
-          text: comm
-        });
+    for (let i = 0; i < malasPalabras.length; i++) {
+      if (comm.includes(malasPalabras[i])) {
+        let str = new Array(malasPalabras[i].length + 1).join('*')
+        comm = comm.replace(malasPalabras[i], str)
+      }
+    }
+    setInput({
+      ...input,
+      text: comm,
+    })
     setInput({
       ...input,
       [e.target.name]: comm,
-    });
+    })
   }
-  
+
   return (
     <div className=" flex flex-col mt-[100px] ml-16 dark:bg-main-dark">
       <ul className="flex flex-col text-justify dark:bg-main-dark">
         <li className="text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b flex flex-col w-full dark:bg-main-dark">
           <div className="flex flex-row p-4 font-bold  dark:text-main-light dark:bg-main-dark">
-            Comentarios{" "}
+            Comentarios{' '}
             <button onClick={(e) => handleClickComent(e)}>
               {comentarios === false ? <VscChevronDown /> : <VscChevronUp />}
-            </button>{" "}
+            </button>{' '}
           </div>
           {comentarios !== false && (
             <div className="flex flex-col w-[800px]">
@@ -150,7 +147,7 @@ const SelectoresProduct = () => {
                         />
                         <p>{e.name}</p>
                       </div>
-                    );
+                    )
                   })}
                 </div>
 
@@ -169,7 +166,7 @@ const SelectoresProduct = () => {
                           {e[1]}
                         </p>
                       </div>
-                    );
+                    )
                   })}
                 </div>
               </div>
@@ -178,11 +175,11 @@ const SelectoresProduct = () => {
                 <div className=" flex ">
                   {isAuthenticated ? (
                     <div>
-                      {allowed === "usuario baneado" ? (
+                      {allowed === 'usuario baneado' ? (
                         <p className=" flex flex-row font-bold text-red-dark mt-[20px]">
                           ESTAS BANEADO <HiBan className="text-[20px]" />
                         </p>
-                      ) : allowed === "User allowed" ? (
+                      ) : allowed === 'User allowed' ? (
                         <button
                           onClick={() => setIsOpen(true)}
                           className="flex bottom-0 right-0 ml-[1000px] border rounded  text-[20px] p-1 mr-[10px]font-bold h-[30px]"
@@ -198,21 +195,21 @@ const SelectoresProduct = () => {
                   ) : (
                     <div className="flex ">
                       <p>
-                        Para poder realizar un comentario,debe{" "}
+                        Para poder realizar un comentario,debe{' '}
                         <button
                           onClick={() => loginWithRedirect()}
                           className="text-verde-dark font-bold "
                         >
-                          {" "}
-                          registrarse / ingresar{" "}
-                        </button>{" "}
+                          {' '}
+                          registrarse / ingresar{' '}
+                        </button>{' '}
                         en la página.
                       </p>
                     </div>
                   )}
 
                   <Modal open={isOpen} onClose={closer}>
-                    {" "}
+                    {' '}
                     {/*este es children de Modal.jsx */}
                     <div className="flex flex-flex row dark:text-main-dark">
                       <label>Comentario:</label>
@@ -259,7 +256,7 @@ const SelectoresProduct = () => {
                         className="absolute bottom-[20px] right-0 border-[2px] m-2 p-1"
                         //onClick={handleComment} onclick={setIsOpen(false)}
                         onClick={() => {
-                          handleComment();
+                          handleComment()
                         }}
                       >
                         Comentar
@@ -273,59 +270,59 @@ const SelectoresProduct = () => {
         </li>
         <li className="text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b flex flex-col w-full dark:bg-main-dark">
           <div className="flex flex-row p-4 font-bold  dark:text-main-light dark:bg-main-dark">
-            Descripción{" "}
+            Descripción{' '}
             <button onClick={(e) => handleClickD(e)}>
               {descripcion === false ? <VscChevronDown /> : <VscChevronUp />}
-            </button>{" "}
+            </button>{' '}
           </div>
           {descripcion !== false && (
             <div className="flex flex-row gap-[25px] dark:bg-main-dark">
               <div className="flex flex-col dark:text-main-light dark:bg-main-dark">
-                {details.clotheType === "Camiseta" && (
+                {details.clotheType === 'Camiseta' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
                     <p>La nueva {details.name}</p>
                     <p>muy versátil y cómoda</p>
                   </div>
                 )}
-                {details.clotheType === "Musculosa" && (
+                {details.clotheType === 'Musculosa' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
                     <p> Una {details.name}</p>
                     <p> muy versátil y cómoda</p>
                   </div>
                 )}
-                {details.clotheType === "Zapatillas" && (
+                {details.clotheType === 'Zapatillas' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px]  mt-[30px]">
                     <p> {details.name}</p>
                     <p>hechas con la mejor calidad</p>
                   </div>
                 )}
-                {details.clotheType === "Pantalón" && (
+                {details.clotheType === 'Pantalón' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
                     <p>El nuevo {details.name}</p>
                     <p>con una comodidad única</p>
                   </div>
                 )}
-                {details.clotheType === "Short" && (
+                {details.clotheType === 'Short' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
                     <p>Los Clásicos {details.name}</p>
                     <p>hechos con materiales reciclados</p>
                   </div>
                 )}
-                {details.clotheType === "Pelota" && (
+                {details.clotheType === 'Pelota' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] ">
                     <p>Escribe tu propia historia futbolística</p>
 
                     <p>con la nueva {details.name}</p>
                   </div>
                 )}
-                {details.clotheType === "Buzo" && (
+                {details.clotheType === 'Buzo' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] mt-[100px] ">
                     <p>Lucí un estilo único y cómodo con</p>
 
                     <p>el nuevo {details.name}</p>
                   </div>
                 )}
-                {details.clotheType === "Campera" && (
+                {details.clotheType === 'Campera' && (
                   <div className=" flex flex-col text-[30px] w-[600px] text-border font-bold gap-[15px] mt-[50px] ">
                     <p>Lucí un estilo único y cómodo con</p>
 
@@ -334,7 +331,7 @@ const SelectoresProduct = () => {
                 )}
 
                 <div>
-                  {details.clotheType === "Camiseta" && (
+                  {details.clotheType === 'Camiseta' && (
                     <div>
                       <p className="w-[600px] mt-[10px]">
                         La nueva {details.name} ofrece comodidad en todo momento
@@ -352,26 +349,29 @@ const SelectoresProduct = () => {
                       </p>
                     </div>
                   )}
-                  {details.clotheType === "Zapatillas" && (
+                  {details.clotheType === 'Zapatillas' && (
                     <div>
                       <p className="w-[600px] mt-[10px]">
                         Kustoms Sports ha diseñado sus zapatillas pensando en la
-                        comodidad de los clientes. Estas zapatillas{" "}
+                        comodidad de los clientes. Estas zapatillas{' '}
                         {details.name} son perfectas para todo momento y lugar,
                         pero eso no quiere decir que no incorporen tecnología
-                        innovadora.  La plantilla suave brinda
-                        soporte, sin importar la frecuencia con que las usés.
+                        innovadora. La plantilla suave brinda soporte, sin
+                        importar la frecuencia con que las usés.
                       </p>
                       <p className="w-[600px] mt-[10px]">
-                      Hecho con una serie de materiales reciclados, el exterior incorpora al menos un 50 % de contenido reciclado. Este producto representa solo una de nuestras soluciones para acabar con los residuos plásticos.
+                        Hecho con una serie de materiales reciclados, el
+                        exterior incorpora al menos un 50 % de contenido
+                        reciclado. Este producto representa solo una de nuestras
+                        soluciones para acabar con los residuos plásticos.
                       </p>
                     </div>
                   )}
-                  {details.clotheType === "Musculosa" && (
+                  {details.clotheType === 'Musculosa' && (
                     <div>
                       <p className="w-[600px] mt-[10px]">
                         Sin importar si estas jugando un partido en el parque,
-                        entrenando en el gimnasio o levantando pesas, esta{" "}
+                        entrenando en el gimnasio o levantando pesas, esta{' '}
                         {details.name}ofrece comodidad. Su corte holgado te
                         permite moverte libremente y el tejido con tecnología de
                         absorción AEROREADY te mantiene seco y fresco en los
@@ -383,7 +383,7 @@ const SelectoresProduct = () => {
                       </p>
                     </div>
                   )}
-                  {details.clotheType === "Pantalón" && (
+                  {details.clotheType === 'Pantalón' && (
                     <div>
                       <p className="w-[600px] mt-[10px]">
                         Presentamos el nuevo {details.name}, un clásico
@@ -403,7 +403,7 @@ const SelectoresProduct = () => {
                       </p>
                     </div>
                   )}
-                  {details.clotheType === "Campera" && (
+                  {details.clotheType === 'Campera' && (
                     <div>
                       <p className="w-[600px] mt-[10px]">
                         Presentamos la nueva {details.name}
@@ -425,7 +425,7 @@ const SelectoresProduct = () => {
                       </p>
                     </div>
                   )}
-                  {details.clotheType === "Short" && (
+                  {details.clotheType === 'Short' && (
                     <div>
                       <p className="w-[600px] mt-[10px]">
                         Los nuevos {details.name} siguen el ejemplo de la
@@ -441,7 +441,7 @@ const SelectoresProduct = () => {
                       </p>
                     </div>
                   )}
-                  {details.clotheType === "Pelota" && (
+                  {details.clotheType === 'Pelota' && (
                     <div>
                       <p className="w-[600px] mt-[10px]">
                         La nueva {details.name} ofrece un toque suave y una gran
@@ -455,10 +455,10 @@ const SelectoresProduct = () => {
                       </p>
                     </div>
                   )}
-                  {details.clotheType === "Buzo" && (
+                  {details.clotheType === 'Buzo' && (
                     <div className=" flex  flex-col justify-center items-center ">
                       <p className="w-[600px] mt-[10px]">
-                        No subestimes el poder de un buen buzo. Este de{" "}
+                        No subestimes el poder de un buen buzo. Este de{' '}
                         {details.name}
                         se puede combinar con varios atuendos, además de
                         proporcionar una gran comodidad y reflejar tu confianza
@@ -474,7 +474,7 @@ const SelectoresProduct = () => {
               </div>
 
               <div>
-                {details.clotheType === "Pelota" ? (
+                {details.clotheType === 'Pelota' ? (
                   <img
                     src={imagenes[2]}
                     alt="imagen del product"
@@ -494,64 +494,112 @@ const SelectoresProduct = () => {
             </div>
           )}
         </li>
-        {details.clotheType !== "Pelota" || details.clotheType !== "Zapatillas" && (
-          <li className="text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b flex flex-col gap[5px] w-full dark:bg-main-dark">
-            <div className="flex flex-row p-4 font-bold dark:text-main-light dark:bg-main-dark">
-              Cuidados{" "}
-              <button onClick={(e) => handleClickC(e)}>
-                {cuidados === false ? <VscChevronDown /> : <VscChevronUp />}
-              </button>{" "}
-            </div>
-            {cuidados !== false && (
-              <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
-                {details.clotheType === "Buzo" && (
-                  <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+        {details.clotheType !== 'Pelota' ||
+          (details.clotheType !== 'Zapatillas' && (
+            <li className="text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b flex flex-col gap[5px] w-full dark:bg-main-dark">
+              <div className="flex flex-row p-4 font-bold dark:text-main-light dark:bg-main-dark">
+                Cuidados{' '}
+                <button onClick={(e) => handleClickC(e)}>
+                  {cuidados === false ? <VscChevronDown /> : <VscChevronUp />}
+                </button>{' '}
+              </div>
+              {cuidados !== false && (
+                <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                  {details.clotheType === 'Buzo' && (
                     <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
-                      <div>
-                        <div className="text-[25px] mt-[10px] p-8 font-bold">
-                          INSTRUCCIONES DE LAVADO
+                      <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                        <div>
+                          <div className="text-[25px] mt-[10px] p-8 font-bold">
+                            INSTRUCCIONES DE LAVADO
+                          </div>
+                          <ul className="grid-cols-2 mt-[25px]">
+                            <li className="flex flex-row mt-[10px]">
+                              <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                              No usar blanqueador
+                            </li>
+                            <li className="flex flex-row mt-[10px]">
+                              <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                              No lavar en seco
+                            </li>
+                            <li className="flex flex-row mt-[10px]">
+                              <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
+                              Lavar máquina en temperatura fría
+                            </li>
+                            <li className="flex flex-row mt-[10px]">
+                              <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                              No utilizar secadora{' '}
+                            </li>
+                            <li className="flex flex-row mt-[10px]">
+                              <MdIron className="w-[30px] h-[30px] mr-[10px]" />
+                              Planchar a temperatura baja{' '}
+                            </li>
+                          </ul>
                         </div>
-                        <ul className="grid-cols-2 mt-[25px]">
-                          <li className="flex flex-row mt-[10px]">
-                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                            No usar blanqueador
-                          </li>
-                          <li className="flex flex-row mt-[10px]">
-                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                            No lavar en seco
-                          </li>
-                          <li className="flex flex-row mt-[10px]">
-                            <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
-                            Lavar máquina en temperatura fría
-                          </li>
-                          <li className="flex flex-row mt-[10px]">
-                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                            No utilizar secadora{" "}
-                          </li>
-                          <li className="flex flex-row mt-[10px]">
-                            <MdIron className="w-[30px] h-[30px] mr-[10px]" />
-                            Planchar a temperatura baja{" "}
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
-                          INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
+                        <div>
+                          <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
+                            INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
+                          </div>
+                          <ul className="flex flex-col ml-[20px] gap-[20px]">
+                            <li className="list-disc">
+                              Usar únicamente detergente suave
+                            </li>
+                            <li className="list-disc">
+                              Lavar al revés con colores similares
+                            </li>
+                          </ul>
                         </div>
-                        <ul className="flex flex-col ml-[20px] gap-[20px]">
-                          <li className="list-disc">
-                            Usar únicamente detergente suave
-                          </li>
-                          <li className="list-disc">
-                            Lavar al revés con colores similares
-                          </li>
-                        </ul>
                       </div>
                     </div>
-                  </div>
-                )}
-                {details.clotheType === "Musculosa" && (
-                  <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                  )}
+                  {details.clotheType === 'Musculosa' && (
+                    <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                      <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                        <div>
+                          <div className="text-[25px] mt-[10px] p-8 font-bold">
+                            INSTRUCCIONES DE LAVADO
+                          </div>
+                          <ul className="grid-cols-2 mt-[25px]">
+                            <li className="flex flex-row mt-[10px]">
+                              <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                              No usar blanqueador
+                            </li>
+                            <li className="flex flex-row mt-[10px]">
+                              <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                              No lavar en seco
+                            </li>
+                            <li className="flex flex-row mt-[10px]">
+                              <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
+                              Lavar máquina en temperatura fría
+                            </li>
+
+                            <li className="flex flex-row mt-[10px]">
+                              <MdIron className="w-[30px] h-[30px] mr-[10px]" />
+                              Planchar a temperatura baja{' '}
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
+                            INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
+                          </div>
+                          <ul className="flex flex-col ml-[20px] gap-[20px]">
+                            <li className="list-disc">No usar suavizante</li>
+                            <li className="list-disc">
+                              Usar únicamente detergente suave
+                            </li>
+                            <li className="list-disc">
+                              Lavar con colores similares
+                            </li>
+                            <li className="list-disc">
+                              Retirar rápidamente después de lavar
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {details.clotheType === 'Camiseta' && (
                     <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
                       <div>
                         <div className="text-[25px] mt-[10px] p-8 font-bold">
@@ -570,10 +618,13 @@ const SelectoresProduct = () => {
                             <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
                             Lavar máquina en temperatura fría
                           </li>
-
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No utilizar secadora{' '}
+                          </li>
                           <li className="flex flex-row mt-[10px]">
                             <MdIron className="w-[30px] h-[30px] mr-[10px]" />
-                            Planchar a temperatura baja{" "}
+                            Planchar a temperatura baja{' '}
                           </li>
                         </ul>
                       </div>
@@ -584,194 +635,149 @@ const SelectoresProduct = () => {
                         <ul className="flex flex-col ml-[20px] gap-[20px]">
                           <li className="list-disc">No usar suavizante</li>
                           <li className="list-disc">
-                            Usar únicamente detergente suave
+                            Lavar y planchar al revés
                           </li>
-                          <li className="list-disc">
-                            Lavar con colores similares
+                          <li className="list-disc">Retirar inmediatamente</li>
+                          <li className="list-disc">Secar en tendedero</li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                  {details.clotheType === 'Campera' && (
+                    <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                      <div>
+                        <div className="text-[25px] mt-[10px] p-8 font-bold">
+                          INSTRUCCIONES DE LAVADO
+                        </div>
+                        <ul className="grid-cols-2 mt-[25px]">
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No usar blanqueador
                           </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No lavar en seco
+                          </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
+                            Lavar máquina en temperatura fría
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
+                          INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
+                        </div>
+                        <ul className="flex flex-col ml-[20px] gap-[20px]">
                           <li className="list-disc">
-                            Retirar rápidamente después de lavar
+                            Lavar colores claros por separados de colores
+                            oscuros
+                          </li>
+                          <li className="list-disc">Lavar al revés</li>
+                          <li className="list-disc">
+                            Lavar a maquina con agua fría y en ciclo delicado
                           </li>
                         </ul>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                  {details.clotheType === 'Short' && (
+                    <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                      <div>
+                        <div className="text-[25px] mt-[10px] p-8 font-bold">
+                          INSTRUCCIONES DE LAVADO
+                        </div>
+                        <ul className="grid-cols-2 mt-[25px]">
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No usar blanqueador
+                          </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No lavar en seco
+                          </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
+                            Lavar máquina en temperatura fría
+                          </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No utilizar secadora{' '}
+                          </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <MdIron className="w-[30px] h-[30px] mr-[10px]" />
+                            Planchar a temperatura baja{' '}
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
+                          INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
+                        </div>
+                        <ul className="flex flex-col ml-[20px] gap-[20px]">
+                          <li className="list-disc">No usar suavizante</li>
+                          <li className="list-disc">
+                            Lavar y planchar al revés
+                          </li>
+                          <li className="list-disc">Retirar inmediatamente</li>
+                          <li className="list-disc">Secar en tendedero</li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                  {details.clotheType === 'Pantalón' && (
+                    <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
+                      <div>
+                        <div className="text-[25px] mt-[10px] p-8 font-bold">
+                          INSTRUCCIONES DE LAVADO
+                        </div>
+                        <ul className="grid-cols-2 mt-[25px]">
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No usar blanqueador
+                          </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
+                            No lavar en seco
+                          </li>
+                          <li className="flex flex-row mt-[10px]">
+                            <FaTemperatureHigh className="w-[30px] h-[30px] mr-[10px]" />
+                            Lavar a máquina a temperatura alta
+                          </li>
 
-                {details.clotheType === "Camiseta" && (
-                  <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
-                    <div>
-                      <div className="text-[25px] mt-[10px] p-8 font-bold">
-                        INSTRUCCIONES DE LAVADO
+                          <li className="flex flex-row mt-[10px]">
+                            <MdIron className="w-[30px] h-[30px] mr-[10px]" />
+                            Planchar a temperatura baja{' '}
+                          </li>
+                        </ul>
                       </div>
-                      <ul className="grid-cols-2 mt-[25px]">
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No usar blanqueador
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No lavar en seco
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
-                          Lavar máquina en temperatura fría
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No utilizar secadora{" "}
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdIron className="w-[30px] h-[30px] mr-[10px]" />
-                          Planchar a temperatura baja{" "}
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
-                        INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
+                      <div>
+                        <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
+                          INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
+                        </div>
+                        <ul className="flex flex-col ml-[20px] gap-[30px]">
+                          <li className="list-disc">No usar suavizante</li>
+                          <li className="list-disc">
+                            Usar únicamente detergente suave
+                          </li>
+                        </ul>
                       </div>
-                      <ul className="flex flex-col ml-[20px] gap-[20px]">
-                        <li className="list-disc">No usar suavizante</li>
-                        <li className="list-disc">Lavar y planchar al revés</li>
-                        <li className="list-disc">Retirar inmediatamente</li>
-                        <li className="list-disc">Secar en tendedero</li>
-                      </ul>
                     </div>
-                  </div>
-                )}
-                {details.clotheType === "Campera" && (
-                  <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
-                    <div>
-                      <div className="text-[25px] mt-[10px] p-8 font-bold">
-                        INSTRUCCIONES DE LAVADO
-                      </div>
-                      <ul className="grid-cols-2 mt-[25px]">
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No usar blanqueador
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No lavar en seco
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
-                          Lavar máquina en temperatura fría
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
-                        INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
-                      </div>
-                      <ul className="flex flex-col ml-[20px] gap-[20px]">
-                        <li className="list-disc">
-                          Lavar colores claros por separados de colores oscuros
-                        </li>
-                        <li className="list-disc">Lavar al revés</li>
-                        <li className="list-disc">
-                          Lavar a maquina con agua fría y en ciclo delicado
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
-                {details.clotheType === "Short" && (
-                  <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
-                    <div>
-                      <div className="text-[25px] mt-[10px] p-8 font-bold">
-                        INSTRUCCIONES DE LAVADO
-                      </div>
-                      <ul className="grid-cols-2 mt-[25px]">
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No usar blanqueador
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No lavar en seco
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <GiWashingMachine className="w-[30px] h-[30px] mr-[10px]" />
-                          Lavar máquina en temperatura fría
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No utilizar secadora{" "}
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdIron className="w-[30px] h-[30px] mr-[10px]" />
-                          Planchar a temperatura baja{" "}
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
-                        INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
-                      </div>
-                      <ul className="flex flex-col ml-[20px] gap-[20px]">
-                        <li className="list-disc">No usar suavizante</li>
-                        <li className="list-disc">Lavar y planchar al revés</li>
-                        <li className="list-disc">Retirar inmediatamente</li>
-                        <li className="list-disc">Secar en tendedero</li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
-                {details.clotheType === "Pantalón" && (
-                  <div className="flex flex-row gap-[50px] dark:text-main-light dark:bg-main-dark">
-                    <div>
-                      <div className="text-[25px] mt-[10px] p-8 font-bold">
-                        INSTRUCCIONES DE LAVADO
-                      </div>
-                      <ul className="grid-cols-2 mt-[25px]">
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No usar blanqueador
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <MdNotInterested className="w-[30px] h-[30px] mr-[10px]" />
-                          No lavar en seco
-                        </li>
-                        <li className="flex flex-row mt-[10px]">
-                          <FaTemperatureHigh className="w-[30px] h-[30px] mr-[10px]" />
-                          Lavar a máquina a temperatura alta
-                        </li>
-
-                        <li className="flex flex-row mt-[10px]">
-                          <MdIron className="w-[30px] h-[30px] mr-[10px]" />
-                          Planchar a temperatura baja{" "}
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-[25px] mt-[10px] w-[550px] p-8 font-bold">
-                        INFORMACIÓN ADICIONAL SOBRE EL CUIDADO
-                      </div>
-                      <ul className="flex flex-col ml-[20px] gap-[30px]">
-                        <li className="list-disc">No usar suavizante</li>
-                        <li className="list-disc">
-                          Usar únicamente detergente suave
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </li>
-        )}
+                  )}
+                </div>
+              )}
+            </li>
+          ))}
         <li className="text-main-dark dark:text-main-light text-base py-8 pl-6  border-gris-light border-b flex flex-col gap-[5px] w-full  dark:bg-main-dark">
           <div className="flex flex-row p-4 font-bold dark:text-main-light dark:bg-main-dark">
-            Detalles{" "}
+            Detalles{' '}
             <button onClick={(e) => handleClick(e)}>
               {desplegable === false ? <VscChevronDown /> : <VscChevronUp />}
-            </button>{" "}
+            </button>{' '}
           </div>
           {desplegable !== false && (
             <div className="dark:text-main-light dark:bg-main-dark">
-              {details.clotheType === "Camiseta" && (
+              {details.clotheType === 'Camiseta' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
@@ -795,7 +801,7 @@ const SelectoresProduct = () => {
                   </div>
                 </div>
               )}
-              {details.clotheType === "Musculosa" && (
+              {details.clotheType === 'Musculosa' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
@@ -817,29 +823,27 @@ const SelectoresProduct = () => {
                   </div>
                 </div>
               )}
-              {details.clotheType === "Zapatillas" && (
+              {details.clotheType === 'Zapatillas' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
                       <li className="list-disc">Ajuste clásico</li>
-                      <li className="list-disc">Sistema de atado de cordones</li>
                       <li className="list-disc">
-                      Forro interno textil
+                        Sistema de atado de cordones
                       </li>
+                      <li className="list-disc">Forro interno textil</li>
                     </ul>
                   </div>
                   <div>
                     <ul className="flex flex-col gap-[15px]">
-                      <li className="list-disc">
-                         Plantilla OrthoLite®
-                      </li>
+                      <li className="list-disc">Plantilla OrthoLite®</li>
                       <li className="list-disc">Suela de caucho</li>
                       <li className="list-disc">Primegreen</li>
                     </ul>
                   </div>
                 </div>
               )}
-              {details.clotheType === "Campera" && (
+              {details.clotheType === 'Campera' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
@@ -868,7 +872,7 @@ const SelectoresProduct = () => {
                   </div>
                 </div>
               )}
-              {details.clotheType === "Buzo" && (
+              {details.clotheType === 'Buzo' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
@@ -892,7 +896,7 @@ const SelectoresProduct = () => {
                   </div>
                 </div>
               )}
-              {details.clotheType === "Short" && (
+              {details.clotheType === 'Short' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
@@ -922,7 +926,7 @@ const SelectoresProduct = () => {
                   </div>
                 </div>
               )}
-              {details.clotheType === "Pantalón" && (
+              {details.clotheType === 'Pantalón' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
@@ -947,7 +951,7 @@ const SelectoresProduct = () => {
                   </div>
                 </div>
               )}
-              {details.clotheType === "Pelota" && (
+              {details.clotheType === 'Pelota' && (
                 <div className="flex flex-row gap-[30px]">
                   <div className="gap-[5px]">
                     <ul className="flex flex-col gap-[15px]">
@@ -971,7 +975,7 @@ const SelectoresProduct = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default SelectoresProduct;
+export default SelectoresProduct

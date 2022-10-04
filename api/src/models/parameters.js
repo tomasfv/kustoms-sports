@@ -1,8 +1,8 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize')
 module.exports = (sequelize) => {
-
-sequelize.define('parameters', {
-    carrousel:{
-        type: DataTypes.STRING,    
-    }
-})}
+  sequelize.define('parameters', {
+    carrousel: {
+      type: DataTypes.STRING,
+    },
+  })
+}

@@ -1,11 +1,12 @@
-import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export const LogoutButton = () => {
-  const { logout } = useAuth0();
+  const { logout } = useAuth0()
 
   return (
-    <button className='border rounded-md h-12 w-40 font-bold  
+    <button
+      className="border rounded-md h-12 w-40 font-bold  
     dark:bg-main-dark 
     dark:border-verde-dark 
     dark:text-main-light
@@ -17,8 +18,10 @@ export const LogoutButton = () => {
     hover:border-red-dark                      
     text-main-light 
     bg-main-dark
-    border-verde-dark' onClick={() => logout({ returnTo: window.location.origin })}>
+    border-verde-dark"
+      onClick={() => logout({ returnTo: window.location.origin })}
+    >
       Salir
     </button>
-  );
-};
+  )
+}
