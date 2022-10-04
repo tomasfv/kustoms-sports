@@ -1,26 +1,25 @@
-require("dotenv").config();
-const { Router } = require("express");
-const axios = require("axios");
-const { Users, Carts, Products, cartproducts } = require("../db.js");
+const { Router } = require('express')
+const { Users, Carts, Products } = require('../db.js')
 
-const router = Router();
+const router = Router()
 
-router.get("/", async (req, res) => {
-  let { email } = req.query;
+router.get('/', async (req, res) => {
+  let { email } = req.query
+  if (email === undefined) return res.status(200).send('email undefined')
   try {
     const user = await Users.findOne({
       where: { email: email },
-    });
+    })
     let cart = await Carts.findOne({
-      where: { userId: user.id, open: "true" },
+      where: { userId: user.id, open: 'true' },
       include: {
         model: Products,
       },
-    });
-    return res.status(200).json(cart);
+    })
+    return res.status(200).json(cart)
   } catch (error) {
-    return res.status(400).json(error);
+    return res.status(400).json(error)
   }
-});
+})
 
-module.exports = router;
+module.exports = router
