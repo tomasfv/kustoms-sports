@@ -27,10 +27,10 @@ const viewcarrousel = require ("./dashboard/carrousel-views.js")
 // const prueba = require('./dashboard/admin-search.js')
 const usersadmin = require ("./dashboard/admin-get-users.js")
 const commentsadmin = require ("./dashboard/Admin-get-comments.js")
-
 const adminproducts = require("./dashboard/admin-get-prod")
 const financials = require ("./dashboard/admin-get-finance.js")
-
+const userfavorites = require('./get-user-favorites.js')
+const postfavorites = require('./post-user-favorites.js')
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -40,6 +40,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 // router.use('/', dogRutas )
+router.use("/getUserFavorites", userfavorites)
 router.use("/dashboard/financial", financials)
 router.use("/dashboard/usersadmin", usersadmin)
 router.use("/dashboard/commentsadmin", commentsadmin)
@@ -70,7 +71,7 @@ router.use('/dashboard/banComment', bancomment)
 router.use('/dashboard/bestsold', bestsold)
 router.use('/dashboard/adminpostproduct', adminpostproduct)
 router.use('/dashboard/getprod', adminproducts )
-
+router.use('/postfavorites', postfavorites)
 
 
 
