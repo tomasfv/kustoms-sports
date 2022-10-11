@@ -1,5 +1,6 @@
-# Kustoms Sports
+<h1>KUSTOMS SPORTS (e-commerce)</h1>
+<h3> sportswear e-commerce website </h3>
 
-Bienvenidos a Kustoms Sports.\
-Deploy del proyecto [acá](https://kustoms-sports.vercel.app/).
+
+Deploy [HERE](https://kustoms-sports.vercel.app/).
 
