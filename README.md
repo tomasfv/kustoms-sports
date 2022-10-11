@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Kustoms Sports
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bienvenidos a Kustoms Sports.\
+Deploy del proyecto [acá](https://kustoms-sports.vercel.app/).
 
 ## Available Scripts
 
