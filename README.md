@@ -3,10 +3,10 @@
 
 
 <p>1º clone</p>
-<p>2º npm install in api</p>
-<p>3º npm install in client</p>
-<p>4º npm start in api</p>
-<p>5º npm start in client</p>
+<p>2º npm install in api folder</p>
+<p>3º npm install in client folder</p>
+<p>4º npm start in api folder</p>
+<p>5º npm start in client folder</p>
 
 <img src='./Home.jpg'/>
 
