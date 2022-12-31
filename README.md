@@ -18,6 +18,10 @@
 <img src='./carrito.jpg'/>
 <h2>Gallery</h2>
 <img src='./galeria.jpg'/>
+<h2>User Login</h2>
+<img src='./login.jpg'/>
+<h2>User Profile</h2>
+<img src='./perfil.jpg'/>
 <h2>Dashboard</h2>
 <img src='./Dashboard.jpg'/>
 <h2>Product Details</h2>
