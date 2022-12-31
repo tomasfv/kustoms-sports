@@ -25,7 +25,8 @@
 <h2>Payment</h2>
 <img src='./pago.jpg'/>
 
-<p>-Group Project for the Full Stack Web Development career at soyHenry
+<p>
+Group Project for the Full Stack Web Development career at soyHenry
 
 - Creation of fictitious e-commerce with the following Tech Objectives: Deploy the app, User Authentication System, Payment Gateway and complete purchase process, Combined Filters, Implementation of Cloudinary for managing images, Notifications to users by e-mail, Logical Deletion of products and bans, Data Persistence, Reviews and Scoring System, Administrator Dashboard.
 
